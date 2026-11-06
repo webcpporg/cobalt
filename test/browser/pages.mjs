@@ -6,7 +6,7 @@
 
 // Exercise the actual example page through Chrome's input and debugging APIs.
 import assert from 'node:assert/strict'
-import {spawn} from 'node:child_process'
+import {execFileSync, spawn} from 'node:child_process'
 import {createHash} from 'node:crypto'
 import {once} from 'node:events'
 import {existsSync, mkdirSync, mkdtempSync, readFileSync, rmSync, writeFileSync} from 'node:fs'
@@ -208,9 +208,19 @@ try {
     }
     assert.deepEqual(errors, [])
     const hash = path => createHash('sha256').update(readFileSync(path)).digest('hex')
+    const library = fileURLToPath(new URL('../../', import.meta.url))
+    const sourceFiles = ['example/applications/events.hpp', ...workers ?
+        ['example/applications/spsc.cpp', 'example/applications/spsc_queue.hpp'] :
+        ['example/applications/portable.cpp', 'example/applications/signal_awaitable.hpp']]
+    const assetFiles = ['index.html', 'workbench.mjs', 'workbench.css', 'bridge.html']
+    const sourceIdentity = sourceFiles.map(path => ({path, sha256: hash(join(library, path))}))
+    const assetIdentity = assetFiles.map(path => ({path, sha256: hash(join(assets, path))}))
+    const sourceRevision = execFileSync('git', ['-C', library, 'rev-parse', 'HEAD'], {encoding: 'utf8'}).trim()
     writeFileSync(join(evidence, 'observations.json'), JSON.stringify({browser: version.Browser, variant,
         threading: multi ? 'multi' : 'single', program, sha256: hash(program),
-        wasmSha256: hash(program.replace(/\.js$/, '.wasm')), observations}, null, 2) + '\n')
+        wasmSha256: hash(program.replace(/\.js$/, '.wasm')), sourceRevision,
+        sourceForm: 'finite-adaptation', sources: sourceIdentity, assets: assetIdentity,
+        observations}, null, 2) + '\n')
     console.log(`PASS browser pages: ${version.Browser}, ${variant}, ${multi ? 'multi' : 'single'}, ${observations.length} checked runs`)
 } finally {
     for (const entry of pending.values()) { clearTimeout(entry.timer); entry.reject(Error('driver closing')) }

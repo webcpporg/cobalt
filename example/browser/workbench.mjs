@@ -28,7 +28,8 @@ const report = () => window.cobaltReport
 window.cobaltReport = {status: 'ready', run: 0, completed: 0, frames: 0, values: []}
 element('environment').textContent = `${variant === 'jspi' ? 'JSPI' : 'Asyncify'} build, ${multi ? 'pthread enabled' : 'single thread'}.`
 for (const option of element('kind').options) option.disabled = (option.value === 'spsc') !== workerBuild
-element('kind').value = workerBuild ? 'spsc' : 'timer'
+element('kind').value = workerBuild ? 'spsc' :
+    (Object.hasOwn(descriptions, query.get('kind')) ? query.get('kind') : 'timer')
 if (workerBuild) {
     element('count').max = '1000000'
     element('count').value = '10000'
@@ -125,7 +126,10 @@ addEventListener('message', event => {
     const message = event.data
     if (!active || event.origin !== location.origin || event.source !== active.frame.contentWindow ||
         message?.owner !== 'webcpp-cobalt' || message.run !== active.run) return
-    if (message.type === 'error') { fail(message.message); return }
+    if (message.type === 'error') {
+        fail(message.message ?? `The C++ program reported ${message.value} failed checks.`)
+        return
+    }
     if (message.type === 'log') { append(message.line); return }
     if (message.type === 'started') setStatus('running', 'Running')
     if (message.type === 'progress') {
