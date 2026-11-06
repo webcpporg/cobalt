@@ -10,6 +10,7 @@
 #include <webcpp/cobalt.hpp>
 #include <webcpp/test/exit_status.hpp>
 
+#include "events.hpp"
 #include "spsc_queue.hpp"
 
 #include <boost/core/lightweight_test.hpp>
@@ -19,10 +20,6 @@
 #include <cstdint>
 #include <cstdio>
 #include <string_view>
-
-#ifdef __EMSCRIPTEN__
-#include <emscripten.h>
-#endif
 
 namespace {
 std::atomic<bool>* active_stop = nullptr;
@@ -69,6 +66,7 @@ cobalt::main co_main(int argc, char** argv) {
     awaitable_spsc_queue<int> queue(128);
     std::atomic<bool> stop{false};
     active_stop = &stop;
+    cobalt_event("started", 0, 0, 0);
     auto worker = produce(queue, count, stop);
     int received = 0;
     std::int64_t checksum = 0;
@@ -80,6 +78,9 @@ cobalt::main co_main(int argc, char** argv) {
         BOOST_TEST_EQ(value, received);
         checksum += value;
         ++received;
+        if (received % 256 == 0) {
+            cobalt_event("progress", received, value, stop.load());
+        }
         if (cancel_after != 0 && received == cancel_after) {
             stop.store(true);
         }
@@ -98,7 +99,9 @@ cobalt::main co_main(int argc, char** argv) {
     }
     std::printf("spsc: count=%d checksum=%lld cancelled=%d\n", received,
                 static_cast<long long>(checksum), stop.load() ? 1 : 0);
-    co_return webcpp::test::exit_status(boost::report_errors());
+    const int errors = boost::report_errors();
+    cobalt_event(errors ? "error" : "done", received, errors, stop.load());
+    co_return webcpp::test::exit_status(errors);
 }
 
 // end::program[]

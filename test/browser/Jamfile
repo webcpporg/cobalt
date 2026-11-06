@@ -21,3 +21,18 @@ webcpp.drive browser_cobalt_worker_return : ../../../asio/test/browser/probes/pt
     <linkflags>-sPTHREAD_POOL_SIZE=1
   : return_probe.mjs ;
 webcpp.lane browser-runtime-probes : browser_cobalt_worker_return : emscripten ;
+
+.page-assets = <dependency>../../example/browser/index.html
+  <dependency>../../example/browser/workbench.mjs
+  <dependency>../../example/browser/workbench.css
+  <dependency>../../example/browser/bridge.html ;
+webcpp.drive browser_portable : ../../example/applications/portable.cpp
+  : <library>/webcpp/cobalt//cobalt <library>/webcpp//node-test
+    <webcpp-drive-timeout>180 $(.page-assets)
+  : pages.mjs ;
+webcpp.drive browser_spsc : ../../example/applications/spsc.cpp
+  : <library>/webcpp/cobalt//cobalt <library>/webcpp//node-test
+    <threading>multi <linkflags>-sPTHREAD_POOL_SIZE=1 <webcpp-drive-timeout>180 $(.page-assets)
+  : pages.mjs ;
+webcpp.lane browser-pages : browser_portable : emscripten ;
+webcpp.lane browser-worker-pages : browser_spsc : emscripten ;

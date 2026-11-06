@@ -1,0 +1,51 @@
+<!-- Copyright (c) 2026 WebCpp.org. Distributed under the Boost Software License, Version 1.0. -->
+<!doctype html>
+<html lang="en"><head><meta charset="utf-8"><title>Cobalt runtime</title></head><body>
+<script>
+(() => {
+const parameters = new URLSearchParams(location.search)
+const run = Number(parameters.get('run'))
+const send = message => parent.postMessage({owner: 'webcpp-cobalt', run, ...message}, location.origin)
+let cancelPending = false
+let finished = false
+const cancel = () => {
+    const callback = window.Module?._cobalt_cancel ?? window.Module?._cobalt_cancel_spsc
+    if (callback) callback()
+    else cancelPending = true
+}
+addEventListener('message', event => {
+    if (event.source === parent && event.origin === location.origin && event.data?.owner === 'webcpp-cobalt' &&
+        event.data.run === run && event.data.type === 'cancel' && !finished) cancel()
+})
+window.Module = {
+    arguments: JSON.parse(parameters.get('args')),
+    print: line => send({type: 'log', line}),
+    printErr: line => send({type: 'log', line}),
+    onCobaltEvent: event => {
+        send(event)
+        if (event.type === 'started' && cancelPending) cancel()
+    },
+    webcppTestFinished: status => {
+        finished = true
+        // Wait until the C++ completion has returned through its runner.
+        setTimeout(() => send({type: 'finished', status}), 0)
+    },
+    onAbort: reason => send({type: 'error', message: `The Wasm runtime aborted: ${reason}`})
+}
+addEventListener('error', event => send({type: 'error', message: event.message}))
+addEventListener('unhandledrejection', event => send({type: 'error', message: String(event.reason)}))
+const script = document.createElement('script')
+const url = new URL(parameters.get('program'), location.href)
+if (url.origin !== location.origin) {
+    send({type: 'error', message: 'The example module must be served from this page origin.'})
+} else {
+    script.src = url.href
+    script.onerror = () => send({type: 'error', message: 'The compiled JavaScript module could not be loaded.'})
+    document.body.appendChild(script)
+}
+addEventListener('pagehide', () => {
+    cancel()
+    if (typeof PThread !== 'undefined') PThread.terminateAllThreads()
+})
+})()
+</script></body></html>

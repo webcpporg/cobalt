@@ -1,0 +1,54 @@
+<!-- Copyright (c) 2026 WebCpp.org. Distributed under the Boost Software License, Version 1.0. -->
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Cobalt coroutine workbench | WebCPP</title>
+  <link rel="stylesheet" href="workbench.css">
+  <script type="module" src="workbench.mjs"></script>
+</head>
+<body>
+<header><a href="https://webcpp.org">WebCPP</a><span>Cobalt examples</span></header>
+<main>
+  <h1>Watch a coroutine work.</h1>
+  <p class="intro">Run the Boost.Cobalt examples in WebAssembly. Change the inputs, follow the values coming from C++, and cancel an operation while it is waiting.</p>
+  <p id="environment">Reading the selected build...</p>
+  <div class="workbench">
+    <section aria-labelledby="configure-title">
+      <h2 id="configure-title">Choose an experiment</h2>
+      <form novalidate>
+        <label for="kind">Example</label>
+        <select id="kind" name="kind">
+          <option value="timer">Timer</option>
+          <option value="custom">Custom asynchronous operation</option>
+          <option value="channel">Producer and consumer channel</option>
+          <option value="outcome">Outcome lazy and eager coroutines</option>
+          <option value="signals">Signals2 notification</option>
+          <option value="spsc">Worker and SPSC queue</option>
+        </select>
+        <div class="inputs">
+          <div><label for="count">Number of values</label><input id="count" name="count" type="number" min="1" max="10000" value="8" required></div>
+          <div><label for="delay">Wait per value (ms)</label><input id="delay" name="delay" type="number" min="0" max="1000" value="100" required></div>
+        </div>
+        <p class="hint" id="bounds">Choose 1 to 10,000 values and a wait of 0 to 1,000 ms.</p>
+        <p id="error" role="alert" hidden></p>
+        <div class="actions"><button id="start" type="submit">Run example</button><button id="cancel" type="button" disabled>Cancel</button></div>
+      </form>
+      <h2>What the C++ does</h2>
+      <p id="explanation"></p>
+      <pre class="code"><code id="snippet"></code></pre>
+      <p class="hint">These are finite adaptations of the pinned Boost.Cobalt examples. The build uses the same C++ source as the command-line tests.</p>
+    </section>
+    <section class="execution" aria-labelledby="execution-title">
+      <div class="execution-heading"><h2 id="execution-title">Execution</h2><span id="status" role="status" aria-live="polite">Ready</span></div>
+      <progress id="progress" value="0" max="8" aria-label="Values completed"></progress>
+      <p id="result">Run an example to see values produced by C++.</p>
+      <pre id="trace" tabindex="0" aria-label="C++ execution trace">No program has started.</pre>
+      <p class="heartbeat"><span id="pulse" aria-hidden="true"></span><span id="heartbeat">The page can paint while C++ waits.</span></p>
+    </section>
+  </div>
+</main>
+<footer>WebAssembly execution through webcpp::cobalt. The selected build determines suspension and threading support.</footer>
+</body>
+</html>

@@ -7,6 +7,7 @@
 #include <webcpp/cobalt.hpp>
 #include <webcpp/test/exit_status.hpp>
 
+#include "events.hpp"
 #include "signal_awaitable.hpp"
 
 #include <boost/asio/steady_timer.hpp>
@@ -16,18 +17,6 @@
 #include <chrono>
 #include <cstdio>
 #include <string_view>
-
-#ifdef __EMSCRIPTEN__
-#include <emscripten.h>
-EM_JS(void, cobalt_event, (const char* type, int count, int value, int cancelled), {
-    if (Module.onCobaltEvent) {
-        Module.onCobaltEvent(
-            {type : UTF8ToString(type), count, value, cancelled : Boolean(cancelled)});
-    }
-});
-#else
-static void cobalt_event(const char*, int, int, int) {}
-#endif
 
 namespace asio = boost::asio;
 
