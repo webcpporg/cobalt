@@ -1,1 +1,3 @@
 * text=auto eol=lf
+# Unified-diff context retains the original source whitespace by definition.
+*.patch -whitespace

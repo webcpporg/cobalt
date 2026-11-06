@@ -1,0 +1,10 @@
+{
+  "original_sha256": "d58e60f7a57a9083c21d5ee32afce5874559c4d382d14b4697c80f4ef1990c0a",
+  "adapted_sha256": "3c34beeddad9d223b9f852ff8fae39d6f6d6550708ec4d508b8768bed042028b",
+  "changes": [
+    "Do not yield the terminal None from the Python async iterator.",
+    "Ignore delayed delivery into an already completed Future.",
+    "Propagate outer Future cancellation through the Cobalt cancellation slot.",
+    "Translate inner asyncio cancellation without losing the awaiting coroutine."
+  ]
+}

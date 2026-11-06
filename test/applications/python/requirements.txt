@@ -1,0 +1,3 @@
+# Optional native fixture, pinned to the nanobind 2.x API used by Boost 1.92.
+# PyPI: https://pypi.org/project/nanobind/2.13.0/
+nanobind==2.13.0 --hash=sha256:9268d7201eaf5519ae61b7a83175f2af77088cb4b99dd3ce5b00550f697da7b7

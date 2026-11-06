@@ -1,0 +1,5 @@
+{
+  "original_sha256": "63242af318ec0040b0bc1cc8daacbe96200332c485c42aaa935e6d426cc6c261",
+  "corrected_sha256": "a0195a0f60a6e98922a214cb810dbd19d3c38add0cc607bef457be7a62618089",
+  "change": "Replace the three stale module identifiers; preserve the example algorithm."
+}

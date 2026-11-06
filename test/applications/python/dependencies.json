@@ -1,0 +1,8 @@
+{
+  "interpreter": "cpython",
+  "python_version": "3.14.7",
+  "nanobind_version": "2.13.0",
+  "nanobind_wheel_sha256": "9268d7201eaf5519ae61b7a83175f2af77088cb4b99dd3ce5b00550f697da7b7",
+  "source": "https://pypi.org/project/nanobind/2.13.0/",
+  "scope": "Optional native fixture. Other interpreter versions and Wasm Python runtimes require separate build and execution evidence."
+}
