@@ -1,0 +1,17 @@
+# Copyright (c) 2026 WebCpp.org
+#
+# Distributed under the Boost Software License, Version 1.0. (See
+# accompanying file LICENSE_1_0.txt or copy at
+# https://www.boost.org/LICENSE_1_0.txt)
+
+import webcpp ;
+webcpp.targets emscripten ;
+webcpp.original node : .. ;
+
+# Reuse Asio's isolated browser host and exact-status driver. The Cobalt
+# coroutine owns a real worker; Node success does not close this browser lane.
+webcpp.drive browser_cobalt_worker : ../cobalt_thread_test.cpp
+  : <threading>multi <webcpp-drive-timeout>60 <library>/webcpp/cobalt//cobalt
+    <library>/webcpp//node-test <linkflags>-sPTHREAD_POOL_SIZE=1
+  : ../../../asio/test/browser/run.mjs : --mode workers ;
+webcpp.lane browser-workers : browser_cobalt_worker : emscripten ;

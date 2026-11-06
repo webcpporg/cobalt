@@ -1,0 +1,278 @@
+{
+  "schema_version": 1,
+  "upstream_repository": "https://github.com/boostorg/cobalt",
+  "upstream_commit": "8b1cecba91d0e868ee0947b40fb04e3594680297",
+  "upstream_tag": "boost-1.92.0",
+  "inventory_glob": "example/*.cpp",
+  "applications": [
+    {
+      "id": "channel",
+      "path": "example/channel.cpp",
+      "sha256": "430fdb3b8399f0de14a08c7fb3145b5933b2b89c959224b2319989c010b3b6c0",
+      "jam_registration": "active",
+      "cmake_registration": "globbed",
+      "purpose": "Channel producer/consumer closes after values 0..3",
+      "dependencies": [
+        "Cobalt"
+      ],
+      "explicit_exception_syntax": false,
+      "requires_worker_profile": false,
+      "native_socket_semantics": false,
+      "adaptation": "Bounded producer/consumer page with actual channel operations; keep original finite case",
+      "unchanged_source_status": "not-run-for-this-proposal"
+    },
+    {
+      "id": "delay",
+      "path": "example/delay.cpp",
+      "sha256": "6da48db04f73fd7cdcb93fdbe491fee56828ad3472f16a4e1e894b139b458744",
+      "jam_registration": "active",
+      "cmake_registration": "globbed",
+      "purpose": "Asio timer awaited with use_op and argv delay",
+      "dependencies": [
+        "Cobalt",
+        "Asio"
+      ],
+      "explicit_exception_syntax": false,
+      "requires_worker_profile": false,
+      "native_socket_semantics": false,
+      "adaptation": "Validate input outside timed work; start/cancel and report actual timer result",
+      "unchanged_source_status": "not-run-for-this-proposal"
+    },
+    {
+      "id": "delay_op",
+      "path": "example/delay_op.cpp",
+      "sha256": "2bf930999e7e6e4d430c0b9a8206743dc8fc72846b33d52e8e6d418b4f29b58c",
+      "jam_registration": "active",
+      "cmake_registration": "globbed",
+      "purpose": "Custom op readiness/initiation around an Asio timer",
+      "dependencies": [
+        "Cobalt",
+        "Asio"
+      ],
+      "explicit_exception_syntax": false,
+      "requires_worker_profile": false,
+      "native_socket_semantics": false,
+      "adaptation": "Retain ready/initiate semantics; cover immediate and delayed completion/cancellation",
+      "unchanged_source_status": "not-run-for-this-proposal"
+    },
+    {
+      "id": "echo_server",
+      "path": "example/echo_server.cpp",
+      "sha256": "c042bd93a9dbb278a3187f91627c10641087a2d22e32928b627ba7be4478a492",
+      "jam_registration": "active",
+      "cmake_registration": "globbed",
+      "purpose": "TCP listener, generator, wait_group, composed read/write",
+      "dependencies": [
+        "Cobalt I/O"
+      ],
+      "explicit_exception_syntax": true,
+      "requires_worker_profile": false,
+      "native_socket_semantics": true,
+      "adaptation": "Controlled TCP peer and explicit shutdown; EH-off value-error counterpart; browser raw listener unavailable",
+      "unchanged_source_status": "not-run-for-this-proposal"
+    },
+    {
+      "id": "http",
+      "path": "example/http.cpp",
+      "sha256": "f4da82928d0cdbb9e2e8a909c73fb2e205526965b5a40712d4583f363e01f9c7",
+      "jam_registration": "absent",
+      "cmake_registration": "globbed",
+      "purpose": "Asio TLS client and Beast HTTP request to boost.org",
+      "dependencies": [
+        "Cobalt",
+        "Asio SSL",
+        "Beast",
+        "OpenSSL"
+      ],
+      "explicit_exception_syntax": false,
+      "requires_worker_profile": false,
+      "native_socket_semantics": true,
+      "adaptation": "Controlled verified HTTPS peer; browser transport counterpart is separately identified",
+      "unchanged_source_status": "not-run-for-this-proposal"
+    },
+    {
+      "id": "outcome",
+      "path": "example/outcome.cpp",
+      "sha256": "51ea374b0ed7519cd5d5ff7331d4f2106b8273fe35f445509344451b2092e33d",
+      "jam_registration": "active",
+      "cmake_registration": "globbed",
+      "purpose": "Outcome lazy and eager awaitables return 11",
+      "dependencies": [
+        "Cobalt",
+        "Outcome"
+      ],
+      "explicit_exception_syntax": false,
+      "requires_worker_profile": false,
+      "native_socket_semantics": false,
+      "adaptation": "Keep the two real awaitables; UI repetition/progress is a bounded derivative",
+      "unchanged_source_status": "not-run-for-this-proposal"
+    },
+    {
+      "id": "python",
+      "path": "example/python.cpp",
+      "sha256": "d58e60f7a57a9083c21d5ee32afce5874559c4d382d14b4697c80f4ef1990c0a",
+      "jam_registration": "absent",
+      "cmake_registration": "conditional-dependencies",
+      "purpose": "nanobind CPython asyncio interoperability module",
+      "dependencies": [
+        "Cobalt",
+        "CPython",
+        "nanobind"
+      ],
+      "explicit_exception_syntax": true,
+      "requires_worker_profile": false,
+      "native_socket_semantics": false,
+      "adaptation": "Preserve python.py baseline failure; separately patch the three references to the imported boost_cobalt_example_python name, pin optional native dependencies and validate the actual extension. No packaged Wasm Python runtime claimed.",
+      "unchanged_source_status": "not-run-for-this-proposal",
+      "known_source_defects": [
+        {
+          "id": "python-module-name-mismatch",
+          "evidence": "python-script-check.json",
+          "description": "python.py imports boost_cobalt_example_python but calls undefined boost_async_example_python; unchanged script fails independently of dependency availability."
+        }
+      ]
+    },
+    {
+      "id": "signals",
+      "path": "example/signals.cpp",
+      "sha256": "70768c8612b9102118c95e266357aea045aa7b52acf3e91a1c4923e38bb628f5",
+      "jam_registration": "absent",
+      "cmake_registration": "globbed",
+      "purpose": "In-process Boost.Signals2 awaitable produces 42",
+      "dependencies": [
+        "Cobalt",
+        "Signals2",
+        "CallableTraits"
+      ],
+      "explicit_exception_syntax": false,
+      "requires_worker_profile": false,
+      "native_socket_semantics": false,
+      "adaptation": "UI event triggers real Signals2 operation; this is not POSIX signals",
+      "unchanged_source_status": "not-run-for-this-proposal"
+    },
+    {
+      "id": "spsc",
+      "path": "example/spsc.cpp",
+      "sha256": "a3d8c7f084ebcad150544bb318199bdafb259496c4e7498a0253d444e0317dab",
+      "jam_registration": "absent",
+      "cmake_registration": "globbed",
+      "purpose": "Cobalt thread and lockfree SPSC queue transfer 100000001 values and sentinel",
+      "dependencies": [
+        "Cobalt",
+        "Lockfree",
+        "threads"
+      ],
+      "explicit_exception_syntax": false,
+      "native_socket_semantics": false,
+      "adaptation": "Bounded configurable workload, sequence checks, worker result storage and controlled stop",
+      "unchanged_source_status": "not-run-for-this-proposal",
+      "requires_worker_execution": true,
+      "worker_profile_note": "Probe native B2 single and multi independently because single does not disable Boost threads; browser/WASI single with threads disabled remains unavailable for these worker applications."
+    },
+    {
+      "id": "thread",
+      "path": "example/thread.cpp",
+      "sha256": "f37e11eed4fe9931e358a10258e5a25c015fc8b565afd23c9eafbc5e84b8397d",
+      "jam_registration": "active",
+      "cmake_registration": "globbed",
+      "purpose": "Cobalt threads consume concurrent-channel addition requests",
+      "dependencies": [
+        "Cobalt",
+        "Asio concurrent_channel",
+        "threads"
+      ],
+      "explicit_exception_syntax": true,
+      "native_socket_semantics": false,
+      "adaptation": "Preserve request/response algorithms; EH-off value-error counterpart; worker UI handoff",
+      "unchanged_source_status": "not-run-for-this-proposal",
+      "requires_worker_execution": true,
+      "worker_profile_note": "Probe native B2 single and multi independently because single does not disable Boost threads; browser/WASI single with threads disabled remains unavailable for these worker applications."
+    },
+    {
+      "id": "thread_pool",
+      "path": "example/thread_pool.cpp",
+      "sha256": "6f49c58b95f8d51df996409d20ada6c1c89adfdf6505e4b30e43c98ba43ea6f4",
+      "jam_registration": "active",
+      "cmake_registration": "globbed",
+      "purpose": "Custom main spawns task work on a four-thread Asio pool",
+      "dependencies": [
+        "Cobalt",
+        "Asio thread_pool",
+        "threads"
+      ],
+      "explicit_exception_syntax": true,
+      "native_socket_semantics": false,
+      "adaptation": "Link core without runner; nonblocking browser host lifecycle; EH-off counterpart and task-move probe",
+      "unchanged_source_status": "not-run-for-this-proposal",
+      "requires_worker_execution": true,
+      "worker_profile_note": "Probe native B2 single and multi independently because single does not disable Boost threads; browser/WASI single with threads disabled remains unavailable for these worker applications."
+    },
+    {
+      "id": "ticker",
+      "path": "example/ticker.cpp",
+      "sha256": "d694672dece5c2764d6901be7739288b9e5f80d8308e2c4955f8068fc7d3054f",
+      "jam_registration": "commented",
+      "cmake_registration": "conditional-dependencies",
+      "purpose": "TLS WebSocket market feed, JSON subscription routing and TCP WebSocket server",
+      "dependencies": [
+        "Cobalt",
+        "Asio SSL",
+        "Beast",
+        "JSON",
+        "URL",
+        "OpenSSL"
+      ],
+      "explicit_exception_syntax": true,
+      "requires_worker_profile": false,
+      "native_socket_semantics": true,
+      "adaptation": "Controlled market feed and server clients; full browser listener unavailable; client/routing counterpart separate",
+      "unchanged_source_status": "not-run-for-this-proposal"
+    }
+  ],
+  "supporting_files": [
+    {
+      "path": "example/python.py",
+      "sha256": "63242af318ec0040b0bc1cc8daacbe96200332c485c42aaa935e6d426cc6c261"
+    },
+    {
+      "path": "example/Jamfile",
+      "sha256": "a317a0e373eb7e188a82bc17a0976b0ec284bfc383847c905d65d490511c8621"
+    },
+    {
+      "path": "example/CMakeLists.txt",
+      "sha256": "83127e4c9337bfa581c1526c74c43f806f9f36189e721a62c0efa59c9dbb6953"
+    }
+  ],
+  "benchmarks": [
+    {
+      "path": "bench/channel.cpp",
+      "sha256": "8af2c85f84016858f0bc2024ba2792efd3614b4a2c4179954e74777f233bad70",
+      "status": "not-run-for-this-proposal",
+      "plan": "Audit and reuse matched Cobalt/Asio workload; optional Boost.Context arms remain separately classified"
+    },
+    {
+      "path": "bench/immediate.cpp",
+      "sha256": "b7dc772a57140d354fda56634e060b516b494d8d4b6c49abcca3e9710449b345",
+      "status": "not-run-for-this-proposal",
+      "plan": "Audit and reuse matched Cobalt/Asio workload; optional Boost.Context arms remain separately classified"
+    },
+    {
+      "path": "bench/monotonic.cpp",
+      "sha256": "41038a1381096ab7c53fe6075d1777b42c5feac480e7e0d11714d1fcd3d26317",
+      "status": "not-run-for-this-proposal",
+      "plan": "Audit and reuse matched Cobalt/Asio workload; optional Boost.Context arms remain separately classified"
+    },
+    {
+      "path": "bench/parallel.cpp",
+      "sha256": "69692bea858797b705f55fccdc5755db707e7f71aec561625de75cf94b78e612",
+      "status": "not-run-for-this-proposal",
+      "plan": "Audit and reuse matched Cobalt/Asio workload; optional Boost.Context arms remain separately classified"
+    },
+    {
+      "path": "bench/post.cpp",
+      "sha256": "974bfd1036a621e278ad27bec634cc487693361e489379f003d2c5b0bcdbd42a",
+      "status": "not-run-for-this-proposal",
+      "plan": "Audit and reuse matched Cobalt/Asio workload; optional Boost.Context arms remain separately classified"
+    }
+  ]
+}

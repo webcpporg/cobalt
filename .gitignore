@@ -1,0 +1,4 @@
+doc/html/
+node_modules
+.node-modules/
+__pycache__/

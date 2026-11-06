@@ -1,0 +1,9 @@
+{
+  "boost_version": 109200,
+  "files": {
+    "boost/cobalt/run.hpp": {
+      "before": "2e545ed0483a254897fa17f206f503037fcb364e25b902c73608c0bc6cfb4def",
+      "after": "67e629ba19612afd39ff9214b11d5b7e7dfe719d589e7255bff70e21dd49d033"
+    }
+  }
+}

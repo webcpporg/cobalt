@@ -1,0 +1,18 @@
+{
+    "key": "cobalt",
+    "name": "cobalt",
+    "authors": [
+        "R"
+    ],
+    "description": "Boost.Cobalt coroutine applications on native, browser and WASI targets.",
+    "category": [
+        "Concurrent",
+        "IO"
+    ],
+    "maintainers": [
+        "R <github.overboard312@passmail.net>"
+    ],
+    "cxxstd": "20",
+    "port-of": null,
+    "kind": "wrapper"
+}

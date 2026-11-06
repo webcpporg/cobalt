@@ -1,0 +1,213 @@
+{
+  "schema_version": 1,
+  "purpose": "Pre-extraction behavior, not independent library conformance",
+  "superproject_revision": "d3a67959cbe52e6d972ef575be8870cc79da1312",
+  "asio_revision": "db4f7fc6afc516fdef057614cc971cdc39484099",
+  "boost_version": "1.92.0",
+  "cobalt_upstream_revision": "8b1cecba91d0e868ee0947b40fb04e3594680297",
+  "host": {
+    "system": "Darwin",
+    "release": "27.0.0",
+    "architecture": "arm64"
+  },
+  "versions": {
+    "wasmtime": "50.0.1",
+    "wasi_sdk": "34.0",
+    "emscripten": "6.0.11",
+    "node": "26.12.0"
+  },
+  "observations": [
+    "The shell initially selected Python 3.9 and defined CPATH; commands use Python 3.14 and clear header-search environment variables.",
+    "Wasmtime 47.0.3 selected from PATH rejected the cooperative component. The same bytes passed Wasmtime 50.0.1. The retained 47 attempt is not support evidence.",
+    "Node 26.12.0 is the actual local runtime, distinct from the initial planning profile 26.7.0.",
+    "Native sandbox socket bind was refused; the unchanged loopback test passed with local networking permission."
+  ],
+  "artifacts": [
+    {
+      "path": ".local/cobalt-genesis/baseline/custom-main.log",
+      "sha256": "bfd35de505a320147250037940068676b21d111eb7adf987af8c92b7853f1d95",
+      "bytes": 424
+    },
+    {
+      "path": ".local/cobalt-genesis/baseline/emscripten-asyncify-verdict.log",
+      "sha256": "49c834dca3a31a3e5cf8390e1a0e09a477db58a980d95d26d4d6d1ed225f4b55",
+      "bytes": 177
+    },
+    {
+      "path": ".local/cobalt-genesis/baseline/emscripten-asyncify.log",
+      "sha256": "d6ec1b13132801076a64e4130b74c09f8bafd1d40a738a3ea9d4d07374c2dbe8",
+      "bytes": 15902
+    },
+    {
+      "path": ".local/cobalt-genesis/baseline/emscripten-asyncify.xml",
+      "sha256": "b8dc1ac24b4ea099baac0f1e01a0f8477d3f9a01e12d72c9cc47d9e397024873",
+      "bytes": 908072
+    },
+    {
+      "path": ".local/cobalt-genesis/baseline/emscripten-jspi-verdict.log",
+      "sha256": "3eecf0bf89309e66bc281194c9bf2ace25cdfd1c18494e67c2931e4034aedeed",
+      "bytes": 173
+    },
+    {
+      "path": ".local/cobalt-genesis/baseline/emscripten-jspi.log",
+      "sha256": "8448fca9be1af1f88a081bbfaa17d57e0efce045e499d2dda055bee2350dc086",
+      "bytes": 14215
+    },
+    {
+      "path": ".local/cobalt-genesis/baseline/emscripten-jspi.xml",
+      "sha256": "826e60de3a892c68850a878d92e1e8904997753649c6ce9185024bfe829dbef8",
+      "bytes": 924668
+    },
+    {
+      "path": ".local/cobalt-genesis/baseline/native-cobalt_ssl_cancel.log",
+      "sha256": "1c1e1d63a309b63d6d7a18c79f2ad06ab3d501fb73dc3b05bcd3c96f60f4749d",
+      "bytes": 2802
+    },
+    {
+      "path": ".local/cobalt-genesis/baseline/native-cobalt_ssl_client.log",
+      "sha256": "b484cbefc22e25a24bc5eb1e4f2e7f29d81b7b05688790fe1c2b2dde2f037807",
+      "bytes": 6981
+    },
+    {
+      "path": ".local/cobalt-genesis/baseline/native-cobalt_ssl_state.log",
+      "sha256": "bedb86280c65dbacdded3431e022b41ba0afd3bca010c4cf008a9fc7dd52aba2",
+      "bytes": 2068
+    },
+    {
+      "path": ".local/cobalt-genesis/baseline/native-threads-verdict.log",
+      "sha256": "0a7e4ad42b2438cabcb7d9be61a3390c7b8f504f33ac8e5c1f88b6ee088c71e0",
+      "bytes": 172
+    },
+    {
+      "path": ".local/cobalt-genesis/baseline/native-threads.log",
+      "sha256": "dc528e7dd327624c695425af07d3737e3cc4065c8acfd12642119ae89a0ec8cb",
+      "bytes": 5939
+    },
+    {
+      "path": ".local/cobalt-genesis/baseline/native-threads.xml",
+      "sha256": "6a10e39548776223922ae0198a7b66992331b677bd1b6e5d6249c1e292fa3185",
+      "bytes": 389485
+    },
+    {
+      "path": ".local/cobalt-genesis/baseline/native-tls-build.log",
+      "sha256": "320db5a45e8909b063560c55f0d82dfd090086ff6eb56ee2f3590ba3293ae94a",
+      "bytes": 6039
+    },
+    {
+      "path": ".local/cobalt-genesis/baseline/native.log",
+      "sha256": "139618238b70ff7d41aa72ec45f8575699fdf64dfe7d53a5b516759206739d77",
+      "bytes": 11776
+    },
+    {
+      "path": ".local/cobalt-genesis/baseline/native.xml",
+      "sha256": "88225b9f759031f61100b14d5eb0240280c15a89438f89ceb2dfb5cc7b34ff18",
+      "bytes": 899043
+    },
+    {
+      "path": ".local/cobalt-genesis/baseline/run.py",
+      "sha256": "b4b0acfe375fda2ff90a14953813be2a56b9d2226da8a61f413bfb3ce36701f5",
+      "bytes": 3389
+    },
+    {
+      "path": ".local/cobalt-genesis/baseline/runs.json",
+      "sha256": "31bf5b63288288f11fcf2e7c758f2fffd43c57bfa5361fc888d5cd5e9743c7b0",
+      "bytes": 2541
+    },
+    {
+      "path": ".local/cobalt-genesis/baseline/tls-runs.json",
+      "sha256": "4aac548af79e31e8a1b6e25aa81f37e940a43d505f0676b668976805cf07abf1",
+      "bytes": 3885
+    },
+    {
+      "path": ".local/cobalt-genesis/baseline/tls.py",
+      "sha256": "92b25afe91920c90f952bea02b388f8aae3a54ceeb46f633572ecfb5bbc61a13",
+      "bytes": 2659
+    },
+    {
+      "path": ".local/cobalt-genesis/baseline/wasip2-tls-verdict.log",
+      "sha256": "0c3522a3e123cc3890ccf7b6d3ce54cf2bb76846d21f1508d308f458529b2a6c",
+      "bytes": 168
+    },
+    {
+      "path": ".local/cobalt-genesis/baseline/wasip2-tls.log",
+      "sha256": "b08f89e3cbf77ba9b6a3b432b7bca61e156bf4629fcb27f3705dcfd23dc2bf5b",
+      "bytes": 48739
+    },
+    {
+      "path": ".local/cobalt-genesis/baseline/wasip2-tls.xml",
+      "sha256": "f5cd33b155d8d61de07a036d1efe358de614f648278fbd99cb9428717f043d6e",
+      "bytes": 48432794
+    },
+    {
+      "path": ".local/cobalt-genesis/baseline/wasip2-verdict.log",
+      "sha256": "4c3fa545bc5b487d9c27f07984f1af5a4eea7d6855d6a6baba102f6da3b84885",
+      "bytes": 164
+    },
+    {
+      "path": ".local/cobalt-genesis/baseline/wasip2.log",
+      "sha256": "6d4d7e14958628ca1fcc1f34a41b317e37ac6694ea89d7ff67d67bd9037a9b18",
+      "bytes": 7868
+    },
+    {
+      "path": ".local/cobalt-genesis/baseline/wasip2.xml",
+      "sha256": "fc7a7e6020e00d3982f7455e103e92acebb9dd851097458b7f8c73ab0c350ece",
+      "bytes": 647510
+    },
+    {
+      "path": ".local/cobalt-genesis/baseline/wasip3-cobalt_ssl_cancel.log",
+      "sha256": "f827d586edd735faa22d2ca4c11bfe64eb76075e3f4011318eb6e6b220e262db",
+      "bytes": 2874
+    },
+    {
+      "path": ".local/cobalt-genesis/baseline/wasip3-cobalt_ssl_client.log",
+      "sha256": "db642e9d0be9d2c197e58f18deab49b506b659630570c8a2482b2ab83d6033c1",
+      "bytes": 8897
+    },
+    {
+      "path": ".local/cobalt-genesis/baseline/wasip3-cobalt_ssl_state.log",
+      "sha256": "eb8b4b54deafb5a40202d3faa57020a8b212b034315a3fca33d685294cb56774",
+      "bytes": 2140
+    },
+    {
+      "path": ".local/cobalt-genesis/baseline/wasip3-threads-verdict.log",
+      "sha256": "74ade62f885defb8f74f3c6b49523c8f50e82679b9cc0902a3d9a245f79aa34d",
+      "bytes": 172
+    },
+    {
+      "path": ".local/cobalt-genesis/baseline/wasip3-threads.log",
+      "sha256": "376a80c6bcd8152e86a6c5b993f05993c0a93a8a9b5cba1b5d95cf24d0537990",
+      "bytes": 6945
+    },
+    {
+      "path": ".local/cobalt-genesis/baseline/wasip3-threads.xml",
+      "sha256": "8141852f8053bcfb57f4b40900e6e8a880e062b3c66c9e91153b7bcf222193d4",
+      "bytes": 466797
+    },
+    {
+      "path": ".local/cobalt-genesis/baseline/wasip3-tls-build.log",
+      "sha256": "b319f04c582d0cf14084e3ac4cb4b40ca33d250657c77053f6e26f3e1ddb14cd",
+      "bytes": 7472
+    },
+    {
+      "path": ".local/cobalt-genesis/baseline/wasip3-verdict.log",
+      "sha256": "aefa2c7d4262356182fbdaa2fee34cab15ad2f0759979d1851449a66e148def3",
+      "bytes": 164
+    },
+    {
+      "path": ".local/cobalt-genesis/baseline/wasip3.log",
+      "sha256": "85d78d1f464c43f1eef2c6a2f845f30de868ce26dcf29de119f69c33337e05b3",
+      "bytes": 7791
+    },
+    {
+      "path": ".local/cobalt-genesis/baseline/wasip3.xml",
+      "sha256": "20d1fe4fe9ea68a7858418f641438f231341d8a8b0fc00bb63ed1a5a44f354c4",
+      "bytes": 647325
+    }
+  ],
+  "archive": {
+    "path": "evidence.zip",
+    "bytes": 2831049,
+    "sha256": "53d23392af5c8278800224e7fd5d7fc3c81ded2e658dd58f49af54b27e2d97f0",
+    "generated_by": "archive.py --capture <superproject-root>"
+  }
+}

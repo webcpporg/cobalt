@@ -1,0 +1,32 @@
+# Copyright (c) 2026 WebCpp.org
+#
+# Distributed under the Boost Software License, Version 1.0. (See
+# accompanying file LICENSE_1_0.txt or copy at
+# https://www.boost.org/LICENSE_1_0.txt)
+
+project : requirements <library>/webcpp/cobalt//core <library>/webcpp//node-test ;
+import webcpp ;
+webcpp.targets native wasip2 wasip3 emscripten ;
+webcpp.original python3 : .. ;
+for local handling in on off
+{
+    webcpp.drive move_$(handling) : move_probe.cpp : <exception-handling>$(handling)
+      : driver.py : : native wasip2 emscripten ;
+    webcpp.drive move_$(handling)_p3 : move_probe.cpp : <exception-handling>$(handling)
+      : driver.py : --wasip3 : wasip3 ;
+    .moves += move_$(handling) ;
+    .moves-p3 += move_$(handling)_p3 ;
+    webcpp.drive borrowed_race_$(handling) : move_probe.cpp
+      : <exception-handling>$(handling) <define>WEBCPP_TEST_BORROWED_RACE
+      : driver.py : --race-only : native wasip2 emscripten ;
+    webcpp.drive borrowed_race_$(handling)_p3 : move_probe.cpp
+      : <exception-handling>$(handling) <define>WEBCPP_TEST_BORROWED_RACE
+      : driver.py : --wasip3 --race-only : wasip3 ;
+    explicit borrowed_race_$(handling) borrowed_race_$(handling)_p3 ;
+    .race += borrowed_race_$(handling) ;
+    .race-p3 += borrowed_race_$(handling)_p3 ;
+}
+webcpp.lane exceptions : $(.moves) : native wasip2 emscripten ;
+webcpp.lane exceptions_p3 : $(.moves-p3) : wasip3 ;
+webcpp.lane borrowed_race : $(.race) : native wasip2 emscripten ;
+webcpp.lane borrowed_race_p3 : $(.race-p3) : wasip3 ;

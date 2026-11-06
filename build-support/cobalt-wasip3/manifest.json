@@ -1,0 +1,45 @@
+{
+  "boost_version": 109200,
+  "files": {
+    "boost/cobalt/io/acceptor.hpp": {
+      "before": "d4288bd7bfd6953c15fdfac09a8caff56c7e78fceebe2c5b9f232daff8736c18",
+      "after": "33c3aa0fa45184a555353153c08f4950b81209221791ec43759ab783fc7ba6fd"
+    },
+    "boost/cobalt/io/datagram_socket.hpp": {
+      "before": "d7779550e83648e7c4e5c2224ada99b2a7d9766adf6411107570eca173865e83",
+      "after": "b60aa660ce9d181967c4369f73a5c8d069d9ee189082d19f033f7cce80c3d0db"
+    },
+    "boost/cobalt/io/endpoint.hpp": {
+      "before": "ab852f4996a2c1078bf79198daec50a5fd5acbefa000a3ab3065b58ce334e595",
+      "after": "5b915d39de36a0291eb1e8fc82f21342f9a6cb3cd64150f0a82f63cc334c219e"
+    },
+    "boost/cobalt/io/seq_packet_socket.hpp": {
+      "before": "75dc97e20b798fc6b6cd159c780d3eb44834fa3b7438e13f3715b3b98ec333ff",
+      "after": "a3bae77026e2d17ea92a303e0139a7bdcd906118a2907508a17d31039cd203d7"
+    },
+    "boost/cobalt/io/serial_port.hpp": {
+      "before": "9a4afa14aef6bb441a2ecb8d83db127a9d555db272f0fcd05688b35b46667d2f",
+      "after": "1019ac492135056919651ce2fc729e9918f7e2fd263a9cf8a88c7da821ed7012"
+    },
+    "boost/cobalt/io/signal_set.hpp": {
+      "before": "e0ca22360d314b483ed6f867eb660a77f4fc931f697094859b702dc245d736d7",
+      "after": "f291fac6c423d9922d9f1c60d57dfec3c97c2652053ff76f3fb8fd90df6ce311"
+    },
+    "boost/cobalt/io/stream_socket.hpp": {
+      "before": "01f6ecedbbf17de0754dd6c8d812fe93fa854c9c45af2eaf4ff7c89ce589058c",
+      "after": "ec45ab77be736f2dbde0bda5924d78acdef80b712305abf59a346cc79a1535e4"
+    },
+    "boost/cobalt/thread.hpp": {
+      "before": "8c4c9882e0e6eb4dd7418f94a7db0bd8eb676b1563afc708886abba9d954df39",
+      "after": "75ce0daf18d95198901180811457e765b29dec0a616cc0d34e9477184fdd520a"
+    },
+    "libs/cobalt/src/io/acceptor.cpp": {
+      "before": "d52e42c21036881779f2064cb99a584e33d1cc062402bc45dce56aa6cfcc57d4",
+      "after": "352b56a65b37f1dbdefd18be99df851a850387c76c5286262d8439e29d271bf0"
+    },
+    "libs/cobalt/src/io/endpoint.cpp": {
+      "before": "00b80c29337991bb81863cd9f666bf6c6ce2b1001a0b0e296f053734da5af51b",
+      "after": "ba0dabaf0b557cebf02223b78b1610e0bedef0b5ce372d006b783d9bc9f6d8cf"
+    }
+  }
+}

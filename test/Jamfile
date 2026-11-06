@@ -1,0 +1,127 @@
+# Copyright (c) 2026 WebCpp.org
+#
+# Distributed under the Boost Software License, Version 1.0. (See
+# accompanying file LICENSE_1_0.txt or copy at
+# https://www.boost.org/LICENSE_1_0.txt)
+
+import webcpp ;
+webcpp.targets native wasip2 wasip3 emscripten ;
+
+webcpp.run canonical_entry : entry_test.cpp : <library>/webcpp/cobalt//cobalt ;
+webcpp.run legacy_entry : entry_test.cpp : <library>/webcpp/asio//cobalt
+  <include>../include ;
+webcpp.run mixed_entry : entry_test.cpp : <library>/webcpp/asio//cobalt
+  <library>/webcpp/cobalt//cobalt ;
+webcpp.run custom_main : custom_main_test.cpp : <library>/webcpp/cobalt//core ;
+
+webcpp.original node : . ;
+webcpp.headers-alone cobalt : ../include : cobalt.hpp cobalt/config.hpp
+  : <library>/webcpp/cobalt//core ;
+
+for local handling in on off
+{
+    webcpp.run cobalt_network_exceptions_$(handling) : cobalt_network_test.cpp
+      : <library>/webcpp/cobalt//cobalt <exception-handling>$(handling)
+      : native wasip2 wasip3 ;
+}
+webcpp.run cobalt_io : cobalt_io_test.cpp
+  : <library>/webcpp/cobalt//cobalt : native wasip2 wasip3 ;
+webcpp.run cobalt_accept_cancel : cobalt_accept_cancel_test.cpp
+  : <library>/webcpp/cobalt//cobalt : native wasip2 wasip3 ;
+webcpp.run cobalt_wasi : cobalt_test.cpp
+  : <library>/webcpp/cobalt//cobalt : wasip2 wasip3 ;
+webcpp.run cobalt_thread : cobalt_thread_test.cpp
+  : <library>/webcpp/cobalt//cobalt <threading>multi
+    <toolset>clang-wasip3:<exception-handling>off : native wasip3 ;
+explicit cobalt_thread ;
+webcpp.lane threads : cobalt_thread : native wasip3 ;
+webcpp.run cobalt_thread_native_single : cobalt_thread_test.cpp
+  : <library>/webcpp/cobalt//cobalt <threading>single : native ;
+webcpp.compile cobalt_main_wasip3 : ../src/cobalt_main.cpp
+  : <library>/webcpp/cobalt//core <define>BOOST_COBALT_NO_LIB=1 : wasip3 ;
+
+# Preserve the exact exit-status and suspension witnesses from Asio.
+for local test in cobalt cobalt_status
+{
+    local runner = run ;
+    if $(test) = cobalt_status { runner = run-fail ; }
+    for local handling in on off
+    {
+        local requirements = <library>/webcpp/cobalt//cobalt <exception-handling>$(handling) ;
+        local name = $(test)_exceptions_$(handling) ;
+        webcpp.$(runner) $(name)_native : $(test)_test.cpp : $(requirements) : native ;
+        webcpp.$(runner) $(name) : $(test)_test.cpp : $(requirements) : emscripten ;
+        webcpp.$(runner) $(name)_asyncify : $(test)_test.cpp
+          : $(requirements) <webcpp-suspend>asyncify : emscripten ;
+        .asyncify += $(name)_asyncify ;
+    }
+}
+webcpp.drive cobalt_exit_wasi : cobalt_status_test.cpp : <library>/webcpp/cobalt//cobalt
+  : cobalt_status_driver.mjs : : wasip3 ;
+webcpp.lane cobalt_wasip3 : cobalt_exit_wasi : wasip3 ;
+for local handling in on off
+{
+    local name = cobalt_exit_exceptions_$(handling) ;
+    local requirements = <library>/webcpp/cobalt//cobalt <exception-handling>$(handling) ;
+    webcpp.drive $(name) : cobalt_status_test.cpp : $(requirements)
+      : cobalt_status_driver.mjs : : native emscripten ;
+    webcpp.drive $(name)_asyncify : cobalt_status_test.cpp
+      : $(requirements) <webcpp-suspend>asyncify : cobalt_status_driver.mjs : : emscripten ;
+    .cobalt += $(name) ;
+    .cobalt-emscripten += $(name)_asyncify ;
+    .asyncify += $(name)_asyncify ;
+    local promise = promise_cobalt_exceptions_$(handling) ;
+    webcpp.run $(promise) : promise_cobalt_test.cpp : $(requirements) : emscripten ;
+    webcpp.run $(promise)_asyncify : promise_cobalt_test.cpp
+      : $(requirements) <webcpp-suspend>asyncify : emscripten ;
+    .asyncify += $(promise)_asyncify ;
+}
+webcpp.lane cobalt : $(.cobalt) : native emscripten ;
+webcpp.lane cobalt_asyncify : $(.cobalt-emscripten) : emscripten ;
+
+.asyncify-stack-debug = <variant>debug ;
+.asyncify-stack-release = <variant>release ;
+.asyncify-stack-optimized_link = <variant>release <linkflags>-O3 ;
+for local build in debug release optimized_link
+{
+    for local handling in on off
+    {
+        local name = cobalt_stack_$(build)_exceptions_$(handling) ;
+        webcpp.run $(name) : cobalt_stack_test.cpp
+          : <library>/webcpp/cobalt//cobalt <webcpp-suspend>asyncify
+            $(.asyncify-stack-$(build)) <exception-handling>$(handling)
+          : emscripten ;
+        .asyncify += $(name) ;
+    }
+}
+webcpp.lane asyncify : $(.asyncify) : emscripten ;
+build-project wasip2 ;
+build-project tls ;
+build-project no_exceptions ;
+build-project browser ;
+build-project applications ;
+
+# run(task) owns a different context from co_main and needs its own witness.
+webcpp.run run_task : run_task_test.cpp : <library>/webcpp/cobalt//core
+  <exception-handling>on ;
+explicit run_task ;
+
+webcpp.compile config : config_test.cpp : <library>/webcpp/cobalt//core ;
+webcpp.compile config_all_off : config_test.cpp
+  : <library>/webcpp/cobalt//core <define>WEBCPP_NO_EXCEPTIONS ;
+webcpp.compile config_developer_defined : config_test.cpp
+  : <library>/webcpp/cobalt//core <define>WEBCPP_COBALT_NO_EXCEPTIONS
+    <define>WEBCPP_TEST_COBALT_DEVELOPER_DEFINED ;
+webcpp.compile config_optional_requirements : config_test.cpp
+  : <library>/webcpp/cobalt//core <define>WEBCPP_COBALT_REQUIRE_SOCKET_BACKEND=0
+    <define>WEBCPP_COBALT_REQUIRE_OPENSSL=0 <define>WEBCPP_COBALT_REQUIRE_THREADS=0
+    <define>WEBCPP_COBALT_REQUIRE_LOCAL_SOCKETS=0 <define>WEBCPP_COBALT_REQUIRE_SIGNALS=0
+    <define>WEBCPP_COBALT_REQUIRE_SERIAL_PORT=0 <define>WEBCPP_COBALT_REQUIRE_REVERSE_DNS=0 ;
+
+webcpp.run core_contracts : core_contracts_test.cpp : <library>/webcpp/cobalt//cobalt ;
+webcpp.run core_contracts_asyncify : core_contracts_test.cpp
+  : <library>/webcpp/cobalt//cobalt <webcpp-suspend>asyncify : emscripten ;
+explicit core_contracts_asyncify ;
+
+webcpp.run composition_contracts : composition_contracts_test.cpp
+  : <library>/webcpp/cobalt//cobalt ;

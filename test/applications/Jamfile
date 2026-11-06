@@ -1,0 +1,39 @@
+# Copyright (c) 2026 WebCpp.org
+#
+# Distributed under the Boost Software License, Version 1.0. (See
+# accompanying file LICENSE_1_0.txt or copy at
+# https://www.boost.org/LICENSE_1_0.txt)
+
+import webcpp ;
+webcpp.targets native wasip2 wasip3 emscripten ;
+webcpp.original python3 : .. ;
+
+# Only the immutable upstream translation units suppress their unused argv
+# parameters. No WebCPP source or library-wide warning policy is weakened.
+for local app in channel delay delay_op outcome signals
+{
+    local requirements = <library>/webcpp/cobalt//cobalt
+      <toolset>clang:<cxxflags>-Wno-unused-parameter
+      <toolset>gcc:<cxxflags>-Wno-unused-parameter
+      <toolset>emscripten:<cxxflags>-Wno-unused-parameter
+      <toolset>emscripten:<linkflags>-sEXIT_RUNTIME=1 ;
+    if $(app) = signals
+    {
+        # The locked example uses aggregate default members and an assert-only
+        # local in Release. Its value is checked by the owned counterpart.
+        requirements += <toolset>clang:<cxxflags>-Wno-missing-field-initializers
+          <toolset>gcc:<cxxflags>-Wno-missing-field-initializers
+          <toolset>emscripten:<cxxflags>-Wno-missing-field-initializers
+          <toolset>clang:<cxxflags>-Wno-unused-variable
+          <toolset>gcc:<cxxflags>-Wno-unused-variable
+          <toolset>emscripten:<cxxflags>-Wno-unused-variable ;
+    }
+    webcpp.drive original_$(app) : upstream/example/$(app).cpp original_exit.cpp
+      : $(requirements) : original_driver.py : $(app) : native wasip2 emscripten ;
+    webcpp.drive original_$(app)_p3 : upstream/example/$(app).cpp original_exit.cpp
+      : $(requirements) : original_driver.py : $(app) --wasip3 : wasip3 ;
+    .portable += original_$(app) ;
+    .portable-p3 += original_$(app)_p3 ;
+}
+webcpp.lane upstream-portable : $(.portable) : native wasip2 emscripten ;
+webcpp.lane upstream-portable-p3 : $(.portable-p3) : wasip3 ;

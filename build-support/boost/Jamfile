@@ -1,0 +1,123 @@
+# Copyright (c) 2026 WebCpp.org
+#
+# Distributed under the Boost Software License, Version 1.0. (See
+# accompanying file LICENSE_1_0.txt or copy at
+# https://www.boost.org/LICENSE_1_0.txt)
+#
+
+# Checked Boost.Cobalt sources, compiled once per consumer configuration.
+import errors ;
+import feature ;
+import property-set ;
+import set ;
+import webcpp-target ;
+
+project /webcpp/cobalt/boost
+  : source-location $(WEBCPP_BOOST_SOURCE)
+  : requirements <warnings>off <warnings-as-errors>off
+    <library>/webcpp//boost-source-check ;
+
+rule compiled ( name : sources * : missing + : requirements * : usage-requirements * )
+{
+    if $(sources)
+    {
+        lib $(name) : $(sources) : <link>static $(requirements) : : $(usage-requirements) ;
+    }
+    else
+    {
+        alias $(name) : : <conditional>@sources-missing ;
+    }
+    explicit $(name) ;
+}
+
+rule sources-missing ( properties * )
+{
+    errors.user-error "libs/cobalt/src holds no .cpp file; /webcpp//boost_cobalt"
+        "requires the matching Boost.Cobalt sources" ;
+}
+
+rule cobalt-sources ( )
+{
+    local sources ;
+    for local file in [ glob libs/cobalt/src/*.cpp libs/cobalt/src/detail/*.cpp
+        libs/cobalt/src/io/*.cpp ]
+    {
+        if ! [ MATCH "(^|/)(main|ssl|endpoint|acceptor|thread|signal_set|serial_port|seq_packet_socket)[.]cpp$" : $(file) ]
+        {
+            sources += $(file) ;
+        }
+    }
+    return $(sources) ;
+}
+
+# This diagnostic is a configuration warning, not a compiler warning: even
+# warnings-as-errors=on must preserve the consumer's choice. Cache the
+# base configuration so several consumers of one archive do not repeat it.
+# b2 evaluates conditionals before and after applying library requirements;
+# ignore link and warning features, which this library fixes independently.
+rule cobalt-configuration ( properties * )
+{
+    if <exception-handling>off in $(properties)
+    {
+        local settings = [ property-set.create $(properties) ] ;
+        local base = [ $(settings).base ] ;
+        base = [ set.difference $(base) : <link>shared <link>static
+            <warnings>all <warnings>extra <warnings>off
+            <warnings-as-errors>on <warnings-as-errors>off ] ;
+        local key = $(base:J=|) ;
+        if ! $(.cobalt-warned.$(key))
+        {
+            .cobalt-warned.$(key) = true ;
+            ECHO "warning: webcpp: Boost.Cobalt is built with exceptions disabled;"
+                "moving a pending task, promise or generator can abort at runtime with libc++."
+                "Use exception-handling=on."
+                "See https://github.com/boostorg/cobalt/issues/287" ;
+        }
+    }
+}
+
+.cobalt-platform-sources = [ glob libs/cobalt/src/thread.cpp
+    libs/cobalt/src/io/endpoint.cpp libs/cobalt/src/io/acceptor.cpp
+    libs/cobalt/src/io/signal_set.cpp libs/cobalt/src/io/serial_port.cpp
+    libs/cobalt/src/io/seq_packet_socket.cpp ] ;
+
+rule cobalt-platform-sources ( properties * )
+{
+    if [ webcpp-target.target-of $(properties) ] in wasip2 wasip3
+    {
+        local threaded ;
+        if <threading>multi in $(properties)
+        {
+            threaded = <source>libs/cobalt/src/thread.cpp ;
+        }
+        return <source>/webcpp/cobalt-wasip3//endpoint
+            <source>/webcpp/cobalt-wasip3//acceptor
+            <library>/webcpp/cobalt-wasip3//headers $(threaded) ;
+    }
+    return <source>$(.cobalt-platform-sources) ;
+}
+
+# Boost.Cobalt, with the macros of its own build: its sources see
+# BOOST_COBALT_SOURCE=1 and BOOST_COBALT_IO_SOURCE=1; users see
+# BOOST_COBALT_NO_LIB=1. Emscripten sources and users disable Asio threads
+# consistently on single threads; worker builds retain thread support. Exception
+# handling follows the consumer: result-based programs may disable it without
+# a blanket configuration refusal. This does not guarantee every operation works
+# without exceptions: moving a pending task creates an exception_ptr in Boost
+# 1.92, which libc++ aborts on when built with -fno-exceptions.
+compiled boost_cobalt : [ cobalt-sources ]
+  : libs/cobalt/src holds no .cpp file
+  : <define>BOOST_COBALT_SOURCE=1 <define>BOOST_COBALT_IO_SOURCE=1
+    <library>/webcpp/cobalt-common//headers
+    <toolset>emscripten:<library>/webcpp/cobalt-browser//headers
+    <target-os>windows:<library>/webcpp/asio-windows//headers
+    <toolset>emscripten,<threading>single:<define>BOOST_ASIO_DISABLE_THREADS
+    <conditional>@cobalt-configuration
+    <conditional>@cobalt-platform-sources
+  : <define>BOOST_COBALT_NO_LIB=1
+    <library>/webcpp/cobalt-common//headers
+    <toolset>emscripten:<library>/webcpp/cobalt-browser//headers
+    <target-os>windows:<library>/webcpp/asio-windows//headers
+    <toolset>clang-wasip2:<library>/webcpp/cobalt-wasip3//headers
+    <toolset>clang-wasip3:<library>/webcpp/cobalt-wasip3//headers
+    <toolset>emscripten,<threading>single:<define>BOOST_ASIO_DISABLE_THREADS ;

@@ -1,0 +1,43 @@
+# Copyright (c) 2026 WebCpp.org
+#
+# Distributed under the Boost Software License, Version 1.0. (See
+# accompanying file LICENSE_1_0.txt or copy at
+# https://www.boost.org/LICENSE_1_0.txt)
+
+import webcpp ;
+webcpp.targets native wasip3 ;
+webcpp.original python3 : .. ;
+
+webcpp.link cobalt_tls_client : cobalt_tls_client.cpp
+    : <library>/webcpp/cobalt//cobalt <library>/webcpp/asio//tls <exception-handling>off:<source>/webcpp//throw_exception ;
+explicit cobalt_tls_client ;
+
+webcpp.link cobalt_ssl_client : cobalt_ssl_client.cpp
+    : <library>/webcpp/cobalt//cobalt_ssl <exception-handling>off:<source>/webcpp//throw_exception ;
+explicit cobalt_ssl_client ;
+
+webcpp.link cobalt_ssl_state : cobalt_ssl_state.cpp
+    : <library>/webcpp/cobalt//cobalt_ssl <include>../../../../tools/node-test/include
+      <exception-handling>off:<source>/webcpp//throw_exception ;
+explicit cobalt_ssl_state ;
+
+webcpp.link cobalt_ssl_cancel : cobalt_ssl_cancel.cpp
+    : <library>/webcpp/cobalt//cobalt_ssl <include>../../../../tools/node-test/include
+      <exception-handling>off:<source>/webcpp//throw_exception ;
+explicit cobalt_ssl_cancel ;
+
+for local test in cobalt_tls_client cobalt_ssl_client cobalt_ssl_state cobalt_ssl_cancel
+{
+    local library = /webcpp/cobalt//cobalt_ssl ;
+    local args = --embedded ;
+    if $(test) = cobalt_tls_client
+    { library = /webcpp/cobalt//cobalt /webcpp/asio//tls ; }
+    if $(test) = cobalt_ssl_client { args += --require-sni ; }
+    if $(test) in cobalt_ssl_state cobalt_ssl_cancel { args = --state-test ; }
+    webcpp.drive $(test)_runtime : $(test).cpp
+      : <library>$(library) <include>../../../../tools/node-test/include
+        <webcpp-drive-timeout>180 <dependency>../../../../tools/openssl/test/tls.py
+      : ../../../../tools/openssl/test/driver.py : $(args) : native wasip3 ;
+    .tls += $(test)_runtime ;
+}
+webcpp.lane tls : $(.tls) : native wasip3 ;

@@ -1,0 +1,225 @@
+--- a/boost/cobalt/io/acceptor.hpp
++++ b/boost/cobalt/io/acceptor.hpp
+@@ -54,6 +54,7 @@
+     stream_socket sock_{acceptor_.get_executor()};
+   };
+ 
++#if defined(SOCK_SEQPACKET)
+   struct BOOST_COBALT_IO_DECL accept_seq_packet_op final : op<system::error_code, seq_packet_socket>
+   {
+     void initiate(completion_handler<system::error_code, seq_packet_socket> h) override;
+@@ -66,6 +67,8 @@
+     seq_packet_socket sock_{acceptor_.get_executor()};
+   };
+ 
++
++#endif
+ 
+   struct BOOST_COBALT_IO_DECL wait_op final : op<system::error_code>
+   {
+@@ -94,12 +97,15 @@
+     return accept_stream_op{acceptor_};
+   }
+ 
++#if defined(SOCK_SEQPACKET)
+   template<protocol_type::family_t F, protocol_type::protocol_t P>
+   [[nodiscard]] accept_seq_packet_op accept(static_protocol<F, local_seqpacket.type(), P> stream_proto)
+   {
+     return accept_seq_packet_op{acceptor_};
+   }
+ 
++
++#endif
+ 
+   [[nodiscard]] wait_op wait(wait_type wt = wait_type::wait_read)
+   {
+--- a/boost/cobalt/io/datagram_socket.hpp
++++ b/boost/cobalt/io/datagram_socket.hpp
+@@ -46,6 +46,7 @@
+ };
+ 
+ 
++#if defined(BOOST_ASIO_HAS_LOCAL_SOCKETS)
+ inline system::result<std::pair<datagram_socket, datagram_socket>> make_pair(decltype(local_datagram) protocol)
+ {
+   std::pair<datagram_socket, datagram_socket> res;
+@@ -55,6 +56,8 @@
+   else
+     return c.error();
+ }
++#endif
++
+ 
+ }
+ 
+--- a/boost/cobalt/io/endpoint.hpp
++++ b/boost/cobalt/io/endpoint.hpp
+@@ -118,10 +118,13 @@
+ constexpr static_protocol<BOOST_ASIO_OS_DEF(AF_INET),   BOOST_ASIO_OS_DEF(SOCK_DGRAM),  BOOST_ASIO_OS_DEF(IPPROTO_UDP)>  udp_v4{};
+ constexpr static_protocol<BOOST_ASIO_OS_DEF(AF_INET6),  BOOST_ASIO_OS_DEF(SOCK_DGRAM),  BOOST_ASIO_OS_DEF(IPPROTO_ICMP)> udp_v6{};
+ constexpr static_protocol<BOOST_ASIO_OS_DEF(AF_UNSPEC), BOOST_ASIO_OS_DEF(SOCK_DGRAM),  BOOST_ASIO_OS_DEF(IPPROTO_ICMP)> icmp  {};
++#if defined(BOOST_ASIO_HAS_LOCAL_SOCKETS)
+ constexpr static_protocol<AF_UNIX,                      BOOST_ASIO_OS_DEF(SOCK_STREAM)>    local_stream   {};
+ constexpr static_protocol<AF_UNIX,                      BOOST_ASIO_OS_DEF(SOCK_DGRAM)>     local_datagram {};
+ constexpr static_protocol<AF_UNIX,                      BOOST_ASIO_OS_DEF(SOCK_SEQPACKET)> local_seqpacket{};
+ constexpr static_protocol<AF_UNIX>                                                         local_protocol {};
++
++#endif
+ 
+ #if defined(IPPROTO_SCTP)
+ constexpr static_protocol<BOOST_ASIO_OS_DEF(AF_UNSPEC), BOOST_ASIO_OS_DEF(SOCK_SEQPACKET), IPPROTO_SCTP>  sctp   {};
+@@ -256,6 +259,7 @@
+   return *e;
+ }
+ 
++#if defined(BOOST_ASIO_HAS_LOCAL_SOCKETS)
+ struct local_endpoint
+ {
+   std::string_view path() const { return unix_.sun_path;}
+@@ -275,6 +279,8 @@
+ const local_endpoint* tag_invoke(get_endpoint_tag<AF_UNIX>,
+                                  protocol_type actual,
+                                  const endpoint::addr_type * addr);
++
++#endif
+ 
+ struct ip_address_v4
+ {
+--- a/boost/cobalt/io/seq_packet_socket.hpp
++++ b/boost/cobalt/io/seq_packet_socket.hpp
+@@ -7,6 +7,9 @@
+ 
+ #ifndef BOOST_COBALT_IOSEQ_PACKET_SOCKET_HPP
+ #define BOOST_COBALT_IOSEQ_PACKET_SOCKET_HPP
++
++#include <boost/asio/detail/config.hpp>
++#if defined(SOCK_SEQPACKET)
+ 
+ #include <boost/cobalt/io/detail/config.hpp>
+ #include <boost/cobalt/io/endpoint.hpp>
+@@ -91,4 +94,6 @@
+ 
+ }
+ 
++#endif
++
+ #endif //BOOST_COBALT_IOSEQ_PACKET_SOCKET_HPP
+--- a/boost/cobalt/io/serial_port.hpp
++++ b/boost/cobalt/io/serial_port.hpp
+@@ -7,6 +7,9 @@
+ 
+ #ifndef BOOST_COBALT_IO_SERIAL_PORT_HPP
+ #define BOOST_COBALT_IO_SERIAL_PORT_HPP
++
++#include <boost/asio/detail/config.hpp>
++#if defined(BOOST_ASIO_HAS_SERIAL_PORT)
+ 
+ #include <boost/cobalt/io/detail/config.hpp>
+ #include <boost/cobalt/op.hpp>
+@@ -81,4 +84,6 @@
+ 
+ }
+ 
++#endif
++
+ #endif //BOOST_COBALT_IO_SERIAL_PORT_HPP
+--- a/boost/cobalt/io/signal_set.hpp
++++ b/boost/cobalt/io/signal_set.hpp
+@@ -7,6 +7,9 @@
+ 
+ #ifndef BOOST_COBALT_IO_SIGNAL_SET_HPP
+ #define BOOST_COBALT_IO_SIGNAL_SET_HPP
++
++#include <boost/asio/detail/config.hpp>
++#if defined(BOOST_ASIO_HAS_SIGNAL)
+ 
+ #include <boost/cobalt/io/detail/config.hpp>
+ #include <boost/cobalt/op.hpp>
+@@ -48,4 +51,6 @@
+ 
+ }
+ 
++#endif
++
+ #endif //BOOST_COBALT_IO_SIGNAL_SET_HPP
+--- a/boost/cobalt/io/stream_socket.hpp
++++ b/boost/cobalt/io/stream_socket.hpp
+@@ -49,6 +49,7 @@
+ };
+ 
+ 
++#if defined(BOOST_ASIO_HAS_LOCAL_SOCKETS)
+ inline system::result<std::pair<stream_socket, stream_socket>> make_pair(decltype(local_stream) protocol)
+ {
+   std::pair<stream_socket, stream_socket> res;
+@@ -58,6 +59,8 @@
+   else
+     return c.error();
+ }
++#endif
++
+ 
+ }
+ 
+--- a/boost/cobalt/thread.hpp
++++ b/boost/cobalt/thread.hpp
+@@ -7,6 +7,9 @@
+ 
+ #ifndef BOOST_COBALT_THREAD_HPP
+ #define BOOST_COBALT_THREAD_HPP
++
++#include <boost/asio/detail/config.hpp>
++#if defined(BOOST_ASIO_HAS_THREADS)
+ 
+ #include <boost/cobalt/detail/thread.hpp>
+ #include <boost/cobalt/detail/exception.hpp>
+@@ -121,4 +124,6 @@
+ 
+ }
+ 
++#endif
++
+ #endif //BOOST_COBALT_THREAD_HPP
+--- a/libs/cobalt/src/io/acceptor.cpp
++++ b/libs/cobalt/src/io/acceptor.cpp
+@@ -43,11 +43,14 @@
+   co_return {ec, std::move(sock_)};
+ }
+ 
++#if defined(SOCK_SEQPACKET)
+ void acceptor::accept_seq_packet_op::initiate(completion_handler<system::error_code, seq_packet_socket>)
+ {
+   auto [ec] = co_await acceptor_.async_accept(sock_.socket_);
+   co_return {ec, std::move(sock_)};
+ }
++
++#endif
+ 
+ void acceptor::wait_op::initiate(completion_handler<system::error_code> handler)
+ {
+--- a/libs/cobalt/src/io/endpoint.cpp
++++ b/libs/cobalt/src/io/endpoint.cpp
+@@ -25,11 +25,14 @@
+ {
+ 
+ static_assert(std::is_standard_layout_v<endpoint>);
++#if defined(BOOST_ASIO_HAS_LOCAL_SOCKETS)
+ static_assert(std::is_standard_layout_v<local_endpoint>);
++#endif
+ static_assert(std::is_standard_layout_v<ip_address>);
+ static_assert(std::is_standard_layout_v<ip_address_v4>);
+ static_assert(std::is_standard_layout_v<ip_address_v6>);
+ 
++#if defined(BOOST_ASIO_HAS_LOCAL_SOCKETS)
+ std::size_t tag_invoke(make_endpoint_tag<AF_UNIX>,
+                        asio::detail::socket_addr_type* base,
+                        std::string_view sv)
+@@ -52,6 +55,8 @@
+     return nullptr;
+   return reinterpret_cast<const local_endpoint*>(addr);
+ }
++
++#endif
+ 
+ boost::static_string<15> ip_address_v4::addr_str() const
+ {

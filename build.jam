@@ -1,0 +1,35 @@
+# Copyright (c) 2026 WebCpp.org
+#
+# Distributed under the Boost Software License, Version 1.0. (See
+# accompanying file LICENSE_1_0.txt or copy at
+# https://www.boost.org/LICENSE_1_0.txt)
+
+project /webcpp/cobalt ;
+import webcpp ;
+
+use-project /webcpp/cobalt-common : build-support/cobalt-common ;
+use-project /webcpp/cobalt-browser : build-support/cobalt-browser ;
+use-project /webcpp/cobalt-wasip3 : build-support/cobalt-wasip3 ;
+use-project /webcpp/cobalt-ssl : build-support/cobalt-ssl ;
+use-project /webcpp/cobalt/boost : build-support/boost ;
+
+# Preserved upstream build files are inventory data, not our build recipes.
+webcpp.source-only test/applications/upstream ;
+
+# tag::core[]
+alias core : /webcpp/cobalt/boost//boost_cobalt : : : <include>include
+  <library>/webcpp/config//config <library>/webcpp/asio//asio ;
+# end::core[]
+
+lib cobalt-main : src/cobalt_main.cpp : <link>static <library>core ;
+explicit cobalt-main ;
+
+# tag::runner[]
+alias cobalt : core cobalt-main ;
+# end::runner[]
+
+# tag::tls[]
+alias io_ssl : /webcpp/cobalt-ssl//boost_cobalt_io_ssl
+  : : : <library>core <library>/webcpp/asio//tls <define>WEBCPP_COBALT_LINK_SSL=1 ;
+alias cobalt_ssl : cobalt io_ssl ;
+# end::tls[]

@@ -1,0 +1,187 @@
+--- a/boost/cobalt/io/ssl.hpp
++++ b/boost/cobalt/io/ssl.hpp
+@@ -62,17 +62,20 @@
+ 
+   [[nodiscard]] write_op write_some(const_buffer_sequence buffer) override
+   {
+-    return {buffer, this, initiate_write_some_};
++    return {buffer, this, initiate_write_some_, check_write_};
+   }
+   [[nodiscard]] read_op read_some(mutable_buffer_sequence buffer) override
+   {
+-    return {buffer, this, initiate_read_some_};
++    return {buffer, this, initiate_read_some_, check_read_};
+   }
+ 
+   [[nodiscard]] bool secure() const {return upgraded_;}
+ 
++  // The SSL connection, distinct from socket::native_handle()'s descriptor.
++  [[nodiscard]] SSL * native_ssl_handle() { return stream_socket_.native_handle(); }
++
+   template<typename VerifyCallback>
+-    requires requires (const VerifyCallback & cb, context & ctx) {{cb(true, ctx)} -> std::same_as<bool>;}
++    requires requires (VerifyCallback & cb, asio::ssl::verify_context & ctx) {{cb(true, ctx)} -> std::same_as<bool>;}
+   system::result<void> set_verify_callback(VerifyCallback vc)
+   {
+     system::error_code ec;
+@@ -93,12 +96,13 @@
+   {
+     void ready(handler<system::error_code> h) final;
+     void initiate(completion_handler<system::error_code> h) final;
+-    handshake_op_(handshake_type type, bool upgraded, asio::ssl::stream<asio::basic_stream_socket<protocol_type, executor>>  & stream_socket)
+-        : type_(type), upgraded_(upgraded), stream_socket_(stream_socket) {}
++    handshake_op_(handshake_type type, bool & upgraded, bool & started, asio::ssl::stream<asio::basic_stream_socket<protocol_type, executor>>  & stream_socket)
++        : type_(type), upgraded_(upgraded), started_(started), stream_socket_(stream_socket) {}
+     ~handshake_op_() = default;
+    private:
+     handshake_type type_;
+-    bool upgraded_;
++    bool & upgraded_;
++    bool & started_;
+     asio::ssl::stream<asio::basic_stream_socket<protocol_type, executor>> &stream_socket_;
+   };
+ 
+@@ -107,13 +111,14 @@
+   {
+     void ready(handler<system::error_code, std::size_t> h) final;
+     void initiate(completion_handler<system::error_code, std::size_t> h) final;
+-    handshake_buffer_op_(handshake_type type, bool upgraded, const_buffer_sequence buffer_,
++    handshake_buffer_op_(handshake_type type, bool & upgraded, bool & started, const_buffer_sequence buffer_,
+                          asio::ssl::stream<asio::basic_stream_socket<protocol_type, executor>>  & stream_socket)
+-        : type_(type), upgraded_(upgraded), buffer_(buffer_), stream_socket_(stream_socket) {}
++        : type_(type), upgraded_(upgraded), started_(started), buffer_(buffer_), stream_socket_(stream_socket) {}
+     ~handshake_buffer_op_() = default;
+    private:
+     handshake_type type_;
+-    bool upgraded_;
++    bool & upgraded_;
++    bool & started_;
+     const_buffer_sequence buffer_;
+     asio::ssl::stream<asio::basic_stream_socket<protocol_type, executor>> &stream_socket_;
+   };
+@@ -123,18 +128,18 @@
+   {
+     void ready(handler<system::error_code> h) final;
+     void initiate(completion_handler<system::error_code> h) final;
+-    shutdown_op_(bool upgraded, asio::ssl::stream<asio::basic_stream_socket<protocol_type, executor>>  & stream_socket)
++    shutdown_op_(bool & upgraded, asio::ssl::stream<asio::basic_stream_socket<protocol_type, executor>>  & stream_socket)
+         : upgraded_(upgraded), stream_socket_(stream_socket) {}
+     ~shutdown_op_() = default;
+    private:
+-    bool upgraded_;
++    bool & upgraded_;
+     asio::ssl::stream<asio::basic_stream_socket<protocol_type, executor>> &stream_socket_;
+   };
+  public:
+-  [[nodiscard]] auto handshake(handshake_type type) { return handshake_op_{type, upgraded_, stream_socket_}; }
++  [[nodiscard]] auto handshake(handshake_type type) { return handshake_op_{type, upgraded_, started_, stream_socket_}; }
+   [[nodiscard]] auto handshake(handshake_type type, const_buffer_sequence buffer)
+   {
+-    return handshake_buffer_op_{type, upgraded_, buffer, stream_socket_};
++    return handshake_buffer_op_{type, upgraded_, started_, buffer, stream_socket_};
+   }
+   [[nodiscard]] auto shutdown() { return shutdown_op_{upgraded_, stream_socket_}; }
+  private:
+@@ -145,6 +150,11 @@
+   BOOST_COBALT_SSL_DECL static void initiate_write_some_(void *,   const_buffer_sequence, cobalt::completion_handler<system::error_code, std::size_t>);
+ 
+ 
++  static void check_read_(void *, mutable_buffer_sequence, cobalt::handler<system::error_code, std::size_t>);
++  static void check_write_(void *, const_buffer_sequence, cobalt::handler<system::error_code, std::size_t>);
++
++  // Plain TCP is allowed only before the first TLS attempt (STARTTLS).
++  bool started_ = false;
+   bool upgraded_ = false;
+ };
+ 
+--- a/libs/cobalt/src/io/ssl.cpp
++++ b/libs/cobalt/src/io/ssl.cpp
+@@ -10,6 +10,43 @@
+ 
+ namespace boost::cobalt::io::ssl
+ {
++namespace
++{
++// Inherit all associated properties, including cancellation, allocator and the
++// immediate executor. Update state before the base handler resumes the coroutine.
++template<bool SecureOnSuccess, typename... Args>
++struct state_handler : completion_handler<system::error_code, Args...>
++{
++  using base = completion_handler<system::error_code, Args...>;
++  bool & secure_;
++
++  state_handler(base handler, bool & secure)
++      : base(std::move(handler)), secure_(secure) {}
++
++  void operator()(system::error_code ec, Args... args)
++  {
++    secure_ = SecureOnSuccess && !ec;
++    base::operator()(ec, std::move(args)...);
++  }
++};
++}
++
++void stream::check_read_(void * self, mutable_buffer_sequence,
++                        cobalt::handler<system::error_code, std::size_t> handler)
++{
++  const auto & stream = *static_cast<ssl::stream *>(self);
++  if (stream.started_ && !stream.upgraded_)
++    handler(asio::error::not_connected, 0);
++}
++
++void stream::check_write_(void * self, const_buffer_sequence,
++                         cobalt::handler<system::error_code, std::size_t> handler)
++{
++  const auto & stream = *static_cast<ssl::stream *>(self);
++  if (stream.started_ && !stream.upgraded_)
++    handler(asio::error::not_connected, 0);
++}
++
+ 
+ stream::stream(context & ctx, const cobalt::executor & exec)
+     : stream_impl{.stream_socket_={exec, ctx}}, socket(stream_socket_.lowest_layer())
+@@ -80,7 +117,7 @@
+ 
+ void stream::handshake_op_::ready(handler<system::error_code> handler)
+ {
+-  if (upgraded_)
++  if (started_)
+   {
+     constexpr static boost::source_location loc{BOOST_CURRENT_LOCATION};
+     handler(system::error_code{asio::error::already_started});
+@@ -89,12 +126,13 @@
+ 
+ void stream::handshake_op_::initiate(completion_handler<system::error_code> handler)
+ {
+-  stream_socket_.async_handshake(type_, std::move(handler));
++  started_ = true;
++  stream_socket_.async_handshake(type_, state_handler<true>{std::move(handler), upgraded_});
+ }
+ 
+ void stream::handshake_buffer_op_::ready(handler<system::error_code, std::size_t> handler)
+ {
+-  if (upgraded_)
++  if (started_)
+   {
+     constexpr static boost::source_location loc{BOOST_CURRENT_LOCATION};
+     handler(system::error_code{asio::error::already_started}, 0ull);
+@@ -103,7 +141,9 @@
+ 
+ void stream::handshake_buffer_op_::initiate(completion_handler<system::error_code, std::size_t> handler)
+ {
+-  stream_socket_.async_handshake(type_, buffer_, std::move(handler));
++  started_ = true;
++  stream_socket_.async_handshake(type_, buffer_,
++      state_handler<true, std::size_t>{std::move(handler), upgraded_});
+ }
+ 
+ void stream::shutdown_op_::ready(handler<system::error_code> handler)
+@@ -117,7 +157,7 @@
+ 
+ void stream::shutdown_op_::initiate(completion_handler<system::error_code> handler)
+ {
+-  stream_socket_.async_shutdown(std::move(handler));
++  stream_socket_.async_shutdown(state_handler<false>{std::move(handler), upgraded_});
+ }
+ 
+ 

@@ -1,0 +1,27 @@
+# Copyright (c) 2026 WebCpp.org
+#
+# Distributed under the Boost Software License, Version 1.0. (See
+# accompanying file LICENSE_1_0.txt or copy at
+# https://www.boost.org/LICENSE_1_0.txt)
+
+project : requirements <library>/webcpp/cobalt//cobalt <library>/webcpp//node-test ;
+import webcpp ;
+webcpp.targets wasip2 ;
+webcpp.original python3 : .. ;
+webcpp.run cobalt_cancel : cobalt_cancel.cpp ;
+webcpp.drive cobalt_status : ../cobalt_status_test.cpp :
+  : status_driver.py ;
+for local test in cobalt_tls_client cobalt_ssl_client cobalt_ssl_state cobalt_ssl_cancel
+{
+    local args = --embedded ;
+    local library = /webcpp/cobalt//cobalt_ssl ;
+    if $(test) = cobalt_tls_client { library = /webcpp/asio//tls ; }
+    if $(test) = cobalt_ssl_client { args += --require-sni ; }
+    if $(test) in cobalt_ssl_state cobalt_ssl_cancel { args = --state-test ; }
+    webcpp.drive $(test) : ../tls/$(test).cpp
+      : <library>$(library) <webcpp-drive-timeout>180
+        <dependency>../../../../tools/openssl/test/tls.py
+      : ../../../../tools/openssl/test/driver.py : --wasip2 $(args) : wasip2 ;
+}
+webcpp.lane wasip2-tls : cobalt_status cobalt_tls_client cobalt_ssl_client
+  cobalt_ssl_state cobalt_ssl_cancel : wasip2 ;
