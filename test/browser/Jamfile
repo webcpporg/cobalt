@@ -15,3 +15,9 @@ webcpp.drive browser_cobalt_worker : ../cobalt_thread_test.cpp
     <library>/webcpp//node-test <linkflags>-sPTHREAD_POOL_SIZE=1
   : ../../../asio/test/browser/run.mjs : --mode workers ;
 webcpp.lane browser-workers : browser_cobalt_worker : emscripten ;
+
+webcpp.drive browser_cobalt_worker_return : ../../../asio/test/browser/probes/pthread_return.cpp
+  : <threading>multi <webcpp-drive-timeout>60 <library>/webcpp/asio//asio
+    <linkflags>-sPTHREAD_POOL_SIZE=1
+  : return_probe.mjs ;
+webcpp.lane browser-runtime-probes : browser_cobalt_worker_return : emscripten ;

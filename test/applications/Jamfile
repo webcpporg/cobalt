@@ -37,3 +37,43 @@ for local app in channel delay delay_op outcome signals
 }
 webcpp.lane upstream-portable : $(.portable) : native wasip2 emscripten ;
 webcpp.lane upstream-portable-p3 : $(.portable-p3) : wasip3 ;
+
+# The original worker examples are checked in native B2 single and multi:
+# neither native B2 label defines BOOST_ASIO_DISABLE_THREADS.
+for local app in thread thread_pool spsc
+{
+    local library = /webcpp/cobalt//cobalt ;
+    if $(app) = thread_pool { library = /webcpp/cobalt//core ; }
+    local requirements = <library>$(library) <webcpp-drive-timeout>60
+      <toolset>clang:<cxxflags>-Wno-unused-parameter
+      <toolset>gcc:<cxxflags>-Wno-unused-parameter ;
+    if $(app) != spsc { requirements += <exception-handling>on ; }
+    webcpp.drive original_$(app) : upstream/example/$(app).cpp original_exit.cpp
+      : $(requirements) : original_driver.py : $(app) : native ;
+    explicit original_$(app) ;
+    # The immutable SPSC source has a reproduced lost-wakeup defect. Keep its
+    # bounded observation available explicitly, outside the conformance lane.
+    if $(app) != spsc { .workers += original_$(app) ; }
+}
+webcpp.lane upstream-workers : $(.workers) : native ;
+
+for local app in thread thread_pool
+{
+    local library = /webcpp/cobalt//cobalt ;
+    local hosting = <linkflags>-sPTHREAD_POOL_SIZE=4 ;
+    if $(app) = thread_pool
+    {
+        library = /webcpp/cobalt//core ;
+        # The unchanged main joins a blocking pool; host main on a fifth worker.
+        hosting = <linkflags>-sPTHREAD_POOL_SIZE=5 <linkflags>-sPROXY_TO_PTHREAD=1 ;
+    }
+    webcpp.drive original_$(app)_browser : upstream/example/$(app).cpp original_exit.cpp
+      : <library>$(library) <threading>multi <exception-handling>on
+        <webcpp-drive-timeout>60 <cxxflags>-Wno-unused-parameter
+        <linkflags>-sEXIT_RUNTIME=1 $(hosting)
+      : original_driver.py : $(app) : emscripten ;
+    .browser-workers += original_$(app)_browser ;
+}
+webcpp.lane upstream-worker-modules : $(.browser-workers) : emscripten ;
+build-project spsc ;
+build-project portable ;

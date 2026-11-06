@@ -8,6 +8,7 @@
 """Run locked upstream sources with explicit normal-exit and output witnesses."""
 import os
 from pathlib import Path
+import re
 import subprocess
 import sys
 
@@ -25,9 +26,16 @@ else:
     command = [program]
 if name in ('delay', 'delay_op'):
     command += ['2']
-result = subprocess.run(command, capture_output=True, text=True, timeout=15)
+result = subprocess.run(command, capture_output=True, text=True,
+                        timeout=45 if name == 'spsc' else 15)
 assert result.returncode == 0, result.stdout + result.stderr
 assert 'webcpp: upstream application reached normal exit' in result.stderr, result.stderr
 if name == 'channel':
     assert result.stdout.splitlines() == ['0', '1', '2', '3'], result.stdout
+elif name in ('thread', 'thread_pool'):
+    results = [tuple(map(int, match)) for match in re.findall(
+        r'The CPU intensive result of adding (-?\d+) to (-?\d+), is (-?\d+)', result.stdout)]
+    expected = [(left, right, left + right) for low, high, right in
+                ((0, 10, 32), (10, 20, 22), (50, 60, -18)) for left in range(low, high + 1)]
+    assert sorted(results) == sorted(expected), result.stdout
 print(f'PASS original {name}: normal exit; output={result.stdout!r}')

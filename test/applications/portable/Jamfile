@@ -1,0 +1,19 @@
+# Copyright (c) 2026 WebCpp.org
+#
+# Distributed under the Boost Software License, Version 1.0. (See
+# accompanying file LICENSE_1_0.txt or copy at
+# https://www.boost.org/LICENSE_1_0.txt)
+
+import webcpp ;
+webcpp.targets native wasip2 wasip3 emscripten ;
+webcpp.original python3 : ../.. ;
+webcpp.drive counterpart : ../../../example/applications/portable.cpp
+  : <library>/webcpp/cobalt//cobalt <library>/webcpp//node-test
+    <webcpp-drive-timeout>120
+  : driver.py : : native wasip2 emscripten ;
+webcpp.drive counterpart_p3 : ../../../example/applications/portable.cpp
+  : <library>/webcpp/cobalt//cobalt <library>/webcpp//node-test
+    <webcpp-drive-timeout>120
+  : driver.py : --wasip3 : wasip3 ;
+webcpp.lane portable-counterparts : counterpart : native wasip2 emscripten ;
+webcpp.lane portable-counterparts-p3 : counterpart_p3 : wasip3 ;
