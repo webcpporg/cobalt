@@ -77,3 +77,4 @@ for local app in thread thread_pool
 webcpp.lane upstream-worker-modules : $(.browser-workers) : emscripten ;
 build-project spsc ;
 build-project portable ;
+build-project network ;

@@ -1,0 +1,24 @@
+# Copyright (c) 2026 WebCpp.org
+# Distributed under the Boost Software License, Version 1.0.
+
+import webcpp ;
+webcpp.targets native wasip2 wasip3 ;
+webcpp.original python3 : ../.. ;
+
+local requirements = <library>/webcpp/cobalt//cobalt <exception-handling>on
+  <cxxflags>-Wno-unused-parameter <webcpp-drive-timeout>60 ;
+webcpp.drive original_echo : ../upstream/example/echo_server.cpp
+  : $(requirements) : echo.py : --original : native wasip2 ;
+webcpp.drive original_echo_p3 : ../upstream/example/echo_server.cpp
+  : $(requirements) : echo.py : --original --wasip3 : wasip3 ;
+webcpp.lane upstream-echo : original_echo : native wasip2 ;
+webcpp.lane upstream-echo-p3 : original_echo_p3 : wasip3 ;
+
+webcpp.drive finite_echo : ../../../example/applications/echo_server.cpp
+  : <library>/webcpp/cobalt//cobalt <webcpp-drive-timeout>90
+  : echo.py : : native wasip2 ;
+webcpp.drive finite_echo_p3 : ../../../example/applications/echo_server.cpp
+  : <library>/webcpp/cobalt//cobalt <webcpp-drive-timeout>90
+  : echo.py : --wasip3 : wasip3 ;
+webcpp.lane finite-echo : finite_echo : native wasip2 ;
+webcpp.lane finite-echo-p3 : finite_echo_p3 : wasip3 ;
