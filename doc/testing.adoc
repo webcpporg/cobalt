@@ -41,6 +41,9 @@ parameter. MSVC diagnoses that valid source with C4457 under `/W4`; `/WX` then
 rejects the compile probe. Only `original_ticker` selects `/wd4457` on MSVC.
 The source remains byte-identical, other warnings remain errors, and this option
 is not exported to library consumers or other test programs.
+That same MSVC probe uses `/bigobj`: its template-heavy Debug translation unit
+exceeds the default COFF section limit (C1128). This changes the object-file
+format limit, not the source, runtime behavior or warning policy.
 
 The tests distinguish immutable upstream programs, namespace-only migrations and
 behavioral counterparts. `test/applications/upstream` retains original hashes;

@@ -22,7 +22,9 @@ for local app in http ticker
         exceptions = <exception-handling>on ;
         # The original ticker shadows its msg parameter (MSVC C4457). Keep
         # its pinned bytes and scope this diagnostic policy to this probe.
-        original-warnings = <toolset>msvc:<cxxflags>/wd4457 ;
+        # Its template-heavy Debug object also exceeds COFF's section limit.
+        original-warnings = <toolset>msvc:<cxxflags>/wd4457
+          <toolset>msvc:<cxxflags>/bigobj ;
     }
     # Keep immutable upstream sources and GCC 14's known coroutine-allocation
     # false positive visible (boostorg/cobalt#7), without weakening other
