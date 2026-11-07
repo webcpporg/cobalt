@@ -73,12 +73,29 @@ cobalt::main co_main([[maybe_unused]] int argc, [[maybe_unused]] char** argv) {
     BOOST_TEST_EQ(cancel_count, 0U);
     webcpp::test::write_stderr("pipes: cancel complete\n");
     BOOST_TEST(writer.close().has_value());
+#ifdef __EMSCRIPTEN__
+    BOOST_TEST_EQ(WEBCPP_COBALT_HAS_PIPE_CREATION, 0);
+    BOOST_TEST(reader.close().has_value());
+    std::puts("pipes: byte transfer and pending cancellation checked");
+    std::puts("SDK-BLOCKED: Emscripten pipe EOF is unsupported; see pipe_eof_sdk_limitation");
+#else
     const auto [eof_error, eof_count] =
         co_await cobalt::as_tuple(reader.read_some(io::buffer(bytes)));
+    const auto eof_message = eof_error.message();
+    BOOST_TEST(std::fprintf(stderr,
+                            "pipes: writer close category=%s value=%d message=%s bytes=%zu\n",
+                            eof_error.category().name(), eof_error.value(), eof_message.c_str(),
+                            eof_count) >= 0);
+#if defined(WEBCPP_TARGET_NATIVE) && defined(_WIN32)
+    // Boost.Asio retains Win32 ERROR_BROKEN_PIPE; see chriskohlhoff/asio#1442.
+    BOOST_TEST(eof_error == webcpp::asio::error::broken_pipe);
+#else
     BOOST_TEST(eof_error == webcpp::asio::error::eof);
+#endif
     BOOST_TEST_EQ(eof_count, 0U);
     BOOST_TEST(reader.close().has_value());
-    std::puts("pipes: guest-created pair, bytes, pending cancellation and EOF checked");
+    std::puts("pipes: guest-created pair, bytes, pending cancellation and writer closure checked");
+#endif
 #endif
     deadline.cancel();
     co_return webcpp::test::exit_status(boost::report_errors());

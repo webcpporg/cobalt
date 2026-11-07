@@ -5,6 +5,7 @@
 # https://www.boost.org/LICENSE_1_0.txt)
 
 import webcpp ;
+import feature ;
 webcpp.targets native ;
 webcpp.original python3 : .. ;
 project : requirements <library>/webcpp//node-test ;
@@ -24,3 +25,22 @@ webcpp.compile-diagnostic original_with_limitation : ../with_contracts_test.cpp
   : <library>/webcpp/cobalt//core <exception-handling>on : native ;
 webcpp.compile-diagnostic original_write_at_limitation : write_at.cpp
   : <library>/webcpp/cobalt//core : native ;
+
+rule msvc-only ( properties * )
+{
+    if [ feature.get-values <toolset> : $(properties) ] != msvc
+    {
+        return <build>no ;
+    }
+}
+
+# The failure alone could pass for an unrelated error. The identical EH-on
+# coroutine and the no-EH promise-shape witness must both compile as controls.
+local main-requirements = <library>/webcpp/cobalt//core <conditional>@msvc-only ;
+webcpp.compile original_main_exceptions_on : main_no_exceptions.cpp
+  : $(main-requirements) <exception-handling>on : native ;
+webcpp.compile-fail original_main_no_exceptions_limitation : main_no_exceptions.cpp
+  : $(main-requirements) <exception-handling>off : native ;
+webcpp.compile original_main_no_exceptions_shape : main_no_exceptions.cpp
+  : $(main-requirements) <exception-handling>off
+    <define>WEBCPP_TEST_MAIN_PROMISE_SHAPE : native ;

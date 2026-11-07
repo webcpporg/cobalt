@@ -110,13 +110,17 @@ def run(case):
                 assert peers[0].recv(1) == b"", "cancelled session did not close"
                 expected = "accepted=1 completed=1 bytes=7 cancelled=1 failures=0"
             else:
+                # Observe an accepted session before resetting it. A successful
+                # connect alone can still leave the socket in the accept queue.
+                peers[0].sendall(b"!")
+                assert peers[0].recv(1) == b"!", "session ended before reset handshake"
                 peers[0].setsockopt(
                     socket.SOL_SOCKET,
                     socket.SO_LINGER,
                     struct.pack("hh" if os.name == "nt" else "ii", 1, 0),
                 )
                 peers[0].close()
-                expected = "accepted=1 completed=1 bytes=0 cancelled=0 failures=1"
+                expected = "accepted=1 completed=1 bytes=1 cancelled=0 failures=1"
             if original:
                 assert process.poll() is None, "the original infinite listener exited unexpectedly"
                 # Traffic is the witness. The native runner catches SIGTERM,

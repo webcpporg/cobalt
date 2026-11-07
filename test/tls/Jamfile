@@ -42,6 +42,42 @@ for local test in cobalt_tls_client cobalt_ssl_client cobalt_ssl_state cobalt_ss
 }
 webcpp.lane tls : $(.tls) : native wasip2 wasip3 ;
 
+# The recurring integration lane owns its Cobalt programs directly, so the
+# report never attributes them to another library through compatibility aliases.
+# MSVC's shared CRT forces threading=multi. S fixtures need its static CRT to
+# configure and exercise the source-built no-threads provider.
+local integration-tests ;
+for local threading in single multi
+{
+    local runtime ;
+    if $(threading) = single { runtime = <toolset>msvc:<runtime-link>static ; }
+    for local exceptions in "on" "off"
+    {
+        local targets = native wasip3 ;
+        if $(threading) = multi && $(exceptions) = "on" { targets = native ; }
+        for local mode in cobalt state cancel
+        {
+            local source = cobalt_ssl_$(mode).cpp ;
+            local args = --state-test ;
+            if $(mode) = cobalt
+            {
+                source = cobalt_ssl_client.cpp ;
+                args = --embedded --require-sni ;
+            }
+            local name = $(mode)-$(threading)-$(exceptions) ;
+            webcpp.drive $(name) : $(source)
+              : <library>/webcpp/cobalt//cobalt_ssl
+                <include>../../../../tools/node-test/include
+                <threading>$(threading) <exception-handling>$(exceptions)
+                $(runtime) <webcpp-drive-timeout>180
+                <dependency>../../../../tools/openssl/test/tls.py
+              : ../../../../tools/openssl/test/driver.py : $(args) : $(targets) ;
+            integration-tests += $(name) ;
+        }
+    }
+}
+webcpp.lane tls-integration : $(integration-tests) : native wasip3 ;
+
 # Native core identity survives the explicitly owned SSL type in either include
 # order.
 webcpp.compile native_ssl_identity : native_identity.cpp

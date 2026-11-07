@@ -25,6 +25,12 @@ namespace asio = webcpp::asio;
 
 namespace {
 
+// GCC 14 misidentifies upstream coroutine allocation: boostorg/cobalt#7.
+#if defined(__GNUC__) && !defined(__clang__) && __GNUC__ == 14
+#pragma GCC diagnostic push
+#pragma GCC diagnostic ignored "-Wmismatched-new-delete"
+#endif
+
 cobalt::promise<int> deferred_value(int value) {
     // NOLINTNEXTLINE(readability-static-accessed-through-instance)
     const auto executor = co_await cobalt::this_coro::executor;
@@ -72,6 +78,10 @@ cobalt::detached detached_completion(bool& done) {
     co_await deferred_value(0);
     done = true;
 }
+
+#if defined(__GNUC__) && !defined(__clang__) && __GNUC__ == 14
+#pragma GCC diagnostic pop
+#endif
 
 }  // namespace
 

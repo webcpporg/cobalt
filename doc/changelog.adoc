@@ -14,6 +14,9 @@ Changes prepared for WebCPP's independent Cobalt integration.
 === Unreleased
 
 // tag::unreleased[]
+* Fixed finite echo cancellation and synchronized peer-reset verification.
+* Added a bounded SDK witness for unsupported Emscripten pipe EOF behavior.
+* Fixed GCC 14 coroutine allocation false positives blocking native test consumers.
 * Added explicit native and WebAssembly coroutine sources for independent consumers.
 * Fixed native SSL state, cancellation and move ownership through a separate wrapper.
 * Fixed the shipped Wasm IPv6 UDP protocol constant; native Boost behavior remains documented.

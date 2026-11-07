@@ -78,7 +78,10 @@ struct session {
 cobalt::promise<void> accept_sessions(io::acceptor& listener, std::list<session>& sessions,
                                       server_state& state, int limit) {
     while (state.accepted < limit && !state.cancelled) {
-        auto [error, socket] = co_await cobalt::as_tuple(listener.accept());
+        // The supplied-socket overload forwards cancellation directly. Native
+        // Boost 1.92 loses it in the composed overload that returns a socket.
+        io::stream_socket socket;
+        auto [error] = co_await cobalt::as_tuple(listener.accept(socket));
         if (error) {
             if (!(state.cancelled && error == asio::error::operation_aborted)) {
                 ++state.failures;

@@ -8,22 +8,29 @@ import webcpp ;
 webcpp.targets native wasip2 wasip3 ;
 webcpp.original python3 : ../.. ;
 
+local unused-parameters = <toolset>clang:<cxxflags>-Wno-unused-parameter
+  <toolset>gcc:<cxxflags>-Wno-unused-parameter <toolset>msvc:<cxxflags>/wd4100 ;
+
 # Preserve the upstream network programs as compile probes as well as the
 # separately identified, controlled-endpoint runtime counterparts.
 for local app in http ticker
 {
     local exceptions ;
     if $(app) = ticker { exceptions = <exception-handling>on ; }
+    # Keep immutable upstream sources and GCC 14's known coroutine-allocation
+    # false positive visible (boostorg/cobalt#7), without weakening other
+    # warnings.
     webcpp.compile original_$(app) : ../upstream/example/$(app).cpp
       : <library>/webcpp/cobalt//cobalt <library>/webcpp/beast//tls
-        $(exceptions) <cxxflags>-Wno-unused-parameter : native ;
+        $(exceptions) $(unused-parameters)
+        <toolset>gcc-14:<cxxflags>-Wno-error=mismatched-new-delete : native ;
     webcpp.compile migrated_$(app) : ../migrated/example/$(app).cpp
       : <library>/webcpp/cobalt//cobalt <library>/webcpp/beast//tls
-        $(exceptions) <cxxflags>-Wno-unused-parameter : wasip2 wasip3 ;
+        $(exceptions) $(unused-parameters) : wasip2 wasip3 ;
 }
 
 local requirements = <library>/webcpp/cobalt//cobalt <exception-handling>on
-  <cxxflags>-Wno-unused-parameter <webcpp-drive-timeout>60 ;
+  $(unused-parameters) <webcpp-drive-timeout>60 ;
 webcpp.drive original_echo : ../upstream/example/echo_server.cpp
   : $(requirements) : echo.py : --original : native ;
 webcpp.drive migrated_echo : ../migrated/example/echo_server.cpp
@@ -60,7 +67,7 @@ for local form in oracle port
         }
         webcpp.drive controlled_$(form)_$(app) : $(form)/$(app).cpp
           : <library>/webcpp/cobalt//cobalt
-            <cxxflags>-Wno-unused-parameter <library>/webcpp/beast//tls <include>. $(extra)
+            $(unused-parameters) <library>/webcpp/beast//tls <include>. $(extra)
             <webcpp-drive-timeout>180
           : protocols.py : $(app) : $(targets) ;
     }

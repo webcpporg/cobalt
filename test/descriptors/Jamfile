@@ -13,6 +13,9 @@ webcpp.drive files_p3 : files.cpp : <library>/webcpp/cobalt//cobalt
 webcpp.lane filesystem : files : wasip2 ;
 webcpp.lane filesystem-p3 : files_p3 : wasip3 ;
 webcpp.run pipes : pipes.cpp : <library>/webcpp/cobalt//cobalt ;
+# Characterize the SDK boundary without linking Cobalt or Asio.
+# A passing negative probe does not establish pipe lifecycle support.
+webcpp.run pipe_eof_sdk_limitation : pipe_eof_sdk_limitation.cpp : : emscripten ;
 webcpp.drive stdio_p2 : stdio_p2.cpp : <library>/webcpp/cobalt//cobalt
   : stdio.py : : wasip2 ;
 webcpp.lane stdio-p2 : stdio_p2 : wasip2 ;

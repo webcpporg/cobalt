@@ -26,6 +26,12 @@ commit `8b1cecba91d0e868ee0947b40fb04e3594680297`.
   or claim every pending-task move is safe merely because a timer test passed.
 - TLS reuses the shared source-built OpenSSL and CA provider. Cobalt must not
   acquire a second provider or link optional TLS into its plain core.
+- `test/tls//tls-integration` owns the recurring native/WASIp3 SSL client,
+  state and cancellation fixtures. Build their Cobalt sources directly with the
+  shared TLS peer driver; registering their compatibility aliases in another
+  library's own lane makes the report reject that lane. Preserve native S/M
+  with EH on/off, WASIp3 S with EH on/off and cooperative M with EH off, plus
+  MSVC's static CRT requirement for S. The separate `tls` lane retains P2.
 - On 2026-11-06 the owner approved one native identity exception after the
   original SSL wrapper failed state, shutdown and post-cancellation write tests:
   `webcpp::cobalt::io::ssl` uses WebCPP's corrected wrapper on native and WASI.

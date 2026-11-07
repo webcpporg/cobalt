@@ -20,6 +20,19 @@ rule native-upstream-diagnostic ( properties * )
         return <cxxflags>-Wno-error=coroutine-missing-unhandled-exception ;
     }
 }
+
+# MSVC rejects Boost's co_main promise without its exception hook. Keep other
+# no-EH consumers enabled; upstream_limits pairs this failure with an
+# EH-on control.
+rule native-main-supported ( properties * )
+{
+    if [ webcpp-target.target-of $(properties) ] = native
+      && <exception-handling>off in $(properties)
+      && [ feature.get-values <toolset> : $(properties) ] = msvc
+    {
+        return <build>no ;
+    }
+}
 project : requirements <conditional>@native-upstream-diagnostic ;
 webcpp.targets native wasip2 wasip3 emscripten ;
 
@@ -40,6 +53,7 @@ for local handling in on off
 {
     webcpp.run cobalt_network_exceptions_$(handling) : cobalt_network_test.cpp
       : <library>/webcpp/cobalt//cobalt <exception-handling>$(handling)
+        <conditional>@native-main-supported
       : native wasip2 wasip3 ;
 }
 webcpp.run udp_v6 : udp_v6_test.cpp
@@ -69,7 +83,8 @@ for local test in cobalt cobalt_status
     {
         local requirements = <library>/webcpp/cobalt//cobalt <exception-handling>$(handling) ;
         local name = $(test)_exceptions_$(handling) ;
-        webcpp.$(runner) $(name)_native : $(test)_test.cpp : $(requirements) : native ;
+        webcpp.$(runner) $(name)_native : $(test)_test.cpp
+          : $(requirements) <conditional>@native-main-supported : native ;
         webcpp.$(runner) $(name) : $(test)_test.cpp : $(requirements) : emscripten ;
         webcpp.$(runner) $(name)_asyncify : $(test)_test.cpp
           : $(requirements) <webcpp-suspend>asyncify : emscripten ;
@@ -83,7 +98,8 @@ for local handling in on off
 {
     local name = cobalt_exit_exceptions_$(handling) ;
     local requirements = <library>/webcpp/cobalt//cobalt <exception-handling>$(handling) ;
-    webcpp.drive $(name) : cobalt_status_test.cpp : $(requirements)
+    webcpp.drive $(name) : cobalt_status_test.cpp
+      : $(requirements) <conditional>@native-main-supported
       : cobalt_status_driver.mjs : : native emscripten ;
     webcpp.drive $(name)_asyncify : cobalt_status_test.cpp
       : $(requirements) <webcpp-suspend>asyncify : cobalt_status_driver.mjs : : emscripten ;

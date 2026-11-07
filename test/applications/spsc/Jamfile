@@ -10,10 +10,10 @@ webcpp.original python3 : ../.. ;
 webcpp.run wakeup : wakeup_test.cpp : <library>/webcpp/cobalt//cobalt
   <threading>multi <toolset>emscripten:<linkflags>-sPTHREAD_POOL_SIZE=1
   <toolset>clang-wasip3:<exception-handling>off ;
+# The immutable queue includes Boost directly. Its native negative control
+# must not mix Boost's executor with the separately shipped Wasm backend.
 webcpp.run original_wakeup : wakeup_test.cpp : <library>/webcpp/cobalt//cobalt
-  <define>WEBCPP_TEST_ORIGINAL_SPSC <threading>multi
-  <toolset>emscripten:<linkflags>-sPTHREAD_POOL_SIZE=1
-  <toolset>clang-wasip3:<exception-handling>off ;
+  <define>WEBCPP_TEST_ORIGINAL_SPSC <threading>multi : native ;
 webcpp.generated queue : extract.py : : original_queue.hpp ;
 webcpp.lane spsc-wakeup : wakeup original_wakeup : native wasip3 emscripten ;
 

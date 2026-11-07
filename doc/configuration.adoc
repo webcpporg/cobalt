@@ -81,6 +81,17 @@ observations. Receiving a host-provided stream does not imply that the guest can
 create a pipe. Use `WEBCPP_COBALT_FOR` from `async_for.hpp` for asynchronous range
 iteration; it forwards to the selected coroutine backend.
 
+Emscripten 6.0.11 does not provide the complete pipe lifecycle. A Node test
+confirms byte transfer and pending-read cancellation through Cobalt. A separate
+`pipe_eof_sdk_limitation` probe calls only libc: after closing the last writer,
+`poll` reports `POLLIN|POLLHUP`, but an empty nonblocking `read` returns `EAGAIN`
+instead of EOF. This SDK limitation leaves `HAS_PIPE_CREATION` at zero; the
+passing negative probe is not lifecycle support or browser evidence. The probe
+fails if the SDK behavior changes, requiring the capability to be re-evaluated.
+Native and WASIp3 continue to test closure of the final writer through Cobalt.
+Native Windows retains Boost.Asio's `broken_pipe` error for that read; native
+POSIX and WASIp3 report `eof`. In each case no further bytes are returned.
+
 [#cobalt-profiles]
 === Feature matrix
 
@@ -123,3 +134,11 @@ diagnostic visible with `-Wno-error=coroutine-missing-unhandled-exception` for
 their no-exceptions consumers. This test-local setting is not exported by the
 library targets; external strict builds must account for the upstream diagnostic
 described in <<cobalt-differences>>.
+
+Native MSVC rejects `co_main` with exceptions disabled because Boost 1.92's
+`main_promise` omits `unhandled_exception`. The test suite classifies that
+specific configuration as an upstream compile limitation, paired with the
+same coroutine compiling with exceptions enabled and a no-exceptions witness
+for the missing promise member. This does not disable other no-exceptions
+consumers or change the native Boost type. Use exceptions for native MSVC
+`co_main` applications.

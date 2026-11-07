@@ -15,12 +15,22 @@
 
 namespace {
 
+// GCC 14 misidentifies upstream coroutine allocation: boostorg/cobalt#7.
+#if defined(__GNUC__) && !defined(__clang__) && __GNUC__ == 14
+#pragma GCC diagnostic push
+#pragma GCC diagnostic ignored "-Wmismatched-new-delete"
+#endif
+
 webcpp::cobalt::promise<int> work() {
     // NOLINTNEXTLINE(readability-static-accessed-through-instance)
     const auto executor = co_await webcpp::cobalt::this_coro::executor;
     co_await webcpp::asio::post(executor, webcpp::cobalt::use_op);
     co_return 42;
 }
+
+#if defined(__GNUC__) && !defined(__clang__) && __GNUC__ == 14
+#pragma GCC diagnostic pop
+#endif
 
 }  // namespace
 

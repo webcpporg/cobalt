@@ -21,17 +21,47 @@ negative probe means the limitation was reproduced, not that cancellation works.
 An unexpected exit, diagnostic or newly fixed upstream behavior fails the probe
 and requires the compatibility record to be revisited.
 
+The finite echo counterpart uses `accept(socket&)`, which forwards cancellation
+directly to the pending accept. It avoids Boost 1.92's composed accept limitation
+without changing native types or sources. Its TCP driver checks concurrent
+traffic, EOF, cancellation before any connection, cancellation with a live
+session, peer reset after a confirmed echo and invalid arguments. Both
+cancellation cases require the server to finish normally and report its exact
+session and byte counts.
+
+The affected owned coroutine tests scope GCC 14's allocation false-positive
+diagnostic to their coroutine functions. The immutable upstream HTTP and ticker
+compile probes instead keep that warning visible with
+`-Wno-error=mismatched-new-delete`, only for their GCC 14 targets. Other warnings
+remain errors, and neither setting is a library usage requirement. See
+<<cobalt-differences>> for the upstream explanation.
+
 The tests distinguish immutable upstream programs, namespace-only migrations and
 behavioral counterparts. `test/applications/upstream` retains original hashes;
 `test/applications/prepare.py` produces the separately identified namespace
 migrations. A missing host facility is documented or diagnosed, never replaced
 by an empty successful program.
 
+The SPSC wakeup lane keeps the immutable Boost queue's negative control on
+native, where its Boost executor and Cobalt types are identical to WebCPP's.
+The corrected queue's forced-interleaving regression runs on native,
+Emscripten and WASIp3. A native failure in the original establishes the upstream
+defect; it is not a claim that the unmodified original supports a Wasm backend.
+
 Native SSL has compile-time type-identity tests for both header orders, plus
 runtime client, handshake-state, transfer-cancellation and shutdown tests against
 real local peers. The same TLS 1.2/1.3 state tests run on WASIp2/P3. A native CMake
 consumer also compiles the complete source inventory and runs those tests from
 a copied source snapshot without B2, Git or replacement Boost headers.
+
+The Cobalt-owned `tls-integration` lane runs the SSL client, state and
+cancellation fixtures in native single/multi-thread profiles with exceptions
+on/off, WASIp3 single-thread profiles with exceptions on/off, and WASIp3
+cooperative threads with exceptions off. It reuses the shared real TLS peer
+driver and builds each Cobalt source directly, keeping the test report under
+Cobalt ownership. Native MSVC single-thread fixtures select the static CRT so
+the provider uses its no-threads configuration. The existing `tls` lane retains
+its native, WASIp2 and WASIp3 coverage.
 
 The SSL client also checks move construction, socket identity and cancellation
 after destroying the source, both before and after handshake completion.
@@ -58,6 +88,8 @@ reject a second shutdown. Elapsed time alone is not proof of a pending operation
 [source,bash]
 ----
 b2 -a variant=release libs/cobalt/test/tls//tls
+b2 -a libs/cobalt/test/tls//tls-integration
+b2 -a toolset=clang-wasip3 libs/cobalt/test/tls//tls-integration
 b2 -a variant=release libs/cobalt/test/tls//native_ssl_identity libs/cobalt/test/tls//native_ssl_identity_boost_first
 b2 -a toolset=clang-wasip2 variant=release libs/cobalt/test/applications//migrated-portable
 b2 -a toolset=clang-wasip3 variant=release libs/cobalt/test/applications//migrated-portable-p3

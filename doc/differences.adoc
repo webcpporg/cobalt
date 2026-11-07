@@ -19,15 +19,42 @@ composed accept or composed waits. Further native checks reproduced `with`
 cleanup instantiation failures and a `write_at` constraint expecting `write_op`
 instead of `write_at_op`. Apple Clang 21 also diagnoses the original main and
 thread promises' missing `unhandled_exception` members when compiling without exceptions;
-with warnings treated as errors, that consumer fails to compile. These are not
-new native guarantees supplied by WebCPP. The Wasm implementation carries its
+with warnings treated as errors, that consumer fails to compile. MSVC rejects
+the no-exceptions `co_main` with error C2039 for the same missing member;
+the limitation probes preserve a control with exceptions enabled and verify
+the promise shape. These are not new native guarantees supplied by WebCPP.
+The Wasm implementation carries its
 documented corrections, including the positioned-write constraint.
+
+GCC 15.2 has a compiler regression for `await_suspend` with additional default
+arguments, including Cobalt's `race`. It can fail with an internal compiler error
+in `make_decl_rtl` even in a program using only Boost.Cobalt. Use GCC 15.3 or a
+compiler containing the fix for
+https://gcc.gnu.org/bugzilla/show_bug.cgi?id=121643[GCC PR121643].
+The CI provisions GCC 15.3 and verifies this coroutine pattern before the suite;
+it does not patch the native Cobalt headers or skip the affected applications.
+
+GCC 14 can emit `-Wmismatched-new-delete` for the upstream coroutine frame
+allocator. The maintainer identifies this as a false positive in
+https://github.com/boostorg/cobalt/issues/7[Boost.Cobalt issue 7]. Strict builds
+that promote this warning to an error fail even though allocation and release
+use the same stored memory resource. This compiler diagnostic is distinct from
+the no-exceptions runtime limitation in issue 287. WebCPP does not change native
+allocation or export a warning suppression to consumers. For an affected strict
+build, scope the diagnostic adjustment to the coroutine functions or translation
+units that reproduce it, rather than disabling allocation diagnostics globally.
 
 The original `io::udp_v6` constant also selects ICMP rather than UDP. Native
 identity preserves that defect. Use an explicit static protocol with the same
 IPv6 family and datagram type but the UDP protocol value; the `udp_v6` regression
 records the original mismatch and exchanges datagrams with that control. The
 shipped Wasm backend corrects `io::udp_v6` itself.
+
+After the final writer closes a native Windows pipe, Boost.Asio reports
+`broken_pipe` rather than `eof` on the next empty read. The native Cobalt pipe
+retains that error and returns zero bytes. See
+https://github.com/chriskohlhoff/asio/issues/1442[Asio issue 1442]. Native POSIX
+and WASIp3 tests require `eof`; none of these paths rewrites the native error.
 
 The owner approved the native SSL exception on 2026-11-06 after upstream state
 and cancellation regressions were reproduced. `webcpp::cobalt::io::ssl::stream`
