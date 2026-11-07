@@ -33,7 +33,8 @@ struct worker_result {
     std::thread::id creator = std::this_thread::get_id();
 };
 
-webcpp::cobalt::thread worker(worker_result& result, webcpp::cobalt::executor creator) {
+webcpp::cobalt::thread worker(worker_result& result, webcpp::cobalt::executor creator,
+                              webcpp::asio::steady_timer& ready) {
     // NOLINTNEXTLINE(readability-static-accessed-through-instance)
     const auto exec = co_await webcpp::cobalt::this_coro::executor;
     if (std::this_thread::get_id() == result.creator) {
@@ -41,7 +42,13 @@ webcpp::cobalt::thread worker(worker_result& result, webcpp::cobalt::executor cr
     }
     webcpp::asio::steady_timer timer(exec, std::chrono::hours(1));
     // Posting the observation ensures async_wait has already been initiated.
-    webcpp::asio::post(exec, [&result] { result.started.store(1); });
+    webcpp::asio::post(exec, [&result, creator, &ready] {
+        result.started.store(1);
+        webcpp::asio::post(creator, [&ready] {
+            // Expiry remembers readiness even if async_wait has not started yet.
+            ready.expires_at(webcpp::asio::steady_timer::clock_type::now());
+        });
+    });
     const auto [error] =
         co_await webcpp::cobalt::as_tuple(timer.async_wait(webcpp::cobalt::use_op));
     if (error != webcpp::asio::error::operation_aborted ||
@@ -70,13 +77,14 @@ webcpp::cobalt::main co_main([[maybe_unused]] int argc, [[maybe_unused]] char** 
         }
     });
     worker_result result;
-    auto operation = worker(result, creator);
+    webcpp::asio::steady_timer ready(creator, webcpp::asio::steady_timer::time_point::max());
+    auto operation = worker(result, creator, ready);
     BOOST_TEST(operation.get_id() != result.creator);
-    webcpp::asio::steady_timer observe(creator);
-    while (result.started.load() == 0) {
-        observe.expires_after(std::chrono::milliseconds(1));
-        co_await observe.async_wait(webcpp::cobalt::use_op);
-    }
+    // Wait for the worker's posted notification without repeatedly polling its state.
+    const auto [ready_error] =
+        co_await webcpp::cobalt::as_tuple(ready.async_wait(webcpp::cobalt::use_op));
+    BOOST_TEST(!ready_error || ready_error == webcpp::asio::error::operation_aborted);
+    BOOST_TEST_EQ(result.started.load(), 1);
     operation.cancel();
     co_await operation;
     while (result.returned_to_creator == 0) {

@@ -115,6 +115,15 @@ Node-only examples are labeled separately. The shared published test report is
 https://webcpporg.github.io/report/[the WebCPP report]; it is evidence for the
 commit it names, not for an unsubmitted local candidate.
 
+The worker lifecycle test receives a posted readiness notification after the
+worker has started its asynchronous timer wait. It then cancels and awaits the
+worker, checking completion and executor affinity. Readiness changes a timer's
+expiry on the creator's executor, so a notification arriving before the wait is
+retained. The test avoids repeated one-millisecond readiness polling, which
+overloaded the browser under controlled CPU throttling. Its five-second deadline
+still bounds the test; it is not a general worker-latency guarantee or a change
+to the SDK's timer polling.
+
 Performance, memory and binary-size comparisons must use optimized builds and
 record source hashes, compiler/linker flags, EH, threads, suspension mode and
 runtime. Raw Wasm and JavaScript sizes are separate artifacts. An unavailable
