@@ -35,6 +35,8 @@ commit `8b1cecba91d0e868ee0947b40fb04e3594680297`.
 - On 2026-11-06 the owner approved one native identity exception after the
   original SSL wrapper failed state, shutdown and post-cancellation write tests:
   `webcpp::cobalt::io::ssl` uses WebCPP's corrected wrapper on native and WASI.
+  The owner retained this exception on 2026-11-07: document these wrapper defects
+  as fixed, while other native Boost defects remain documented limitations.
   Keep native coroutine/plain I/O types and the compiled core/runner upstream.
   Ship the native SSL header/source explicitly, without changing Boost files.
 - Preserve original example sources and their hashes under test/applications.

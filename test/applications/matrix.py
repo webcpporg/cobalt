@@ -6,6 +6,7 @@
 
 """Generate application support from exact local receipts and explicit source constraints."""
 import argparse
+import copy
 from collections import Counter
 import hashlib
 import json
@@ -407,6 +408,13 @@ def document(data):
             " same feasible profiles.\n\n"
         ),
         (
+            "Current support includes the SPSC delayed-notification limitation: both the original"
+            " queue and its wakeup adaptation can lose values. Their deterministic limitation"
+            " probes preserve queue behavior; the browser workbench disables the counterpart."
+            " Earlier dated successful observations remain historical and do not establish"
+            " reliable concurrent transfer.\n\n"
+        ),
+        (
             "`source-requires-exceptions` means the original application contains exception syntax."
             " It does not mean Cobalt itself requires exceptions. Native no-EH Clang builds retain"
             " the documented upstream promise warning; only that diagnostic is nonfatal in these"
@@ -441,7 +449,12 @@ def document(data):
                 + "".join(
                     " |"
                     + labels[cells[name]["status"]]
-                    + (" + counterpart" if cells[name]["counterpart"] else "")
+                    + (
+                        " + counterpart unavailable"
+                        if cells[name]["counterpart"]
+                        and cells[name]["counterpart"]["status"] == "upstream-defect"
+                        else " + counterpart" if cells[name]["counterpart"] else ""
+                    )
                     for name in names
                 )
                 + "\n"
@@ -460,8 +473,9 @@ def document(data):
             " disabled.\n"
         ),
         (
-            "* `upstream defect`: the original failure has its own evidence; a corrected"
-            " counterpart stays separately identified.\n\n"
+            "* `upstream defect`: the original failure has its own evidence; counterpart status"
+            " remains separate. `counterpart unavailable` preserves a limitation inherited by"
+            " the adaptation.\n\n"
         ),
         (
             "Raw JSON cells retain source hashes, implementation snapshots, commands and evidence"
@@ -495,14 +509,46 @@ def document(data):
     return "".join(lines)
 
 
+def current_constraints(historical):
+    data = copy.deepcopy(historical)
+    for row in data["cells"]:
+        if row["application"] != "spsc" or row["status"] != "upstream-defect":
+            continue
+        row["historical_counterpart"] = row["counterpart"]
+        row["reason"] = (
+            "The original has a lost-wakeup window and a delayed-notification race."
+            " The existing wakeup adaptation retains the latter: a completed write can lose"
+            " its value. Reliable concurrent sequence transfer is unavailable."
+        )
+        row["counterpart"] = dict(
+            status="upstream-defect",
+            scope="Unchanged queue; a passing limitation probe confirms value loss, not support.",
+            evidence=["test/applications/spsc/LIMITATION.md",
+                      "test/applications/spsc/sequence_limitation.cpp"],
+        )
+    return data
+
+
 def main():
     parser = argparse.ArgumentParser(description=__doc__)
-    parser.add_argument("--evidence", type=Path, required=True)
-    parser.add_argument("--probes", type=Path, required=True)
+    parser.add_argument("--evidence", type=Path)
+    parser.add_argument("--probes", type=Path)
+    parser.add_argument("--historical", type=Path)
     parser.add_argument("--output", type=Path, required=True)
     parser.add_argument("--document", type=Path)
     args = parser.parse_args()
-    data = generate(args.evidence, args.probes)
+    if args.historical:
+        if args.evidence or args.probes:
+            parser.error("--historical cannot be combined with --evidence or --probes")
+        destinations = [args.output] + ([args.document] if args.document else [])
+        if any(path.resolve() == args.historical.resolve() for path in destinations):
+            parser.error("The current output must not overwrite the historical report")
+        data = current_constraints(json.loads(args.historical.read_text()))
+        data["historical_report"] = dict(path=str(args.historical), sha256=digest(args.historical))
+    else:
+        if not args.evidence or not args.probes:
+            parser.error("Specify --historical or both --evidence and --probes")
+        data = current_constraints(generate(args.evidence, args.probes))
     args.output.write_text(json.dumps(data, indent=2) + "\n")
     if args.document:
         args.document.write_text(document(data))

@@ -36,17 +36,27 @@ compile probes instead keep that warning visible with
 remain errors, and neither setting is a library usage requirement. See
 <<cobalt-differences>> for the upstream explanation.
 
+The immutable upstream ticker declares a local `msg` that shadows its `msg`
+parameter. MSVC diagnoses that valid source with C4457 under `/W4`; `/WX` then
+rejects the compile probe. Only `original_ticker` selects `/wd4457` on MSVC.
+The source remains byte-identical, other warnings remain errors, and this option
+is not exported to library consumers or other test programs.
+
 The tests distinguish immutable upstream programs, namespace-only migrations and
 behavioral counterparts. `test/applications/upstream` retains original hashes;
 `test/applications/prepare.py` produces the separately identified namespace
 migrations. A missing host facility is documented or diagnosed, never replaced
 by an empty successful program.
 
-The SPSC wakeup lane keeps the immutable Boost queue's negative control on
-native, where its Boost executor and Cobalt types are identical to WebCPP's.
-The corrected queue's forced-interleaving regression runs on native,
-Emscripten and WASIp3. A native failure in the original establishes the upstream
-defect; it is not a claim that the unmodified original supports a Wasm backend.
+The `spsc-wakeup` lane checks only the `await_ready`/`await_suspend` lost-wakeup
+window. The adaptation closes that window but retains the original queue's
+delayed-notification race: a notification can resume a writer after its free
+slot has already been reused, and a failed push is ignored. The `spsc-sequence`
+lane is a deterministic limitation probe, with the immutable original on native
+and the unchanged counterpart on native, Emscripten and WASIp3. Passing means
+the known value loss was reproduced, not that concurrent transfer is reliable.
+The browser workbench marks SPSC unavailable and does not start it. A native
+failure in the original does not establish support for a Wasm backend.
 
 Native SSL has compile-time type-identity tests for both header orders, plus
 runtime client, handshake-state, transfer-cancellation and shutdown tests against

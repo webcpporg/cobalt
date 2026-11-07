@@ -160,57 +160,70 @@ try {
     const page = `${base}/index.html?program=/build/${basename(program)}&variant=${variant}&threads=${multi ? 'multi' : 'single'}&kind=${workers ? 'spsc' : 'timer'}`
     await send('Page.navigate', {url: page})
     await wait('!!document.querySelector("#start")')
-    await fill('#count', 0)
-    await click('#start')
-    await wait('!document.querySelector("#error").hidden')
-    assert.equal(await evaluate('document.querySelectorAll("iframe").length'), 0)
-    await fill('#count', workers ? 1000 : 4)
-    await fill('#delay', 4)
-    for (const kind of workers ? ['spsc'] : ['timer', 'custom', 'channel', 'outcome', 'signals']) {
-        await choose(kind)
+    if (workers) {
+        await wait('window.cobaltReport?.status === "unavailable"')
+        assert.match(await evaluate('document.querySelector("#explanation").textContent'), /can lose values/)
+        for (const id of ['start', 'cancel', 'kind', 'count', 'delay']) {
+            assert.equal(await evaluate(`document.querySelector('#${id}').disabled`), true)
+        }
         await click('#start')
-        const result = await terminal('completed')
-        assert.equal(result.completed, workers ? 1000 : 4)
-        assert.equal(result.cancelled, false)
-        assert.equal(result.exitStatus, 0)
-        if (kind === 'channel') assert.deepEqual(result.values, [0, 1, 2, 3])
-        if (kind === 'signals') assert.deepEqual(result.values, [42, 42, 42, 42])
-        if (kind === 'outcome') assert.deepEqual(result.values, [11, 11, 11, 11])
-        await click('#cancel') // completion wins; disabled cancellation changes nothing
-        assert.equal((await evaluate('window.cobaltReport')).status, 'completed')
-    }
-    await choose(workers ? 'spsc' : 'timer')
-    await fill('#count', workers ? 1000000 : 100)
-    await fill('#delay', 10)
-    await click('#start')
-    await wait('window.cobaltReport?.status === "running"')
-    const run = await evaluate('window.cobaltReport.run')
-    await evaluate('window.oldCobaltFrame = document.querySelector("iframe").contentWindow; document.querySelector("form").requestSubmit()')
-    assert.equal(await evaluate('window.cobaltReport.run'), run, 'duplicate submit started another runtime')
-    await wait('window.cobaltReport?.completed > 0')
-    await click('#cancel')
-    const cancelled = await terminal('cancelled')
-    assert.ok(cancelled.completed < (workers ? 1000000 : 100))
-    assert.ok(cancelled.frames > 0, 'no animation opportunity while pending')
-    await fill('#count', workers ? 1000 : 4)
-    await fill('#delay', 2)
-    await click('#start')
-    await evaluate(`window.dispatchEvent(new MessageEvent('message', {origin:location.origin, source:window.oldCobaltFrame, data:{owner:'webcpp-cobalt',run:${run},type:'finished',status:99}}))`)
-    await terminal('completed')
-    // Keyboard-only start from an input follows the same submission path.
-    await fill('#count', workers ? 1000 : 4)
-    await send('Input.dispatchKeyEvent', {type: 'keyDown', key: 'Enter', code: 'Enter', windowsVirtualKeyCode: 13, text: '\r'})
-    await send('Input.dispatchKeyEvent', {type: 'keyUp', key: 'Enter', code: 'Enter', windowsVirtualKeyCode: 13})
-    await wait(`window.cobaltReport.run > ${run + 1}`)
-    await terminal('completed')
-    registryObservations.push(...await evaluate('window.cobaltRegistryObservations ?? []'))
-    assert.equal(registryObservations.filter(item => item.phase === 'done').length,
-        observations.length, 'a completed run did not prove registry cleanup')
-    for (const item of registryObservations) {
-        if (item.phase === 'started') assert.deepEqual(item.keys, [workers ? 'spsc' : 'portable'])
-        else {
-            assert.deepEqual(item.keys, [], 'a completed run retained its cancellation target')
-            assert.equal(item.afterCompletion, 0, 'cancellation remained active after completion')
+        await evaluate('document.querySelector("form").requestSubmit()')
+        assert.equal(await evaluate('document.querySelectorAll("iframe").length'), 0)
+        assert.equal((await evaluate('window.cobaltReport')).run, 0)
+        observations.push(await evaluate('window.cobaltReport'))
+    } else {
+        await fill('#count', 0)
+        await click('#start')
+        await wait('!document.querySelector("#error").hidden')
+        assert.equal(await evaluate('document.querySelectorAll("iframe").length'), 0)
+        await fill('#count', workers ? 1000 : 4)
+        await fill('#delay', 4)
+        for (const kind of workers ? ['spsc'] : ['timer', 'custom', 'channel', 'outcome', 'signals']) {
+            await choose(kind)
+            await click('#start')
+            const result = await terminal('completed')
+            assert.equal(result.completed, workers ? 1000 : 4)
+            assert.equal(result.cancelled, false)
+            assert.equal(result.exitStatus, 0)
+            if (kind === 'channel') assert.deepEqual(result.values, [0, 1, 2, 3])
+            if (kind === 'signals') assert.deepEqual(result.values, [42, 42, 42, 42])
+            if (kind === 'outcome') assert.deepEqual(result.values, [11, 11, 11, 11])
+            await click('#cancel') // completion wins; disabled cancellation changes nothing
+            assert.equal((await evaluate('window.cobaltReport')).status, 'completed')
+        }
+        await choose(workers ? 'spsc' : 'timer')
+        await fill('#count', workers ? 1000000 : 100)
+        await fill('#delay', 10)
+        await click('#start')
+        await wait('window.cobaltReport?.status === "running"')
+        const run = await evaluate('window.cobaltReport.run')
+        await evaluate('window.oldCobaltFrame = document.querySelector("iframe").contentWindow; document.querySelector("form").requestSubmit()')
+        assert.equal(await evaluate('window.cobaltReport.run'), run, 'duplicate submit started another runtime')
+        await wait('window.cobaltReport?.completed > 0')
+        await click('#cancel')
+        const cancelled = await terminal('cancelled')
+        assert.ok(cancelled.completed < (workers ? 1000000 : 100))
+        assert.ok(cancelled.frames > 0, 'no animation opportunity while pending')
+        await fill('#count', workers ? 1000 : 4)
+        await fill('#delay', 2)
+        await click('#start')
+        await evaluate(`window.dispatchEvent(new MessageEvent('message', {origin:location.origin, source:window.oldCobaltFrame, data:{owner:'webcpp-cobalt',run:${run},type:'finished',status:99}}))`)
+        await terminal('completed')
+        // Keyboard-only start from an input follows the same submission path.
+        await fill('#count', workers ? 1000 : 4)
+        await send('Input.dispatchKeyEvent', {type: 'keyDown', key: 'Enter', code: 'Enter', windowsVirtualKeyCode: 13, text: '\r'})
+        await send('Input.dispatchKeyEvent', {type: 'keyUp', key: 'Enter', code: 'Enter', windowsVirtualKeyCode: 13})
+        await wait(`window.cobaltReport.run > ${run + 1}`)
+        await terminal('completed')
+        registryObservations.push(...await evaluate('window.cobaltRegistryObservations ?? []'))
+        assert.equal(registryObservations.filter(item => item.phase === 'done').length,
+            observations.length, 'a completed run did not prove registry cleanup')
+        for (const item of registryObservations) {
+            if (item.phase === 'started') assert.deepEqual(item.keys, [workers ? 'spsc' : 'portable'])
+            else {
+                assert.deepEqual(item.keys, [], 'a completed run retained its cancellation target')
+                assert.equal(item.afterCompletion, 0, 'cancellation remained active after completion')
+            }
         }
     }
     for (const [name, width, height] of [['wide', 1240, 900], ['narrow', 390, 844]]) {
@@ -220,37 +233,39 @@ try {
         const screenshot = await send('Page.captureScreenshot', {format: 'png', captureBeyondViewport: true})
         writeFileSync(join(evidence, `${name}.png`), Buffer.from(screenshot.data, 'base64'))
     }
-    await fill('#count', workers ? 1000000 : 100)
-    await click('#start')
-    await wait('window.cobaltReport?.status === "running"')
-    await send('Page.navigate', {url: 'about:blank'})
-    await delay(100)
-    const workersClosed = Date.now() + 5000
-    while (Date.now() < workersClosed) {
-        const {targetInfos} = await send('Target.getTargets')
-        if (!targetInfos.some(target => target.type === 'worker' && target.url.startsWith(base))) break
-        await delay(50)
-    }
-    assert.ok(!(await send('Target.getTargets')).targetInfos.some(
-        target => target.type === 'worker' && target.url.startsWith(base)), 'a worker survived page unload')
-    // Actual response headers, rather than a mocked crossOriginIsolated value.
-    if (multi) {
-        await send('Page.navigate', {url: page.replace('/index.html?', '/unisolated/index.html?')})
-        await wait('!!document.querySelector("#start")')
-        assert.equal(await evaluate('crossOriginIsolated'), false)
+    if (!workers) {
+        await fill('#count', 100)
         await click('#start')
-        await wait('!document.querySelector("#error").hidden')
-        assert.match(await evaluate('document.querySelector("#error").textContent'), /COOP and COEP/)
-        assert.equal(await evaluate('document.querySelectorAll("iframe").length'), 0)
-    }
-    if (variant === 'jspi') {
-        await send('Page.navigate', {url: page})
-        await wait('!!document.querySelector("#start")')
-        await evaluate('delete WebAssembly.Suspending')
-        await click('#start')
-        await wait('!document.querySelector("#error").hidden')
-        assert.match(await evaluate('document.querySelector("#error").textContent'), /does not support JSPI/)
-        assert.equal(await evaluate('document.querySelectorAll("iframe").length'), 0)
+        await wait('window.cobaltReport?.status === "running"')
+        await send('Page.navigate', {url: 'about:blank'})
+        await delay(100)
+        const workersClosed = Date.now() + 5000
+        while (Date.now() < workersClosed) {
+            const {targetInfos} = await send('Target.getTargets')
+            if (!targetInfos.some(target => target.type === 'worker' && target.url.startsWith(base))) break
+            await delay(50)
+        }
+        assert.ok(!(await send('Target.getTargets')).targetInfos.some(
+            target => target.type === 'worker' && target.url.startsWith(base)), 'a worker survived page unload')
+        // Actual response headers, rather than a mocked crossOriginIsolated value.
+        if (multi) {
+            await send('Page.navigate', {url: page.replace('/index.html?', '/unisolated/index.html?')})
+            await wait('!!document.querySelector("#start")')
+            assert.equal(await evaluate('crossOriginIsolated'), false)
+            await click('#start')
+            await wait('!document.querySelector("#error").hidden')
+            assert.match(await evaluate('document.querySelector("#error").textContent'), /COOP and COEP/)
+            assert.equal(await evaluate('document.querySelectorAll("iframe").length'), 0)
+        }
+        if (variant === 'jspi') {
+            await send('Page.navigate', {url: page})
+            await wait('!!document.querySelector("#start")')
+            await evaluate('delete WebAssembly.Suspending')
+            await click('#start')
+            await wait('!document.querySelector("#error").hidden')
+            assert.match(await evaluate('document.querySelector("#error").textContent'), /does not support JSPI/)
+            assert.equal(await evaluate('document.querySelectorAll("iframe").length'), 0)
+        }
     }
     assert.deepEqual(errors, [])
     const hash = path => createHash('sha256').update(readFileSync(path)).digest('hex')
@@ -265,9 +280,12 @@ try {
     writeFileSync(join(evidence, 'observations.json'), JSON.stringify({browser: version.Browser, variant,
         threading: multi ? 'multi' : 'single', program, sha256: hash(program),
         wasmSha256: hash(program.replace(/\.js$/, '.wasm')), sourceRevision,
-        sourceForm: 'finite-adaptation', sources: sourceIdentity, assets: assetIdentity,
+        sourceForm: workers ? 'unavailable-upstream-counterpart' : 'finite-adaptation',
+        sources: sourceIdentity, assets: assetIdentity,
         observations, registryObservations}, null, 2) + '\n')
-    console.log(`PASS browser pages: ${version.Browser}, ${variant}, ${multi ? 'multi' : 'single'}, ${observations.length} checked runs`)
+    console.log(workers
+        ? `PASS browser SPSC unavailable: ${version.Browser}, ${variant}, no runtime started`
+        : `PASS browser pages: ${version.Browser}, ${variant}, ${multi ? 'multi' : 'single'}, ${observations.length} checked runs`)
 } finally {
     for (const entry of pending.values()) { clearTimeout(entry.timer); entry.reject(Error('driver closing')) }
     pending.clear()

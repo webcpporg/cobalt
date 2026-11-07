@@ -114,7 +114,14 @@ connection reusable; end that connection according to the underlying Asio contra
 [#cobalt-ssl-state]
 === SSL handshake and stream state
 
-The corrected wrapper supports STARTTLS. Before its first handshake, reads and
+The wrapper fixes the <<cobalt-ssl-fixes,Boost.Cobalt SSL state defects>> on
+native and WASIp2/P3. The same state guards apply with exceptions enabled or
+disabled in a supported compiler/threading profile. WASI SDK 34 provides both
+exception modes for single-thread P2/P3 and only EH off for cooperative P3;
+native `co_main` limitations remain as described in <<cobalt-exceptions>>.
+Browser HTTPS/WSS uses host TLS and does not use this wrapper.
+
+The fixed wrapper supports STARTTLS. Before its first handshake, reads and
 writes use plain TCP. Complete a successful, verified handshake before sending
 confidential application data. `secure()` reports TLS establishment, not whether
 the application configured trust and hostname verification.

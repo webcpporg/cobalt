@@ -13,6 +13,8 @@ A controlled network counterpart changes endpoints, ports and certificate setup.
 
 Original examples run in Release, so an original `assert` may be disabled by `NDEBUG`. A normal exit is not evidence for an assertion that did not execute. Separate finite portable counterparts check values, cancellation and completion explicitly in the same feasible profiles.
 
+Current support includes the SPSC delayed-notification limitation: both the original queue and its wakeup adaptation can lose values. Their deterministic limitation probes preserve queue behavior; the browser workbench disables the counterpart. Earlier dated successful observations remain historical and do not establish reliable concurrent transfer.
+
 `source-requires-exceptions` means the original application contains exception syntax. It does not mean Cobalt itself requires exceptions. Native no-EH Clang builds retain the documented upstream promise warning; only that diagnostic is nonfatal in these test consumers. P3 multi means cooperative threads, not CPU parallelism.
 
 === native
@@ -20,10 +22,10 @@ Original examples run in Release, so an original `assert` may be disabled by `ND
 [cols="3,12*1",options="header"]
 |===
 |Profile |channel |delay |delay_op |echo_server |http |outcome |python |signals |spsc |thread |thread_pool |ticker
-|native-single-on-native |pass |pass |pass |fixture |fixture |pass |upstream defect + counterpart |pass |upstream defect |pass |pass |fixture
-|native-single-off-native |pass |pass |pass |source EH |fixture |pass |source EH |pass |upstream defect |source EH |source EH |source EH
-|native-multi-on-native |pass |pass |pass |fixture |fixture |pass |upstream defect + counterpart |pass |upstream defect + counterpart |pass |pass |fixture
-|native-multi-off-native |pass |pass |pass |source EH |fixture |pass |source EH |pass |upstream defect + counterpart |source EH |source EH |source EH
+|native-single-on-native |pass |pass |pass |fixture |fixture |pass |upstream defect + counterpart |pass |upstream defect + counterpart unavailable |pass |pass |fixture
+|native-single-off-native |pass |pass |pass |source EH |fixture |pass |source EH |pass |upstream defect + counterpart unavailable |source EH |source EH |source EH
+|native-multi-on-native |pass |pass |pass |fixture |fixture |pass |upstream defect + counterpart |pass |upstream defect + counterpart unavailable |pass |pass |fixture
+|native-multi-off-native |pass |pass |pass |source EH |fixture |pass |source EH |pass |upstream defect + counterpart unavailable |source EH |source EH |source EH
 |===
 
 === wasip2
@@ -45,7 +47,7 @@ Original examples run in Release, so an original `assert` may be disabled by `ND
 |wasip3-single-on-wasmtime |pass |pass |pass |fixture |fixture |pass |dependency |pass |threads |threads |threads |fixture
 |wasip3-single-off-wasmtime |pass |pass |pass |source EH |fixture |pass |dependency |pass |threads |source EH |source EH |source EH
 |wasip3-multi-on-wasmtime |SDK |SDK |SDK |SDK |SDK |SDK |SDK |SDK |SDK |SDK |SDK |SDK
-|wasip3-multi-off-wasmtime |pass |pass |pass |source EH |fixture |pass |dependency |pass |upstream defect + counterpart |source EH |source EH |source EH
+|wasip3-multi-off-wasmtime |pass |pass |pass |source EH |fixture |pass |dependency |pass |upstream defect + counterpart unavailable |source EH |source EH |source EH
 |===
 
 === jspi
@@ -59,12 +61,12 @@ Original examples run in Release, so an original `assert` may be disabled by `ND
 |jspi-single-off-node |pass |pass |pass |platform |platform |pass |dependency |pass |threads |source EH |source EH |platform
 |jspi-single-off-page |pass |pass |pass |platform |platform + counterpart |pass |dependency |pass |threads |source EH |source EH |platform + counterpart
 |jspi-single-off-worker |pass |pass |pass |platform |platform + counterpart |pass |dependency |pass |threads |source EH |source EH |platform + counterpart
-|jspi-multi-on-node |pass |pass |pass |platform |platform |pass |dependency |pass |upstream defect + counterpart |pass |pass |platform
-|jspi-multi-on-page |pass |pass |pass |platform |platform + counterpart |pass |dependency |pass |upstream defect + counterpart |pass |pass |platform + counterpart
-|jspi-multi-on-worker |pass |pass |pass |platform |platform + counterpart |pass |dependency |pass |upstream defect |pass |pass |platform + counterpart
-|jspi-multi-off-node |pass |pass |pass |platform |platform |pass |dependency |pass |upstream defect + counterpart |source EH |source EH |platform
-|jspi-multi-off-page |pass |pass |pass |platform |platform + counterpart |pass |dependency |pass |upstream defect + counterpart |source EH |source EH |platform + counterpart
-|jspi-multi-off-worker |pass |pass |pass |platform |platform + counterpart |pass |dependency |pass |upstream defect |source EH |source EH |platform + counterpart
+|jspi-multi-on-node |pass |pass |pass |platform |platform |pass |dependency |pass |upstream defect + counterpart unavailable |pass |pass |platform
+|jspi-multi-on-page |pass |pass |pass |platform |platform + counterpart |pass |dependency |pass |upstream defect + counterpart unavailable |pass |pass |platform + counterpart
+|jspi-multi-on-worker |pass |pass |pass |platform |platform + counterpart |pass |dependency |pass |upstream defect + counterpart unavailable |pass |pass |platform + counterpart
+|jspi-multi-off-node |pass |pass |pass |platform |platform |pass |dependency |pass |upstream defect + counterpart unavailable |source EH |source EH |platform
+|jspi-multi-off-page |pass |pass |pass |platform |platform + counterpart |pass |dependency |pass |upstream defect + counterpart unavailable |source EH |source EH |platform + counterpart
+|jspi-multi-off-worker |pass |pass |pass |platform |platform + counterpart |pass |dependency |pass |upstream defect + counterpart unavailable |source EH |source EH |platform + counterpart
 |===
 
 === asyncify
@@ -78,12 +80,12 @@ Original examples run in Release, so an original `assert` may be disabled by `ND
 |asyncify-single-off-node |pass |pass |pass |platform |platform |pass |dependency |pass |threads |source EH |source EH |platform
 |asyncify-single-off-page |pass |pass |pass |platform |platform + counterpart |pass |dependency |pass |threads |source EH |source EH |platform + counterpart
 |asyncify-single-off-worker |pass |pass |pass |platform |platform + counterpart |pass |dependency |pass |threads |source EH |source EH |platform + counterpart
-|asyncify-multi-on-node |pass |pass |pass |platform |platform |pass |dependency |pass |upstream defect + counterpart |pass |pass |platform
-|asyncify-multi-on-page |pass |pass |pass |platform |platform + counterpart |pass |dependency |pass |upstream defect + counterpart |pass |pass |platform + counterpart
-|asyncify-multi-on-worker |pass |pass |pass |platform |platform + counterpart |pass |dependency |pass |upstream defect |pass |pass |platform + counterpart
-|asyncify-multi-off-node |pass |pass |pass |platform |platform |pass |dependency |pass |upstream defect + counterpart |source EH |source EH |platform
-|asyncify-multi-off-page |pass |pass |pass |platform |platform + counterpart |pass |dependency |pass |upstream defect + counterpart |source EH |source EH |platform + counterpart
-|asyncify-multi-off-worker |pass |pass |pass |platform |platform + counterpart |pass |dependency |pass |upstream defect |source EH |source EH |platform + counterpart
+|asyncify-multi-on-node |pass |pass |pass |platform |platform |pass |dependency |pass |upstream defect + counterpart unavailable |pass |pass |platform
+|asyncify-multi-on-page |pass |pass |pass |platform |platform + counterpart |pass |dependency |pass |upstream defect + counterpart unavailable |pass |pass |platform + counterpart
+|asyncify-multi-on-worker |pass |pass |pass |platform |platform + counterpart |pass |dependency |pass |upstream defect + counterpart unavailable |pass |pass |platform + counterpart
+|asyncify-multi-off-node |pass |pass |pass |platform |platform |pass |dependency |pass |upstream defect + counterpart unavailable |source EH |source EH |platform
+|asyncify-multi-off-page |pass |pass |pass |platform |platform + counterpart |pass |dependency |pass |upstream defect + counterpart unavailable |source EH |source EH |platform + counterpart
+|asyncify-multi-off-worker |pass |pass |pass |platform |platform + counterpart |pass |dependency |pass |upstream defect + counterpart unavailable |source EH |source EH |platform + counterpart
 |===
 
 === Evidence boundaries
@@ -92,7 +94,7 @@ Original examples run in Release, so an original `assert` may be disabled by `ND
 * `fixture`: a controlled endpoint adaptation ran against real TCP/TLS peers.
 * `SDK`, `platform`, `threads`, `dependency`: the exact prerequisite is absent in that profile.
 * `source EH`: explicit exception syntax in the example is rejected with exceptions disabled.
-* `upstream defect`: the original failure has its own evidence; a corrected counterpart stays separately identified.
+* `upstream defect`: the original failure has its own evidence; counterpart status remains separate. `counterpart unavailable` preserves a limitation inherited by the adaptation.
 
 Raw JSON cells retain source hashes, implementation snapshots, commands and evidence filenames. The native Python extension is an optional CPython 3.14/nanobind experiment, not a Wasm capability. The five upstream benchmark sources remain inventoried and compile-probed; current performance uses separately identified finite matched workloads.
 

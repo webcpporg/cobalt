@@ -56,19 +56,48 @@ retains that error and returns zero bytes. See
 https://github.com/chriskohlhoff/asio/issues/1442[Asio issue 1442]. Native POSIX
 and WASIp3 tests require `eof`; none of these paths rewrites the native error.
 
-The owner approved the native SSL exception on 2026-11-06 after upstream state
-and cancellation regressions were reproduced. `webcpp::cobalt::io::ssl::stream`
-is a distinct type. Its SSL context and plain Asio dependencies retain native
-Boost identity. The fixes prevent plaintext fallback after a failed/cancelled
-handshake and cover TLS transfer/shutdown behavior. The concrete native composed
-read/write overloads have the static-type requirement in <<cobalt-building-ssl>>.
+[#cobalt-ssl-fixes]
+WebCPP fixes Boost.Cobalt 1.92 SSL wrapper defects on native and WASIp2/P3.
+The owner approved this native exception on 2026-11-06 and retained it on
+2026-11-07. `webcpp::cobalt::io::ssl::stream` is a distinct, corrected type;
+its native SSL context and plain Asio dependencies retain Boost identity.
+These are Cobalt wrapper fixes, not changes to OpenSSL's cryptographic
+implementation or to native Cobalt's core and runner.
+
+The original handshake completion did not update the stream's TLS state.
+Consequently, a successful handshake could leave `secure()` false, subsequent
+I/O selecting plain TCP and `shutdown()` returning `no_protocol_option`.
+Lazy handshake/shutdown operations also captured state at construction instead
+of checking it when awaited. The fix updates the stream before resuming the
+coroutine and checks its current state when an operation starts.
+
+The original wrapper also allowed application I/O to select plain TCP after a
+failed or cancelled handshake. The fix records the first TLS attempt and blocks
+that fallback with `not_connected` and zero transferred bytes. Shutdown completion
+clears the TLS state even on error or cancellation. The precise state and retry
+contract is in <<cobalt-ssl-state>>; successful negotiation still does not replace
+the application's trust and hostname verification settings.
+
+Native complete-buffer SSL `read`/`write` overloads also fix lost cancellation by
+using Asio's composed operations with the completion handler's associated
+properties. This correction requires the concrete SSL type as explained in
+<<cobalt-building-ssl>>. Erasing it to Boost's generic I/O stream still selects
+the unchanged upstream composition.
+
 Move construction rebinds socket access to the destination's SSL lowest layer
-and preserves handshake state. Copying and assignment are unavailable. Move only
-when no lazy or outstanding operation retains either stream's address; moving
+and preserves handshake state, fixing the socket facade's reference to the
+moved-from object. Copying and assignment are unavailable. Move only when no
+lazy or outstanding operation retains either stream's address; moving
 does not transfer those operation references. After moving, the source is
 non-secure and may be destroyed. Tests destroy the source before handshake and
 after completed successful or rejected handshakes, then exercise the destination.
 
+The TLS 1.2/1.3 regression fixtures are `test/tls/cobalt_ssl_client.cpp`,
+`cobalt_ssl_state.cpp` and `cobalt_ssl_cancel.cpp`: they check real peers, state
+transitions, blocked application I/O, moves, transfer cancellation and shutdown.
+The native identity fixtures check both header orders. See <<cobalt-testing>>
+for the lanes and their exception/threading profiles. These wrapper fixes do not
+repair the other native Boost limitations described above.
 
 On Wasm, library-owned headers and sources select the same shipped Asio backend
 as WebCPP Beast. Corrections include the browser runner, WASI networking and

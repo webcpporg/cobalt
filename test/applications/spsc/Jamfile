@@ -17,10 +17,20 @@ webcpp.run original_wakeup : wakeup_test.cpp : <library>/webcpp/cobalt//cobalt
 webcpp.generated queue : extract.py : : original_queue.hpp ;
 webcpp.lane spsc-wakeup : wakeup original_wakeup : native wasip3 emscripten ;
 
-webcpp.drive sequence : ../../../example/applications/spsc.cpp
-  : <library>/webcpp/cobalt//cobalt <library>/webcpp//node-test
-    <webcpp-drive-timeout>100 <threading>multi
+# A passing probe confirms inherited value loss, not working queue transfer.
+# Keep the original and counterpart unchanged. The former positive CLI driver
+# remains available for manual diagnosis, outside the conformance lanes.
+.matrix-checks = <dependency>../matrix.py <dependency>../matrix_test.py ;
+webcpp.drive sequence_limitation : sequence_limitation.cpp
+  : <library>/webcpp/cobalt//core <library>/webcpp//node-test
+    <webcpp-drive-timeout>45 <threading>multi $(.matrix-checks)
     <toolset>emscripten:<linkflags>-sPTHREAD_POOL_SIZE=1
     <toolset>clang-wasip3:<exception-handling>off
-  : driver.py ;
-webcpp.lane spsc-sequence : sequence : native wasip3 emscripten ;
+  : limitation_driver.py : counterpart ;
+webcpp.drive original_sequence_limitation : sequence_limitation.cpp
+  : <library>/webcpp/cobalt//core <library>/webcpp//node-test
+    <webcpp-drive-timeout>45 <threading>multi <define>WEBCPP_TEST_ORIGINAL_SPSC
+    $(.matrix-checks)
+  : limitation_driver.py : original : native ;
+webcpp.lane spsc-sequence : sequence_limitation original_sequence_limitation
+  : native wasip3 emscripten ;

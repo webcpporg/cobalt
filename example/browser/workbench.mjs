@@ -21,7 +21,7 @@ const descriptions = {
         'const int lazy = co_await lazy_value(10);\nconst int eager = co_await eager_value(10);\n// Both must equal 11.'],
     signals: ['Suspend a coroutine until a Signals2 callback delivers 42. The callback disconnects its single-shot connection before resuming the coroutine.',
         'auto pending = await_signal(signal);\nsignal(42);\nconst int value = co_await pending;'],
-    spsc: ['A real Cobalt worker produces integers. The page-side coroutine receives them through a single-producer, single-consumer queue and verifies their order and checksum.',
+    spsc: ['Unavailable: the pinned SPSC queue can lose values after a delayed notification. Its unchanged counterpart is retained for diagnosis, not reliable concurrent transfer.',
         'auto worker = produce(queue, count, stop);\nconst int value = co_await queue.read();\nco_await worker;']
 }
 let nextRun = 0
@@ -30,14 +30,18 @@ let frameCount = 0
 const report = () => window.cobaltReport
 window.cobaltReport = {status: 'ready', run: 0, completed: 0, frames: 0, values: []}
 element('environment').textContent = `${variant === 'jspi' ? 'JSPI' : 'Asyncify'} build, ${multi ? 'pthread enabled' : 'single thread'}.`
-for (const option of element('kind').options) option.disabled = (option.value === 'spsc') !== workerBuild
+for (const option of element('kind').options) option.disabled = option.value === 'spsc' || workerBuild
 element('kind').value = workerBuild ? 'spsc' :
     (Object.hasOwn(descriptions, query.get('kind')) ? query.get('kind') : 'timer')
 if (workerBuild) {
     element('count').max = '1000000'
     element('count').value = '10000'
     element('delay').disabled = true
-    element('bounds').textContent = 'Choose 1 to 1,000,000 values. The worker uses a bounded queue with 128 slots.'
+    element('bounds').textContent = 'This example is unavailable because concurrent execution can lose values.'
+    for (const id of ['start', 'cancel', 'kind', 'count']) element(id).disabled = true
+    report().status = 'unavailable'
+    element('status').textContent = 'Unavailable'
+    element('result').textContent = 'No program will run. The original queue and counterpart remain unchanged.'
 }
 const explain = () => {
     const [text, code] = descriptions[element('kind').value]
@@ -77,7 +81,7 @@ const append = line => {
 }
 const start = event => {
     event.preventDefault()
-    if (active) return
+    if (active || workerBuild) return
     element('error').hidden = true
     const count = Number(element('count').value)
     const delay = Number(element('delay').value)
