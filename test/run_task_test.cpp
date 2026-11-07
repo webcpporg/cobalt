@@ -8,9 +8,9 @@
 #include <webcpp/test/exit_status.hpp>
 #include <webcpp/test/page_timeout.hpp>
 
-#include <boost/asio/post.hpp>
-#include <boost/asio/steady_timer.hpp>
 #include <boost/core/lightweight_test.hpp>
+#include <webcpp/asio/post.hpp>
+#include <webcpp/asio/steady_timer.hpp>
 
 #include <algorithm>
 #include <chrono>
@@ -23,15 +23,15 @@
 
 namespace {
 
-boost::cobalt::task<int> calculate() {
+webcpp::cobalt::task<int> calculate() {
     // NOLINTNEXTLINE(readability-static-accessed-through-instance)
-    const auto executor = co_await boost::cobalt::this_coro::executor;
+    const auto executor = co_await webcpp::cobalt::this_coro::executor;
     const webcpp::test::yield_counter yields;
     int last = 0;
     std::size_t longest = 0;
     std::size_t consecutive = 0;
     for (int index = 0; index < 5000; ++index) {
-        co_await boost::asio::post(executor, boost::cobalt::use_op);
+        co_await webcpp::asio::post(executor, webcpp::cobalt::use_op);
         const auto now = yields.count();
         if (now != last) {
             last = now;
@@ -46,8 +46,9 @@ boost::cobalt::task<int> calculate() {
     BOOST_TEST_EQ(yields.count(), 0);
     BOOST_TEST_EQ(longest, 5000U);
 #endif
-    boost::asio::steady_timer timer(executor, std::chrono::milliseconds(1));
-    const auto [error] = co_await boost::cobalt::as_tuple(timer.async_wait(boost::cobalt::use_op));
+    webcpp::asio::steady_timer timer(executor, std::chrono::milliseconds(1));
+    const auto [error] =
+        co_await webcpp::cobalt::as_tuple(timer.async_wait(webcpp::cobalt::use_op));
     BOOST_TEST(!error);
     co_return 42;
 }
@@ -55,7 +56,7 @@ boost::cobalt::task<int> calculate() {
 }  // namespace
 
 int main() {
-    BOOST_TEST_EQ(boost::cobalt::run(calculate()), 42);
+    BOOST_TEST_EQ(webcpp::cobalt::run(calculate()), 42);
     std::puts("cobalt: run(task) checked independently of co_main");
     return webcpp::test::exit_status(boost::report_errors());
 }

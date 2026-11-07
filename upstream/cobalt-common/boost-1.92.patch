@@ -1,0 +1,278 @@
+--- a/boost/cobalt/composition.hpp
++++ b/boost/cobalt/composition.hpp
+@@ -130,7 +130,7 @@
+   template<typename ... Ts>
+   composition_promise(Ts && ... args) : handler(std::move(std::get<sizeof... (Ts) - 1>(std::tie(args...))))
+   {
+-
++    this->reset_cancellation_source(handler.get_cancellation_slot());
+   }
+ 
+   void unhandled_exception() { throw ; }
+--- a/boost/cobalt/detail/main.hpp
++++ b/boost/cobalt/detail/main.hpp
+@@ -13,6 +13,7 @@
+ #include <boost/cobalt/this_coro.hpp>
+ 
+ #include <boost/config.hpp>
++#include <exception>
+ 
+ 
+ namespace boost::asio
+@@ -26,10 +27,17 @@
+ namespace boost::cobalt::detail
+ {
+ 
++#if defined(__clang__) && defined(__wasip3__)
++#pragma clang diagnostic push
++#pragma clang diagnostic ignored "-Wmain"
++#endif
+ extern "C"
+ {
+ int main(int argc, char * argv[]);
+ }
++#if defined(__clang__) && defined(__wasip3__)
++#pragma clang diagnostic pop
++#endif
+ 
+ struct signal_helper
+ {
+@@ -92,6 +100,8 @@
+ 
+ #if !defined(BOOST_NO_EXCEPTIONS)
+     void unhandled_exception() { throw ; }
++#else
++    void unhandled_exception() noexcept { std::terminate(); }
+ #endif
+     void return_value(int res = 0)
+     {
+--- a/boost/cobalt/detail/thread.hpp
++++ b/boost/cobalt/detail/thread.hpp
+@@ -17,6 +17,7 @@
+ 
+ #include <boost/asio/cancellation_signal.hpp>
+ 
++#include <exception>
+ #include <thread>
+ 
+ namespace boost::cobalt
+@@ -84,6 +85,8 @@
+ 
+ #if !defined(BOOST_NO_EXCEPTIONS)
+   void unhandled_exception() { throw; }
++#else
++  void unhandled_exception() noexcept { std::terminate(); }
+ #endif
+   void return_void() { }
+ 
+--- a/boost/cobalt/detail/detached.hpp
++++ b/boost/cobalt/detail/detached.hpp
+@@ -19,6 +19,7 @@
+ #include <boost/core/exchange.hpp>
+ 
+ #include <coroutine>
++#include <exception>
+ #include <optional>
+ #include <utility>
+ #include <boost/asio/bind_allocator.hpp>
+@@ -76,6 +77,8 @@
+   void return_void() {}
+ #if !defined(BOOST_NO_EXCEPTIONS)
+   void unhandled_exception() { throw ; }
++#else
++  void unhandled_exception() noexcept { std::terminate(); }
+ #endif
+ };
+ 
+--- a/boost/cobalt/with.hpp
++++ b/boost/cobalt/with.hpp
+@@ -43,7 +43,7 @@
+     std::exception_ptr e;
+ #if defined(BOOST_NO_EXCEPTIONS)
+     co_await std::move(func)(arg);
+-    co_await std::move(teardown)(arg, e);
++    co_await std::move(teardown)(std::move(arg), e);
+ #else
+     try
+     {
+@@ -84,7 +84,7 @@
+     std::exception_ptr e;
+ #if defined(BOOST_NO_EXCEPTIONS)
+     std::move(func)(arg);
+-    co_await std::move(teardown)(arg, e);
++    co_await std::move(teardown)(std::move(arg), e);
+ #else
+     try
+     {
+@@ -97,7 +97,7 @@
+ 
+     try
+     {
+-        co_await std::move(teardown)(arg, e);
++        co_await std::move(teardown)(std::move(arg), e);
+     }
+     catch (...)
+     {
+@@ -169,7 +169,7 @@
+ 
+ #if defined(BOOST_NO_EXCEPTIONS)
+     res = std::move(func)(arg);
+-    co_await std::move(teardown)(arg, e);
++    co_await std::move(teardown)(std::move(arg), e);
+ #else
+     try
+     {
+@@ -182,7 +182,7 @@
+ 
+     try
+     {
+-        co_await std::move(teardown)(arg, e);
++        co_await std::move(teardown)(std::move(arg), e);
+     }
+     catch (...)
+     {
+--- a/libs/cobalt/src/io/file.cpp
++++ b/libs/cobalt/src/io/file.cpp
+@@ -107,7 +107,9 @@
+ }
+ result<void> file::cancel()
+ {
+-  return result<void>{};
++  error_code ec;
++  file_.cancel(ec);
++  return ec ? ec : result<void>{};
+ }
+ 
+ executor file::get_executor() { return file_.get_executor();}
+--- a/libs/cobalt/src/io/stream_file.cpp
++++ b/libs/cobalt/src/io/stream_file.cpp
+@@ -43,7 +43,7 @@
+ system::result<std::uint64_t> stream_file::seek(std::int64_t offset, seek_basis whence)
+ {
+   system::error_code ec;
+-  auto n = implementation_.seek(offset, whence);
++  auto n = implementation_.seek(offset, whence, ec);
+   return ec ? ec : system::result<std::uint64_t>{n};
+ }
+ 
+@@ -104,10 +104,11 @@
+ 
+ system::result<std::uint64_t> stream_file::seek(std::int64_t offset, seek_basis whence)
+ {
+-  if (::lseek(native_handle(), offset, whence) < 0)
++  const auto position = ::lseek(native_handle(), offset, whence);
++  if (position < 0)
+     COBALT_RETURN_ERROR();
+ 
+-  return {};
++  return static_cast<std::uint64_t>(position);
+ }
+ 
+ void stream_file::initiate_read_some_(void * this_, mutable_buffer_sequence buffer, boost::cobalt::completion_handler<system::error_code, std::size_t> handler)
+--- a/libs/cobalt/src/io/random_access_file.cpp
++++ b/libs/cobalt/src/io/random_access_file.cpp
+@@ -8,6 +8,9 @@
+ #define _FILE_OFFSET_BITS 64
+ 
+ #include <boost/cobalt/io/random_access_file.hpp>
++#include <boost/asio/bind_allocator.hpp>
++#include <boost/asio/post.hpp>
++#include <limits>
+ 
+ 
+ namespace boost::cobalt::io
+@@ -77,31 +80,68 @@
+ 
+ random_access_file::random_access_file(random_access_file && sf) noexcept = default;
+ 
++// The POSIX fallback performs the positional syscall during initiation and
++// posts its result. It does not provide kernel-asynchronous disk I/O. Unlike
++// lseek followed by read/write, pread/pwrite never changes the shared cursor.
++template <typename Sequence, typename Operation>
++void positional_io(boost::asio::posix::basic_stream_descriptor<executor> & str,
++                   std::uint64_t offset, Sequence buffers, Operation operation, bool reading,
++                   completion_handler<system::error_code, std::size_t> handler)
++{
++  system::error_code error;
++  std::size_t transferred = 0;
++  visit(buffers, [&](auto sequence)
++  {
++    for (auto it = asio::buffer_sequence_begin(sequence),
++              end = asio::buffer_sequence_end(sequence); it != end; ++it)
++    {
++      const auto buffer = *it;
++      if (buffer.size() == 0)
++        continue;
++      if (offset > static_cast<std::uint64_t>((std::numeric_limits<off_t>::max)()))
++      {
++        error = asio::error::invalid_argument;
++        break;
++      }
++      ssize_t count;
++      do
++      {
++        count = operation(str.native_handle(), buffer.data(),
++                          (std::min)(buffer.size(), static_cast<std::size_t>(
++                              (std::numeric_limits<ssize_t>::max)())),
++                          static_cast<off_t>(offset));
++      }
++      while (count < 0 && errno == EINTR);
++      if (count < 0)
++        error = system::error_code{errno, system::system_category()};
++      else if (count == 0 && reading)
++        error = asio::error::eof;
++      else
++        transferred = static_cast<std::size_t>(count);
++      // read_some/write_some may consume only the first nonempty buffer.
++      break;
++    }
++  });
++  const auto allocator = handler.get_allocator();
++  asio::post(str.get_executor(), asio::bind_allocator(allocator,
++      [handler = std::move(handler), error, transferred]() mutable
++      {
++        handler(error, transferred);
++      }));
++}
++
+ void initiate_async_read_some_at_helper(boost::asio::posix::basic_stream_descriptor<executor> & str,
+                                         std::uint64_t offset, mutable_buffer_sequence seq,
+                                         completion_handler<system::error_code, std::size_t> handler)
+ {
+-
+-  if (lseek(str.native_handle(), SEEK_SET, offset) < 0)
+-  {
+-    constexpr static boost::source_location loc{BOOST_CURRENT_LOCATION};
+-    return handler(system::error_code{errno, ::boost::system::system_category(), &loc}, 0u);
+-  }
+-
+-  visit(seq, [&](auto buffer) {str.async_read_some(buffer, std::move(handler)); });
++  positional_io(str, offset, seq, ::pread, true, std::move(handler));
+ }
+ 
+ void initiate_async_write_some_at_helper(boost::asio::posix::basic_stream_descriptor<executor> & str,
+                                         std::uint64_t offset, const_buffer_sequence seq,
+                                         completion_handler<system::error_code, std::size_t> handler)
+ {
+-  if (lseek(str.native_handle(), SEEK_SET, offset) < 0)
+-  {
+-    constexpr static boost::source_location loc{BOOST_CURRENT_LOCATION};
+-    return handler(system::error_code{errno, ::boost::system::system_category(), &loc}, 0u);
+-  }
+-
+-  visit(seq, [&](auto buffer) {str.async_write_some(buffer, std::move(handler)); });
++  positional_io(str, offset, seq, ::pwrite, false, std::move(handler));
+ }
+ 
+ void random_access_file::initiate_read_some_at_(void *this_, std::uint64_t offset,  mutable_buffer_sequence buffer, completion_handler<system::error_code, std::size_t> handler)
+--- a/libs/cobalt/src/io/pipe.cpp
++++ b/libs/cobalt/src/io/pipe.cpp
+@@ -130,7 +130,7 @@
+   readable_pipe r{executor};
+   writable_pipe w{executor};
+   system::error_code ec;
+-  asio::connect_pipe(r.implementation_, w.implementation_);
++  asio::connect_pipe(r.implementation_, w.implementation_, ec);
+   if (ec)
+     return ec;
+   else

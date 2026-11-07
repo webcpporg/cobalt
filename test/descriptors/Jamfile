@@ -1,0 +1,18 @@
+# Copyright (c) 2026 WebCpp.org
+#
+# Distributed under the Boost Software License, Version 1.0. (See
+# accompanying file LICENSE_1_0.txt or copy at
+# https://www.boost.org/LICENSE_1_0.txt)
+import webcpp ;
+webcpp.targets native wasip2 wasip3 emscripten ;
+webcpp.original python3 : .. ;
+webcpp.drive files : files.cpp : <library>/webcpp/cobalt//cobalt
+  : driver.py : : wasip2 ;
+webcpp.drive files_p3 : files.cpp : <library>/webcpp/cobalt//cobalt
+  : driver.py : --wasip3 : wasip3 ;
+webcpp.lane filesystem : files : wasip2 ;
+webcpp.lane filesystem-p3 : files_p3 : wasip3 ;
+webcpp.run pipes : pipes.cpp : <library>/webcpp/cobalt//cobalt ;
+webcpp.drive stdio_p2 : stdio_p2.cpp : <library>/webcpp/cobalt//cobalt
+  : stdio.py : : wasip2 ;
+webcpp.lane stdio-p2 : stdio_p2 : wasip2 ;

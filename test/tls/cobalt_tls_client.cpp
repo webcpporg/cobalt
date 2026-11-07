@@ -6,21 +6,21 @@
 
 #include <webcpp/asio/tls_client_context.hpp>
 
-#include <boost/asio/ip/tcp.hpp>
-#include <boost/asio/read.hpp>
-#include <boost/asio/write.hpp>
-#include <boost/cobalt/main.hpp>
-#include <boost/cobalt/op.hpp>
-#include <boost/cobalt/result.hpp>
-#include <boost/cobalt/this_coro.hpp>
+#include <webcpp/asio/ip/tcp.hpp>
+#include <webcpp/asio/read.hpp>
+#include <webcpp/asio/write.hpp>
+#include <webcpp/cobalt/main.hpp>
+#include <webcpp/cobalt/op.hpp>
+#include <webcpp/cobalt/result.hpp>
+#include <webcpp/cobalt/this_coro.hpp>
 
 #include <array>
 #include <charconv>
 #include <cstdio>
 #include <string_view>
 
-namespace cobalt = boost::cobalt;
-namespace asio = boost::asio;
+namespace cobalt = webcpp::cobalt;
+namespace asio = webcpp::asio;
 
 cobalt::main co_main(int argc, char** argv) {
     if (argc != 6) {

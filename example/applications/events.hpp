@@ -18,7 +18,8 @@ EM_JS(void, cobalt_event, (const char* type, int count, int value, int cancelled
     }
 });
 #else
-static void cobalt_event(const char*, int, int, int) {}
+static void cobalt_event([[maybe_unused]] const char* type, [[maybe_unused]] int count,
+                         [[maybe_unused]] int value, [[maybe_unused]] int cancelled) {}
 #endif
 
 #endif

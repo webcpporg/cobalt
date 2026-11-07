@@ -18,8 +18,7 @@
       "explicit_exception_syntax": false,
       "requires_worker_profile": false,
       "native_socket_semantics": false,
-      "adaptation": "Bounded producer/consumer page with actual channel operations; keep original finite case",
-      "unchanged_source_status": "not-run-for-this-proposal"
+      "adaptation": "Bounded producer/consumer page with actual channel operations; keep original finite case"
     },
     {
       "id": "delay",
@@ -35,8 +34,7 @@
       "explicit_exception_syntax": false,
       "requires_worker_profile": false,
       "native_socket_semantics": false,
-      "adaptation": "Validate input outside timed work; start/cancel and report actual timer result",
-      "unchanged_source_status": "not-run-for-this-proposal"
+      "adaptation": "Validate input outside timed work; start/cancel and report actual timer result"
     },
     {
       "id": "delay_op",
@@ -52,8 +50,7 @@
       "explicit_exception_syntax": false,
       "requires_worker_profile": false,
       "native_socket_semantics": false,
-      "adaptation": "Retain ready/initiate semantics; cover immediate and delayed completion/cancellation",
-      "unchanged_source_status": "not-run-for-this-proposal"
+      "adaptation": "Retain ready/initiate semantics; cover immediate and delayed completion/cancellation"
     },
     {
       "id": "echo_server",
@@ -68,8 +65,7 @@
       "explicit_exception_syntax": true,
       "requires_worker_profile": false,
       "native_socket_semantics": true,
-      "adaptation": "Controlled TCP peer and explicit shutdown; EH-off value-error counterpart; browser raw listener unavailable",
-      "unchanged_source_status": "not-run-for-this-proposal"
+      "adaptation": "Controlled TCP peer and explicit shutdown; EH-off value-error counterpart; browser raw listener unavailable"
     },
     {
       "id": "http",
@@ -87,8 +83,7 @@
       "explicit_exception_syntax": false,
       "requires_worker_profile": false,
       "native_socket_semantics": true,
-      "adaptation": "Controlled verified HTTPS peer; browser transport counterpart is separately identified",
-      "unchanged_source_status": "not-run-for-this-proposal"
+      "adaptation": "Controlled verified HTTPS peer; browser transport counterpart is separately identified"
     },
     {
       "id": "outcome",
@@ -104,8 +99,7 @@
       "explicit_exception_syntax": false,
       "requires_worker_profile": false,
       "native_socket_semantics": false,
-      "adaptation": "Keep the two real awaitables; UI repetition/progress is a bounded derivative",
-      "unchanged_source_status": "not-run-for-this-proposal"
+      "adaptation": "Keep the two real awaitables; UI repetition/progress is a bounded derivative"
     },
     {
       "id": "python",
@@ -123,7 +117,6 @@
       "requires_worker_profile": false,
       "native_socket_semantics": false,
       "adaptation": "Preserve python.py baseline failure; separately patch the three references to the imported boost_cobalt_example_python name, pin optional native dependencies and validate the actual extension. No packaged Wasm Python runtime claimed.",
-      "unchanged_source_status": "not-run-for-this-proposal",
       "known_source_defects": [
         {
           "id": "python-module-name-mismatch",
@@ -147,8 +140,7 @@
       "explicit_exception_syntax": false,
       "requires_worker_profile": false,
       "native_socket_semantics": false,
-      "adaptation": "UI event triggers real Signals2 operation; this is not POSIX signals",
-      "unchanged_source_status": "not-run-for-this-proposal"
+      "adaptation": "UI event triggers real Signals2 operation; this is not POSIX signals"
     },
     {
       "id": "spsc",
@@ -165,7 +157,6 @@
       "explicit_exception_syntax": false,
       "native_socket_semantics": false,
       "adaptation": "Bounded configurable workload, sequence checks, worker result storage and controlled stop",
-      "unchanged_source_status": "not-run-for-this-proposal",
       "requires_worker_execution": true,
       "worker_profile_note": "Probe native B2 single and multi independently because single does not disable Boost threads; browser/WASI single with threads disabled remains unavailable for these worker applications."
     },
@@ -184,7 +175,6 @@
       "explicit_exception_syntax": true,
       "native_socket_semantics": false,
       "adaptation": "Preserve request/response algorithms; EH-off value-error counterpart; worker UI handoff",
-      "unchanged_source_status": "not-run-for-this-proposal",
       "requires_worker_execution": true,
       "worker_profile_note": "Probe native B2 single and multi independently because single does not disable Boost threads; browser/WASI single with threads disabled remains unavailable for these worker applications."
     },
@@ -203,7 +193,6 @@
       "explicit_exception_syntax": true,
       "native_socket_semantics": false,
       "adaptation": "Link core without runner; nonblocking browser host lifecycle; EH-off counterpart and task-move probe",
-      "unchanged_source_status": "not-run-for-this-proposal",
       "requires_worker_execution": true,
       "worker_profile_note": "Probe native B2 single and multi independently because single does not disable Boost threads; browser/WASI single with threads disabled remains unavailable for these worker applications."
     },
@@ -225,8 +214,7 @@
       "explicit_exception_syntax": true,
       "requires_worker_profile": false,
       "native_socket_semantics": true,
-      "adaptation": "Controlled market feed and server clients; full browser listener unavailable; client/routing counterpart separate",
-      "unchanged_source_status": "not-run-for-this-proposal"
+      "adaptation": "Controlled market feed and server clients; full browser listener unavailable; client/routing counterpart separate"
     }
   ],
   "supporting_files": [
@@ -274,5 +262,6 @@
       "status": "not-run-for-this-proposal",
       "plan": "Audit and reuse matched Cobalt/Asio workload; optional Boost.Context arms remain separately classified"
     }
-  ]
+  ],
+  "runtime_evidence": "doc/application-matrix.adoc; generated cells retain exact profile receipts"
 }

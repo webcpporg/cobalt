@@ -10,14 +10,17 @@
 #include <webcpp/cobalt.hpp>
 #include <webcpp/test/exit_status.hpp>
 
-#include <boost/asio/post.hpp>
+#include <webcpp/asio/post.hpp>
+
+#include "../output.hpp"
 
 #include <cstdio>
 #include <cstring>
 #include <exception>
+#include <string_view>
 #include <utility>
 
-namespace cobalt = boost::cobalt;
+namespace cobalt = webcpp::cobalt;
 
 namespace {
 
@@ -28,7 +31,7 @@ cobalt::task<int> lazy_value() {
 cobalt::promise<int> pending_value() {
     // NOLINTNEXTLINE(readability-static-accessed-through-instance)
     const auto executor = co_await cobalt::this_coro::executor;
-    co_await boost::asio::post(executor, cobalt::use_op);
+    co_await webcpp::asio::post(executor, cobalt::use_op);
     co_return 42;
 }
 
@@ -39,7 +42,7 @@ cobalt::generator<int> sequence() {
 
 cobalt::promise<int> consume(cobalt::generator<int>& generator) {
     int sum = 0;
-    BOOST_COBALT_FOR(const int value, generator) {
+    WEBCPP_COBALT_FOR(const int value, generator) {
         sum += value;
     }
     co_return sum;
@@ -50,14 +53,12 @@ cobalt::promise<int> complete(cobalt::task<int>& task) {
 }
 
 void before() {
-    std::fputs("before move\n", stderr);
+    webcpp::test::write_stderr("before move\n");
 }
 
 void after() {
-    std::fputs("after move\n", stderr);
+    webcpp::test::write_stderr("after move\n");
 }
-
-}  // namespace
 
 #ifdef WEBCPP_TEST_BORROWED_RACE
 cobalt::promise<int> borrowed_race() {
@@ -68,7 +69,87 @@ cobalt::promise<int> borrowed_race() {
 }
 #endif
 
-int main(int argc, char** argv) {
+int check_pending_move(const char* kind, webcpp::asio::io_context& context) {
+    int result = 0;
+    if (std::strcmp(kind, "pending-task") == 0) {
+        auto first = lazy_value();
+        before();
+        auto second = std::move(first);
+        after();
+        auto completed = complete(second);
+        context.run();  // lint-run: consume the moved task and verify its result
+        result = completed.ready() && completed.get() == 42 ? 0 : 1;
+    } else if (std::strcmp(kind, "pending-promise") == 0) {
+        auto first = pending_value();
+        before();
+        auto second = std::move(first);
+        after();
+        context.run();  // lint-run: drain this isolated pending-promise witness
+        result = second.ready() && second.get() == 42 ? 0 : 1;
+    } else if (std::strcmp(kind, "pending-generator") == 0) {
+        auto first = sequence();
+        before();
+        auto second = std::move(first);
+        after();
+        auto consumed = consume(second);
+        context.run();  // lint-run: consume the generator after ownership transfer
+        result = consumed.ready() && consumed.get() == 42 ? 0 : 1;
+    } else {
+        return 2;
+    }
+    return result;
+}
+
+int check_move(const char* kind, webcpp::asio::io_context& context) {
+    int result = 0;
+    if (std::string_view(kind).starts_with("pending-")) {
+        return check_pending_move(kind, context);
+    }
+    if (std::strcmp(kind, "completed-task") == 0) {
+        auto first = lazy_value();
+        auto completed = complete(first);
+        context.run();  // lint-run: prove real coroutine completion before moving it
+        if (!completed.ready() || completed.get() != 42) {
+            return 3;
+        }
+        before();
+        const auto second = std::move(first);
+        after();
+        static_cast<void>(second);
+    } else if (std::strcmp(kind, "ready-promise") == 0) {
+        cobalt::promise<int> first{cobalt::noop(42)};
+        before();
+        auto second = std::move(first);
+        after();
+        result = second.ready() && second.get() == 42 ? 0 : 1;
+    } else if (std::strcmp(kind, "ready-generator") == 0) {
+        cobalt::generator<int> first{cobalt::noop(42)};
+        before();
+        auto second = std::move(first);
+        after();
+        result = second.ready() && second.get() == 42 ? 0 : 1;
+    } else if (std::strcmp(kind, "exception-ptr") == 0) {
+        before();
+        const auto error = std::make_exception_ptr(42);
+        after();
+        result = error ? 0 : 1;
+#ifdef WEBCPP_TEST_BORROWED_RACE
+    } else if (std::strcmp(kind, "borrowed-race") == 0) {
+        before();
+        auto raced = borrowed_race();
+        context.run();  // lint-run: observe the losing borrowed await interruption
+        result = raced.ready() && raced.get() == 0 ? 0 : 1;
+        after();
+#endif
+    } else {
+        return 2;
+    }
+    return result;
+}
+
+}  // namespace
+
+int main(int argc, const char* const* argv) {
     if (argc != 2) {
         return 2;
     }
@@ -86,71 +167,10 @@ int main(int argc, char** argv) {
 #else
     std::printf("exception_handling=%s standard_library=unknown version=0\n", handling);
 #endif
-    std::fflush(stdout);
+    webcpp::test::flush_stdout();
     webcpp::asio::io_context context;
     cobalt::this_thread::set_executor(context.get_executor());
     int result = 0;
-    if (std::strcmp(argv[1], "pending-task") == 0) {
-        auto first = lazy_value();
-        before();
-        auto second = std::move(first);
-        after();
-        auto completed = complete(second);
-        context.run();  // lint-run: consume the moved task and verify its result
-        result = completed.ready() && completed.get() == 42 ? 0 : 1;
-    } else if (std::strcmp(argv[1], "pending-promise") == 0) {
-        auto first = pending_value();
-        before();
-        auto second = std::move(first);
-        after();
-        context.run();  // lint-run: drain this isolated pending-promise witness
-        result = second.ready() && second.get() == 42 ? 0 : 1;
-    } else if (std::strcmp(argv[1], "pending-generator") == 0) {
-        auto first = sequence();
-        before();
-        auto second = std::move(first);
-        after();
-        auto consumed = consume(second);
-        context.run();  // lint-run: consume the generator after ownership transfer
-        result = consumed.ready() && consumed.get() == 42 ? 0 : 1;
-    } else if (std::strcmp(argv[1], "completed-task") == 0) {
-        auto first = lazy_value();
-        auto completed = complete(first);
-        context.run();  // lint-run: prove real coroutine completion before moving it
-        if (!completed.ready() || completed.get() != 42) {
-            return 3;
-        }
-        before();
-        auto second = std::move(first);
-        after();
-        static_cast<void>(second);
-    } else if (std::strcmp(argv[1], "ready-promise") == 0) {
-        cobalt::promise<int> first{cobalt::noop(42)};
-        before();
-        auto second = std::move(first);
-        after();
-        result = second.ready() && second.get() == 42 ? 0 : 1;
-    } else if (std::strcmp(argv[1], "ready-generator") == 0) {
-        cobalt::generator<int> first{cobalt::noop(42)};
-        before();
-        auto second = std::move(first);
-        after();
-        result = second.ready() && second.get() == 42 ? 0 : 1;
-    } else if (std::strcmp(argv[1], "exception-ptr") == 0) {
-        before();
-        const auto error = std::make_exception_ptr(42);
-        after();
-        result = error ? 0 : 1;
-#ifdef WEBCPP_TEST_BORROWED_RACE
-    } else if (std::strcmp(argv[1], "borrowed-race") == 0) {
-        before();
-        auto raced = borrowed_race();
-        context.run();  // lint-run: observe the losing borrowed await interruption
-        result = raced.ready() && raced.get() == 0 ? 0 : 1;
-        after();
-#endif
-    } else {
-        return 2;
-    }
+    result = check_move(argv[1], context);
     return webcpp::test::exit_status(result);
 }

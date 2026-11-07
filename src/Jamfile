@@ -1,0 +1,89 @@
+# Copyright (c) 2026 WebCpp.org
+#
+# Distributed under the Boost Software License, Version 1.0. (See
+# accompanying file LICENSE_1_0.txt or copy at
+# https://www.boost.org/LICENSE_1_0.txt)
+# See accompanying file LICENSE_1_0.txt or
+# https://www.boost.org/LICENSE_1_0.txt.
+
+project /webcpp/cobalt-sources ;
+import errors ;
+import webcpp-target ;
+path-constant HERE : . ;
+include $(HERE)/sources.jam ;
+
+lib native-core : $(NATIVE_CORE)
+  : <link>static <include>../include <library>/boost//headers
+    <library>/webcpp/asio//asio
+    <define>BOOST_COBALT_SOURCE=1 <define>BOOST_COBALT_IO_SOURCE=1
+    <warnings>off <warnings-as-errors>off
+  : : <define>BOOST_COBALT_NO_LIB=1 ;
+
+rule wasm-platform ( properties * )
+{
+    local sources ;
+    if <threading>multi in $(properties)
+    {
+        sources += <source>wasm/thread.cpp ;
+    }
+    if [ webcpp-target.target-of $(properties) ] = emscripten
+    {
+        sources += <source>$(BROWSER_EXTRA) ;
+    }
+    return $(sources) ;
+}
+
+lib wasm-core : $(WASM_COMMON)
+  : <link>static <include>../include <library>/webcpp/asio//asio
+    <define>WEBCPP_COBALT_BACKEND_SOURCE=1 <define>WEBCPP_COBALT_BACKEND_IO_SOURCE=1
+    <conditional>@wasm-platform <warnings>off <warnings-as-errors>off ;
+
+lib native-runner : native/main.cpp : <link>static <library>native-core ;
+lib wasm-runner : wasm/main.cpp : <link>static <include>../include
+    <library>wasm-core <library>/webcpp/asio//asio ;
+obj native-ssl-transfer : native_ssl_transfer.cpp
+  : <include>../include <library>native-core <library>/webcpp/asio//tls
+    <warnings>all <warnings-as-errors>on ;
+lib native-ssl : native_ssl.cpp native-ssl-transfer : <link>static <include>../include <library>native-core
+    <library>/webcpp/asio//tls <define>BOOST_COBALT_SSL_SOURCE=1
+    <warnings>off <warnings-as-errors>off ;
+lib wasm-ssl : wasm/io/ssl.cpp : <link>static <include>../include <library>wasm-core
+    <library>/webcpp/asio//tls <define>WEBCPP_COBALT_BACKEND_SSL_SOURCE=1
+    <warnings>off <warnings-as-errors>off ;
+explicit native-core wasm-core native-runner wasm-runner native-ssl-transfer native-ssl wasm-ssl ;
+
+rule select-core ( properties * )
+{
+    if <exception-handling>off in $(properties)
+    {
+        if ! $(.warned-no-exceptions)
+        {
+            .warned-no-exceptions = true ;
+            ECHO "warning: Cobalt without exceptions can abort when moving a pending coroutine with libc++; use exception-handling=on or avoid the affected moves. See https://github.com/boostorg/cobalt/issues/287" ;
+        }
+    }
+    if [ webcpp-target.target-of $(properties) ] = native
+    {
+        return <source>native-core ;
+    }
+    return <source>wasm-core ;
+}
+rule select-runner ( properties * )
+{
+    if [ webcpp-target.target-of $(properties) ] = native
+    {
+        return <source>native-runner ;
+    }
+    return <source>wasm-runner ;
+}
+rule select-ssl ( properties * )
+{
+    local target = [ webcpp-target.target-of $(properties) ] ;
+    if $(target) = native { return <source>native-ssl ; }
+    if $(target) in wasip2 wasip3 { return <source>wasm-ssl ; }
+    errors.user-error "Cobalt SSL requires native or WASI OpenSSL; browser TLS is managed by HTTPS/WSS." ;
+}
+alias core : : <conditional>@select-core ;
+alias runner : : <conditional>@select-runner ;
+alias ssl : : <conditional>@select-ssl ;
+explicit core runner ssl ;

@@ -5,10 +5,13 @@
 // https://www.boost.org/LICENSE_1_0.txt)
 
 /**
- The WebCPP Cobalt configuration and Boost.Cobalt coroutine interfaces.
+ The WebCPP Cobalt configuration and coroutine interfaces.
 
- Boost.Cobalt keeps its upstream namespace and types. Optional I/O and SSL
- wrappers retain their boost/cobalt/io headers; SSL requires the io_ssl or
+ On native targets coroutine types are the original Boost.Cobalt types.
+ The optional io::ssl wrapper is WebCPP's corrected implementation on every
+ guest TLS target, including native.
+ WebAssembly selects the shipped coroutine implementation and Asio backend.
+ Optional I/O and SSL wrappers have webcpp/cobalt/io headers; SSL requires the io_ssl or
  cobalt_ssl build target and the shared OpenSSL provider.
 */
 #ifndef WEBCPP_COBALT_HPP
@@ -16,7 +19,12 @@
 
 #include <webcpp/cobalt/config.hpp>
 
+#ifdef WEBCPP_TARGET_NATIVE
 #include <boost/cobalt.hpp>
-#include <boost/cobalt/result.hpp>
+#else
+#include <webcpp/cobalt/detail/backend.hpp>
+#endif
+#include <webcpp/cobalt/async_for.hpp>
+#include <webcpp/cobalt/result.hpp>
 
 #endif  // WEBCPP_COBALT_HPP

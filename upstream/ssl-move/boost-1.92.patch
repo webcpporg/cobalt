@@ -1,0 +1,30 @@
+--- a/boost/cobalt/io/ssl.hpp
++++ b/boost/cobalt/io/ssl.hpp
+@@ -53,6 +53,9 @@
+ 
+ struct BOOST_SYMBOL_VISIBLE stream final : private detail::stream_impl, socket, cobalt::io::stream, asio::ssl::stream_base
+ {
++  // Move only when no lazy or outstanding operation refers to either stream.
++  // Rebind the socket facade to this object's moved SSL lowest layer.
++  BOOST_COBALT_SSL_DECL stream(stream && other);
+   BOOST_COBALT_SSL_DECL stream(context & ctx, const cobalt::executor & executor = this_thread::get_executor());
+   BOOST_COBALT_SSL_DECL stream(context & ctx, stream_socket && sock);
+   BOOST_COBALT_SSL_DECL stream(context & ctx, native_handle_type h, protocol_type protocol = protocol_type(),
+--- a/libs/cobalt/src/io/ssl.cpp
++++ b/libs/cobalt/src/io/ssl.cpp
+@@ -47,6 +47,15 @@
+     handler(asio::error::not_connected, 0);
+ }
+ 
++
++stream::stream(stream && other)
++    : stream_impl{.stream_socket_=std::move(other.stream_socket_)},
++      socket(stream_socket_.lowest_layer()),
++      started_(other.started_), upgraded_(other.upgraded_)
++{
++  other.started_ = true;
++  other.upgraded_ = false;
++}
+ 
+ stream::stream(context & ctx, const cobalt::executor & exec)
+     : stream_impl{.stream_socket_={exec, ctx}}, socket(stream_socket_.lowest_layer())

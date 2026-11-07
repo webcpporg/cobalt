@@ -1,0 +1,18 @@
+{
+  "matplotlib": "3.11.2",
+  "numpy": "2.5.4",
+  "summary_sha256": "b0cc3b559c498b1c575dea5fc8576b00d108adceeb8eab9ff8bcfde24dc6d3cf",
+  "files": {
+    "cobalt-runtime-ratio.svg": "83aa728c9f12db990230066c3776e8ba308cfd0f3f4d65fcef31d57ff0e86bfc",
+    "cobalt-runtime-ratio.png": "2b751c8e5dfca44f73f0fc73945f35e0dce530491456e38c92dc69418f8ce66e",
+    "compilation.png": "87bab60a6c1fd28870f7d51fdb35c2e263370d4cce3ced965210c5373da87605",
+    "cobalt-payload.png": "c97f34f08a4a925b8007c4e257a609eb9ae89e728e6f3fb5e4334f88fddd2ced",
+    "asio-runtime-ratio.svg": "a0f924cff50ef041a1cfce3cc934eb059c22ab85500137293054fb45a74375f1",
+    "release-measurements.pdf": "311ca2bff802236485f0c844445e07410ce84a5c83bfc22b7e7f916ea3507054",
+    "asio-payload.svg": "4492220554e380ca5e2cd3fbb96d4e2d817bf6aae135cfcc47a89f2022bfc31f",
+    "asio-payload.png": "f715c842b76079cb07c49931a61ea0823c4f68ea53f5d4c9784f93e9dbf446ea",
+    "cobalt-payload.svg": "b473815363c7be6073d1288e2b38d85d8e10150e683b20a7cd56f53fdbc0a6e4",
+    "asio-runtime-ratio.png": "8bc582edf7f17977674eb98cc3841c404d4970d79cda9c1241b2cdb02ca0578d",
+    "compilation.svg": "dd68377dccd14bd7b3e3c68d76f54cef056b6670816177f4ed8a6d0d92c0c300"
+  }
+}

@@ -1,0 +1,97 @@
+// Copyright (c) 2026 WebCpp.org
+//
+// Distributed under the Boost Software License, Version 1.0. (See
+// accompanying file LICENSE_1_0.txt or copy at
+// https://www.boost.org/LICENSE_1_0.txt)
+
+= cobalt: coroutine applications for {cpp} and WebAssembly
+:toc: left
+:toclevels: 1
+:idprefix:
+:sectanchors:
+:example-caption!:
+:attribute-missing: warn
+
+`webcpp::cobalt` makes Boost.Cobalt-style {cpp}20 applications usable in browsers
+through Emscripten and in WASIp2/P3 runtimes such as Wasmtime. JSPI and Asyncify
+are Emscripten suspension variants; they are not WASI versions. Cobalt supplies
+coroutines and asynchronous composition, while Asio supplies the executor and I/O.
+
+Start with <<cobalt-tutorial>> to await a timer. Use <<cobalt-building>> to select
+the runner and optional TLS, <<cobalt-configuration>> to choose requirements,
+and <<cobalt-differences>> to understand the boundaries of compatibility.
+The <<cobalt-profiles>> distinguishes target facilities from runtime permission.
+
+[#cobalt-tutorial]
+== Tutorial: await a timer
+
+Use the library at `libs/cobalt` in the WebCPP superproject, matching Boost 1.92
+headers and a configured {cpp}20 compiler. The application writes `co_main`;
+the separately linked runner owns `main` and drives its executor.
+
+[source,cpp]
+----
+include::{examples}/asio_cobalt.cpp[tag=program,indent=0]
+----
+
+The example's `webcpp::test::exit_status` reports its result to the project's
+browser test harness. It is test support, not a Cobalt API requirement.
+The coroutine gets its executor, awaits an Asio timer with Cobalt's completion
+token, checks the error, then returns its exit status.
+
+From the superproject root:
+
+[source,bash]
+----
+unset CPATH CPLUS_INCLUDE_PATH C_INCLUDE_PATH
+b2 -a variant=release libs/cobalt/example//asio_cobalt.output
+----
+
+The matched output is:
+
+[listing]
+----
+include::{examples}/asio_cobalt.expected[]
+----
+
+For a real browser, build the page driver with Emscripten:
+
+[source,bash]
+----
+b2 -a toolset=emscripten variant=release libs/cobalt/test/browser//browser-pages
+b2 -a toolset=emscripten variant=release webcpp-suspend=asyncify libs/cobalt/test/browser//browser-pages
+----
+
+The driver serves the example page and checks its interaction in Chrome.
+A successful Node run alone does not establish browser support.
+
+include::building.adoc[]
+include::configuration.adoc[]
+include::testing.adoc[]
+include::application-matrix.adoc[]
+include::release-measurements.adoc[]
+
+[#cobalt-guarantees]
+== Guarantees
+
+. [[cobalt-invariant-1]]Native core coroutine and plain I/O types retain their
+  Boost.Cobalt identity. The corrected SSL wrapper is the documented exception.
+. [[cobalt-invariant-2]]Consumer builds use shipped source files and explicit
+  dependencies. They do not patch Boost or select replacement Boost include trees.
+. [[cobalt-invariant-3]]The browser runner uses Asio's configured handler limit.
+  This limit is checked between handlers, not inside a running handler.
+. [[cobalt-invariant-4]]A failed or cancelled handshake on the corrected SSL
+  stream prevents subsequent application I/O from falling back to plaintext.
+
+[#reference]
+== Reference
+
+The generated reference documents WebCPP's additions and configuration. The
+https://www.boost.org/doc/libs/1_92_0/libs/cobalt/doc/html/index.html[Boost.Cobalt 1.92 reference]
+describes the inherited coroutine concepts and operations; target restrictions
+and the SSL exception below also apply.
+
+include::{reference}[leveloffset=+1]
+
+include::differences.adoc[]
+include::changelog.adoc[]

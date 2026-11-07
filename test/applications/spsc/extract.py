@@ -6,12 +6,16 @@
 # https://www.boost.org/LICENSE_1_0.txt)
 
 """Extract and format the pinned queue class without changing its algorithm."""
+import argparse
 import hashlib
 from pathlib import Path
 import subprocess
-import sys
 
 here = Path(__file__).resolve().parent
+parser = argparse.ArgumentParser(description=__doc__)
+parser.add_argument('output', nargs='?', type=Path, default=here / 'original_queue.hpp')
+parser.add_argument('--check', action='store_true')
+arguments = parser.parse_args()
 source = here.parent / 'upstream/example/spsc.cpp'
 data = source.read_bytes()
 expected = 'a3d8c7f084ebcad150544bb318199bdafb259496c4e7498a0253d444e0317dab'
@@ -28,4 +32,9 @@ license_notice = ('// Copyright (c) 2026 WebCpp.org\n//\n'
                   '// Distributed under the Boost Software License, Version 1.0. (See\n'
                   '// accompanying file LICENSE_1_0.txt or copy at\n'
                   '// https://www.boost.org/LICENSE_1_0.txt)\n\n')
-Path(sys.argv[1]).write_text(license_notice + notice + '\n' + formatted)
+content = license_notice + notice + '\n' + formatted
+if arguments.check:
+    if not arguments.output.is_file() or arguments.output.read_text() != content:
+        parser.exit(1, f'{arguments.output} is stale; run extract.py\n')
+else:
+    arguments.output.write_text(content)

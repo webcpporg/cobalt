@@ -1,0 +1,8 @@
+{
+  "files": {
+    "boost/cobalt/io/write.hpp": {
+      "before": "170386fc0525af5610ae801695cbf82b7adc9371de71b5278371192e08315993",
+      "after": "c256979e6098afc611d573084e54ab4d96652a7b166821bf8aafc3f790c5b995"
+    }
+  }
+}

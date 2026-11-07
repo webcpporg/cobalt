@@ -6,17 +6,17 @@
 
 #include <webcpp/test/exit_status.hpp>
 
-#include <boost/asio/post.hpp>
-#include <boost/asio/steady_timer.hpp>
-#include <boost/cobalt/io/acceptor.hpp>
-#include <boost/cobalt/io/read.hpp>
-#include <boost/cobalt/io/ssl.hpp>
-#include <boost/cobalt/io/write.hpp>
-#include <boost/cobalt/main.hpp>
-#include <boost/cobalt/op.hpp>
-#include <boost/cobalt/promise.hpp>
-#include <boost/cobalt/task.hpp>
 #include <boost/core/lightweight_test.hpp>
+#include <webcpp/asio/post.hpp>
+#include <webcpp/asio/steady_timer.hpp>
+#include <webcpp/cobalt/io/acceptor.hpp>
+#include <webcpp/cobalt/io/read.hpp>
+#include <webcpp/cobalt/io/ssl.hpp>
+#include <webcpp/cobalt/io/write.hpp>
+#include <webcpp/cobalt/main.hpp>
+#include <webcpp/cobalt/op.hpp>
+#include <webcpp/cobalt/promise.hpp>
+#include <webcpp/cobalt/task.hpp>
 
 #include <poll.h>
 #include <array>
@@ -28,9 +28,9 @@
 #include <tuple>
 #include <vector>
 
-namespace cobalt = boost::cobalt;
+namespace cobalt = webcpp::cobalt;
 namespace io = cobalt::io;
-namespace asio = boost::asio;
+namespace asio = webcpp::asio;
 
 namespace {
 

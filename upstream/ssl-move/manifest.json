@@ -1,0 +1,13 @@
+{
+  "boost_version": 109200,
+  "files": {
+    "boost/cobalt/io/ssl.hpp": {
+      "before": "9c26d54001d4de8f2092cfe6d0f277b9dabfb0bcca1db7cb59f018ae0b44bb38",
+      "after": "fc797a0065d71bcdb7c671579493e7c686a40cfadc508e8f3b374372d6614f82"
+    },
+    "libs/cobalt/src/io/ssl.cpp": {
+      "before": "eac41d38066f6e027c428a49a55791031d3bfb76bdffd9dbedacf0564410e620",
+      "after": "6e825488ce2058008eedf5d4ead29040ffbabce5f916d1dc47f4df7e9ac38434"
+    }
+  }
+}

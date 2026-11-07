@@ -24,12 +24,14 @@ const assets = fileURLToPath(new URL('../../example/browser/', import.meta.url))
 const variant = program.includes('asyncify') ? 'asyncify' : 'jspi'
 const workers = basename(program).includes('spsc')
 const multi = program.includes('threading-multi')
-const evidence = join(process.env.WEBCPP_BROWSER_EVIDENCE ?? build, 'page-evidence')
+const evidence = join(process.env.WEBCPP_BROWSER_EVIDENCE ?? build,
+    workers ? 'spsc-page-evidence' : 'portable-page-evidence')
 mkdirSync(evidence, {recursive: true})
 const profile = mkdtempSync(join(tmpdir(), 'cobalt-pages-'))
 let chrome, ws, server
 const errors = []
 const observations = []
+const registryObservations = []
 const pending = new Map()
 let sequence = 0
 const send = (method, params = {}) => new Promise((resolve, reject) => {
@@ -120,6 +122,40 @@ try {
     })
     await send('Page.enable')
     await send('Runtime.enable')
+    // Observe the exported cancellation function before the runtime tears down.
+    // The hook runs in each isolated bridge frame and leaves its event delivery intact.
+    await send('Page.addScriptToEvaluateOnNewDocument', {source: `
+        (() => {
+            let current;
+            const hooked = new WeakSet();
+            Object.defineProperty(window, 'Module', {
+                configurable: true,
+                get: () => current,
+                set: module => {
+                    current = module;
+                    const original = module.onCobaltEvent;
+                    if (!original || hooked.has(module)) return;
+                    hooked.add(module);
+                    module.onCobaltEvent = event => {
+                        if (event.type === 'started' || event.type === 'done') {
+                            const keys = Object.keys(module.webcppCobaltActiveRuns ?? {});
+                            const callback = module._cobalt_cancel ?? module._cobalt_cancel_spsc;
+                            const afterCompletion = event.type === 'done' ? callback() : null;
+                            parent.postMessage({owner: 'webcpp-cobalt-registry',
+                                phase: event.type, keys, afterCompletion}, location.origin);
+                        }
+                        original(event);
+                    };
+                }
+            });
+            window.addEventListener('message', event => {
+                if (event.origin === location.origin &&
+                    event.data?.owner === 'webcpp-cobalt-registry') {
+                    (window.cobaltRegistryObservations ??= []).push(event.data);
+                }
+            });
+        })();
+    `})
     await send('Emulation.setDeviceMetricsOverride', {width: 1240, height: 900, deviceScaleFactor: 1, mobile: false})
     const page = `${base}/index.html?program=/build/${basename(program)}&variant=${variant}&threads=${multi ? 'multi' : 'single'}&kind=${workers ? 'spsc' : 'timer'}`
     await send('Page.navigate', {url: page})
@@ -167,6 +203,16 @@ try {
     await send('Input.dispatchKeyEvent', {type: 'keyUp', key: 'Enter', code: 'Enter', windowsVirtualKeyCode: 13})
     await wait(`window.cobaltReport.run > ${run + 1}`)
     await terminal('completed')
+    registryObservations.push(...await evaluate('window.cobaltRegistryObservations ?? []'))
+    assert.equal(registryObservations.filter(item => item.phase === 'done').length,
+        observations.length, 'a completed run did not prove registry cleanup')
+    for (const item of registryObservations) {
+        if (item.phase === 'started') assert.deepEqual(item.keys, [workers ? 'spsc' : 'portable'])
+        else {
+            assert.deepEqual(item.keys, [], 'a completed run retained its cancellation target')
+            assert.equal(item.afterCompletion, 0, 'cancellation remained active after completion')
+        }
+    }
     for (const [name, width, height] of [['wide', 1240, 900], ['narrow', 390, 844]]) {
         await send('Emulation.setDeviceMetricsOverride', {width, height, deviceScaleFactor: 1, mobile: false})
         await delay(100)
@@ -209,7 +255,7 @@ try {
     assert.deepEqual(errors, [])
     const hash = path => createHash('sha256').update(readFileSync(path)).digest('hex')
     const library = fileURLToPath(new URL('../../', import.meta.url))
-    const sourceFiles = ['example/applications/events.hpp', ...workers ?
+    const sourceFiles = ['example/applications/events.hpp', 'example/applications/active_run.hpp', ...workers ?
         ['example/applications/spsc.cpp', 'example/applications/spsc_queue.hpp'] :
         ['example/applications/portable.cpp', 'example/applications/signal_awaitable.hpp']]
     const assetFiles = ['index.html', 'workbench.mjs', 'workbench.css', 'bridge.html']
@@ -220,7 +266,7 @@ try {
         threading: multi ? 'multi' : 'single', program, sha256: hash(program),
         wasmSha256: hash(program.replace(/\.js$/, '.wasm')), sourceRevision,
         sourceForm: 'finite-adaptation', sources: sourceIdentity, assets: assetIdentity,
-        observations}, null, 2) + '\n')
+        observations, registryObservations}, null, 2) + '\n')
     console.log(`PASS browser pages: ${version.Browser}, ${variant}, ${multi ? 'multi' : 'single'}, ${observations.length} checked runs`)
 } finally {
     for (const entry of pending.values()) { clearTimeout(entry.timer); entry.reject(Error('driver closing')) }

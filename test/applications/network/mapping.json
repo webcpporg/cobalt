@@ -1,0 +1,48 @@
+{
+  "source_form": "controlled-endpoint-counterpart",
+  "files": [
+    {
+      "name": "http",
+      "form": "oracle",
+      "original_sha256": "f4da82928d0cdbb9e2e8a909c73fb2e205526965b5a40712d4583f363e01f9c7",
+      "counterpart_sha256": "c1955a46c955877e2f51f79281d7a83052dff0fd3cc258ce451e5e5f12ea7b04"
+    },
+    {
+      "name": "http",
+      "form": "port",
+      "original_sha256": "f4da82928d0cdbb9e2e8a909c73fb2e205526965b5a40712d4583f363e01f9c7",
+      "counterpart_sha256": "5a746ff0d23aa6df31a5aaf548414721105337c754bf53697b0c591d866375df"
+    },
+    {
+      "name": "ticker",
+      "form": "oracle",
+      "original_sha256": "d694672dece5c2764d6901be7739288b9e5f80d8308e2c4955f8068fc7d3054f",
+      "counterpart_sha256": "c5e1774f5ee69528b44e572d352886bd4446aca8c07e82b73bbacc96405de1dd"
+    },
+    {
+      "name": "ticker",
+      "form": "port",
+      "original_sha256": "d694672dece5c2764d6901be7739288b9e5f80d8308e2c4955f8068fc7d3054f",
+      "counterpart_sha256": "9a4d6660125117b1b5838ef86daf5978e430604a6766b5ae41df9b5df4ca6095"
+    },
+    {
+      "name": "echo_server",
+      "form": "oracle",
+      "original_sha256": "c042bd93a9dbb278a3187f91627c10641087a2d22e32928b627ba7be4478a492",
+      "counterpart_sha256": "76955ff7968fde783a35b739f82c577405e345de5decbd10a68295b5e481de6c"
+    },
+    {
+      "name": "echo_server",
+      "form": "port",
+      "original_sha256": "c042bd93a9dbb278a3187f91627c10641087a2d22e32928b627ba7be4478a492",
+      "counterpart_sha256": "0a40e6aabb0b93b24081a3c402a0bae828ba5976634499f98a7f43e1462cf021"
+    }
+  ],
+  "adaptations": [
+    "Select loopback peer/listener ports through fixture environment variables.",
+    "Resolve the numeric loopback endpoint using the real resolver.",
+    "Require the fixture CA, localhost identity verification and SNI.",
+    "Apply reviewed style normalization; preserve explicit output flushing.",
+    "Terminate the original infinite listeners after witnessed traffic; this is not graceful application shutdown evidence."
+  ]
+}

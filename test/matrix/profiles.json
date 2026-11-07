@@ -1,6 +1,6 @@
 {
   "schema_version": 1,
-  "phase": "implementation-pending-validation",
+  "phase": "profile-catalogue",
   "profiles": [
     {
       "id": "native-native-process-single-eh-on-not-applicable",
@@ -11,7 +11,7 @@
       "suspension": "not-applicable",
       "compiler_sdk": "record-actual-native-toolchain",
       "runtime_version_required_at_execution": true,
-      "status": "implementation-missing",
+      "status": "see-application-matrix",
       "blocker": null
     },
     {
@@ -23,7 +23,7 @@
       "suspension": "not-applicable",
       "compiler_sdk": "record-actual-native-toolchain",
       "runtime_version_required_at_execution": true,
-      "status": "implementation-missing",
+      "status": "see-application-matrix",
       "blocker": null
     },
     {
@@ -35,7 +35,7 @@
       "suspension": "not-applicable",
       "compiler_sdk": "record-actual-native-toolchain",
       "runtime_version_required_at_execution": true,
-      "status": "implementation-missing",
+      "status": "see-application-matrix",
       "blocker": null
     },
     {
@@ -47,7 +47,7 @@
       "suspension": "not-applicable",
       "compiler_sdk": "record-actual-native-toolchain",
       "runtime_version_required_at_execution": true,
-      "status": "implementation-missing",
+      "status": "see-application-matrix",
       "blocker": null
     },
     {
@@ -59,7 +59,7 @@
       "suspension": "jspi",
       "compiler_sdk": "emscripten-6.0.11",
       "runtime_version_required_at_execution": true,
-      "status": "implementation-missing",
+      "status": "see-application-matrix",
       "blocker": null
     },
     {
@@ -71,7 +71,7 @@
       "suspension": "asyncify",
       "compiler_sdk": "emscripten-6.0.11",
       "runtime_version_required_at_execution": true,
-      "status": "implementation-missing",
+      "status": "see-application-matrix",
       "blocker": null
     },
     {
@@ -83,7 +83,7 @@
       "suspension": "jspi",
       "compiler_sdk": "emscripten-6.0.11",
       "runtime_version_required_at_execution": true,
-      "status": "implementation-missing",
+      "status": "see-application-matrix",
       "blocker": null
     },
     {
@@ -95,7 +95,7 @@
       "suspension": "asyncify",
       "compiler_sdk": "emscripten-6.0.11",
       "runtime_version_required_at_execution": true,
-      "status": "implementation-missing",
+      "status": "see-application-matrix",
       "blocker": null
     },
     {
@@ -107,7 +107,7 @@
       "suspension": "jspi",
       "compiler_sdk": "emscripten-6.0.11",
       "runtime_version_required_at_execution": true,
-      "status": "implementation-missing",
+      "status": "see-application-matrix",
       "blocker": null
     },
     {
@@ -119,7 +119,7 @@
       "suspension": "asyncify",
       "compiler_sdk": "emscripten-6.0.11",
       "runtime_version_required_at_execution": true,
-      "status": "implementation-missing",
+      "status": "see-application-matrix",
       "blocker": null
     },
     {
@@ -131,7 +131,7 @@
       "suspension": "jspi",
       "compiler_sdk": "emscripten-6.0.11",
       "runtime_version_required_at_execution": true,
-      "status": "implementation-missing",
+      "status": "see-application-matrix",
       "blocker": null
     },
     {
@@ -143,103 +143,103 @@
       "suspension": "asyncify",
       "compiler_sdk": "emscripten-6.0.11",
       "runtime_version_required_at_execution": true,
-      "status": "implementation-missing",
+      "status": "see-application-matrix",
       "blocker": null
     },
     {
-      "id": "emscripten-node-26.7.0-single-eh-on-jspi",
+      "id": "emscripten-node-single-eh-on-jspi",
       "target": "emscripten",
-      "runtime": "node-26.7.0",
+      "runtime": "node",
       "threading": "single",
       "exception_handling": "on",
       "suspension": "jspi",
       "compiler_sdk": "emscripten-6.0.11",
       "runtime_version_required_at_execution": true,
-      "status": "implementation-missing",
+      "status": "see-application-matrix",
       "blocker": null
     },
     {
-      "id": "emscripten-node-26.7.0-single-eh-on-asyncify",
+      "id": "emscripten-node-single-eh-on-asyncify",
       "target": "emscripten",
-      "runtime": "node-26.7.0",
+      "runtime": "node",
       "threading": "single",
       "exception_handling": "on",
       "suspension": "asyncify",
       "compiler_sdk": "emscripten-6.0.11",
       "runtime_version_required_at_execution": true,
-      "status": "implementation-missing",
+      "status": "see-application-matrix",
       "blocker": null
     },
     {
-      "id": "emscripten-node-26.7.0-single-eh-off-jspi",
+      "id": "emscripten-node-single-eh-off-jspi",
       "target": "emscripten",
-      "runtime": "node-26.7.0",
+      "runtime": "node",
       "threading": "single",
       "exception_handling": "off",
       "suspension": "jspi",
       "compiler_sdk": "emscripten-6.0.11",
       "runtime_version_required_at_execution": true,
-      "status": "implementation-missing",
+      "status": "see-application-matrix",
       "blocker": null
     },
     {
-      "id": "emscripten-node-26.7.0-single-eh-off-asyncify",
+      "id": "emscripten-node-single-eh-off-asyncify",
       "target": "emscripten",
-      "runtime": "node-26.7.0",
+      "runtime": "node",
       "threading": "single",
       "exception_handling": "off",
       "suspension": "asyncify",
       "compiler_sdk": "emscripten-6.0.11",
       "runtime_version_required_at_execution": true,
-      "status": "implementation-missing",
+      "status": "see-application-matrix",
       "blocker": null
     },
     {
-      "id": "emscripten-node-26.7.0-multi-eh-on-jspi",
+      "id": "emscripten-node-multi-eh-on-jspi",
       "target": "emscripten",
-      "runtime": "node-26.7.0",
+      "runtime": "node",
       "threading": "multi",
       "exception_handling": "on",
       "suspension": "jspi",
       "compiler_sdk": "emscripten-6.0.11",
       "runtime_version_required_at_execution": true,
-      "status": "implementation-missing",
+      "status": "see-application-matrix",
       "blocker": null
     },
     {
-      "id": "emscripten-node-26.7.0-multi-eh-on-asyncify",
+      "id": "emscripten-node-multi-eh-on-asyncify",
       "target": "emscripten",
-      "runtime": "node-26.7.0",
+      "runtime": "node",
       "threading": "multi",
       "exception_handling": "on",
       "suspension": "asyncify",
       "compiler_sdk": "emscripten-6.0.11",
       "runtime_version_required_at_execution": true,
-      "status": "implementation-missing",
+      "status": "see-application-matrix",
       "blocker": null
     },
     {
-      "id": "emscripten-node-26.7.0-multi-eh-off-jspi",
+      "id": "emscripten-node-multi-eh-off-jspi",
       "target": "emscripten",
-      "runtime": "node-26.7.0",
+      "runtime": "node",
       "threading": "multi",
       "exception_handling": "off",
       "suspension": "jspi",
       "compiler_sdk": "emscripten-6.0.11",
       "runtime_version_required_at_execution": true,
-      "status": "implementation-missing",
+      "status": "see-application-matrix",
       "blocker": null
     },
     {
-      "id": "emscripten-node-26.7.0-multi-eh-off-asyncify",
+      "id": "emscripten-node-multi-eh-off-asyncify",
       "target": "emscripten",
-      "runtime": "node-26.7.0",
+      "runtime": "node",
       "threading": "multi",
       "exception_handling": "off",
       "suspension": "asyncify",
       "compiler_sdk": "emscripten-6.0.11",
       "runtime_version_required_at_execution": true,
-      "status": "implementation-missing",
+      "status": "see-application-matrix",
       "blocker": null
     },
     {
@@ -251,7 +251,7 @@
       "suspension": "not-applicable",
       "compiler_sdk": "wasi-sdk-34.0",
       "runtime_version_required_at_execution": true,
-      "status": "implementation-missing",
+      "status": "see-application-matrix",
       "blocker": null
     },
     {
@@ -263,7 +263,7 @@
       "suspension": "not-applicable",
       "compiler_sdk": "wasi-sdk-34.0",
       "runtime_version_required_at_execution": true,
-      "status": "implementation-missing",
+      "status": "see-application-matrix",
       "blocker": null
     },
     {
@@ -299,7 +299,7 @@
       "suspension": "not-applicable",
       "compiler_sdk": "wasi-sdk-34.0",
       "runtime_version_required_at_execution": true,
-      "status": "implementation-missing",
+      "status": "see-application-matrix",
       "blocker": null
     },
     {
@@ -311,7 +311,7 @@
       "suspension": "not-applicable",
       "compiler_sdk": "wasi-sdk-34.0",
       "runtime_version_required_at_execution": true,
-      "status": "implementation-missing",
+      "status": "see-application-matrix",
       "blocker": null
     },
     {
@@ -335,8 +335,9 @@
       "suspension": "not-applicable",
       "compiler_sdk": "wasi-sdk-34.0",
       "runtime_version_required_at_execution": true,
-      "status": "implementation-missing",
+      "status": "see-application-matrix",
       "blocker": null
     }
-  ]
+  ],
+  "evidence": "See doc/application-matrix.adoc and the generated application matrix for per-application observations."
 }

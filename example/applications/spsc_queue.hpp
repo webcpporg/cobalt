@@ -14,12 +14,12 @@
 #ifndef WEBCPP_COBALT_EXAMPLE_SPSC_QUEUE_HPP
 #define WEBCPP_COBALT_EXAMPLE_SPSC_QUEUE_HPP
 
-#include <boost/cobalt.hpp>
+#include <webcpp/cobalt.hpp>
 
-#include <boost/asio/post.hpp>
 #include <boost/lockfree/spsc_queue.hpp>
+#include <webcpp/asio/post.hpp>
 
-namespace cobalt = boost::cobalt;
+namespace cobalt = webcpp::cobalt;
 
 /// This is a simple class making a lockfree::spsc_queue awaitable. It's not movable, since the
 /// spsc_queue isn't.
@@ -28,15 +28,17 @@ struct awaitable_spsc_queue {
     boost::lockfree::spsc_queue<T, Options...> queue;
 
     template <typename... Args>
-    awaitable_spsc_queue(Args&&... args) : queue(std::forward<Args>(args)...) {}
+    explicit awaitable_spsc_queue(Args&&... args) : queue(std::forward<Args>(args)...) {}
 
     // if the queue gets destroyed, destroying the awaiters is all we can do.
     ~awaitable_spsc_queue() {
-        if (auto r = reader.load(); r != nullptr)
+        if (auto* r = reader.load(); r != nullptr) {
             std::coroutine_handle<void>::from_address(r).destroy();
+        }
 
-        if (auto w = writer.load(); w != nullptr)
+        if (auto* w = writer.load(); w != nullptr) {
             std::coroutine_handle<void>::from_address(w).destroy();
+        }
     }
 
     // to avoid locks, put the coroutine handles into atomics.
@@ -47,32 +49,33 @@ struct awaitable_spsc_queue {
 
     // the awaitable to read a value from the queue
     struct read_op {
-        awaitable_spsc_queue* this_;
+        awaitable_spsc_queue* owner;
 
         // if reads are available we don't need to suspend
-        bool await_ready() { return this_->queue.read_available(); }
+        bool await_ready() { return owner->queue.read_available(); }
 
         // The suspend implementation. We expect the coroutine promise to have an associated
         // executor. If it doesn't resumption will end up on the system_executor
         template <typename Promise>
         void await_suspend(std::coroutine_handle<Promise> h) {
             // Capture the read_executor.
-            if constexpr (requires { h.promise().get_executor(); })
-                this_->read_executor = h.promise().get_executor();
-            else
-                this_->read_executor = cobalt::this_thread::get_executor();
+            if constexpr (requires { h.promise().get_executor(); }) {
+                owner->read_executor = h.promise().get_executor();
+            } else {
+                owner->read_executor = cobalt::this_thread::get_executor();
+            }
 
             // Make sure there's only one coroutine awaiting the read
-            assert(this_->reader == nullptr);
+            assert(owner->reader == nullptr);
             // Publish the waiter, then recheck readiness. The exchange also
             // acquires a producer notification that arrived before publication.
-            static_cast<void>(this_->reader.exchange(h.address()));
-            if (this_->queue.read_available()) {
+            static_cast<void>(owner->reader.exchange(h.address()));
+            if (owner->queue.read_available()) {
                 auto ready =
-                    cobalt::unique_handle<void>::from_address(this_->reader.exchange(nullptr));
+                    cobalt::unique_handle<void>::from_address(owner->reader.exchange(nullptr));
                 if (ready) {
-                    const auto executor = this_->read_executor;
-                    boost::asio::post(executor, std::move(ready));
+                    const auto executor = owner->read_executor;
+                    webcpp::asio::post(executor, std::move(ready));
                 }
             }
         }
@@ -80,12 +83,12 @@ struct awaitable_spsc_queue {
         T await_resume() {
             T res;
             // Grab the value from the queue
-            this_->queue.pop(res);
+            owner->queue.pop(res);
             // if a writer is waiting post it to complete on it's thread
-            auto w = cobalt::unique_handle<void>::from_address(this_->writer.exchange(nullptr));
+            auto w = cobalt::unique_handle<void>::from_address(owner->writer.exchange(nullptr));
             if (w) {
-                const auto executor = this_->write_executor;
-                boost::asio::post(executor, std::move(w));
+                const auto executor = owner->write_executor;
+                webcpp::asio::post(executor, std::move(w));
             }
 
             return res;
@@ -97,30 +100,31 @@ struct awaitable_spsc_queue {
 
     // the awaitable to write a value from the queue
     struct write_op {
-        awaitable_spsc_queue* this_;
+        awaitable_spsc_queue* owner;
         // The value to write
         T value;
 
         // If there is room in the queue we don't need to suspend
-        bool await_ready() { return this_->queue.write_available(); }
+        bool await_ready() { return owner->queue.write_available(); }
 
         // The suspend implementation. Similar to the writer one.
         template <typename Promise>
         void await_suspend(std::coroutine_handle<Promise> h) {
             // Capture the read_executor.
-            if constexpr (requires { h.promise().get_executor(); })
-                this_->write_executor = h.promise().get_executor();
-            else
-                this_->write_executor = cobalt::this_thread::get_executor();
+            if constexpr (requires { h.promise().get_executor(); }) {
+                owner->write_executor = h.promise().get_executor();
+            } else {
+                owner->write_executor = cobalt::this_thread::get_executor();
+            }
 
-            assert(this_->writer == nullptr);
-            static_cast<void>(this_->writer.exchange(h.address()));
-            if (this_->queue.write_available()) {
+            assert(owner->writer == nullptr);
+            static_cast<void>(owner->writer.exchange(h.address()));
+            if (owner->queue.write_available()) {
                 auto ready =
-                    cobalt::unique_handle<void>::from_address(this_->writer.exchange(nullptr));
+                    cobalt::unique_handle<void>::from_address(owner->writer.exchange(nullptr));
                 if (ready) {
-                    const auto executor = this_->write_executor;
-                    boost::asio::post(executor, std::move(ready));
+                    const auto executor = owner->write_executor;
+                    webcpp::asio::post(executor, std::move(ready));
                 }
             }
         }
@@ -128,12 +132,12 @@ struct awaitable_spsc_queue {
         // Resume the coroutine, this is where we do the actual write.
         // The reason is that we suspend when we cannot write because the queue is full.
         void await_resume() {
-            this_->queue.push(std::move(value));
+            owner->queue.push(std::move(value));
             // if a writer is waiting post it
-            auto r = cobalt::unique_handle<void>::from_address(this_->reader.exchange(nullptr));
+            auto r = cobalt::unique_handle<void>::from_address(owner->reader.exchange(nullptr));
             if (r) {
-                const auto executor = this_->read_executor;
-                boost::asio::post(executor, std::move(r));
+                const auto executor = owner->read_executor;
+                webcpp::asio::post(executor, std::move(r));
             }
         }
     };

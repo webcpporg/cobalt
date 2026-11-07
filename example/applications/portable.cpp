@@ -7,18 +7,19 @@
 #include <webcpp/cobalt.hpp>
 #include <webcpp/test/exit_status.hpp>
 
+#include "active_run.hpp"
 #include "events.hpp"
 #include "signal_awaitable.hpp"
 
-#include <boost/asio/steady_timer.hpp>
 #include <boost/outcome/coroutine_support.hpp>
+#include <webcpp/asio/steady_timer.hpp>
 
 #include <charconv>
 #include <chrono>
 #include <cstdio>
 #include <string_view>
 
-namespace asio = boost::asio;
+namespace asio = webcpp::asio;
 
 namespace {
 
@@ -45,14 +46,12 @@ struct run_state {
     void progress(int value) {
         ++completed;
         std::printf("progress: count=%d value=%d\n", completed, value);
-        cobalt_event("progress", completed, value, cancelled);
+        cobalt_event("progress", completed, value, static_cast<int>(cancelled));
         if (cancel_after != 0 && completed == cancel_after) {
             cancel();
         }
     }
 };
-
-run_state* active = nullptr;
 
 // tag::custom-operation[]
 struct wait_op final : cobalt::op<boost::system::error_code> {
@@ -141,25 +140,32 @@ boost::outcome_v2::awaitables::eager<int> eager_value(int value) {
 
 // end::outcome[]
 
+cobalt::promise<bool> signal_example(run_state& state) {
+    // The pending coroutine is owned by the single-shot connection.
+    signals::signal<void(int)> signal;
+    auto pending = await_signal(signal);
+    if (signal.num_slots() != 1) {
+        ++state.failures;
+    }
+    const bool delivered = co_await pause(state);
+    signal(delivered ? 42 : -1);
+    const int value = co_await pending;
+    if (signal.num_slots() != 0 || value != (delivered ? 42 : -1)) {
+        ++state.failures;
+    }
+    if (!delivered) {
+        co_return false;
+    }
+    state.progress(value);
+    co_return true;
+}
+
 cobalt::promise<void> scalar_examples(run_state& state, std::string_view kind) {
     for (int index = 0; index < state.count; ++index) {
         if (kind == "signals") {
-            // The pending coroutine is owned by the single-shot connection.
-            signals::signal<void(int)> signal;
-            auto pending = await_signal(signal);
-            if (signal.num_slots() != 1) {
-                ++state.failures;
-            }
-            const bool delivered = co_await pause(state);
-            signal(delivered ? 42 : -1);
-            const int value = co_await pending;
-            if (signal.num_slots() != 0 || value != (delivered ? 42 : -1)) {
-                ++state.failures;
-            }
-            if (!delivered) {
+            if (!(co_await signal_example(state))) {
                 break;
             }
-            state.progress(value);
         } else {
             if (!(co_await pause(state, kind == "custom"))) {
                 break;
@@ -190,7 +196,8 @@ extern "C"
     EMSCRIPTEN_KEEPALIVE
 #endif
     int cobalt_cancel() {
-    if (!active) {
+    auto* active = static_cast<run_state*>(active_run::find("portable"));
+    if (active == nullptr) {
         return 0;
     }
     active->cancel();
@@ -213,13 +220,17 @@ cobalt::main co_main(int argc, char** argv) {
         state.count < 1 || state.count > 10000 || state.delay < 0 || state.delay > 1000 ||
         state.cancel_after < 0 || state.cancel_after >= state.count || cancel_ms < 0 ||
         cancel_ms > 60000) {
-        std::fputs(
-            "usage: portable <timer|custom|channel|outcome|signals> "
-            "[count 1..10000] [delay-ms 0..1000] [cancel-after] [cancel-ms]\n",
-            stderr);
+        if (std::fputs("usage: portable <timer|custom|channel|outcome|signals> "
+                       "[count 1..10000] [delay-ms 0..1000] [cancel-after] [cancel-ms]\n",
+                       stderr) < 0) {
+            co_return webcpp::test::exit_status(1);
+        }
         co_return webcpp::test::exit_status(2);
     }
-    active = &state;
+    active_run registration("portable", &state);
+    if (!registration.registered()) {
+        co_return webcpp::test::exit_status(2);
+    }
     asio::steady_timer canceller(executor, std::chrono::milliseconds(cancel_ms));
     if (cancel_ms != 0) {
         canceller.async_wait([&](boost::system::error_code error) {
@@ -234,7 +245,7 @@ cobalt::main co_main(int argc, char** argv) {
     } else {
         co_await scalar_examples(state, kind);
     }
-    active = nullptr;
+    registration.reset();
     canceller.cancel();
     // Drain the cancelled timer callback before its referenced state dies.
     co_await asio::post(executor, cobalt::use_op);
@@ -243,9 +254,9 @@ cobalt::main co_main(int argc, char** argv) {
     if (kind == "custom") {
         std::printf("custom: ready=%d initiated=%d\n", state.ready, state.initiated);
     }
-    cobalt_event(state.failures ? "error" : "done", state.completed, state.failures,
-                 state.cancelled);
-    co_return webcpp::test::exit_status(state.failures ? 1 : 0);
+    cobalt_event(state.failures != 0 ? "error" : "done", state.completed, state.failures,
+                 static_cast<int>(state.cancelled));
+    co_return webcpp::test::exit_status(state.failures != 0 ? 1 : 0);
 }
 
 // end::program[]

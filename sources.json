@@ -1,0 +1,140 @@
+{
+  "schema": 1,
+  "boost_version": "1.92.0",
+  "profiles": {
+    "native": {
+      "core": [
+        "src/native/channel.cpp",
+        "src/native/detail/exception.cpp",
+        "src/native/detail/util.cpp",
+        "src/native/error.cpp",
+        "src/native/io/acceptor.cpp",
+        "src/native/io/datagram_socket.cpp",
+        "src/native/io/endpoint.cpp",
+        "src/native/io/file.cpp",
+        "src/native/io/pipe.cpp",
+        "src/native/io/random_access_file.cpp",
+        "src/native/io/read.cpp",
+        "src/native/io/resolver.cpp",
+        "src/native/io/seq_packet_socket.cpp",
+        "src/native/io/serial_port.cpp",
+        "src/native/io/signal_set.cpp",
+        "src/native/io/sleep.cpp",
+        "src/native/io/socket.cpp",
+        "src/native/io/steady_timer.cpp",
+        "src/native/io/stream_file.cpp",
+        "src/native/io/stream_socket.cpp",
+        "src/native/io/system_timer.cpp",
+        "src/native/io/write.cpp",
+        "src/native/this_thread.cpp",
+        "src/native/thread.cpp",
+        "src/native_version.cpp"
+      ],
+      "multi_add": [],
+      "runner": [
+        "src/native/main.cpp"
+      ],
+      "ssl": [
+        "src/native_ssl.cpp",
+        "src/native_ssl_transfer.cpp"
+      ]
+    },
+    "wasip2": {
+      "core": [
+        "src/wasm/channel.cpp",
+        "src/wasm/detail/exception.cpp",
+        "src/wasm/detail/util.cpp",
+        "src/wasm/error.cpp",
+        "src/wasm/io/acceptor.cpp",
+        "src/wasm/io/datagram_socket.cpp",
+        "src/wasm/io/endpoint.cpp",
+        "src/wasm/io/file.cpp",
+        "src/wasm/io/pipe.cpp",
+        "src/wasm/io/random_access_file.cpp",
+        "src/wasm/io/read.cpp",
+        "src/wasm/io/resolver.cpp",
+        "src/wasm/io/sleep.cpp",
+        "src/wasm/io/socket.cpp",
+        "src/wasm/io/steady_timer.cpp",
+        "src/wasm/io/stream_file.cpp",
+        "src/wasm/io/stream_socket.cpp",
+        "src/wasm/io/system_timer.cpp",
+        "src/wasm/io/write.cpp",
+        "src/wasm/this_thread.cpp"
+      ],
+      "multi_add": [
+        "src/wasm/thread.cpp"
+      ],
+      "runner": [
+        "src/wasm/main.cpp"
+      ],
+      "ssl": [
+        "src/wasm/io/ssl.cpp"
+      ]
+    },
+    "wasip3": {
+      "core": [
+        "src/wasm/channel.cpp",
+        "src/wasm/detail/exception.cpp",
+        "src/wasm/detail/util.cpp",
+        "src/wasm/error.cpp",
+        "src/wasm/io/acceptor.cpp",
+        "src/wasm/io/datagram_socket.cpp",
+        "src/wasm/io/endpoint.cpp",
+        "src/wasm/io/file.cpp",
+        "src/wasm/io/pipe.cpp",
+        "src/wasm/io/random_access_file.cpp",
+        "src/wasm/io/read.cpp",
+        "src/wasm/io/resolver.cpp",
+        "src/wasm/io/sleep.cpp",
+        "src/wasm/io/socket.cpp",
+        "src/wasm/io/steady_timer.cpp",
+        "src/wasm/io/stream_file.cpp",
+        "src/wasm/io/stream_socket.cpp",
+        "src/wasm/io/system_timer.cpp",
+        "src/wasm/io/write.cpp",
+        "src/wasm/this_thread.cpp"
+      ],
+      "multi_add": [
+        "src/wasm/thread.cpp"
+      ],
+      "runner": [
+        "src/wasm/main.cpp"
+      ],
+      "ssl": [
+        "src/wasm/io/ssl.cpp"
+      ]
+    },
+    "emscripten": {
+      "core": [
+        "src/wasm/channel.cpp",
+        "src/wasm/detail/exception.cpp",
+        "src/wasm/detail/util.cpp",
+        "src/wasm/error.cpp",
+        "src/wasm/io/acceptor.cpp",
+        "src/wasm/io/datagram_socket.cpp",
+        "src/wasm/io/endpoint.cpp",
+        "src/wasm/io/file.cpp",
+        "src/wasm/io/pipe.cpp",
+        "src/wasm/io/random_access_file.cpp",
+        "src/wasm/io/read.cpp",
+        "src/wasm/io/resolver.cpp",
+        "src/wasm/io/sleep.cpp",
+        "src/wasm/io/socket.cpp",
+        "src/wasm/io/steady_timer.cpp",
+        "src/wasm/io/stream_file.cpp",
+        "src/wasm/io/stream_socket.cpp",
+        "src/wasm/io/system_timer.cpp",
+        "src/wasm/io/write.cpp",
+        "src/wasm/this_thread.cpp"
+      ],
+      "multi_add": [
+        "src/wasm/thread.cpp"
+      ],
+      "runner": [
+        "src/wasm/main.cpp"
+      ],
+      "ssl": []
+    }
+  }
+}

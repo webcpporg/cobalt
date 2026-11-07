@@ -1,4 +1,8 @@
 // Copyright (c) 2026 WebCpp.org
+//
+// Distributed under the Boost Software License, Version 1.0. (See
+// accompanying file LICENSE_1_0.txt or copy at
+// https://www.boost.org/LICENSE_1_0.txt)
 // Adapted from the pinned Boost.Cobalt Signals2 example: explicit constructor
 // avoids aggregate warnings; awaiter ownership and single-shot connection stay intact.
 #ifndef WEBCPP_COBALT_EXAMPLE_SIGNAL_AWAITABLE_HPP
@@ -11,10 +15,12 @@
 //
 
 #include <boost/callable_traits/args.hpp>
-#include <boost/cobalt.hpp>
 #include <boost/signals2.hpp>
+#include <webcpp/cobalt.hpp>
 
-namespace cobalt = boost::cobalt;
+#include <exception>
+
+namespace cobalt = webcpp::cobalt;
 namespace signals = boost::signals2;
 
 template <typename Signal>
@@ -40,10 +46,15 @@ struct signal_awaitable {
     auto await_resume()  // return the value
     {
         constexpr std::size_t size = std::tuple_size_v<args_type>;
-        if constexpr (size == 1u)  // single argument doesn't need a tuple
+        // Suspension ends only after the single-shot handler caches its arguments.
+        if (!result_cache.has_value()) {
+            std::terminate();
+        }
+        if constexpr (size == 1u) {  // A single argument does not need a tuple.
             return std::get<0u>(*std::move(result_cache));
-        else if constexpr (size > 1u)  // make a tuple if more than one arg
+        } else if constexpr (size > 1u) {  // Multiple arguments retain their tuple.
             return *std::move(result_cache);
+        }
         // else return void.
     }
 
@@ -62,8 +73,9 @@ struct signal_awaitable {
     friend void intrusive_ptr_add_ref(signal_awaitable* st) { st->use_count++; }
 
     friend void intrusive_ptr_release(signal_awaitable* st) {
-        if (st->use_count-- == 1u)
+        if (st->use_count-- == 1u) {
             st->awaited_from.reset();
+        }
     }
 };
 
@@ -78,7 +90,7 @@ auto operator co_await(signals::signal<Args...>& sig)
 
 }  // namespace boost::signals2
 
-cobalt::promise<int> await_signal(signals::signal<void(int)>& sig) {
+inline cobalt::promise<int> await_signal(signals::signal<void(int)>& sig) {
     co_return co_await sig;
 }
 

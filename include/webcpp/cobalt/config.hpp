@@ -12,6 +12,99 @@
 
 #include <webcpp/asio/config.hpp>
 
+#include <boost/version.hpp>
+
+// Native compiled sources and the Wasm import share this exact audited baseline.
+// Check here so direct compiler builds receive the same diagnostic as B2/CMake.
+#if BOOST_VERSION != 109200
+#error "webcpp::cobalt requires Boost 1.92.0 headers matching its shipped sources"
+#endif
+
+// Preserve Boost's build-wide configuration vocabulary. Native source files
+// read these controls directly; Wasm maps them before its private config loads.
+// Every application and compiled source must receive the same definitions.
+#if defined(BOOST_COBALT_USE_IO_CONTEXT) && defined(BOOST_COBALT_CUSTOM_EXECUTOR)
+#error "webcpp::cobalt: select either the io_context executor or a custom executor"
+#endif
+#if (defined(BOOST_COBALT_USE_STD_PMR) + defined(BOOST_COBALT_USE_BOOST_CONTAINER_PMR) + \
+     defined(BOOST_COBALT_USE_CUSTOM_PMR) + defined(BOOST_COBALT_NO_PMR)) > 1
+#error "webcpp::cobalt: select exactly one PMR policy"
+#endif
+#ifndef WEBCPP_TARGET_NATIVE
+#ifdef BOOST_COBALT_USE_IO_CONTEXT
+#define WEBCPP_COBALT_BACKEND_USE_IO_CONTEXT BOOST_COBALT_USE_IO_CONTEXT
+#endif
+#ifdef BOOST_COBALT_CUSTOM_EXECUTOR
+#define WEBCPP_COBALT_BACKEND_CUSTOM_EXECUTOR BOOST_COBALT_CUSTOM_EXECUTOR
+
+namespace webcpp::cobalt {
+using executor = ::boost::cobalt::executor;
+}
+#endif
+#ifdef BOOST_COBALT_USE_STD_PMR
+#define WEBCPP_COBALT_BACKEND_USE_STD_PMR BOOST_COBALT_USE_STD_PMR
+#endif
+#ifdef BOOST_COBALT_USE_BOOST_CONTAINER_PMR
+#define WEBCPP_COBALT_BACKEND_USE_BOOST_CONTAINER_PMR BOOST_COBALT_USE_BOOST_CONTAINER_PMR
+#endif
+#ifdef BOOST_COBALT_USE_CUSTOM_PMR
+#define WEBCPP_COBALT_BACKEND_USE_CUSTOM_PMR BOOST_COBALT_USE_CUSTOM_PMR
+
+namespace webcpp::cobalt {
+namespace pmr = ::boost::cobalt::pmr;
+}
+#endif
+#ifdef BOOST_COBALT_NO_PMR
+#define WEBCPP_COBALT_BACKEND_NO_PMR BOOST_COBALT_NO_PMR
+#endif
+#endif
+
+#ifdef WEBCPP_TARGET_NATIVE
+/**
+ Iterates an asynchronous range with the selected coroutine backend.
+
+ Include `webcpp/cobalt/async_for.hpp` before using this macro. The arguments
+ follow Boost.Cobalt's `BOOST_COBALT_FOR` syntax on every target.
+
+ @param Value The declaration receiving each yielded value.
+ @param Expression The asynchronous range expression.
+*/
+#define WEBCPP_COBALT_FOR(Value, Expression) BOOST_COBALT_FOR(Value, Expression)
+#else
+/**
+ Iterates an asynchronous range with the selected coroutine backend.
+
+ Include `webcpp/cobalt/async_for.hpp` before using this macro.
+
+ @param Value The declaration receiving each yielded value.
+ @param Expression The asynchronous range expression.
+*/
+#define WEBCPP_COBALT_FOR(Value, Expression) WEBCPP_COBALT_BACKEND_FOR(Value, Expression)
+#endif
+
+#ifdef WEBCPP_TARGET_NATIVE
+namespace boost::cobalt::io {}
+
+/** Native coroutine types retain Boost identity; the SSL wrapper is corrected separately. */
+namespace webcpp::cobalt {
+using namespace ::boost::cobalt;
+
+namespace io {
+using namespace ::boost::cobalt::io;
+}
+}  // namespace webcpp::cobalt
+#else
+namespace boost {}
+
+namespace webcpp::cobalt {
+using namespace ::boost;
+}
+
+// The Wasm library is compiled explicitly; it never asks a platform linker to
+// auto-select a separately built Boost.Cobalt archive.
+#define WEBCPP_COBALT_BACKEND_NO_LIB 1
+#endif
+
 #ifdef __MRDOCS__
 /**
  Defined when WebCPP's Cobalt adapters are configured without exceptions.
@@ -37,7 +130,9 @@
     defined(WEBCPP_COBALT_HAS_BROWSER_BRIDGE) || defined(WEBCPP_COBALT_HAS_THREADS) ||         \
     defined(WEBCPP_COBALT_HAS_BROWSER_WORKERS) || defined(WEBCPP_COBALT_HAS_LOCAL_SOCKETS) ||  \
     defined(WEBCPP_COBALT_HAS_SIGNALS) || defined(WEBCPP_COBALT_HAS_SERIAL_PORT) ||            \
-    defined(WEBCPP_COBALT_HAS_HOST_DNS) || defined(WEBCPP_COBALT_HAS_REVERSE_DNS)
+    defined(WEBCPP_COBALT_HAS_HOST_DNS) || defined(WEBCPP_COBALT_HAS_REVERSE_DNS) ||           \
+    defined(WEBCPP_COBALT_HAS_PIPE_CREATION) || defined(WEBCPP_COBALT_HAS_POSIX_STDIO) ||      \
+    defined(WEBCPP_COBALT_HAS_POLLABLE_STDIO)
 #error \
     "webcpp::cobalt: capability macros are derived by config.hpp; do not define WEBCPP_COBALT_HAS_*"
 #else
@@ -79,6 +174,30 @@
 /** 1 when native reverse lookup is available; WASI address lookup is forward-only. */
 #define WEBCPP_COBALT_HAS_REVERSE_DNS WEBCPP_ASIO_HAS_REVERSE_DNS
 
+#if (defined(WEBCPP_TARGET_NATIVE) && defined(BOOST_ASIO_HAS_PIPE)) || defined(WEBCPP_TARGET_WASIP3)
+/** 1 when guest-created asynchronous pipes support transfer, cancellation and EOF. */
+#define WEBCPP_COBALT_HAS_PIPE_CREATION 1
+#else
+/** 1 when guest-created asynchronous pipes support transfer, cancellation and EOF. */
+#define WEBCPP_COBALT_HAS_PIPE_CREATION 0
+#endif
+
+#if defined(WEBCPP_TARGET_NATIVE) && defined(BOOST_ASIO_HAS_POSIX_STREAM_DESCRIPTOR)
+/** 1 when native POSIX stdio descriptors can participate in asynchronous stream operations. */
+#define WEBCPP_COBALT_HAS_POSIX_STDIO 1
+#else
+/** 1 when native POSIX stdio descriptors can participate in asynchronous stream operations. */
+#define WEBCPP_COBALT_HAS_POSIX_STDIO 0
+#endif
+
+#ifdef WEBCPP_TARGET_WASIP2
+/** 1 when Asio's explicit WASIp2 pollable stdio adapter is available with Cobalt tokens. */
+#define WEBCPP_COBALT_HAS_POLLABLE_STDIO 1
+#else
+/** 1 when Asio's explicit WASIp2 pollable stdio adapter is available with Cobalt tokens. */
+#define WEBCPP_COBALT_HAS_POLLABLE_STDIO 0
+#endif
+
 // Set a requirement before including any Cobalt integration header. Zero
 // leaves the choice to the application and does not require the capability.
 #if defined(WEBCPP_COBALT_REQUIRE_SOCKET_BACKEND) && WEBCPP_COBALT_REQUIRE_SOCKET_BACKEND && \
@@ -119,6 +238,30 @@
 #error \
     "webcpp::cobalt: SSL requires /webcpp/cobalt//io_ssl or //cobalt_ssl; outside B2, link matching Cobalt SSL/OpenSSL archives and define WEBCPP_COBALT_LINK_SSL=1"
 #endif
+#endif
+
+#if defined(WEBCPP_COBALT_REQUIRE_PIPE_CREATION) && WEBCPP_COBALT_REQUIRE_PIPE_CREATION && \
+    !WEBCPP_COBALT_HAS_PIPE_CREATION
+#ifdef WEBCPP_TARGET_WASIP2
+#error "webcpp::cobalt: wasi-libc does not create pipes on WASIp2; use supplied pollable streams"
+#else
+#error \
+    "webcpp::cobalt: this target has no validated asynchronous pipe lifecycle; use a host adapter"
+#endif
+#endif
+#if defined(WEBCPP_COBALT_REQUIRE_POSIX_STDIO) && WEBCPP_COBALT_REQUIRE_POSIX_STDIO && \
+    !WEBCPP_COBALT_HAS_POSIX_STDIO
+#if defined(WEBCPP_TARGET_WASIP2) || defined(WEBCPP_TARGET_WASIP3)
+#error \
+    "webcpp::cobalt: wasi-libc stdio descriptors have no nonblocking mode; use an explicit host stream adapter"
+#else
+#error "webcpp::cobalt: asynchronous POSIX stdio requires a native POSIX descriptor backend"
+#endif
+#endif
+#if defined(WEBCPP_COBALT_REQUIRE_POLLABLE_STDIO) && WEBCPP_COBALT_REQUIRE_POLLABLE_STDIO && \
+    !WEBCPP_COBALT_HAS_POLLABLE_STDIO
+#error \
+    "webcpp::cobalt: the pollable stdio adapter requires WASIp2; other targets need their own host adapter"
 #endif
 
 #endif  // derived capability observations

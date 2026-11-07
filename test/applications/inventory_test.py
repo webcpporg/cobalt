@@ -17,6 +17,8 @@ import sys
 import tempfile
 import unittest
 
+import prepare
+
 
 class InventoryTests(unittest.TestCase):
     """An omitted, modified or unclassified upstream source must fail validation."""
@@ -43,6 +45,13 @@ class InventoryTests(unittest.TestCase):
             [sys.executable, str(Path(__file__).with_name('inventory.py')),
              '--manifest', str(self.manifest), '--source', str(self.root)],
             capture_output=True, text=True, timeout=10)
+
+    def test_python_migration_binds_cancellation_promise(self) -> None:
+        source = Path(__file__).with_name('upstream') / 'example/python.cpp'
+        result = prepare.migrate(source.read_text())
+        self.assertNotIn('h.promise().get_cancellation_slot()', result)
+        self.assertEqual(result.count('auto& promise = h.promise();'), 1)
+        self.assertIn('promise.get_cancellation_slot()', result)
 
     def test_classified_source_passes(self) -> None:
         result = self.run_checker()

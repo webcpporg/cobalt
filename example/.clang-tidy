@@ -1,0 +1,8 @@
+# An uncaught allocation or operation error terminates the example and fails
+# its driver. Keep exception-escape checks for noexcept functions, destructors
+# and moves.
+---
+InheritParentConfig: true
+CheckOptions:
+  - key: bugprone-exception-escape.CheckMain
+    value: 'false'

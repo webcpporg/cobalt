@@ -7,20 +7,20 @@
 // A separately compiled acceptor must receive the common composition fix too.
 #include <webcpp/test/exit_status.hpp>
 
-#include <boost/asio/post.hpp>
-#include <boost/asio/steady_timer.hpp>
-#include <boost/cobalt/io/acceptor.hpp>
-#include <boost/cobalt/main.hpp>
-#include <boost/cobalt/promise.hpp>
-#include <boost/cobalt/result.hpp>
-#include <boost/cobalt/this_coro.hpp>
 #include <boost/core/lightweight_test.hpp>
+#include <webcpp/asio/post.hpp>
+#include <webcpp/asio/steady_timer.hpp>
+#include <webcpp/cobalt/io/acceptor.hpp>
+#include <webcpp/cobalt/main.hpp>
+#include <webcpp/cobalt/promise.hpp>
+#include <webcpp/cobalt/result.hpp>
+#include <webcpp/cobalt/this_coro.hpp>
 
 #include <chrono>
 #include <cstdio>
 #include <cstdlib>
 
-namespace cobalt = boost::cobalt;
+namespace cobalt = webcpp::cobalt;
 namespace io = cobalt::io;
 
 namespace {
@@ -34,7 +34,7 @@ namespace {
 
 cobalt::promise<void> accept_stream(io::acceptor& listener) {
     const auto [error, socket] = co_await cobalt::as_tuple(listener.accept());
-    BOOST_TEST(error == boost::asio::error::operation_aborted);
+    BOOST_TEST(error == webcpp::asio::error::operation_aborted);
     BOOST_TEST(!socket.is_open());
 }
 
@@ -47,7 +47,7 @@ cobalt::promise<void> accept_stream(io::acceptor& listener) {
 cobalt::main co_main([[maybe_unused]] int argc, [[maybe_unused]] char** argv) {
     // NOLINTNEXTLINE(readability-static-accessed-through-instance)
     const auto exec = co_await cobalt::this_coro::executor;
-    boost::asio::steady_timer watchdog(exec, std::chrono::seconds(5));
+    webcpp::asio::steady_timer watchdog(exec, std::chrono::seconds(5));
     watchdog.async_wait([](boost::system::error_code error) {
         if (!error) {
             static_cast<void>(std::fputs("pending accept did not receive cancellation\n", stderr));
@@ -58,7 +58,7 @@ cobalt::main co_main([[maybe_unused]] int argc, [[maybe_unused]] char** argv) {
     // The promise eagerly initiates accept. No client connects to this listener.
     auto pending = accept_stream(listener);
     BOOST_TEST(!pending.ready());
-    boost::asio::post(exec, [&pending] { pending.cancel(); });
+    webcpp::asio::post(exec, [&pending] { pending.cancel(); });
     co_await pending;
     watchdog.cancel();
     std::puts("cobalt: pending composed accept cancelled through its promise");

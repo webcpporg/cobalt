@@ -8,6 +8,11 @@ import webcpp ;
 webcpp.targets emscripten ;
 webcpp.original node : .. ;
 
+# Exercise the module-owned cancellation registry, including rejected overlap
+# and exception unwinding, before the page-driven examples use it.
+webcpp.run browser_active_run : active_run_test.cpp
+  : <library>/webcpp//node-test ;
+
 # Reuse Asio's isolated browser host and exact-status driver. The Cobalt
 # coroutine owns a real worker; Node success does not close this browser lane.
 webcpp.drive browser_cobalt_worker : ../cobalt_thread_test.cpp
@@ -36,3 +41,25 @@ webcpp.drive browser_spsc : ../../example/applications/spsc.cpp
   : pages.mjs ;
 webcpp.lane browser-pages : browser_portable : emscripten ;
 webcpp.lane browser-worker-pages : browser_spsc : emscripten ;
+
+for local name in http ticker
+{
+    local requirements = <library>/webcpp/cobalt//cobalt <library>/webcpp/beast//browser
+      <linkflags>-sEXIT_RUNTIME=1 ;
+    if $(name) = ticker
+    {
+        requirements += <define>WEBCPP_COBALT_TICKER_COUNTERPART <library>/webcpp//boost_json ;
+    }
+    obj cobalt-$(name)-network : ../../example/applications/browser_network.cpp
+      : $(requirements) ;
+    explicit cobalt-$(name)-network ;
+    webcpp.variants cobalt-$(name)-ssl : cobalt-$(name)-network
+      : $(requirements) ;
+    webcpp.drive browser_$(name) : .//cobalt-$(name)-ssl
+      : <dependency>cobalt-$(name)-ssl.variants.json <webcpp-drive-timeout>180
+        <dependency>../../../beast/test/applications/browser/page.html
+        <dependency>../../../beast/test/applications/browser/network-worker.mjs
+      : ../../../beast/test/applications/browser/run.mjs
+      : --program cobalt-$(name)-ssl --expected "application cobalt-$(name)-ssl: passed" --host both ;
+}
+webcpp.lane browser-network-counterparts : browser_http browser_ticker : emscripten ;

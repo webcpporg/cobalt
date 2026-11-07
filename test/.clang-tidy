@@ -1,0 +1,7 @@
+# An uncaught allocation or operation error terminates the test and fails it.
+# Keep exception-escape checks for noexcept functions, destructors and moves.
+---
+InheritParentConfig: true
+CheckOptions:
+  - key: bugprone-exception-escape.CheckMain
+    value: 'false'

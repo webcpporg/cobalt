@@ -1,18 +1,38 @@
 # Copyright (c) 2026 WebCpp.org
-# Distributed under the Boost Software License, Version 1.0.
+#
+# Distributed under the Boost Software License, Version 1.0. (See
+# accompanying file LICENSE_1_0.txt or copy at
+# https://www.boost.org/LICENSE_1_0.txt)
 
 import webcpp ;
 webcpp.targets native wasip2 wasip3 ;
 webcpp.original python3 : ../.. ;
 
+# Preserve the upstream network programs as compile probes as well as the
+# separately identified, controlled-endpoint runtime counterparts.
+for local app in http ticker
+{
+    local exceptions ;
+    if $(app) = ticker { exceptions = <exception-handling>on ; }
+    webcpp.compile original_$(app) : ../upstream/example/$(app).cpp
+      : <library>/webcpp/cobalt//cobalt <library>/webcpp/beast//tls
+        $(exceptions) <cxxflags>-Wno-unused-parameter : native ;
+    webcpp.compile migrated_$(app) : ../migrated/example/$(app).cpp
+      : <library>/webcpp/cobalt//cobalt <library>/webcpp/beast//tls
+        $(exceptions) <cxxflags>-Wno-unused-parameter : wasip2 wasip3 ;
+}
+
 local requirements = <library>/webcpp/cobalt//cobalt <exception-handling>on
   <cxxflags>-Wno-unused-parameter <webcpp-drive-timeout>60 ;
 webcpp.drive original_echo : ../upstream/example/echo_server.cpp
-  : $(requirements) : echo.py : --original : native wasip2 ;
-webcpp.drive original_echo_p3 : ../upstream/example/echo_server.cpp
+  : $(requirements) : echo.py : --original : native ;
+webcpp.drive migrated_echo : ../migrated/example/echo_server.cpp
+  : $(requirements) : echo.py : --original : wasip2 ;
+webcpp.drive migrated_echo_p3 : ../migrated/example/echo_server.cpp
   : $(requirements) : echo.py : --original --wasip3 : wasip3 ;
-webcpp.lane upstream-echo : original_echo : native wasip2 ;
-webcpp.lane upstream-echo-p3 : original_echo_p3 : wasip3 ;
+webcpp.lane upstream-echo : original_echo : native ;
+webcpp.lane migrated-echo : migrated_echo : wasip2 ;
+webcpp.lane migrated-echo-p3 : migrated_echo_p3 : wasip3 ;
 
 webcpp.drive finite_echo : ../../../example/applications/echo_server.cpp
   : <library>/webcpp/cobalt//cobalt <webcpp-drive-timeout>90
@@ -22,3 +42,28 @@ webcpp.drive finite_echo_p3 : ../../../example/applications/echo_server.cpp
   : echo.py : --wasip3 : wasip3 ;
 webcpp.lane finite-echo : finite_echo : native wasip2 ;
 webcpp.lane finite-echo-p3 : finite_echo_p3 : wasip3 ;
+
+for local form in oracle port
+{
+    local targets = native ;
+    if $(form) = port { targets = wasip2 wasip3 ; }
+    webcpp.drive controlled_$(form)_echo : $(form)/echo_server.cpp
+      : $(requirements) <include>.
+      : echo.py : --original --controlled : $(targets) ;
+    for local app in http ticker
+    {
+        local extra ;
+        if $(app) = ticker
+        {
+            extra = <library>/webcpp//boost_json <library>/webcpp//boost_url
+              <exception-handling>on ;
+        }
+        webcpp.drive controlled_$(form)_$(app) : $(form)/$(app).cpp
+          : <library>/webcpp/cobalt//cobalt
+            <cxxflags>-Wno-unused-parameter <library>/webcpp/beast//tls <include>. $(extra)
+            <webcpp-drive-timeout>180
+          : protocols.py : $(app) : $(targets) ;
+    }
+    webcpp.lane controlled-$(form) : controlled_$(form)_echo
+      controlled_$(form)_http controlled_$(form)_ticker : $(targets) ;
+}

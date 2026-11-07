@@ -6,21 +6,21 @@
 
 #include <webcpp/test/exit_status.hpp>
 
-#include <boost/asio/post.hpp>
-#include <boost/asio/steady_timer.hpp>
-#include <boost/cobalt/io/resolver.hpp>
-#include <boost/cobalt/io/steady_timer.hpp>
-#include <boost/cobalt/main.hpp>
-#include <boost/cobalt/promise.hpp>
 #include <boost/core/lightweight_test.hpp>
+#include <webcpp/asio/post.hpp>
+#include <webcpp/asio/steady_timer.hpp>
+#include <webcpp/cobalt/io/resolver.hpp>
+#include <webcpp/cobalt/io/steady_timer.hpp>
+#include <webcpp/cobalt/main.hpp>
+#include <webcpp/cobalt/promise.hpp>
 
 #include <chrono>
 #include <cstdio>
 #include <cstdlib>
 
-namespace cobalt = boost::cobalt;
+namespace cobalt = webcpp::cobalt;
 namespace io = cobalt::io;
-namespace asio = boost::asio;
+namespace asio = webcpp::asio;
 
 namespace {
 cobalt::promise<void> resolve_cancelled(io::resolver& resolver) {

@@ -1,0 +1,62 @@
+// Copyright (c) 2026 WebCpp.org
+//
+// Distributed under the Boost Software License, Version 1.0. (See
+// accompanying file LICENSE_1_0.txt or copy at
+// https://www.boost.org/LICENSE_1_0.txt)
+
+[appendix]
+[#cobalt-differences]
+== Differences
+
+On native targets, `task`, `promise`, `generator`, completion tokens and plain
+I/O types are Boost.Cobalt types. The upstream native implementation and runner
+sources remain byte-identical. One WebCPP translation unit checks the Boost
+version while compiling the core; it adds no runtime behavior. This preserves native interoperability; it
+also preserves upstream limitations outside the separately corrected SSL wrapper.
+
+With Boost 1.92, the native limitation probes cover cancellation not reaching
+composed accept or composed waits. Further native checks reproduced `with`
+cleanup instantiation failures and a `write_at` constraint expecting `write_op`
+instead of `write_at_op`. Apple Clang 21 also diagnoses the original main and
+thread promises' missing `unhandled_exception` members when compiling without exceptions;
+with warnings treated as errors, that consumer fails to compile. These are not
+new native guarantees supplied by WebCPP. The Wasm implementation carries its
+documented corrections, including the positioned-write constraint.
+
+The original `io::udp_v6` constant also selects ICMP rather than UDP. Native
+identity preserves that defect. Use an explicit static protocol with the same
+IPv6 family and datagram type but the UDP protocol value; the `udp_v6` regression
+records the original mismatch and exchanges datagrams with that control. The
+shipped Wasm backend corrects `io::udp_v6` itself.
+
+The owner approved the native SSL exception on 2026-11-06 after upstream state
+and cancellation regressions were reproduced. `webcpp::cobalt::io::ssl::stream`
+is a distinct type. Its SSL context and plain Asio dependencies retain native
+Boost identity. The fixes prevent plaintext fallback after a failed/cancelled
+handshake and cover TLS transfer/shutdown behavior. The concrete native composed
+read/write overloads have the static-type requirement in <<cobalt-building-ssl>>.
+Move construction rebinds socket access to the destination's SSL lowest layer
+and preserves handshake state. Copying and assignment are unavailable. Move only
+when no lazy or outstanding operation retains either stream's address; moving
+does not transfer those operation references. After moving, the source is
+non-secure and may be destroyed. Tests destroy the source before handshake and
+after completed successful or rejected handshakes, then exercise the destination.
+
+
+On Wasm, library-owned headers and sources select the same shipped Asio backend
+as WebCPP Beast. Corrections include the browser runner, WASI networking and
+SSL state machine, and aligned storage handling. The importer verifies original
+and corrected inputs and output hashes; application builds do not execute it.
+See `upstream/README.md` and its manifests for provenance.
+
+In the browser, the runner and the checked task runner yield between bounded
+turns, with Asio's default of 100 handlers. A long-running individual handler
+still blocks its thread. JSPI delegates suspension to the engine; Asyncify uses
+instrumented Wasm. Availability, stack requirements and performance are separate
+from Cobalt's coroutine semantics.
+
+An upstream example depending on a native signal, Unix socket, filesystem,
+blocking thread or TCP listener may require an explicit host counterpart.
+The matrix identifies that adaptation instead of promising identical facilities
+in a browser. A browser WebSocket or fetch operation uses host TLS and security
+policy rather than the guest OpenSSL wrapper.

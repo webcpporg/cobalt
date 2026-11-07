@@ -1,0 +1,41 @@
+{
+  "boost_version": 109200,
+  "files": {
+    "boost/cobalt/composition.hpp": {
+      "before": "4f89225430772cc39a82e37ec1b67069b342fa77423b3f6ad74edc3d8d1a77c5",
+      "after": "a4d22f4619cad58063473d0e86a31dfbbfd4856b57d59c22e1c18ec0ccfabe1b"
+    },
+    "boost/cobalt/detail/main.hpp": {
+      "before": "fbdcb0ca58d8a368b8e4ec680dc99bcdd6ce2a2c5375770e278dec1dec91afcb",
+      "after": "2a55b2e808068c0aaef80ab257f462ab9d61f7d3d59ef0ede23ed6b56046bdf5"
+    },
+    "boost/cobalt/detail/thread.hpp": {
+      "before": "e8dc12b4145c9903ac7f87dd50d87f4b3d742819ee653cdd84e84d92c3c8c37d",
+      "after": "670b2c403b2e75d70ade9dd95bfe34834ce49ea2c1f875559071fd6fd4a2812b"
+    },
+    "boost/cobalt/detail/detached.hpp": {
+      "before": "74d1c952ca0df3523e1b82ded53c111ac428b64a08c4d37267ec3b06a476fbc9",
+      "after": "ceabaf83886048efb050c45c01a92b803cd0f6f149034cd9db8aa5ca53e74c0f"
+    },
+    "boost/cobalt/with.hpp": {
+      "before": "9f0ce0389d8a0ff9a0b1ba02889e583a2c24e0ea783d89de67d132112d04e386",
+      "after": "97d5487bd067b655bfbab7b2698851344c60cbbc615be32804041f6b2829080a"
+    },
+    "libs/cobalt/src/io/file.cpp": {
+      "before": "39b08acf34275943aa4b18152257c55056a2ceeb45b20066652162fafa73c7bf",
+      "after": "b73121cf82065f5b10ba03a8a5d35fc09d1e2fea928956600d6c43346a1a19fe"
+    },
+    "libs/cobalt/src/io/stream_file.cpp": {
+      "before": "21a3d2968eeb7519dc60200ab0177656dc261792e3b4ccde34288e51b1c2f6cd",
+      "after": "3fc1647f2396ff5bf6919dde7274045978b82d9f1eac88af6ffbe05d97fb6307"
+    },
+    "libs/cobalt/src/io/random_access_file.cpp": {
+      "before": "d918da9888a644343218c9a9c024fe514ace7be37e2d0396302e5451ed23537b",
+      "after": "25b78f992928b9fc38a23b4b65eae3d681fc7ba0ef724a565b48830a214b99dd"
+    },
+    "libs/cobalt/src/io/pipe.cpp": {
+      "before": "3b93d1223f57339555d8b07a26b38b76d1b8b9b30822a117a1a93ba94e343648",
+      "after": "6a9ebf5afbdba1da0981c486c99c7d3521f24ca9b02a5716b31e4bc9d54c284c"
+    }
+  }
+}

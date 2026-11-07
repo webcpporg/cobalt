@@ -40,6 +40,8 @@ struct continuation {
     std::coroutine_handle<promise_type> handle;
 };
 
+// The coroutine transformation invokes static promise hooks through its promise object.
+// NOLINTNEXTLINE(readability-static-accessed-through-instance)
 continuation resumed(bool& value) {
     value = true;
     co_return;

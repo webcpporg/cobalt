@@ -5,6 +5,22 @@
 # https://www.boost.org/LICENSE_1_0.txt)
 
 import webcpp ;
+import feature ;
+import webcpp-target ;
+
+# Native types remain Boost 1.92, including its missing no-EH promise hook.
+# Keep this one diagnostic visible but nonfatal in runtime test consumers.
+# No library usage requirement or other warning is weakened.
+rule native-upstream-diagnostic ( properties * )
+{
+    if [ webcpp-target.target-of $(properties) ] = native
+      && <exception-handling>off in $(properties)
+      && [ feature.get-values <toolset> : $(properties) ] = clang
+    {
+        return <cxxflags>-Wno-error=coroutine-missing-unhandled-exception ;
+    }
+}
+project : requirements <conditional>@native-upstream-diagnostic ;
 webcpp.targets native wasip2 wasip3 emscripten ;
 
 webcpp.run canonical_entry : entry_test.cpp : <library>/webcpp/cobalt//cobalt ;
@@ -17,6 +33,8 @@ webcpp.run custom_main : custom_main_test.cpp : <library>/webcpp/cobalt//core ;
 webcpp.original node : . ;
 webcpp.headers-alone cobalt : ../include : cobalt.hpp cobalt/config.hpp
   : <library>/webcpp/cobalt//core ;
+webcpp.headers-alone cobalt : ../include : cobalt/detail/native_ssl_transfer.hpp
+  : <library>/webcpp/cobalt//io_ssl : native ;
 
 for local handling in on off
 {
@@ -24,10 +42,12 @@ for local handling in on off
       : <library>/webcpp/cobalt//cobalt <exception-handling>$(handling)
       : native wasip2 wasip3 ;
 }
+webcpp.run udp_v6 : udp_v6_test.cpp
+  : <library>/webcpp/cobalt//cobalt : native wasip2 wasip3 ;
 webcpp.run cobalt_io : cobalt_io_test.cpp
   : <library>/webcpp/cobalt//cobalt : native wasip2 wasip3 ;
 webcpp.run cobalt_accept_cancel : cobalt_accept_cancel_test.cpp
-  : <library>/webcpp/cobalt//cobalt : native wasip2 wasip3 ;
+  : <library>/webcpp/cobalt//cobalt : wasip2 wasip3 ;
 webcpp.run cobalt_wasi : cobalt_test.cpp
   : <library>/webcpp/cobalt//cobalt : wasip2 wasip3 ;
 webcpp.run cobalt_thread : cobalt_thread_test.cpp
@@ -37,7 +57,7 @@ explicit cobalt_thread ;
 webcpp.lane threads : cobalt_thread : native wasip3 ;
 webcpp.run cobalt_thread_native_single : cobalt_thread_test.cpp
   : <library>/webcpp/cobalt//cobalt <threading>single : native ;
-webcpp.compile cobalt_main_wasip3 : ../src/cobalt_main.cpp
+webcpp.compile cobalt_main_wasip3 : ../src/wasm/main.cpp
   : <library>/webcpp/cobalt//core <define>BOOST_COBALT_NO_LIB=1 : wasip3 ;
 
 # Preserve the exact exit-status and suspension witnesses from Asio.
@@ -122,6 +142,11 @@ webcpp.run core_contracts : core_contracts_test.cpp : <library>/webcpp/cobalt//c
 webcpp.run core_contracts_asyncify : core_contracts_test.cpp
   : <library>/webcpp/cobalt//cobalt <webcpp-suspend>asyncify : emscripten ;
 explicit core_contracts_asyncify ;
+webcpp.run with_contracts : with_contracts_test.cpp
+  : <library>/webcpp/cobalt//cobalt : wasip2 wasip3 emscripten ;
 
 webcpp.run composition_contracts : composition_contracts_test.cpp
-  : <library>/webcpp/cobalt//cobalt ;
+  : <library>/webcpp/cobalt//cobalt : wasip2 wasip3 emscripten ;
+
+build-project descriptors ;
+build-project upstream_limits ;

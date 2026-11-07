@@ -1,0 +1,89 @@
+{
+  "platform": "macOS-27.0-arm64-arm-64bit-Mach-O",
+  "python": "3.14.7",
+  "clock": {
+    "implementation": "mach_absolute_time()",
+    "monotonic": true,
+    "adjustable": false,
+    "resolution": 4.166666666666666e-08
+  },
+  "recorded_at": 1794024511.07083,
+  "isolation": "No other build/test from this session during runtime measurements. Other user/OS activity is not controlled.",
+  "native_compiler": {
+    "command": [
+      "clang++",
+      "--version"
+    ],
+    "exit_code": 0,
+    "stdout": "Apple clang version 21.0.0 (clang-2100.3.34.2)\nTarget: arm64-apple-darwin27.0.0\nThread model: posix\nInstalledDir: /Library/Developer/CommandLineTools/usr/bin\n",
+    "stderr": ""
+  },
+  "wasi_compiler": {
+    "command": [
+      "/Users/rodrigo/dev/webcpporg/asio-task9-review/.local/wasi-sdk/bin/clang++",
+      "--version"
+    ],
+    "exit_code": 0,
+    "stdout": "clang version 23.1.0-wasi-sdk (https://github.com/llvm/llvm-project 895aa2c896ada719451be2e3673c83da8ddf1141)\nTarget: wasm32-unknown-wasip1\nThread model: posix\nInstalledDir: /Users/rodrigo/dev/webcpp/.local/wasi-sdk/bin\nConfiguration file: /Users/rodrigo/dev/webcpp/.local/wasi-sdk/bin/clang++.cfg\n",
+    "stderr": ""
+  },
+  "emscripten": {
+    "command": [
+      "/Users/rodrigo/dev/webcpporg/asio-task9-review/.local/emsdk/upstream/emscripten/em++",
+      "--version"
+    ],
+    "exit_code": 0,
+    "stdout": "emcc (Emscripten gcc/clang-like replacement + linker emulating GNU ld) 6.0.11 (a0014542110d6078c3a1a7941fa1ddb3a2281f16)\nCopyright (C) 2026 the Emscripten authors (see AUTHORS.txt)\nThis is free and open source software under the MIT license.\nThere is NO warranty; not even for MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.\n\n",
+    "stderr": ""
+  },
+  "node": {
+    "command": [
+      "node",
+      "--version"
+    ],
+    "exit_code": 0,
+    "stdout": "v26.12.0\n",
+    "stderr": ""
+  },
+  "wasmtime": {
+    "command": [
+      "/Users/rodrigo/dev/webcpporg/asio-task9-review/.local/wasmtime-50/wasmtime/wasmtime",
+      "--version"
+    ],
+    "exit_code": 0,
+    "stdout": "wasmtime 50.0.1 (c307ec81d 2026-10-29)\n",
+    "stderr": ""
+  },
+  "cpu": {
+    "command": [
+      "sysctl",
+      "-n",
+      "machdep.cpu.brand_string"
+    ],
+    "exit_code": 0,
+    "stdout": "Apple M5 Max\n",
+    "stderr": ""
+  },
+  "hardware": {
+    "command": [
+      "sysctl",
+      "hw.memsize",
+      "hw.ncpu",
+      "hw.physicalcpu",
+      "hw.logicalcpu"
+    ],
+    "exit_code": 0,
+    "stdout": "hw.memsize: 137438953472\nhw.ncpu: 18\nhw.physicalcpu: 18\nhw.logicalcpu: 18\n",
+    "stderr": ""
+  },
+  "power": {
+    "command": [
+      "pmset",
+      "-g",
+      "batt"
+    ],
+    "exit_code": 0,
+    "stdout": "Now drawing from 'AC Power'\n -InternalBattery-0 (id=23396451)\t100%; charged; 0:00 remaining present: true\n",
+    "stderr": ""
+  }
+}

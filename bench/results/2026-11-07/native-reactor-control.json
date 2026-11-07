@@ -1,0 +1,71 @@
+{
+  "command": [
+    "clang++",
+    "-std=c++20",
+    "-O3",
+    "-DNDEBUG",
+    "-I/opt/homebrew/opt/boost/include",
+    "libs/cobalt/bench/results/2026-11-07/native-reactor-control.cpp",
+    "-o",
+    ".superpowers/sdd/2026-11-06-portable-network-libraries/native-reactor-control"
+  ],
+  "execute": [
+    ".superpowers/sdd/2026-11-06-portable-network-libraries/native-reactor-control"
+  ],
+  "source_sha256": "51c1a08171e71b83d9ac4504b1460ac51662db050e51e4049986cc39b65c6dee",
+  "binary_sha256": "8a00ac0a116c43d2c92beb1c0d92caf911ef0955bb8df3a261b56a8bf483584b",
+  "log_sha256": "0c594979ea701e786fde33d1bd6e33612d75ff8fc748535412ba8d38c9cdfbab",
+  "scope": "Separate five-pair boundary diagnostic, not a comparative performance distribution; fixed order, no discarded warmup.",
+  "rows": [
+    {
+      "repetition": 0,
+      "initialized_reactor": false,
+      "ns_per_post": 98.938
+    },
+    {
+      "repetition": 0,
+      "initialized_reactor": true,
+      "ns_per_post": 11760.154
+    },
+    {
+      "repetition": 1,
+      "initialized_reactor": false,
+      "ns_per_post": 61.125
+    },
+    {
+      "repetition": 1,
+      "initialized_reactor": true,
+      "ns_per_post": 10503.108
+    },
+    {
+      "repetition": 2,
+      "initialized_reactor": false,
+      "ns_per_post": 59.458
+    },
+    {
+      "repetition": 2,
+      "initialized_reactor": true,
+      "ns_per_post": 11082.354
+    },
+    {
+      "repetition": 3,
+      "initialized_reactor": false,
+      "ns_per_post": 60.383
+    },
+    {
+      "repetition": 3,
+      "initialized_reactor": true,
+      "ns_per_post": 12147.454
+    },
+    {
+      "repetition": 4,
+      "initialized_reactor": false,
+      "ns_per_post": 72.133
+    },
+    {
+      "repetition": 4,
+      "initialized_reactor": true,
+      "ns_per_post": 12078.633
+    }
+  ]
+}

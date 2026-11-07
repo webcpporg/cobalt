@@ -1,0 +1,26 @@
+# Copyright (c) 2026 WebCpp.org
+#
+# Distributed under the Boost Software License, Version 1.0. (See
+# accompanying file LICENSE_1_0.txt or copy at
+# https://www.boost.org/LICENSE_1_0.txt)
+
+import webcpp ;
+webcpp.targets native ;
+webcpp.original python3 : .. ;
+project : requirements <library>/webcpp//node-test ;
+
+# Native identity deliberately retains these independently reproduced defects.
+# A trap, a different diagnostic, or a newly fixed upstream version fails the
+# observation driver. These targets do not advertise successful cancellation.
+webcpp.drive original_accept_limitation : ../cobalt_accept_cancel_test.cpp
+  : <library>/webcpp/cobalt//cobalt <exception-handling>on
+  : driver.py : accept : native ;
+webcpp.drive original_composition_limitation : ../composition_contracts_test.cpp
+  : <library>/webcpp/cobalt//cobalt <exception-handling>on
+  : driver.py : composition : native ;
+webcpp.lane upstream-limitations
+  : original_accept_limitation original_composition_limitation : native ;
+webcpp.compile-diagnostic original_with_limitation : ../with_contracts_test.cpp
+  : <library>/webcpp/cobalt//core <exception-handling>on : native ;
+webcpp.compile-diagnostic original_write_at_limitation : write_at.cpp
+  : <library>/webcpp/cobalt//core : native ;

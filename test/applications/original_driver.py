@@ -38,4 +38,5 @@ elif name in ('thread', 'thread_pool'):
     expected = [(left, right, left + right) for low, high, right in
                 ((0, 10, 32), (10, 20, 22), (50, 60, -18)) for left in range(low, high + 1)]
     assert sorted(results) == sorted(expected), result.stdout
-print(f'PASS original {name}: normal exit; output={result.stdout!r}')
+identity = 'namespace-migration' if '--migrated' in sys.argv else 'original'
+print(f'PASS {identity} {name}: normal exit; output={result.stdout!r}')

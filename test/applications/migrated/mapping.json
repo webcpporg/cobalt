@@ -1,0 +1,90 @@
+{
+  "source_form": "namespace-migration",
+  "files": [
+    {
+      "source": "example/channel.cpp",
+      "original_sha256": "430fdb3b8399f0de14a08c7fb3145b5933b2b89c959224b2319989c010b3b6c0",
+      "migrated_sha256": "b1d89634a5df0d752885da9efe529ac9ab2a0a985b70d8dceb0d177bfe6db0e8"
+    },
+    {
+      "source": "example/delay.cpp",
+      "original_sha256": "6da48db04f73fd7cdcb93fdbe491fee56828ad3472f16a4e1e894b139b458744",
+      "migrated_sha256": "15b38f30a611be7b590bf2429d31dfb8a76ee828bbb83e899027df04e168aa88"
+    },
+    {
+      "source": "example/delay_op.cpp",
+      "original_sha256": "2bf930999e7e6e4d430c0b9a8206743dc8fc72846b33d52e8e6d418b4f29b58c",
+      "migrated_sha256": "10669ee49f8e6cb32cb47d3e55ad2fe2e5bde702786fba09e073ef989dbc041b"
+    },
+    {
+      "source": "example/echo_server.cpp",
+      "original_sha256": "c042bd93a9dbb278a3187f91627c10641087a2d22e32928b627ba7be4478a492",
+      "migrated_sha256": "3a1c1b691c3ecc6f5fb642e9831c7e72978f44c08eba220346e254a6ee7425db"
+    },
+    {
+      "source": "example/http.cpp",
+      "original_sha256": "f4da82928d0cdbb9e2e8a909c73fb2e205526965b5a40712d4583f363e01f9c7",
+      "migrated_sha256": "29601def547596f743e35865cb5b53ccd6b1fd5dcc31366721f74eeeda73384a"
+    },
+    {
+      "source": "example/outcome.cpp",
+      "original_sha256": "51ea374b0ed7519cd5d5ff7331d4f2106b8273fe35f445509344451b2092e33d",
+      "migrated_sha256": "dd260f44ddb97c59da4f2f294403dfcebf0ae25ec26406f9a72faf4cfb2607f9"
+    },
+    {
+      "source": "example/python.cpp",
+      "original_sha256": "d58e60f7a57a9083c21d5ee32afce5874559c4d382d14b4697c80f4ef1990c0a",
+      "migrated_sha256": "de4fd5462eb02607c4ac513a79ab831359cbe3a3decb41afb7d5024d620b2a54"
+    },
+    {
+      "source": "example/signals.cpp",
+      "original_sha256": "70768c8612b9102118c95e266357aea045aa7b52acf3e91a1c4923e38bb628f5",
+      "migrated_sha256": "16d7bc48f608250fa19cbc9d9c3ebe3719852399889e836411bb5835c4e1e509"
+    },
+    {
+      "source": "example/spsc.cpp",
+      "original_sha256": "a3d8c7f084ebcad150544bb318199bdafb259496c4e7498a0253d444e0317dab",
+      "migrated_sha256": "ea130051cfe3a7c0f6ecb72584a4118d26ebe4cb868268aad73febf7856e4e7b"
+    },
+    {
+      "source": "example/thread.cpp",
+      "original_sha256": "f37e11eed4fe9931e358a10258e5a25c015fc8b565afd23c9eafbc5e84b8397d",
+      "migrated_sha256": "3d00034ebc86e8aea7b508c1d3750d74c42a254e11aac5f696158aef7ede028d"
+    },
+    {
+      "source": "example/thread_pool.cpp",
+      "original_sha256": "6f49c58b95f8d51df996409d20ada6c1c89adfdf6505e4b30e43c98ba43ea6f4",
+      "migrated_sha256": "463b6b4380cbdb554d92a98c7ec706d6e39083d96c3204ab28572f1912095b85"
+    },
+    {
+      "source": "example/ticker.cpp",
+      "original_sha256": "d694672dece5c2764d6901be7739288b9e5f80d8308e2c4955f8068fc7d3054f",
+      "migrated_sha256": "a5bfd5f270ba8e7561f1fb47813095b2face0ed81484a1d368b4974af4d22c82"
+    },
+    {
+      "source": "bench/channel.cpp",
+      "original_sha256": "8af2c85f84016858f0bc2024ba2792efd3614b4a2c4179954e74777f233bad70",
+      "migrated_sha256": "8870c886f422b0e3725084c6bea9770670dad33f8c8632c007cb1e4cf84807ae"
+    },
+    {
+      "source": "bench/immediate.cpp",
+      "original_sha256": "b7dc772a57140d354fda56634e060b516b494d8d4b6c49abcca3e9710449b345",
+      "migrated_sha256": "37d86ea4f67e55f3a173d3b37c974bdba1d462c5bc12d143cbae43e9bb178058"
+    },
+    {
+      "source": "bench/monotonic.cpp",
+      "original_sha256": "41038a1381096ab7c53fe6075d1777b42c5feac480e7e0d11714d1fcd3d26317",
+      "migrated_sha256": "8c61315941f1cb1168717902fa38c5dfac6342dac73a2f558bcbe05b7e56a978"
+    },
+    {
+      "source": "bench/parallel.cpp",
+      "original_sha256": "69692bea858797b705f55fccdc5755db707e7f71aec561625de75cf94b78e612",
+      "migrated_sha256": "d1bb39f9639289a99f236eb622204c598c8cb85ca31e64b165fc5116e0ee45df"
+    },
+    {
+      "source": "bench/post.cpp",
+      "original_sha256": "974bfd1036a621e278ad27bec634cc487693361e489379f003d2c5b0bcdbd42a",
+      "migrated_sha256": "d6f85001a8884da76f321e021ddc8407ac4c0f35ee110e8cead06f66626b7d89"
+    }
+  ]
+}

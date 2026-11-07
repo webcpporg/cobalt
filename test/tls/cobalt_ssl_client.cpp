@@ -6,22 +6,26 @@
 
 #include <webcpp/asio/tls_client_context.hpp>
 
-#include <boost/cobalt/io/read.hpp>
-#include <boost/cobalt/io/ssl.hpp>
-#include <boost/cobalt/io/write.hpp>
-#include <boost/cobalt/main.hpp>
-#include <boost/cobalt/op.hpp>
-#include <boost/cobalt/result.hpp>
-#include <boost/cobalt/task.hpp>
-#include <boost/cobalt/this_coro.hpp>
+#include <webcpp/cobalt/io/read.hpp>
+#include <webcpp/cobalt/io/ssl.hpp>
+#include <webcpp/cobalt/io/write.hpp>
+#include <webcpp/cobalt/main.hpp>
+#include <webcpp/cobalt/op.hpp>
+#include <webcpp/cobalt/result.hpp>
+#include <webcpp/cobalt/task.hpp>
+#include <webcpp/cobalt/this_coro.hpp>
+
+#include "../output.hpp"
 
 #include <array>
 #include <charconv>
 #include <cstdio>
+#include <optional>
 #include <string_view>
+#include <utility>
 
-namespace cobalt = boost::cobalt;
-namespace asio = boost::asio;
+namespace cobalt = webcpp::cobalt;
+namespace asio = webcpp::asio;
 
 namespace {
 
@@ -98,6 +102,24 @@ cobalt::task<bool> exchange(cobalt::io::ssl::stream& stream) {
     co_return true;
 }
 
+cobalt::task<int> check_handshake_result(cobalt::io::ssl::stream& destination,
+                                         const boost::system::error_code& error, bool reject) {
+    if (error) {
+        if (reject && SSL_get_verify_result(destination.native_ssl_handle()) != X509_V_OK) {
+            {
+                co_return (co_await rejected_io(destination)) ? 0 : 1;
+            }
+        }
+        co_return 1;
+    }
+    if (reject || !destination.secure()) {
+        {
+            co_return 1;
+        }
+    }
+    co_return (co_await exchange(destination)) ? 0 : 1;
+}
+
 }  // namespace
 
 cobalt::main co_main(int argc, char** argv) {
@@ -131,7 +153,18 @@ cobalt::main co_main(int argc, char** argv) {
     }
     // NOLINTNEXTLINE(readability-static-accessed-through-instance)
     const auto exec = co_await cobalt::this_coro::executor;
-    cobalt::io::ssl::stream stream(context, exec);
+    std::optional<cobalt::io::ssl::stream> original(std::in_place, context, exec);
+    if (!original->open(cobalt::io::tcp_v4)) {
+        co_return 1;
+    }
+    const auto descriptor = original->native_handle();
+    std::optional<cobalt::io::ssl::stream> current(std::in_place, std::move(*original));
+    original.reset();
+    auto& stream = *current;
+    if (!stream.is_open() || stream.native_handle() != descriptor || !stream.cancel()) {
+        webcpp::test::write_stderr("SSL move lost its destination socket before handshake\n");
+        co_return 1;
+    }
     if (stream.secure()) {
         co_return 1;
     }
@@ -152,19 +185,15 @@ cobalt::main co_main(int argc, char** argv) {
     }
     const auto error =
         co_await perform_handshake(stream, argc == 7 && std::string_view(argv[6]) == "buffered");
-    const bool reject = std::string_view(argv[4]) == "reject";
-    if (error) {
-        if (reject && SSL_get_verify_result(stream.native_ssl_handle()) != X509_V_OK) {
-            {
-                co_return (co_await rejected_io(stream)) ? 0 : 1;
-            }
-        }
+    // No operation remains outstanding when the stream moves. Destroying the
+    // source proves that socket methods and TLS state belong to the destination.
+    cobalt::io::ssl::stream destination(std::move(*current));
+    current.reset();
+    if (!destination.is_open() || destination.native_handle() != descriptor ||
+        !destination.cancel() || destination.secure() != !error) {
+        webcpp::test::write_stderr("SSL move lost its destination socket or TLS state\n");
         co_return 1;
     }
-    if (reject || !stream.secure()) {
-        {
-            co_return 1;
-        }
-    }
-    co_return (co_await exchange(stream)) ? 0 : 1;
+    co_return co_await check_handshake_result(destination, error,
+                                              std::string_view(argv[4]) == "reject");
 }

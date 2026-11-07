@@ -1,3 +1,14 @@
 * text=auto eol=lf
 # Unified-diff context retains the original source whitespace by definition.
 *.patch -whitespace
+
+# Preserve pinned imports and generated evidence byte for byte.
+include/webcpp/cobalt/detail/backend.hpp -whitespace
+include/webcpp/cobalt/detail/backend/** -whitespace
+include/webcpp/cobalt/detail/native_ssl.hpp -whitespace
+src/native/** -whitespace
+src/wasm/** -whitespace
+src/sources.jam whitespace=-blank-at-eol,-blank-at-eof
+bench/results/**/*.svg whitespace=-blank-at-eol
+bench/results/**/*.csv -text whitespace=cr-at-eol
+doc/release-measurements.adoc whitespace=-blank-at-eof

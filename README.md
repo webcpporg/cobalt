@@ -1,13 +1,29 @@
 # webcpp::cobalt
 
-Boost.Cobalt coroutine applications on native systems, browsers through Emscripten,
-and WASIp2/P3, using WebCPP's Asio integration. The upstream Boost.Cobalt namespace,
-headers and coroutine types remain available.
+WebCPP Cobalt makes Boost-style coroutine applications usable in WebAssembly:
+browsers through Emscripten, and WASIp2/P3 components through runtimes such as
+Wasmtime. JSPI and Asyncify are Emscripten suspension variants. Exception mode,
+thread mode and runtime capabilities are separate choices in the support matrix.
 
-This library is being extracted from the existing Asio integration under the
+On native targets, the core coroutine and plain I/O types have the identity of
+the original Boost.Cobalt types. The compiled core and runner use unmodified
+Boost 1.92 sources. One explicit exception is `webcpp::cobalt::io::ssl`: its
+corrected state machine is shipped by WebCPP on native and WASI targets because
+the upstream wrapper failed the handshake, cancellation and shutdown regression
+tests. It is a separate type from `boost::cobalt::io::ssl::stream`.
+
+The Wasm backend is shipped under library-owned paths and namespaces. B2,
+direct-compiler and CMake consumers compile those files; they never apply a patch
+or place replacement Boost headers before an installed Boost. The dated application matrix and Release measurements describe the shipped-source
+candidate. Local lint and review are complete; coordinated remote CI remains
+the publication gate.
+
+This library was extracted from the existing Asio integration under the
 [accepted proposal](https://github.com/webcpporg/proposals/tree/main/libraries/cobalt/openspec/changes/genesis).
-The independent target's application matrix and documentation are in development;
-existing Asio results do not certify all Cobalt applications.
+The independent target has its own [application matrix](doc/application-matrix.adoc),
+[Release measurements](doc/release-measurements.adoc), and
+[configuration guide](doc/configuration.adoc). Existing Asio results alone do not
+certify Cobalt applications; each report names its source and runtime evidence.
 
 Develop this repository inside `libs/cobalt` of the WebCPP superproject. Its
 `Jamroot` supplies Boost 1.92 and the configured native, Emscripten or WASI toolchain.

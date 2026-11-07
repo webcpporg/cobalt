@@ -1,0 +1,1421 @@
+<?xml version="1.0" encoding="utf-8" standalone="no"?>
+<!DOCTYPE svg PUBLIC "-//W3C//DTD SVG 1.1//EN"
+  "http://www.w3.org/Graphics/SVG/1.1/DTD/svg11.dtd">
+<svg xmlns:xlink="http://www.w3.org/1999/xlink" width="864pt" height="987.84pt" viewBox="0 0 864 987.84" xmlns="http://www.w3.org/2000/svg" version="1.1">
+ <metadata>
+  <rdf:RDF xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:cc="http://creativecommons.org/ns#" xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#">
+   <cc:Work>
+    <dc:type rdf:resource="http://purl.org/dc/dcmitype/StillImage"/>
+    <dc:date>2026-11-07T01:30:54.864156</dc:date>
+    <dc:format>image/svg+xml</dc:format>
+    <dc:creator>
+     <cc:Agent>
+      <dc:title>Matplotlib v3.11.2, https://matplotlib.org/</dc:title>
+     </cc:Agent>
+    </dc:creator>
+   </cc:Work>
+  </rdf:RDF>
+ </metadata>
+ <defs>
+  <style type="text/css">*{stroke-linejoin: round; stroke-linecap: butt}</style>
+ </defs>
+ <g id="asio-runtime-ratio-figure_1">
+  <g id="asio-runtime-ratio-patch_1">
+   <path d="M 0 987.84 
+L 864 987.84 
+L 864 0 
+L 0 0 
+z
+" style="fill: #ffffff"/>
+  </g>
+  <g id="asio-runtime-ratio-axes_1">
+   <g id="asio-runtime-ratio-patch_2">
+    <path d="M 155.84875 944.161846 
+L 782.776779 944.161846 
+L 782.776779 112.083984 
+L 155.84875 112.083984 
+z
+" style="fill: #ffffff"/>
+   </g>
+   <g clip-path="url(#asio-runtime-ratio-p0d1d6bc50c)">
+    <image xlink:href="data:image/png;base64,
+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" id="asio-runtime-ratio-image8c5b88d307" transform="scale(1 -1) translate(0 -831.6)" x="155.52" y="-112.32" width="627.12" height="831.6"/>
+   </g>
+   <g id="asio-runtime-ratio-matplotlib.axis_1">
+    <g id="asio-runtime-ratio-xtick_1">
+     <g id="asio-runtime-ratio-line2d_1">
+      <defs>
+       <path id="asio-runtime-ratio-m350b71c254" d="M 0 0 
+L 0 3.5 
+" style="stroke: #000000; stroke-width: 0.8"/>
+      </defs>
+      <g>
+       <use xlink:href="#asio-runtime-ratio-m350b71c254" x="200.629324" y="944.161846" style="stroke: #000000; stroke-width: 0.8"/>
+      </g>
+     </g>
+     <g id="asio-runtime-ratio-text_1">
+      <text style="font-size: 9px; font-family: 'DejaVu Sans'" transform="translate(181.624857 964.235272) rotate(-20)">post</text>
+     </g>
+    </g>
+    <g id="asio-runtime-ratio-xtick_2">
+     <g id="asio-runtime-ratio-line2d_2">
+      <g>
+       <use xlink:href="#asio-runtime-ratio-m350b71c254" x="290.190471" y="944.161846" style="stroke: #000000; stroke-width: 0.8"/>
+      </g>
+     </g>
+     <g id="asio-runtime-ratio-text_2">
+      <text style="font-size: 9px; font-family: 'DejaVu Sans'" transform="translate(244.001284 974.130361) rotate(-20)">immediate</text>
+     </g>
+    </g>
+    <g id="asio-runtime-ratio-xtick_3">
+     <g id="asio-runtime-ratio-line2d_3">
+      <g>
+       <use xlink:href="#asio-runtime-ratio-m350b71c254" x="379.751618" y="944.161846" style="stroke: #000000; stroke-width: 0.8"/>
+      </g>
+     </g>
+     <g id="asio-runtime-ratio-text_3">
+      <text style="font-size: 9px; font-family: 'DejaVu Sans'" transform="translate(345.546595 969.768482) rotate(-20)">channel</text>
+     </g>
+    </g>
+    <g id="asio-runtime-ratio-xtick_4">
+     <g id="asio-runtime-ratio-line2d_4">
+      <g>
+       <use xlink:href="#asio-runtime-ratio-m350b71c254" x="469.312765" y="944.161846" style="stroke: #000000; stroke-width: 0.8"/>
+      </g>
+     </g>
+     <g id="asio-runtime-ratio-text_4">
+      <text style="font-size: 9px; font-family: 'DejaVu Sans'" transform="translate(437.109728 969.039819) rotate(-20)">parallel</text>
+     </g>
+    </g>
+    <g id="asio-runtime-ratio-xtick_5">
+     <g id="asio-runtime-ratio-line2d_5">
+      <g>
+       <use xlink:href="#asio-runtime-ratio-m350b71c254" x="558.873912" y="944.161846" style="stroke: #000000; stroke-width: 0.8"/>
+      </g>
+     </g>
+     <g id="asio-runtime-ratio-text_5">
+      <text style="font-size: 9px; font-family: 'DejaVu Sans'" transform="translate(517.045486 972.543174) rotate(-20)">allocation</text>
+     </g>
+    </g>
+    <g id="asio-runtime-ratio-xtick_6">
+     <g id="asio-runtime-ratio-line2d_6">
+      <g>
+       <use xlink:href="#asio-runtime-ratio-m350b71c254" x="648.435059" y="944.161846" style="stroke: #000000; stroke-width: 0.8"/>
+      </g>
+     </g>
+     <g id="asio-runtime-ratio-text_6">
+      <text style="font-size: 9px; font-family: 'DejaVu Sans'" transform="translate(625.112117 965.807729) rotate(-20)">timer</text>
+     </g>
+    </g>
+    <g id="asio-runtime-ratio-xtick_7">
+     <g id="asio-runtime-ratio-line2d_7">
+      <g>
+       <use xlink:href="#asio-runtime-ratio-m350b71c254" x="737.996206" y="944.161846" style="stroke: #000000; stroke-width: 0.8"/>
+      </g>
+     </g>
+     <g id="asio-runtime-ratio-text_7">
+      <text style="font-size: 9px; font-family: 'DejaVu Sans'" transform="translate(719.896927 963.906471) rotate(-20)">http</text>
+     </g>
+    </g>
+   </g>
+   <g id="asio-runtime-ratio-matplotlib.axis_2">
+    <g id="asio-runtime-ratio-ytick_1">
+     <g id="asio-runtime-ratio-line2d_8">
+      <defs>
+       <path id="asio-runtime-ratio-m265b7cc7d5" d="M 0 0 
+L -3.5 0 
+" style="stroke: #000000; stroke-width: 0.8"/>
+      </defs>
+      <g>
+       <use xlink:href="#asio-runtime-ratio-m265b7cc7d5" x="155.84875" y="124.691225" style="stroke: #000000; stroke-width: 0.8"/>
+      </g>
+     </g>
+     <g id="asio-runtime-ratio-text_8">
+      <text style="font-size: 9px; font-family: 'DejaVu Sans'; text-anchor: end" x="148.84875" y="128.110522" transform="rotate(-0 148.84875 128.110522)">asyncify-multi-off / node</text>
+     </g>
+    </g>
+    <g id="asio-runtime-ratio-ytick_2">
+     <g id="asio-runtime-ratio-line2d_9">
+      <g>
+       <use xlink:href="#asio-runtime-ratio-m265b7cc7d5" x="155.84875" y="149.905705" style="stroke: #000000; stroke-width: 0.8"/>
+      </g>
+     </g>
+     <g id="asio-runtime-ratio-text_9">
+      <text style="font-size: 9px; font-family: 'DejaVu Sans'; text-anchor: end" x="148.84875" y="153.325002" transform="rotate(-0 148.84875 153.325002)">asyncify-multi-off / page</text>
+     </g>
+    </g>
+    <g id="asio-runtime-ratio-ytick_3">
+     <g id="asio-runtime-ratio-line2d_10">
+      <g>
+       <use xlink:href="#asio-runtime-ratio-m265b7cc7d5" x="155.84875" y="175.120186" style="stroke: #000000; stroke-width: 0.8"/>
+      </g>
+     </g>
+     <g id="asio-runtime-ratio-text_10">
+      <text style="font-size: 9px; font-family: 'DejaVu Sans'; text-anchor: end" x="148.84875" y="178.539483" transform="rotate(-0 148.84875 178.539483)">asyncify-multi-off / worker</text>
+     </g>
+    </g>
+    <g id="asio-runtime-ratio-ytick_4">
+     <g id="asio-runtime-ratio-line2d_11">
+      <g>
+       <use xlink:href="#asio-runtime-ratio-m265b7cc7d5" x="155.84875" y="200.334667" style="stroke: #000000; stroke-width: 0.8"/>
+      </g>
+     </g>
+     <g id="asio-runtime-ratio-text_11">
+      <text style="font-size: 9px; font-family: 'DejaVu Sans'; text-anchor: end" x="148.84875" y="203.753964" transform="rotate(-0 148.84875 203.753964)">asyncify-multi-on / node</text>
+     </g>
+    </g>
+    <g id="asio-runtime-ratio-ytick_5">
+     <g id="asio-runtime-ratio-line2d_12">
+      <g>
+       <use xlink:href="#asio-runtime-ratio-m265b7cc7d5" x="155.84875" y="225.549147" style="stroke: #000000; stroke-width: 0.8"/>
+      </g>
+     </g>
+     <g id="asio-runtime-ratio-text_12">
+      <text style="font-size: 9px; font-family: 'DejaVu Sans'; text-anchor: end" x="148.84875" y="228.968444" transform="rotate(-0 148.84875 228.968444)">asyncify-multi-on / page</text>
+     </g>
+    </g>
+    <g id="asio-runtime-ratio-ytick_6">
+     <g id="asio-runtime-ratio-line2d_13">
+      <g>
+       <use xlink:href="#asio-runtime-ratio-m265b7cc7d5" x="155.84875" y="250.763628" style="stroke: #000000; stroke-width: 0.8"/>
+      </g>
+     </g>
+     <g id="asio-runtime-ratio-text_13">
+      <text style="font-size: 9px; font-family: 'DejaVu Sans'; text-anchor: end" x="148.84875" y="254.182925" transform="rotate(-0 148.84875 254.182925)">asyncify-multi-on / worker</text>
+     </g>
+    </g>
+    <g id="asio-runtime-ratio-ytick_7">
+     <g id="asio-runtime-ratio-line2d_14">
+      <g>
+       <use xlink:href="#asio-runtime-ratio-m265b7cc7d5" x="155.84875" y="275.978109" style="stroke: #000000; stroke-width: 0.8"/>
+      </g>
+     </g>
+     <g id="asio-runtime-ratio-text_14">
+      <text style="font-size: 9px; font-family: 'DejaVu Sans'; text-anchor: end" x="148.84875" y="279.397406" transform="rotate(-0 148.84875 279.397406)">asyncify-single-off / node</text>
+     </g>
+    </g>
+    <g id="asio-runtime-ratio-ytick_8">
+     <g id="asio-runtime-ratio-line2d_15">
+      <g>
+       <use xlink:href="#asio-runtime-ratio-m265b7cc7d5" x="155.84875" y="301.192589" style="stroke: #000000; stroke-width: 0.8"/>
+      </g>
+     </g>
+     <g id="asio-runtime-ratio-text_15">
+      <text style="font-size: 9px; font-family: 'DejaVu Sans'; text-anchor: end" x="148.84875" y="304.611886" transform="rotate(-0 148.84875 304.611886)">asyncify-single-off / page</text>
+     </g>
+    </g>
+    <g id="asio-runtime-ratio-ytick_9">
+     <g id="asio-runtime-ratio-line2d_16">
+      <g>
+       <use xlink:href="#asio-runtime-ratio-m265b7cc7d5" x="155.84875" y="326.40707" style="stroke: #000000; stroke-width: 0.8"/>
+      </g>
+     </g>
+     <g id="asio-runtime-ratio-text_16">
+      <text style="font-size: 9px; font-family: 'DejaVu Sans'; text-anchor: end" x="148.84875" y="329.826367" transform="rotate(-0 148.84875 329.826367)">asyncify-single-off / worker</text>
+     </g>
+    </g>
+    <g id="asio-runtime-ratio-ytick_10">
+     <g id="asio-runtime-ratio-line2d_17">
+      <g>
+       <use xlink:href="#asio-runtime-ratio-m265b7cc7d5" x="155.84875" y="351.621551" style="stroke: #000000; stroke-width: 0.8"/>
+      </g>
+     </g>
+     <g id="asio-runtime-ratio-text_17">
+      <text style="font-size: 9px; font-family: 'DejaVu Sans'; text-anchor: end" x="148.84875" y="355.040848" transform="rotate(-0 148.84875 355.040848)">asyncify-single-on / node</text>
+     </g>
+    </g>
+    <g id="asio-runtime-ratio-ytick_11">
+     <g id="asio-runtime-ratio-line2d_18">
+      <g>
+       <use xlink:href="#asio-runtime-ratio-m265b7cc7d5" x="155.84875" y="376.836031" style="stroke: #000000; stroke-width: 0.8"/>
+      </g>
+     </g>
+     <g id="asio-runtime-ratio-text_18">
+      <text style="font-size: 9px; font-family: 'DejaVu Sans'; text-anchor: end" x="148.84875" y="380.255328" transform="rotate(-0 148.84875 380.255328)">asyncify-single-on / page</text>
+     </g>
+    </g>
+    <g id="asio-runtime-ratio-ytick_12">
+     <g id="asio-runtime-ratio-line2d_19">
+      <g>
+       <use xlink:href="#asio-runtime-ratio-m265b7cc7d5" x="155.84875" y="402.050512" style="stroke: #000000; stroke-width: 0.8"/>
+      </g>
+     </g>
+     <g id="asio-runtime-ratio-text_19">
+      <text style="font-size: 9px; font-family: 'DejaVu Sans'; text-anchor: end" x="148.84875" y="405.469809" transform="rotate(-0 148.84875 405.469809)">asyncify-single-on / worker</text>
+     </g>
+    </g>
+    <g id="asio-runtime-ratio-ytick_13">
+     <g id="asio-runtime-ratio-line2d_20">
+      <g>
+       <use xlink:href="#asio-runtime-ratio-m265b7cc7d5" x="155.84875" y="427.264993" style="stroke: #000000; stroke-width: 0.8"/>
+      </g>
+     </g>
+     <g id="asio-runtime-ratio-text_20">
+      <text style="font-size: 9px; font-family: 'DejaVu Sans'; text-anchor: end" x="148.84875" y="430.68429" transform="rotate(-0 148.84875 430.68429)">jspi-multi-off / node</text>
+     </g>
+    </g>
+    <g id="asio-runtime-ratio-ytick_14">
+     <g id="asio-runtime-ratio-line2d_21">
+      <g>
+       <use xlink:href="#asio-runtime-ratio-m265b7cc7d5" x="155.84875" y="452.479473" style="stroke: #000000; stroke-width: 0.8"/>
+      </g>
+     </g>
+     <g id="asio-runtime-ratio-text_21">
+      <text style="font-size: 9px; font-family: 'DejaVu Sans'; text-anchor: end" x="148.84875" y="455.89877" transform="rotate(-0 148.84875 455.89877)">jspi-multi-off / page</text>
+     </g>
+    </g>
+    <g id="asio-runtime-ratio-ytick_15">
+     <g id="asio-runtime-ratio-line2d_22">
+      <g>
+       <use xlink:href="#asio-runtime-ratio-m265b7cc7d5" x="155.84875" y="477.693954" style="stroke: #000000; stroke-width: 0.8"/>
+      </g>
+     </g>
+     <g id="asio-runtime-ratio-text_22">
+      <text style="font-size: 9px; font-family: 'DejaVu Sans'; text-anchor: end" x="148.84875" y="481.113251" transform="rotate(-0 148.84875 481.113251)">jspi-multi-off / worker</text>
+     </g>
+    </g>
+    <g id="asio-runtime-ratio-ytick_16">
+     <g id="asio-runtime-ratio-line2d_23">
+      <g>
+       <use xlink:href="#asio-runtime-ratio-m265b7cc7d5" x="155.84875" y="502.908435" style="stroke: #000000; stroke-width: 0.8"/>
+      </g>
+     </g>
+     <g id="asio-runtime-ratio-text_23">
+      <text style="font-size: 9px; font-family: 'DejaVu Sans'; text-anchor: end" x="148.84875" y="506.327732" transform="rotate(-0 148.84875 506.327732)">jspi-multi-on / node</text>
+     </g>
+    </g>
+    <g id="asio-runtime-ratio-ytick_17">
+     <g id="asio-runtime-ratio-line2d_24">
+      <g>
+       <use xlink:href="#asio-runtime-ratio-m265b7cc7d5" x="155.84875" y="528.122915" style="stroke: #000000; stroke-width: 0.8"/>
+      </g>
+     </g>
+     <g id="asio-runtime-ratio-text_24">
+      <text style="font-size: 9px; font-family: 'DejaVu Sans'; text-anchor: end" x="148.84875" y="531.542212" transform="rotate(-0 148.84875 531.542212)">jspi-multi-on / page</text>
+     </g>
+    </g>
+    <g id="asio-runtime-ratio-ytick_18">
+     <g id="asio-runtime-ratio-line2d_25">
+      <g>
+       <use xlink:href="#asio-runtime-ratio-m265b7cc7d5" x="155.84875" y="553.337396" style="stroke: #000000; stroke-width: 0.8"/>
+      </g>
+     </g>
+     <g id="asio-runtime-ratio-text_25">
+      <text style="font-size: 9px; font-family: 'DejaVu Sans'; text-anchor: end" x="148.84875" y="556.756693" transform="rotate(-0 148.84875 556.756693)">jspi-multi-on / worker</text>
+     </g>
+    </g>
+    <g id="asio-runtime-ratio-ytick_19">
+     <g id="asio-runtime-ratio-line2d_26">
+      <g>
+       <use xlink:href="#asio-runtime-ratio-m265b7cc7d5" x="155.84875" y="578.551877" style="stroke: #000000; stroke-width: 0.8"/>
+      </g>
+     </g>
+     <g id="asio-runtime-ratio-text_26">
+      <text style="font-size: 9px; font-family: 'DejaVu Sans'; text-anchor: end" x="148.84875" y="581.971174" transform="rotate(-0 148.84875 581.971174)">jspi-single-off / node</text>
+     </g>
+    </g>
+    <g id="asio-runtime-ratio-ytick_20">
+     <g id="asio-runtime-ratio-line2d_27">
+      <g>
+       <use xlink:href="#asio-runtime-ratio-m265b7cc7d5" x="155.84875" y="603.766357" style="stroke: #000000; stroke-width: 0.8"/>
+      </g>
+     </g>
+     <g id="asio-runtime-ratio-text_27">
+      <text style="font-size: 9px; font-family: 'DejaVu Sans'; text-anchor: end" x="148.84875" y="607.185654" transform="rotate(-0 148.84875 607.185654)">jspi-single-off / page</text>
+     </g>
+    </g>
+    <g id="asio-runtime-ratio-ytick_21">
+     <g id="asio-runtime-ratio-line2d_28">
+      <g>
+       <use xlink:href="#asio-runtime-ratio-m265b7cc7d5" x="155.84875" y="628.980838" style="stroke: #000000; stroke-width: 0.8"/>
+      </g>
+     </g>
+     <g id="asio-runtime-ratio-text_28">
+      <text style="font-size: 9px; font-family: 'DejaVu Sans'; text-anchor: end" x="148.84875" y="632.400135" transform="rotate(-0 148.84875 632.400135)">jspi-single-off / worker</text>
+     </g>
+    </g>
+    <g id="asio-runtime-ratio-ytick_22">
+     <g id="asio-runtime-ratio-line2d_29">
+      <g>
+       <use xlink:href="#asio-runtime-ratio-m265b7cc7d5" x="155.84875" y="654.195319" style="stroke: #000000; stroke-width: 0.8"/>
+      </g>
+     </g>
+     <g id="asio-runtime-ratio-text_29">
+      <text style="font-size: 9px; font-family: 'DejaVu Sans'; text-anchor: end" x="148.84875" y="657.614616" transform="rotate(-0 148.84875 657.614616)">jspi-single-on / node</text>
+     </g>
+    </g>
+    <g id="asio-runtime-ratio-ytick_23">
+     <g id="asio-runtime-ratio-line2d_30">
+      <g>
+       <use xlink:href="#asio-runtime-ratio-m265b7cc7d5" x="155.84875" y="679.409799" style="stroke: #000000; stroke-width: 0.8"/>
+      </g>
+     </g>
+     <g id="asio-runtime-ratio-text_30">
+      <text style="font-size: 9px; font-family: 'DejaVu Sans'; text-anchor: end" x="148.84875" y="682.829096" transform="rotate(-0 148.84875 682.829096)">jspi-single-on / page</text>
+     </g>
+    </g>
+    <g id="asio-runtime-ratio-ytick_24">
+     <g id="asio-runtime-ratio-line2d_31">
+      <g>
+       <use xlink:href="#asio-runtime-ratio-m265b7cc7d5" x="155.84875" y="704.62428" style="stroke: #000000; stroke-width: 0.8"/>
+      </g>
+     </g>
+     <g id="asio-runtime-ratio-text_31">
+      <text style="font-size: 9px; font-family: 'DejaVu Sans'; text-anchor: end" x="148.84875" y="708.043577" transform="rotate(-0 148.84875 708.043577)">jspi-single-on / worker</text>
+     </g>
+    </g>
+    <g id="asio-runtime-ratio-ytick_25">
+     <g id="asio-runtime-ratio-line2d_32">
+      <g>
+       <use xlink:href="#asio-runtime-ratio-m265b7cc7d5" x="155.84875" y="729.838761" style="stroke: #000000; stroke-width: 0.8"/>
+      </g>
+     </g>
+     <g id="asio-runtime-ratio-text_32">
+      <text style="font-size: 9px; font-family: 'DejaVu Sans'; text-anchor: end" x="148.84875" y="733.258058" transform="rotate(-0 148.84875 733.258058)">native-multi-off / native</text>
+     </g>
+    </g>
+    <g id="asio-runtime-ratio-ytick_26">
+     <g id="asio-runtime-ratio-line2d_33">
+      <g>
+       <use xlink:href="#asio-runtime-ratio-m265b7cc7d5" x="155.84875" y="755.053241" style="stroke: #000000; stroke-width: 0.8"/>
+      </g>
+     </g>
+     <g id="asio-runtime-ratio-text_33">
+      <text style="font-size: 9px; font-family: 'DejaVu Sans'; text-anchor: end" x="148.84875" y="758.472538" transform="rotate(-0 148.84875 758.472538)">native-multi-on / native</text>
+     </g>
+    </g>
+    <g id="asio-runtime-ratio-ytick_27">
+     <g id="asio-runtime-ratio-line2d_34">
+      <g>
+       <use xlink:href="#asio-runtime-ratio-m265b7cc7d5" x="155.84875" y="780.267722" style="stroke: #000000; stroke-width: 0.8"/>
+      </g>
+     </g>
+     <g id="asio-runtime-ratio-text_34">
+      <text style="font-size: 9px; font-family: 'DejaVu Sans'; text-anchor: end" x="148.84875" y="783.687019" transform="rotate(-0 148.84875 783.687019)">native-single-off / native</text>
+     </g>
+    </g>
+    <g id="asio-runtime-ratio-ytick_28">
+     <g id="asio-runtime-ratio-line2d_35">
+      <g>
+       <use xlink:href="#asio-runtime-ratio-m265b7cc7d5" x="155.84875" y="805.482203" style="stroke: #000000; stroke-width: 0.8"/>
+      </g>
+     </g>
+     <g id="asio-runtime-ratio-text_35">
+      <text style="font-size: 9px; font-family: 'DejaVu Sans'; text-anchor: end" x="148.84875" y="808.9015" transform="rotate(-0 148.84875 808.9015)">native-single-on / native</text>
+     </g>
+    </g>
+    <g id="asio-runtime-ratio-ytick_29">
+     <g id="asio-runtime-ratio-line2d_36">
+      <g>
+       <use xlink:href="#asio-runtime-ratio-m265b7cc7d5" x="155.84875" y="830.696683" style="stroke: #000000; stroke-width: 0.8"/>
+      </g>
+     </g>
+     <g id="asio-runtime-ratio-text_36">
+      <text style="font-size: 9px; font-family: 'DejaVu Sans'; text-anchor: end" x="148.84875" y="834.11598" transform="rotate(-0 148.84875 834.11598)">wasip2-single-off / wasmtime</text>
+     </g>
+    </g>
+    <g id="asio-runtime-ratio-ytick_30">
+     <g id="asio-runtime-ratio-line2d_37">
+      <g>
+       <use xlink:href="#asio-runtime-ratio-m265b7cc7d5" x="155.84875" y="855.911164" style="stroke: #000000; stroke-width: 0.8"/>
+      </g>
+     </g>
+     <g id="asio-runtime-ratio-text_37">
+      <text style="font-size: 9px; font-family: 'DejaVu Sans'; text-anchor: end" x="148.84875" y="859.330461" transform="rotate(-0 148.84875 859.330461)">wasip2-single-on / wasmtime</text>
+     </g>
+    </g>
+    <g id="asio-runtime-ratio-ytick_31">
+     <g id="asio-runtime-ratio-line2d_38">
+      <g>
+       <use xlink:href="#asio-runtime-ratio-m265b7cc7d5" x="155.84875" y="881.125645" style="stroke: #000000; stroke-width: 0.8"/>
+      </g>
+     </g>
+     <g id="asio-runtime-ratio-text_38">
+      <text style="font-size: 9px; font-family: 'DejaVu Sans'; text-anchor: end" x="148.84875" y="884.544942" transform="rotate(-0 148.84875 884.544942)">wasip3-multi-off / wasmtime</text>
+     </g>
+    </g>
+    <g id="asio-runtime-ratio-ytick_32">
+     <g id="asio-runtime-ratio-line2d_39">
+      <g>
+       <use xlink:href="#asio-runtime-ratio-m265b7cc7d5" x="155.84875" y="906.340125" style="stroke: #000000; stroke-width: 0.8"/>
+      </g>
+     </g>
+     <g id="asio-runtime-ratio-text_39">
+      <text style="font-size: 9px; font-family: 'DejaVu Sans'; text-anchor: end" x="148.84875" y="909.759422" transform="rotate(-0 148.84875 909.759422)">wasip3-single-off / wasmtime</text>
+     </g>
+    </g>
+    <g id="asio-runtime-ratio-ytick_33">
+     <g id="asio-runtime-ratio-line2d_40">
+      <g>
+       <use xlink:href="#asio-runtime-ratio-m265b7cc7d5" x="155.84875" y="931.554606" style="stroke: #000000; stroke-width: 0.8"/>
+      </g>
+     </g>
+     <g id="asio-runtime-ratio-text_40">
+      <text style="font-size: 9px; font-family: 'DejaVu Sans'; text-anchor: end" x="148.84875" y="934.973903" transform="rotate(-0 148.84875 934.973903)">wasip3-single-on / wasmtime</text>
+     </g>
+    </g>
+   </g>
+   <g id="asio-runtime-ratio-patch_3">
+    <path d="M 155.84875 944.161846 
+L 155.84875 112.083984 
+" style="fill: none; stroke: #000000; stroke-width: 0.8; stroke-linejoin: miter; stroke-linecap: square"/>
+   </g>
+   <g id="asio-runtime-ratio-patch_4">
+    <path d="M 782.776779 944.161846 
+L 782.776779 112.083984 
+" style="fill: none; stroke: #000000; stroke-width: 0.8; stroke-linejoin: miter; stroke-linecap: square"/>
+   </g>
+   <g id="asio-runtime-ratio-patch_5">
+    <path d="M 155.84875 944.161846 
+L 782.776779 944.161846 
+" style="fill: none; stroke: #000000; stroke-width: 0.8; stroke-linejoin: miter; stroke-linecap: square"/>
+   </g>
+   <g id="asio-runtime-ratio-patch_6">
+    <path d="M 155.84875 112.083984 
+L 782.776779 112.083984 
+" style="fill: none; stroke: #000000; stroke-width: 0.8; stroke-linejoin: miter; stroke-linecap: square"/>
+   </g>
+   <g id="asio-runtime-ratio-text_41">
+    <text style="font-size: 8px; font-family: 'DejaVu Sans'; text-anchor: middle; fill: #17212b" x="200.629324" y="126.76935" transform="rotate(-0 200.629324 126.76935)">0.07</text>
+   </g>
+   <g id="asio-runtime-ratio-text_42">
+    <text style="font-size: 8px; font-family: 'DejaVu Sans'; text-anchor: middle; fill: #17212b" x="290.190471" y="126.76935" transform="rotate(-0 290.190471 126.76935)">0.08</text>
+   </g>
+   <g id="asio-runtime-ratio-text_43">
+    <text style="font-size: 8px; font-family: 'DejaVu Sans'; text-anchor: middle; fill: #17212b" x="379.751618" y="126.76935" transform="rotate(-0 379.751618 126.76935)">0.12</text>
+   </g>
+   <g id="asio-runtime-ratio-text_44">
+    <text style="font-size: 8px; font-family: 'DejaVu Sans'; text-anchor: middle; fill: #17212b" x="469.312765" y="126.76935" transform="rotate(-0 469.312765 126.76935)">0.12</text>
+   </g>
+   <g id="asio-runtime-ratio-text_45">
+    <text style="font-size: 8px; font-family: 'DejaVu Sans'; text-anchor: middle; fill: #17212b" x="558.873912" y="126.76935" transform="rotate(-0 558.873912 126.76935)">0.06</text>
+   </g>
+   <g id="asio-runtime-ratio-text_46">
+    <text style="font-size: 8px; font-family: 'DejaVu Sans'; text-anchor: middle; fill: #ffffff" x="648.435059" y="126.76935" transform="rotate(-0 648.435059 126.76935)">5.89</text>
+   </g>
+   <g id="asio-runtime-ratio-text_47">
+    <text style="font-size: 8px; font-family: 'DejaVu Sans'; text-anchor: middle; fill: #ffffff" x="737.996206" y="126.76935" transform="rotate(-0 737.996206 126.76935)">3.51</text>
+   </g>
+   <g id="asio-runtime-ratio-text_48">
+    <text style="font-size: 8px; font-family: 'DejaVu Sans'; text-anchor: middle; fill: #17212b" x="200.629324" y="151.98383" transform="rotate(-0 200.629324 151.98383)">0.06</text>
+   </g>
+   <g id="asio-runtime-ratio-text_49">
+    <text style="font-size: 8px; font-family: 'DejaVu Sans'; text-anchor: middle; fill: #17212b" x="290.190471" y="151.98383" transform="rotate(-0 290.190471 151.98383)">0.07</text>
+   </g>
+   <g id="asio-runtime-ratio-text_50">
+    <text style="font-size: 8px; font-family: 'DejaVu Sans'; text-anchor: middle; fill: #17212b" x="379.751618" y="151.98383" transform="rotate(-0 379.751618 151.98383)">0.12</text>
+   </g>
+   <g id="asio-runtime-ratio-text_51">
+    <text style="font-size: 8px; font-family: 'DejaVu Sans'; text-anchor: middle; fill: #17212b" x="469.312765" y="151.98383" transform="rotate(-0 469.312765 151.98383)">0.11</text>
+   </g>
+   <g id="asio-runtime-ratio-text_52">
+    <text style="font-size: 8px; font-family: 'DejaVu Sans'; text-anchor: middle; fill: #17212b" x="558.873912" y="151.98383" transform="rotate(-0 558.873912 151.98383)">0.06</text>
+   </g>
+   <g id="asio-runtime-ratio-text_53">
+    <text style="font-size: 8px; font-family: 'DejaVu Sans'; text-anchor: middle; fill: #ffffff" x="648.435059" y="151.98383" transform="rotate(-0 648.435059 151.98383)">5.31</text>
+   </g>
+   <g id="asio-runtime-ratio-text_54">
+    <text style="font-size: 8px; font-family: 'DejaVu Sans'; text-anchor: middle; fill: #ffffff" x="737.996206" y="151.98383" transform="rotate(-0 737.996206 151.98383)">3.13</text>
+   </g>
+   <g id="asio-runtime-ratio-text_55">
+    <text style="font-size: 8px; font-family: 'DejaVu Sans'; text-anchor: middle; fill: #17212b" x="200.629324" y="177.198311" transform="rotate(-0 200.629324 177.198311)">0.06</text>
+   </g>
+   <g id="asio-runtime-ratio-text_56">
+    <text style="font-size: 8px; font-family: 'DejaVu Sans'; text-anchor: middle; fill: #17212b" x="290.190471" y="177.198311" transform="rotate(-0 290.190471 177.198311)">0.07</text>
+   </g>
+   <g id="asio-runtime-ratio-text_57">
+    <text style="font-size: 8px; font-family: 'DejaVu Sans'; text-anchor: middle; fill: #17212b" x="379.751618" y="177.198311" transform="rotate(-0 379.751618 177.198311)">0.12</text>
+   </g>
+   <g id="asio-runtime-ratio-text_58">
+    <text style="font-size: 8px; font-family: 'DejaVu Sans'; text-anchor: middle; fill: #17212b" x="469.312765" y="177.198311" transform="rotate(-0 469.312765 177.198311)">0.12</text>
+   </g>
+   <g id="asio-runtime-ratio-text_59">
+    <text style="font-size: 8px; font-family: 'DejaVu Sans'; text-anchor: middle; fill: #17212b" x="558.873912" y="177.198311" transform="rotate(-0 558.873912 177.198311)">0.07</text>
+   </g>
+   <g id="asio-runtime-ratio-text_60">
+    <text style="font-size: 8px; font-family: 'DejaVu Sans'; text-anchor: middle; fill: #ffffff" x="648.435059" y="177.198311" transform="rotate(-0 648.435059 177.198311)">5.28</text>
+   </g>
+   <g id="asio-runtime-ratio-text_61">
+    <text style="font-size: 8px; font-family: 'DejaVu Sans'; text-anchor: middle; fill: #ffffff" x="737.996206" y="177.198311" transform="rotate(-0 737.996206 177.198311)">3.26</text>
+   </g>
+   <g id="asio-runtime-ratio-text_62">
+    <text style="font-size: 8px; font-family: 'DejaVu Sans'; text-anchor: middle; fill: #17212b" x="200.629324" y="202.412792" transform="rotate(-0 200.629324 202.412792)">0.33</text>
+   </g>
+   <g id="asio-runtime-ratio-text_63">
+    <text style="font-size: 8px; font-family: 'DejaVu Sans'; text-anchor: middle; fill: #17212b" x="290.190471" y="202.412792" transform="rotate(-0 290.190471 202.412792)">0.35</text>
+   </g>
+   <g id="asio-runtime-ratio-text_64">
+    <text style="font-size: 8px; font-family: 'DejaVu Sans'; text-anchor: middle; fill: #17212b" x="379.751618" y="202.412792" transform="rotate(-0 379.751618 202.412792)">0.38</text>
+   </g>
+   <g id="asio-runtime-ratio-text_65">
+    <text style="font-size: 8px; font-family: 'DejaVu Sans'; text-anchor: middle; fill: #17212b" x="469.312765" y="202.412792" transform="rotate(-0 469.312765 202.412792)">0.38</text>
+   </g>
+   <g id="asio-runtime-ratio-text_66">
+    <text style="font-size: 8px; font-family: 'DejaVu Sans'; text-anchor: middle; fill: #17212b" x="558.873912" y="202.412792" transform="rotate(-0 558.873912 202.412792)">0.27</text>
+   </g>
+   <g id="asio-runtime-ratio-text_67">
+    <text style="font-size: 8px; font-family: 'DejaVu Sans'; text-anchor: middle; fill: #ffffff" x="648.435059" y="202.412792" transform="rotate(-0 648.435059 202.412792)">8.24</text>
+   </g>
+   <g id="asio-runtime-ratio-text_68">
+    <text style="font-size: 8px; font-family: 'DejaVu Sans'; text-anchor: middle; fill: #ffffff" x="737.996206" y="202.412792" transform="rotate(-0 737.996206 202.412792)">4.59</text>
+   </g>
+   <g id="asio-runtime-ratio-text_69">
+    <text style="font-size: 8px; font-family: 'DejaVu Sans'; text-anchor: middle; fill: #17212b" x="200.629324" y="227.627272" transform="rotate(-0 200.629324 227.627272)">0.24</text>
+   </g>
+   <g id="asio-runtime-ratio-text_70">
+    <text style="font-size: 8px; font-family: 'DejaVu Sans'; text-anchor: middle; fill: #17212b" x="290.190471" y="227.627272" transform="rotate(-0 290.190471 227.627272)">0.28</text>
+   </g>
+   <g id="asio-runtime-ratio-text_71">
+    <text style="font-size: 8px; font-family: 'DejaVu Sans'; text-anchor: middle; fill: #17212b" x="379.751618" y="227.627272" transform="rotate(-0 379.751618 227.627272)">0.34</text>
+   </g>
+   <g id="asio-runtime-ratio-text_72">
+    <text style="font-size: 8px; font-family: 'DejaVu Sans'; text-anchor: middle; fill: #17212b" x="469.312765" y="227.627272" transform="rotate(-0 469.312765 227.627272)">0.33</text>
+   </g>
+   <g id="asio-runtime-ratio-text_73">
+    <text style="font-size: 8px; font-family: 'DejaVu Sans'; text-anchor: middle; fill: #17212b" x="558.873912" y="227.627272" transform="rotate(-0 558.873912 227.627272)">0.22</text>
+   </g>
+   <g id="asio-runtime-ratio-text_74">
+    <text style="font-size: 8px; font-family: 'DejaVu Sans'; text-anchor: middle; fill: #ffffff" x="648.435059" y="227.627272" transform="rotate(-0 648.435059 227.627272)">8.18</text>
+   </g>
+   <g id="asio-runtime-ratio-text_75">
+    <text style="font-size: 8px; font-family: 'DejaVu Sans'; text-anchor: middle; fill: #ffffff" x="737.996206" y="227.627272" transform="rotate(-0 737.996206 227.627272)">3.74</text>
+   </g>
+   <g id="asio-runtime-ratio-text_76">
+    <text style="font-size: 8px; font-family: 'DejaVu Sans'; text-anchor: middle; fill: #17212b" x="200.629324" y="252.841753" transform="rotate(-0 200.629324 252.841753)">0.24</text>
+   </g>
+   <g id="asio-runtime-ratio-text_77">
+    <text style="font-size: 8px; font-family: 'DejaVu Sans'; text-anchor: middle; fill: #17212b" x="290.190471" y="252.841753" transform="rotate(-0 290.190471 252.841753)">0.28</text>
+   </g>
+   <g id="asio-runtime-ratio-text_78">
+    <text style="font-size: 8px; font-family: 'DejaVu Sans'; text-anchor: middle; fill: #17212b" x="379.751618" y="252.841753" transform="rotate(-0 379.751618 252.841753)">0.34</text>
+   </g>
+   <g id="asio-runtime-ratio-text_79">
+    <text style="font-size: 8px; font-family: 'DejaVu Sans'; text-anchor: middle; fill: #17212b" x="469.312765" y="252.841753" transform="rotate(-0 469.312765 252.841753)">0.33</text>
+   </g>
+   <g id="asio-runtime-ratio-text_80">
+    <text style="font-size: 8px; font-family: 'DejaVu Sans'; text-anchor: middle; fill: #17212b" x="558.873912" y="252.841753" transform="rotate(-0 558.873912 252.841753)">0.21</text>
+   </g>
+   <g id="asio-runtime-ratio-text_81">
+    <text style="font-size: 8px; font-family: 'DejaVu Sans'; text-anchor: middle; fill: #ffffff" x="648.435059" y="252.841753" transform="rotate(-0 648.435059 252.841753)">7.65</text>
+   </g>
+   <g id="asio-runtime-ratio-text_82">
+    <text style="font-size: 8px; font-family: 'DejaVu Sans'; text-anchor: middle; fill: #ffffff" x="737.996206" y="252.841753" transform="rotate(-0 737.996206 252.841753)">3.77</text>
+   </g>
+   <g id="asio-runtime-ratio-text_83">
+    <text style="font-size: 8px; font-family: 'DejaVu Sans'; text-anchor: middle; fill: #17212b" x="200.629324" y="278.056234" transform="rotate(-0 200.629324 278.056234)">0.08</text>
+   </g>
+   <g id="asio-runtime-ratio-text_84">
+    <text style="font-size: 8px; font-family: 'DejaVu Sans'; text-anchor: middle; fill: #17212b" x="290.190471" y="278.056234" transform="rotate(-0 290.190471 278.056234)">0.10</text>
+   </g>
+   <g id="asio-runtime-ratio-text_85">
+    <text style="font-size: 8px; font-family: 'DejaVu Sans'; text-anchor: middle; fill: #17212b" x="379.751618" y="278.056234" transform="rotate(-0 379.751618 278.056234)">0.11</text>
+   </g>
+   <g id="asio-runtime-ratio-text_86">
+    <text style="font-size: 8px; font-family: 'DejaVu Sans'; text-anchor: middle; fill: #17212b" x="469.312765" y="278.056234" transform="rotate(-0 469.312765 278.056234)">0.11</text>
+   </g>
+   <g id="asio-runtime-ratio-text_87">
+    <text style="font-size: 8px; font-family: 'DejaVu Sans'; text-anchor: middle; fill: #17212b" x="558.873912" y="278.056234" transform="rotate(-0 558.873912 278.056234)">0.07</text>
+   </g>
+   <g id="asio-runtime-ratio-text_88">
+    <text style="font-size: 8px; font-family: 'DejaVu Sans'; text-anchor: middle; fill: #ffffff" x="648.435059" y="278.056234" transform="rotate(-0 648.435059 278.056234)">7.27</text>
+   </g>
+   <g id="asio-runtime-ratio-text_89">
+    <text style="font-size: 8px; font-family: 'DejaVu Sans'; text-anchor: middle; fill: #ffffff" x="737.996206" y="278.056234" transform="rotate(-0 737.996206 278.056234)">3.08</text>
+   </g>
+   <g id="asio-runtime-ratio-text_90">
+    <text style="font-size: 8px; font-family: 'DejaVu Sans'; text-anchor: middle; fill: #17212b" x="200.629324" y="303.270714" transform="rotate(-0 200.629324 303.270714)">0.05</text>
+   </g>
+   <g id="asio-runtime-ratio-text_91">
+    <text style="font-size: 8px; font-family: 'DejaVu Sans'; text-anchor: middle; fill: #17212b" x="290.190471" y="303.270714" transform="rotate(-0 290.190471 303.270714)">0.07</text>
+   </g>
+   <g id="asio-runtime-ratio-text_92">
+    <text style="font-size: 8px; font-family: 'DejaVu Sans'; text-anchor: middle; fill: #17212b" x="379.751618" y="303.270714" transform="rotate(-0 379.751618 303.270714)">0.09</text>
+   </g>
+   <g id="asio-runtime-ratio-text_93">
+    <text style="font-size: 8px; font-family: 'DejaVu Sans'; text-anchor: middle; fill: #17212b" x="469.312765" y="303.270714" transform="rotate(-0 469.312765 303.270714)">0.09</text>
+   </g>
+   <g id="asio-runtime-ratio-text_94">
+    <text style="font-size: 8px; font-family: 'DejaVu Sans'; text-anchor: middle; fill: #17212b" x="558.873912" y="303.270714" transform="rotate(-0 558.873912 303.270714)">0.05</text>
+   </g>
+   <g id="asio-runtime-ratio-text_95">
+    <text style="font-size: 8px; font-family: 'DejaVu Sans'; text-anchor: middle; fill: #ffffff" x="648.435059" y="303.270714" transform="rotate(-0 648.435059 303.270714)">4.81</text>
+   </g>
+   <g id="asio-runtime-ratio-text_96">
+    <text style="font-size: 8px; font-family: 'DejaVu Sans'; text-anchor: middle; fill: #ffffff" x="737.996206" y="303.270714" transform="rotate(-0 737.996206 303.270714)">2.87</text>
+   </g>
+   <g id="asio-runtime-ratio-text_97">
+    <text style="font-size: 8px; font-family: 'DejaVu Sans'; text-anchor: middle; fill: #17212b" x="200.629324" y="328.485195" transform="rotate(-0 200.629324 328.485195)">0.05</text>
+   </g>
+   <g id="asio-runtime-ratio-text_98">
+    <text style="font-size: 8px; font-family: 'DejaVu Sans'; text-anchor: middle; fill: #17212b" x="290.190471" y="328.485195" transform="rotate(-0 290.190471 328.485195)">0.07</text>
+   </g>
+   <g id="asio-runtime-ratio-text_99">
+    <text style="font-size: 8px; font-family: 'DejaVu Sans'; text-anchor: middle; fill: #17212b" x="379.751618" y="328.485195" transform="rotate(-0 379.751618 328.485195)">0.09</text>
+   </g>
+   <g id="asio-runtime-ratio-text_100">
+    <text style="font-size: 8px; font-family: 'DejaVu Sans'; text-anchor: middle; fill: #17212b" x="469.312765" y="328.485195" transform="rotate(-0 469.312765 328.485195)">0.09</text>
+   </g>
+   <g id="asio-runtime-ratio-text_101">
+    <text style="font-size: 8px; font-family: 'DejaVu Sans'; text-anchor: middle; fill: #17212b" x="558.873912" y="328.485195" transform="rotate(-0 558.873912 328.485195)">0.05</text>
+   </g>
+   <g id="asio-runtime-ratio-text_102">
+    <text style="font-size: 8px; font-family: 'DejaVu Sans'; text-anchor: middle; fill: #ffffff" x="648.435059" y="328.485195" transform="rotate(-0 648.435059 328.485195)">4.66</text>
+   </g>
+   <g id="asio-runtime-ratio-text_103">
+    <text style="font-size: 8px; font-family: 'DejaVu Sans'; text-anchor: middle; fill: #ffffff" x="737.996206" y="328.485195" transform="rotate(-0 737.996206 328.485195)">2.89</text>
+   </g>
+   <g id="asio-runtime-ratio-text_104">
+    <text style="font-size: 8px; font-family: 'DejaVu Sans'; text-anchor: middle; fill: #17212b" x="200.629324" y="353.699676" transform="rotate(-0 200.629324 353.699676)">0.33</text>
+   </g>
+   <g id="asio-runtime-ratio-text_105">
+    <text style="font-size: 8px; font-family: 'DejaVu Sans'; text-anchor: middle; fill: #17212b" x="290.190471" y="353.699676" transform="rotate(-0 290.190471 353.699676)">0.33</text>
+   </g>
+   <g id="asio-runtime-ratio-text_106">
+    <text style="font-size: 8px; font-family: 'DejaVu Sans'; text-anchor: middle; fill: #17212b" x="379.751618" y="353.699676" transform="rotate(-0 379.751618 353.699676)">0.36</text>
+   </g>
+   <g id="asio-runtime-ratio-text_107">
+    <text style="font-size: 8px; font-family: 'DejaVu Sans'; text-anchor: middle; fill: #17212b" x="469.312765" y="353.699676" transform="rotate(-0 469.312765 353.699676)">0.36</text>
+   </g>
+   <g id="asio-runtime-ratio-text_108">
+    <text style="font-size: 8px; font-family: 'DejaVu Sans'; text-anchor: middle; fill: #17212b" x="558.873912" y="353.699676" transform="rotate(-0 558.873912 353.699676)">0.28</text>
+   </g>
+   <g id="asio-runtime-ratio-text_109">
+    <text style="font-size: 8px; font-family: 'DejaVu Sans'; text-anchor: middle; fill: #ffffff" x="648.435059" y="353.699676" transform="rotate(-0 648.435059 353.699676)">7.13</text>
+   </g>
+   <g id="asio-runtime-ratio-text_110">
+    <text style="font-size: 8px; font-family: 'DejaVu Sans'; text-anchor: middle; fill: #ffffff" x="737.996206" y="353.699676" transform="rotate(-0 737.996206 353.699676)">4.17</text>
+   </g>
+   <g id="asio-runtime-ratio-text_111">
+    <text style="font-size: 8px; font-family: 'DejaVu Sans'; text-anchor: middle; fill: #17212b" x="200.629324" y="378.914156" transform="rotate(-0 200.629324 378.914156)">0.25</text>
+   </g>
+   <g id="asio-runtime-ratio-text_112">
+    <text style="font-size: 8px; font-family: 'DejaVu Sans'; text-anchor: middle; fill: #17212b" x="290.190471" y="378.914156" transform="rotate(-0 290.190471 378.914156)">0.26</text>
+   </g>
+   <g id="asio-runtime-ratio-text_113">
+    <text style="font-size: 8px; font-family: 'DejaVu Sans'; text-anchor: middle; fill: #17212b" x="379.751618" y="378.914156" transform="rotate(-0 379.751618 378.914156)">0.31</text>
+   </g>
+   <g id="asio-runtime-ratio-text_114">
+    <text style="font-size: 8px; font-family: 'DejaVu Sans'; text-anchor: middle; fill: #17212b" x="469.312765" y="378.914156" transform="rotate(-0 469.312765 378.914156)">0.30</text>
+   </g>
+   <g id="asio-runtime-ratio-text_115">
+    <text style="font-size: 8px; font-family: 'DejaVu Sans'; text-anchor: middle; fill: #17212b" x="558.873912" y="378.914156" transform="rotate(-0 558.873912 378.914156)">0.22</text>
+   </g>
+   <g id="asio-runtime-ratio-text_116">
+    <text style="font-size: 8px; font-family: 'DejaVu Sans'; text-anchor: middle; fill: #ffffff" x="648.435059" y="378.914156" transform="rotate(-0 648.435059 378.914156)">6.73</text>
+   </g>
+   <g id="asio-runtime-ratio-text_117">
+    <text style="font-size: 8px; font-family: 'DejaVu Sans'; text-anchor: middle; fill: #ffffff" x="737.996206" y="378.914156" transform="rotate(-0 737.996206 378.914156)">3.31</text>
+   </g>
+   <g id="asio-runtime-ratio-text_118">
+    <text style="font-size: 8px; font-family: 'DejaVu Sans'; text-anchor: middle; fill: #17212b" x="200.629324" y="404.128637" transform="rotate(-0 200.629324 404.128637)">0.24</text>
+   </g>
+   <g id="asio-runtime-ratio-text_119">
+    <text style="font-size: 8px; font-family: 'DejaVu Sans'; text-anchor: middle; fill: #17212b" x="290.190471" y="404.128637" transform="rotate(-0 290.190471 404.128637)">0.26</text>
+   </g>
+   <g id="asio-runtime-ratio-text_120">
+    <text style="font-size: 8px; font-family: 'DejaVu Sans'; text-anchor: middle; fill: #17212b" x="379.751618" y="404.128637" transform="rotate(-0 379.751618 404.128637)">0.30</text>
+   </g>
+   <g id="asio-runtime-ratio-text_121">
+    <text style="font-size: 8px; font-family: 'DejaVu Sans'; text-anchor: middle; fill: #17212b" x="469.312765" y="404.128637" transform="rotate(-0 469.312765 404.128637)">0.30</text>
+   </g>
+   <g id="asio-runtime-ratio-text_122">
+    <text style="font-size: 8px; font-family: 'DejaVu Sans'; text-anchor: middle; fill: #17212b" x="558.873912" y="404.128637" transform="rotate(-0 558.873912 404.128637)">0.22</text>
+   </g>
+   <g id="asio-runtime-ratio-text_123">
+    <text style="font-size: 8px; font-family: 'DejaVu Sans'; text-anchor: middle; fill: #ffffff" x="648.435059" y="404.128637" transform="rotate(-0 648.435059 404.128637)">6.67</text>
+   </g>
+   <g id="asio-runtime-ratio-text_124">
+    <text style="font-size: 8px; font-family: 'DejaVu Sans'; text-anchor: middle; fill: #ffffff" x="737.996206" y="404.128637" transform="rotate(-0 737.996206 404.128637)">3.32</text>
+   </g>
+   <g id="asio-runtime-ratio-text_125">
+    <text style="font-size: 8px; font-family: 'DejaVu Sans'; text-anchor: middle; fill: #17212b" x="200.629324" y="429.343118" transform="rotate(-0 200.629324 429.343118)">0.07</text>
+   </g>
+   <g id="asio-runtime-ratio-text_126">
+    <text style="font-size: 8px; font-family: 'DejaVu Sans'; text-anchor: middle; fill: #17212b" x="290.190471" y="429.343118" transform="rotate(-0 290.190471 429.343118)">0.09</text>
+   </g>
+   <g id="asio-runtime-ratio-text_127">
+    <text style="font-size: 8px; font-family: 'DejaVu Sans'; text-anchor: middle; fill: #17212b" x="379.751618" y="429.343118" transform="rotate(-0 379.751618 429.343118)">0.10</text>
+   </g>
+   <g id="asio-runtime-ratio-text_128">
+    <text style="font-size: 8px; font-family: 'DejaVu Sans'; text-anchor: middle; fill: #17212b" x="469.312765" y="429.343118" transform="rotate(-0 469.312765 429.343118)">0.10</text>
+   </g>
+   <g id="asio-runtime-ratio-text_129">
+    <text style="font-size: 8px; font-family: 'DejaVu Sans'; text-anchor: middle; fill: #17212b" x="558.873912" y="429.343118" transform="rotate(-0 558.873912 429.343118)">0.06</text>
+   </g>
+   <g id="asio-runtime-ratio-text_130">
+    <text style="font-size: 8px; font-family: 'DejaVu Sans'; text-anchor: middle; fill: #ffffff" x="648.435059" y="429.343118" transform="rotate(-0 648.435059 429.343118)">3.27</text>
+   </g>
+   <g id="asio-runtime-ratio-text_131">
+    <text style="font-size: 8px; font-family: 'DejaVu Sans'; text-anchor: middle; fill: #ffffff" x="737.996206" y="429.343118" transform="rotate(-0 737.996206 429.343118)">2.71</text>
+   </g>
+   <g id="asio-runtime-ratio-text_132">
+    <text style="font-size: 8px; font-family: 'DejaVu Sans'; text-anchor: middle; fill: #17212b" x="200.629324" y="454.557598" transform="rotate(-0 200.629324 454.557598)">0.04</text>
+   </g>
+   <g id="asio-runtime-ratio-text_133">
+    <text style="font-size: 8px; font-family: 'DejaVu Sans'; text-anchor: middle; fill: #17212b" x="290.190471" y="454.557598" transform="rotate(-0 290.190471 454.557598)">0.06</text>
+   </g>
+   <g id="asio-runtime-ratio-text_134">
+    <text style="font-size: 8px; font-family: 'DejaVu Sans'; text-anchor: middle; fill: #17212b" x="379.751618" y="454.557598" transform="rotate(-0 379.751618 454.557598)">0.09</text>
+   </g>
+   <g id="asio-runtime-ratio-text_135">
+    <text style="font-size: 8px; font-family: 'DejaVu Sans'; text-anchor: middle; fill: #17212b" x="469.312765" y="454.557598" transform="rotate(-0 469.312765 454.557598)">0.09</text>
+   </g>
+   <g id="asio-runtime-ratio-text_136">
+    <text style="font-size: 8px; font-family: 'DejaVu Sans'; text-anchor: middle; fill: #17212b" x="558.873912" y="454.557598" transform="rotate(-0 558.873912 454.557598)">0.05</text>
+   </g>
+   <g id="asio-runtime-ratio-text_137">
+    <text style="font-size: 8px; font-family: 'DejaVu Sans'; text-anchor: middle; fill: #ffffff" x="648.435059" y="454.557598" transform="rotate(-0 648.435059 454.557598)">3.45</text>
+   </g>
+   <g id="asio-runtime-ratio-text_138">
+    <text style="font-size: 8px; font-family: 'DejaVu Sans'; text-anchor: middle; fill: #ffffff" x="737.996206" y="454.557598" transform="rotate(-0 737.996206 454.557598)">2.52</text>
+   </g>
+   <g id="asio-runtime-ratio-text_139">
+    <text style="font-size: 8px; font-family: 'DejaVu Sans'; text-anchor: middle; fill: #17212b" x="200.629324" y="479.772079" transform="rotate(-0 200.629324 479.772079)">0.04</text>
+   </g>
+   <g id="asio-runtime-ratio-text_140">
+    <text style="font-size: 8px; font-family: 'DejaVu Sans'; text-anchor: middle; fill: #17212b" x="290.190471" y="479.772079" transform="rotate(-0 290.190471 479.772079)">0.06</text>
+   </g>
+   <g id="asio-runtime-ratio-text_141">
+    <text style="font-size: 8px; font-family: 'DejaVu Sans'; text-anchor: middle; fill: #17212b" x="379.751618" y="479.772079" transform="rotate(-0 379.751618 479.772079)">0.09</text>
+   </g>
+   <g id="asio-runtime-ratio-text_142">
+    <text style="font-size: 8px; font-family: 'DejaVu Sans'; text-anchor: middle; fill: #17212b" x="469.312765" y="479.772079" transform="rotate(-0 469.312765 479.772079)">0.09</text>
+   </g>
+   <g id="asio-runtime-ratio-text_143">
+    <text style="font-size: 8px; font-family: 'DejaVu Sans'; text-anchor: middle; fill: #17212b" x="558.873912" y="479.772079" transform="rotate(-0 558.873912 479.772079)">0.04</text>
+   </g>
+   <g id="asio-runtime-ratio-text_144">
+    <text style="font-size: 8px; font-family: 'DejaVu Sans'; text-anchor: middle; fill: #ffffff" x="648.435059" y="479.772079" transform="rotate(-0 648.435059 479.772079)">3.41</text>
+   </g>
+   <g id="asio-runtime-ratio-text_145">
+    <text style="font-size: 8px; font-family: 'DejaVu Sans'; text-anchor: middle; fill: #ffffff" x="737.996206" y="479.772079" transform="rotate(-0 737.996206 479.772079)">2.53</text>
+   </g>
+   <g id="asio-runtime-ratio-text_146">
+    <text style="font-size: 8px; font-family: 'DejaVu Sans'; text-anchor: middle; fill: #17212b" x="200.629324" y="504.98656" transform="rotate(-0 200.629324 504.98656)">0.08</text>
+   </g>
+   <g id="asio-runtime-ratio-text_147">
+    <text style="font-size: 8px; font-family: 'DejaVu Sans'; text-anchor: middle; fill: #17212b" x="290.190471" y="504.98656" transform="rotate(-0 290.190471 504.98656)">0.10</text>
+   </g>
+   <g id="asio-runtime-ratio-text_148">
+    <text style="font-size: 8px; font-family: 'DejaVu Sans'; text-anchor: middle; fill: #17212b" x="379.751618" y="504.98656" transform="rotate(-0 379.751618 504.98656)">0.10</text>
+   </g>
+   <g id="asio-runtime-ratio-text_149">
+    <text style="font-size: 8px; font-family: 'DejaVu Sans'; text-anchor: middle; fill: #17212b" x="469.312765" y="504.98656" transform="rotate(-0 469.312765 504.98656)">0.10</text>
+   </g>
+   <g id="asio-runtime-ratio-text_150">
+    <text style="font-size: 8px; font-family: 'DejaVu Sans'; text-anchor: middle; fill: #17212b" x="558.873912" y="504.98656" transform="rotate(-0 558.873912 504.98656)">0.07</text>
+   </g>
+   <g id="asio-runtime-ratio-text_151">
+    <text style="font-size: 8px; font-family: 'DejaVu Sans'; text-anchor: middle; fill: #ffffff" x="648.435059" y="504.98656" transform="rotate(-0 648.435059 504.98656)">3.25</text>
+   </g>
+   <g id="asio-runtime-ratio-text_152">
+    <text style="font-size: 8px; font-family: 'DejaVu Sans'; text-anchor: middle; fill: #ffffff" x="737.996206" y="504.98656" transform="rotate(-0 737.996206 504.98656)">2.74</text>
+   </g>
+   <g id="asio-runtime-ratio-text_153">
+    <text style="font-size: 8px; font-family: 'DejaVu Sans'; text-anchor: middle; fill: #17212b" x="200.629324" y="530.20104" transform="rotate(-0 200.629324 530.20104)">0.05</text>
+   </g>
+   <g id="asio-runtime-ratio-text_154">
+    <text style="font-size: 8px; font-family: 'DejaVu Sans'; text-anchor: middle; fill: #17212b" x="290.190471" y="530.20104" transform="rotate(-0 290.190471 530.20104)">0.07</text>
+   </g>
+   <g id="asio-runtime-ratio-text_155">
+    <text style="font-size: 8px; font-family: 'DejaVu Sans'; text-anchor: middle; fill: #17212b" x="379.751618" y="530.20104" transform="rotate(-0 379.751618 530.20104)">0.09</text>
+   </g>
+   <g id="asio-runtime-ratio-text_156">
+    <text style="font-size: 8px; font-family: 'DejaVu Sans'; text-anchor: middle; fill: #17212b" x="469.312765" y="530.20104" transform="rotate(-0 469.312765 530.20104)">0.09</text>
+   </g>
+   <g id="asio-runtime-ratio-text_157">
+    <text style="font-size: 8px; font-family: 'DejaVu Sans'; text-anchor: middle; fill: #17212b" x="558.873912" y="530.20104" transform="rotate(-0 558.873912 530.20104)">0.05</text>
+   </g>
+   <g id="asio-runtime-ratio-text_158">
+    <text style="font-size: 8px; font-family: 'DejaVu Sans'; text-anchor: middle; fill: #ffffff" x="648.435059" y="530.20104" transform="rotate(-0 648.435059 530.20104)">3.46</text>
+   </g>
+   <g id="asio-runtime-ratio-text_159">
+    <text style="font-size: 8px; font-family: 'DejaVu Sans'; text-anchor: middle; fill: #ffffff" x="737.996206" y="530.20104" transform="rotate(-0 737.996206 530.20104)">2.59</text>
+   </g>
+   <g id="asio-runtime-ratio-text_160">
+    <text style="font-size: 8px; font-family: 'DejaVu Sans'; text-anchor: middle; fill: #17212b" x="200.629324" y="555.415521" transform="rotate(-0 200.629324 555.415521)">0.05</text>
+   </g>
+   <g id="asio-runtime-ratio-text_161">
+    <text style="font-size: 8px; font-family: 'DejaVu Sans'; text-anchor: middle; fill: #17212b" x="290.190471" y="555.415521" transform="rotate(-0 290.190471 555.415521)">0.07</text>
+   </g>
+   <g id="asio-runtime-ratio-text_162">
+    <text style="font-size: 8px; font-family: 'DejaVu Sans'; text-anchor: middle; fill: #17212b" x="379.751618" y="555.415521" transform="rotate(-0 379.751618 555.415521)">0.09</text>
+   </g>
+   <g id="asio-runtime-ratio-text_163">
+    <text style="font-size: 8px; font-family: 'DejaVu Sans'; text-anchor: middle; fill: #17212b" x="469.312765" y="555.415521" transform="rotate(-0 469.312765 555.415521)">0.09</text>
+   </g>
+   <g id="asio-runtime-ratio-text_164">
+    <text style="font-size: 8px; font-family: 'DejaVu Sans'; text-anchor: middle; fill: #17212b" x="558.873912" y="555.415521" transform="rotate(-0 558.873912 555.415521)">0.05</text>
+   </g>
+   <g id="asio-runtime-ratio-text_165">
+    <text style="font-size: 8px; font-family: 'DejaVu Sans'; text-anchor: middle; fill: #ffffff" x="648.435059" y="555.415521" transform="rotate(-0 648.435059 555.415521)">3.40</text>
+   </g>
+   <g id="asio-runtime-ratio-text_166">
+    <text style="font-size: 8px; font-family: 'DejaVu Sans'; text-anchor: middle; fill: #ffffff" x="737.996206" y="555.415521" transform="rotate(-0 737.996206 555.415521)">2.61</text>
+   </g>
+   <g id="asio-runtime-ratio-text_167">
+    <text style="font-size: 8px; font-family: 'DejaVu Sans'; text-anchor: middle; fill: #17212b" x="200.629324" y="580.630002" transform="rotate(-0 200.629324 580.630002)">0.07</text>
+   </g>
+   <g id="asio-runtime-ratio-text_168">
+    <text style="font-size: 8px; font-family: 'DejaVu Sans'; text-anchor: middle; fill: #17212b" x="290.190471" y="580.630002" transform="rotate(-0 290.190471 580.630002)">0.07</text>
+   </g>
+   <g id="asio-runtime-ratio-text_169">
+    <text style="font-size: 8px; font-family: 'DejaVu Sans'; text-anchor: middle; fill: #17212b" x="379.751618" y="580.630002" transform="rotate(-0 379.751618 580.630002)">0.10</text>
+   </g>
+   <g id="asio-runtime-ratio-text_170">
+    <text style="font-size: 8px; font-family: 'DejaVu Sans'; text-anchor: middle; fill: #17212b" x="469.312765" y="580.630002" transform="rotate(-0 469.312765 580.630002)">0.10</text>
+   </g>
+   <g id="asio-runtime-ratio-text_171">
+    <text style="font-size: 8px; font-family: 'DejaVu Sans'; text-anchor: middle; fill: #17212b" x="558.873912" y="580.630002" transform="rotate(-0 558.873912 580.630002)">0.06</text>
+   </g>
+   <g id="asio-runtime-ratio-text_172">
+    <text style="font-size: 8px; font-family: 'DejaVu Sans'; text-anchor: middle; fill: #ffffff" x="648.435059" y="580.630002" transform="rotate(-0 648.435059 580.630002)">2.91</text>
+   </g>
+   <g id="asio-runtime-ratio-text_173">
+    <text style="font-size: 8px; font-family: 'DejaVu Sans'; text-anchor: middle; fill: #ffffff" x="737.996206" y="580.630002" transform="rotate(-0 737.996206 580.630002)">2.51</text>
+   </g>
+   <g id="asio-runtime-ratio-text_174">
+    <text style="font-size: 8px; font-family: 'DejaVu Sans'; text-anchor: middle; fill: #17212b" x="200.629324" y="605.844482" transform="rotate(-0 200.629324 605.844482)">0.04</text>
+   </g>
+   <g id="asio-runtime-ratio-text_175">
+    <text style="font-size: 8px; font-family: 'DejaVu Sans'; text-anchor: middle; fill: #17212b" x="290.190471" y="605.844482" transform="rotate(-0 290.190471 605.844482)">0.05</text>
+   </g>
+   <g id="asio-runtime-ratio-text_176">
+    <text style="font-size: 8px; font-family: 'DejaVu Sans'; text-anchor: middle; fill: #17212b" x="379.751618" y="605.844482" transform="rotate(-0 379.751618 605.844482)">0.07</text>
+   </g>
+   <g id="asio-runtime-ratio-text_177">
+    <text style="font-size: 8px; font-family: 'DejaVu Sans'; text-anchor: middle; fill: #17212b" x="469.312765" y="605.844482" transform="rotate(-0 469.312765 605.844482)">0.07</text>
+   </g>
+   <g id="asio-runtime-ratio-text_178">
+    <text style="font-size: 8px; font-family: 'DejaVu Sans'; text-anchor: middle; fill: #17212b" x="558.873912" y="605.844482" transform="rotate(-0 558.873912 605.844482)">0.04</text>
+   </g>
+   <g id="asio-runtime-ratio-text_179">
+    <text style="font-size: 8px; font-family: 'DejaVu Sans'; text-anchor: middle; fill: #ffffff" x="648.435059" y="605.844482" transform="rotate(-0 648.435059 605.844482)">2.84</text>
+   </g>
+   <g id="asio-runtime-ratio-text_180">
+    <text style="font-size: 8px; font-family: 'DejaVu Sans'; text-anchor: middle; fill: #ffffff" x="737.996206" y="605.844482" transform="rotate(-0 737.996206 605.844482)">2.43</text>
+   </g>
+   <g id="asio-runtime-ratio-text_181">
+    <text style="font-size: 8px; font-family: 'DejaVu Sans'; text-anchor: middle; fill: #17212b" x="200.629324" y="631.058963" transform="rotate(-0 200.629324 631.058963)">0.04</text>
+   </g>
+   <g id="asio-runtime-ratio-text_182">
+    <text style="font-size: 8px; font-family: 'DejaVu Sans'; text-anchor: middle; fill: #17212b" x="290.190471" y="631.058963" transform="rotate(-0 290.190471 631.058963)">0.05</text>
+   </g>
+   <g id="asio-runtime-ratio-text_183">
+    <text style="font-size: 8px; font-family: 'DejaVu Sans'; text-anchor: middle; fill: #17212b" x="379.751618" y="631.058963" transform="rotate(-0 379.751618 631.058963)">0.07</text>
+   </g>
+   <g id="asio-runtime-ratio-text_184">
+    <text style="font-size: 8px; font-family: 'DejaVu Sans'; text-anchor: middle; fill: #17212b" x="469.312765" y="631.058963" transform="rotate(-0 469.312765 631.058963)">0.07</text>
+   </g>
+   <g id="asio-runtime-ratio-text_185">
+    <text style="font-size: 8px; font-family: 'DejaVu Sans'; text-anchor: middle; fill: #17212b" x="558.873912" y="631.058963" transform="rotate(-0 558.873912 631.058963)">0.04</text>
+   </g>
+   <g id="asio-runtime-ratio-text_186">
+    <text style="font-size: 8px; font-family: 'DejaVu Sans'; text-anchor: middle; fill: #ffffff" x="648.435059" y="631.058963" transform="rotate(-0 648.435059 631.058963)">2.79</text>
+   </g>
+   <g id="asio-runtime-ratio-text_187">
+    <text style="font-size: 8px; font-family: 'DejaVu Sans'; text-anchor: middle; fill: #ffffff" x="737.996206" y="631.058963" transform="rotate(-0 737.996206 631.058963)">2.45</text>
+   </g>
+   <g id="asio-runtime-ratio-text_188">
+    <text style="font-size: 8px; font-family: 'DejaVu Sans'; text-anchor: middle; fill: #17212b" x="200.629324" y="656.273444" transform="rotate(-0 200.629324 656.273444)">0.08</text>
+   </g>
+   <g id="asio-runtime-ratio-text_189">
+    <text style="font-size: 8px; font-family: 'DejaVu Sans'; text-anchor: middle; fill: #17212b" x="290.190471" y="656.273444" transform="rotate(-0 290.190471 656.273444)">0.09</text>
+   </g>
+   <g id="asio-runtime-ratio-text_190">
+    <text style="font-size: 8px; font-family: 'DejaVu Sans'; text-anchor: middle; fill: #17212b" x="379.751618" y="656.273444" transform="rotate(-0 379.751618 656.273444)">0.12</text>
+   </g>
+   <g id="asio-runtime-ratio-text_191">
+    <text style="font-size: 8px; font-family: 'DejaVu Sans'; text-anchor: middle; fill: #17212b" x="469.312765" y="656.273444" transform="rotate(-0 469.312765 656.273444)">0.12</text>
+   </g>
+   <g id="asio-runtime-ratio-text_192">
+    <text style="font-size: 8px; font-family: 'DejaVu Sans'; text-anchor: middle; fill: #17212b" x="558.873912" y="656.273444" transform="rotate(-0 558.873912 656.273444)">0.07</text>
+   </g>
+   <g id="asio-runtime-ratio-text_193">
+    <text style="font-size: 8px; font-family: 'DejaVu Sans'; text-anchor: middle; fill: #ffffff" x="648.435059" y="656.273444" transform="rotate(-0 648.435059 656.273444)">2.95</text>
+   </g>
+   <g id="asio-runtime-ratio-text_194">
+    <text style="font-size: 8px; font-family: 'DejaVu Sans'; text-anchor: middle; fill: #ffffff" x="737.996206" y="656.273444" transform="rotate(-0 737.996206 656.273444)">2.48</text>
+   </g>
+   <g id="asio-runtime-ratio-text_195">
+    <text style="font-size: 8px; font-family: 'DejaVu Sans'; text-anchor: middle; fill: #17212b" x="200.629324" y="681.487924" transform="rotate(-0 200.629324 681.487924)">0.05</text>
+   </g>
+   <g id="asio-runtime-ratio-text_196">
+    <text style="font-size: 8px; font-family: 'DejaVu Sans'; text-anchor: middle; fill: #17212b" x="290.190471" y="681.487924" transform="rotate(-0 290.190471 681.487924)">0.06</text>
+   </g>
+   <g id="asio-runtime-ratio-text_197">
+    <text style="font-size: 8px; font-family: 'DejaVu Sans'; text-anchor: middle; fill: #17212b" x="379.751618" y="681.487924" transform="rotate(-0 379.751618 681.487924)">0.08</text>
+   </g>
+   <g id="asio-runtime-ratio-text_198">
+    <text style="font-size: 8px; font-family: 'DejaVu Sans'; text-anchor: middle; fill: #17212b" x="469.312765" y="681.487924" transform="rotate(-0 469.312765 681.487924)">0.08</text>
+   </g>
+   <g id="asio-runtime-ratio-text_199">
+    <text style="font-size: 8px; font-family: 'DejaVu Sans'; text-anchor: middle; fill: #17212b" x="558.873912" y="681.487924" transform="rotate(-0 558.873912 681.487924)">0.05</text>
+   </g>
+   <g id="asio-runtime-ratio-text_200">
+    <text style="font-size: 8px; font-family: 'DejaVu Sans'; text-anchor: middle; fill: #ffffff" x="648.435059" y="681.487924" transform="rotate(-0 648.435059 681.487924)">2.84</text>
+   </g>
+   <g id="asio-runtime-ratio-text_201">
+    <text style="font-size: 8px; font-family: 'DejaVu Sans'; text-anchor: middle; fill: #ffffff" x="737.996206" y="681.487924" transform="rotate(-0 737.996206 681.487924)">2.40</text>
+   </g>
+   <g id="asio-runtime-ratio-text_202">
+    <text style="font-size: 8px; font-family: 'DejaVu Sans'; text-anchor: middle; fill: #17212b" x="200.629324" y="706.702405" transform="rotate(-0 200.629324 706.702405)">0.05</text>
+   </g>
+   <g id="asio-runtime-ratio-text_203">
+    <text style="font-size: 8px; font-family: 'DejaVu Sans'; text-anchor: middle; fill: #17212b" x="290.190471" y="706.702405" transform="rotate(-0 290.190471 706.702405)">0.06</text>
+   </g>
+   <g id="asio-runtime-ratio-text_204">
+    <text style="font-size: 8px; font-family: 'DejaVu Sans'; text-anchor: middle; fill: #17212b" x="379.751618" y="706.702405" transform="rotate(-0 379.751618 706.702405)">0.08</text>
+   </g>
+   <g id="asio-runtime-ratio-text_205">
+    <text style="font-size: 8px; font-family: 'DejaVu Sans'; text-anchor: middle; fill: #17212b" x="469.312765" y="706.702405" transform="rotate(-0 469.312765 706.702405)">0.08</text>
+   </g>
+   <g id="asio-runtime-ratio-text_206">
+    <text style="font-size: 8px; font-family: 'DejaVu Sans'; text-anchor: middle; fill: #17212b" x="558.873912" y="706.702405" transform="rotate(-0 558.873912 706.702405)">0.05</text>
+   </g>
+   <g id="asio-runtime-ratio-text_207">
+    <text style="font-size: 8px; font-family: 'DejaVu Sans'; text-anchor: middle; fill: #ffffff" x="648.435059" y="706.702405" transform="rotate(-0 648.435059 706.702405)">3.00</text>
+   </g>
+   <g id="asio-runtime-ratio-text_208">
+    <text style="font-size: 8px; font-family: 'DejaVu Sans'; text-anchor: middle; fill: #ffffff" x="737.996206" y="706.702405" transform="rotate(-0 737.996206 706.702405)">2.41</text>
+   </g>
+   <g id="asio-runtime-ratio-text_209">
+    <text style="font-size: 8px; font-family: 'DejaVu Sans'; text-anchor: middle; fill: #ffffff" x="200.629324" y="731.916886" transform="rotate(-0 200.629324 731.916886)">1.00</text>
+   </g>
+   <g id="asio-runtime-ratio-text_210">
+    <text style="font-size: 8px; font-family: 'DejaVu Sans'; text-anchor: middle; fill: #ffffff" x="290.190471" y="731.916886" transform="rotate(-0 290.190471 731.916886)">1.00</text>
+   </g>
+   <g id="asio-runtime-ratio-text_211">
+    <text style="font-size: 8px; font-family: 'DejaVu Sans'; text-anchor: middle; fill: #ffffff" x="379.751618" y="731.916886" transform="rotate(-0 379.751618 731.916886)">1.00</text>
+   </g>
+   <g id="asio-runtime-ratio-text_212">
+    <text style="font-size: 8px; font-family: 'DejaVu Sans'; text-anchor: middle; fill: #ffffff" x="469.312765" y="731.916886" transform="rotate(-0 469.312765 731.916886)">1.00</text>
+   </g>
+   <g id="asio-runtime-ratio-text_213">
+    <text style="font-size: 8px; font-family: 'DejaVu Sans'; text-anchor: middle; fill: #ffffff" x="558.873912" y="731.916886" transform="rotate(-0 558.873912 731.916886)">1.00</text>
+   </g>
+   <g id="asio-runtime-ratio-text_214">
+    <text style="font-size: 8px; font-family: 'DejaVu Sans'; text-anchor: middle; fill: #ffffff" x="648.435059" y="731.916886" transform="rotate(-0 648.435059 731.916886)">1.00</text>
+   </g>
+   <g id="asio-runtime-ratio-text_215">
+    <text style="font-size: 8px; font-family: 'DejaVu Sans'; text-anchor: middle; fill: #ffffff" x="737.996206" y="731.916886" transform="rotate(-0 737.996206 731.916886)">1.00</text>
+   </g>
+   <g id="asio-runtime-ratio-text_216">
+    <text style="font-size: 8px; font-family: 'DejaVu Sans'; text-anchor: middle; fill: #ffffff" x="200.629324" y="757.131366" transform="rotate(-0 200.629324 757.131366)">1.00</text>
+   </g>
+   <g id="asio-runtime-ratio-text_217">
+    <text style="font-size: 8px; font-family: 'DejaVu Sans'; text-anchor: middle; fill: #ffffff" x="290.190471" y="757.131366" transform="rotate(-0 290.190471 757.131366)">1.00</text>
+   </g>
+   <g id="asio-runtime-ratio-text_218">
+    <text style="font-size: 8px; font-family: 'DejaVu Sans'; text-anchor: middle; fill: #ffffff" x="379.751618" y="757.131366" transform="rotate(-0 379.751618 757.131366)">1.00</text>
+   </g>
+   <g id="asio-runtime-ratio-text_219">
+    <text style="font-size: 8px; font-family: 'DejaVu Sans'; text-anchor: middle; fill: #ffffff" x="469.312765" y="757.131366" transform="rotate(-0 469.312765 757.131366)">1.00</text>
+   </g>
+   <g id="asio-runtime-ratio-text_220">
+    <text style="font-size: 8px; font-family: 'DejaVu Sans'; text-anchor: middle; fill: #ffffff" x="558.873912" y="757.131366" transform="rotate(-0 558.873912 757.131366)">1.00</text>
+   </g>
+   <g id="asio-runtime-ratio-text_221">
+    <text style="font-size: 8px; font-family: 'DejaVu Sans'; text-anchor: middle; fill: #ffffff" x="648.435059" y="757.131366" transform="rotate(-0 648.435059 757.131366)">1.00</text>
+   </g>
+   <g id="asio-runtime-ratio-text_222">
+    <text style="font-size: 8px; font-family: 'DejaVu Sans'; text-anchor: middle; fill: #ffffff" x="737.996206" y="757.131366" transform="rotate(-0 737.996206 757.131366)">1.00</text>
+   </g>
+   <g id="asio-runtime-ratio-text_223">
+    <text style="font-size: 8px; font-family: 'DejaVu Sans'; text-anchor: middle; fill: #ffffff" x="200.629324" y="782.345847" transform="rotate(-0 200.629324 782.345847)">1.00</text>
+   </g>
+   <g id="asio-runtime-ratio-text_224">
+    <text style="font-size: 8px; font-family: 'DejaVu Sans'; text-anchor: middle; fill: #ffffff" x="290.190471" y="782.345847" transform="rotate(-0 290.190471 782.345847)">1.00</text>
+   </g>
+   <g id="asio-runtime-ratio-text_225">
+    <text style="font-size: 8px; font-family: 'DejaVu Sans'; text-anchor: middle; fill: #ffffff" x="379.751618" y="782.345847" transform="rotate(-0 379.751618 782.345847)">1.00</text>
+   </g>
+   <g id="asio-runtime-ratio-text_226">
+    <text style="font-size: 8px; font-family: 'DejaVu Sans'; text-anchor: middle; fill: #ffffff" x="469.312765" y="782.345847" transform="rotate(-0 469.312765 782.345847)">1.00</text>
+   </g>
+   <g id="asio-runtime-ratio-text_227">
+    <text style="font-size: 8px; font-family: 'DejaVu Sans'; text-anchor: middle; fill: #ffffff" x="558.873912" y="782.345847" transform="rotate(-0 558.873912 782.345847)">1.00</text>
+   </g>
+   <g id="asio-runtime-ratio-text_228">
+    <text style="font-size: 8px; font-family: 'DejaVu Sans'; text-anchor: middle; fill: #ffffff" x="648.435059" y="782.345847" transform="rotate(-0 648.435059 782.345847)">1.00</text>
+   </g>
+   <g id="asio-runtime-ratio-text_229">
+    <text style="font-size: 8px; font-family: 'DejaVu Sans'; text-anchor: middle; fill: #ffffff" x="737.996206" y="782.345847" transform="rotate(-0 737.996206 782.345847)">1.00</text>
+   </g>
+   <g id="asio-runtime-ratio-text_230">
+    <text style="font-size: 8px; font-family: 'DejaVu Sans'; text-anchor: middle; fill: #ffffff" x="200.629324" y="807.560328" transform="rotate(-0 200.629324 807.560328)">1.00</text>
+   </g>
+   <g id="asio-runtime-ratio-text_231">
+    <text style="font-size: 8px; font-family: 'DejaVu Sans'; text-anchor: middle; fill: #ffffff" x="290.190471" y="807.560328" transform="rotate(-0 290.190471 807.560328)">1.00</text>
+   </g>
+   <g id="asio-runtime-ratio-text_232">
+    <text style="font-size: 8px; font-family: 'DejaVu Sans'; text-anchor: middle; fill: #ffffff" x="379.751618" y="807.560328" transform="rotate(-0 379.751618 807.560328)">1.00</text>
+   </g>
+   <g id="asio-runtime-ratio-text_233">
+    <text style="font-size: 8px; font-family: 'DejaVu Sans'; text-anchor: middle; fill: #ffffff" x="469.312765" y="807.560328" transform="rotate(-0 469.312765 807.560328)">1.00</text>
+   </g>
+   <g id="asio-runtime-ratio-text_234">
+    <text style="font-size: 8px; font-family: 'DejaVu Sans'; text-anchor: middle; fill: #ffffff" x="558.873912" y="807.560328" transform="rotate(-0 558.873912 807.560328)">1.00</text>
+   </g>
+   <g id="asio-runtime-ratio-text_235">
+    <text style="font-size: 8px; font-family: 'DejaVu Sans'; text-anchor: middle; fill: #ffffff" x="648.435059" y="807.560328" transform="rotate(-0 648.435059 807.560328)">1.00</text>
+   </g>
+   <g id="asio-runtime-ratio-text_236">
+    <text style="font-size: 8px; font-family: 'DejaVu Sans'; text-anchor: middle; fill: #ffffff" x="737.996206" y="807.560328" transform="rotate(-0 737.996206 807.560328)">1.00</text>
+   </g>
+   <g id="asio-runtime-ratio-text_237">
+    <text style="font-size: 8px; font-family: 'DejaVu Sans'; text-anchor: middle; fill: #17212b" x="200.629324" y="832.774808" transform="rotate(-0 200.629324 832.774808)">0.01</text>
+   </g>
+   <g id="asio-runtime-ratio-text_238">
+    <text style="font-size: 8px; font-family: 'DejaVu Sans'; text-anchor: middle; fill: #17212b" x="290.190471" y="832.774808" transform="rotate(-0 290.190471 832.774808)">0.02</text>
+   </g>
+   <g id="asio-runtime-ratio-text_239">
+    <text style="font-size: 8px; font-family: 'DejaVu Sans'; text-anchor: middle; fill: #17212b" x="379.751618" y="832.774808" transform="rotate(-0 379.751618 832.774808)">0.02</text>
+   </g>
+   <g id="asio-runtime-ratio-text_240">
+    <text style="font-size: 8px; font-family: 'DejaVu Sans'; text-anchor: middle; fill: #17212b" x="469.312765" y="832.774808" transform="rotate(-0 469.312765 832.774808)">0.02</text>
+   </g>
+   <g id="asio-runtime-ratio-text_241">
+    <text style="font-size: 8px; font-family: 'DejaVu Sans'; text-anchor: middle; fill: #17212b" x="558.873912" y="832.774808" transform="rotate(-0 558.873912 832.774808)">0.01</text>
+   </g>
+   <g id="asio-runtime-ratio-text_242">
+    <text style="font-size: 8px; font-family: 'DejaVu Sans'; text-anchor: middle; fill: #ffffff" x="648.435059" y="832.774808" transform="rotate(-0 648.435059 832.774808)">1.32</text>
+   </g>
+   <g id="asio-runtime-ratio-text_243">
+    <text style="font-size: 8px; font-family: 'DejaVu Sans'; text-anchor: middle; fill: #ffffff" x="737.996206" y="832.774808" transform="rotate(-0 737.996206 832.774808)">2.00</text>
+   </g>
+   <g id="asio-runtime-ratio-text_244">
+    <text style="font-size: 8px; font-family: 'DejaVu Sans'; text-anchor: middle; fill: #17212b" x="200.629324" y="857.989289" transform="rotate(-0 200.629324 857.989289)">0.02</text>
+   </g>
+   <g id="asio-runtime-ratio-text_245">
+    <text style="font-size: 8px; font-family: 'DejaVu Sans'; text-anchor: middle; fill: #17212b" x="290.190471" y="857.989289" transform="rotate(-0 290.190471 857.989289)">0.03</text>
+   </g>
+   <g id="asio-runtime-ratio-text_246">
+    <text style="font-size: 8px; font-family: 'DejaVu Sans'; text-anchor: middle; fill: #17212b" x="379.751618" y="857.989289" transform="rotate(-0 379.751618 857.989289)">0.04</text>
+   </g>
+   <g id="asio-runtime-ratio-text_247">
+    <text style="font-size: 8px; font-family: 'DejaVu Sans'; text-anchor: middle; fill: #17212b" x="469.312765" y="857.989289" transform="rotate(-0 469.312765 857.989289)">0.04</text>
+   </g>
+   <g id="asio-runtime-ratio-text_248">
+    <text style="font-size: 8px; font-family: 'DejaVu Sans'; text-anchor: middle; fill: #17212b" x="558.873912" y="857.989289" transform="rotate(-0 558.873912 857.989289)">0.02</text>
+   </g>
+   <g id="asio-runtime-ratio-text_249">
+    <text style="font-size: 8px; font-family: 'DejaVu Sans'; text-anchor: middle; fill: #ffffff" x="648.435059" y="857.989289" transform="rotate(-0 648.435059 857.989289)">1.41</text>
+   </g>
+   <g id="asio-runtime-ratio-text_250">
+    <text style="font-size: 8px; font-family: 'DejaVu Sans'; text-anchor: middle; fill: #ffffff" x="737.996206" y="857.989289" transform="rotate(-0 737.996206 857.989289)">2.03</text>
+   </g>
+   <g id="asio-runtime-ratio-text_251">
+    <text style="font-size: 8px; font-family: 'DejaVu Sans'; text-anchor: middle; fill: #17212b" x="200.629324" y="883.20377" transform="rotate(-0 200.629324 883.20377)">0.02</text>
+   </g>
+   <g id="asio-runtime-ratio-text_252">
+    <text style="font-size: 8px; font-family: 'DejaVu Sans'; text-anchor: middle; fill: #17212b" x="290.190471" y="883.20377" transform="rotate(-0 290.190471 883.20377)">0.03</text>
+   </g>
+   <g id="asio-runtime-ratio-text_253">
+    <text style="font-size: 8px; font-family: 'DejaVu Sans'; text-anchor: middle; fill: #17212b" x="379.751618" y="883.20377" transform="rotate(-0 379.751618 883.20377)">0.03</text>
+   </g>
+   <g id="asio-runtime-ratio-text_254">
+    <text style="font-size: 8px; font-family: 'DejaVu Sans'; text-anchor: middle; fill: #17212b" x="469.312765" y="883.20377" transform="rotate(-0 469.312765 883.20377)">0.03</text>
+   </g>
+   <g id="asio-runtime-ratio-text_255">
+    <text style="font-size: 8px; font-family: 'DejaVu Sans'; text-anchor: middle; fill: #17212b" x="558.873912" y="883.20377" transform="rotate(-0 558.873912 883.20377)">0.02</text>
+   </g>
+   <g id="asio-runtime-ratio-text_256">
+    <text style="font-size: 8px; font-family: 'DejaVu Sans'; text-anchor: middle; fill: #ffffff" x="648.435059" y="883.20377" transform="rotate(-0 648.435059 883.20377)">1.30</text>
+   </g>
+   <g id="asio-runtime-ratio-text_257">
+    <text style="font-size: 8px; font-family: 'DejaVu Sans'; text-anchor: middle; fill: #ffffff" x="737.996206" y="883.20377" transform="rotate(-0 737.996206 883.20377)">1.97</text>
+   </g>
+   <g id="asio-runtime-ratio-text_258">
+    <text style="font-size: 8px; font-family: 'DejaVu Sans'; text-anchor: middle; fill: #17212b" x="200.629324" y="908.41825" transform="rotate(-0 200.629324 908.41825)">0.01</text>
+   </g>
+   <g id="asio-runtime-ratio-text_259">
+    <text style="font-size: 8px; font-family: 'DejaVu Sans'; text-anchor: middle; fill: #17212b" x="290.190471" y="908.41825" transform="rotate(-0 290.190471 908.41825)">0.02</text>
+   </g>
+   <g id="asio-runtime-ratio-text_260">
+    <text style="font-size: 8px; font-family: 'DejaVu Sans'; text-anchor: middle; fill: #17212b" x="379.751618" y="908.41825" transform="rotate(-0 379.751618 908.41825)">0.02</text>
+   </g>
+   <g id="asio-runtime-ratio-text_261">
+    <text style="font-size: 8px; font-family: 'DejaVu Sans'; text-anchor: middle; fill: #17212b" x="469.312765" y="908.41825" transform="rotate(-0 469.312765 908.41825)">0.02</text>
+   </g>
+   <g id="asio-runtime-ratio-text_262">
+    <text style="font-size: 8px; font-family: 'DejaVu Sans'; text-anchor: middle; fill: #17212b" x="558.873912" y="908.41825" transform="rotate(-0 558.873912 908.41825)">0.02</text>
+   </g>
+   <g id="asio-runtime-ratio-text_263">
+    <text style="font-size: 8px; font-family: 'DejaVu Sans'; text-anchor: middle; fill: #ffffff" x="648.435059" y="908.41825" transform="rotate(-0 648.435059 908.41825)">1.19</text>
+   </g>
+   <g id="asio-runtime-ratio-text_264">
+    <text style="font-size: 8px; font-family: 'DejaVu Sans'; text-anchor: middle; fill: #ffffff" x="737.996206" y="908.41825" transform="rotate(-0 737.996206 908.41825)">2.01</text>
+   </g>
+   <g id="asio-runtime-ratio-text_265">
+    <text style="font-size: 8px; font-family: 'DejaVu Sans'; text-anchor: middle; fill: #17212b" x="200.629324" y="933.632731" transform="rotate(-0 200.629324 933.632731)">0.02</text>
+   </g>
+   <g id="asio-runtime-ratio-text_266">
+    <text style="font-size: 8px; font-family: 'DejaVu Sans'; text-anchor: middle; fill: #17212b" x="290.190471" y="933.632731" transform="rotate(-0 290.190471 933.632731)">0.03</text>
+   </g>
+   <g id="asio-runtime-ratio-text_267">
+    <text style="font-size: 8px; font-family: 'DejaVu Sans'; text-anchor: middle; fill: #17212b" x="379.751618" y="933.632731" transform="rotate(-0 379.751618 933.632731)">0.04</text>
+   </g>
+   <g id="asio-runtime-ratio-text_268">
+    <text style="font-size: 8px; font-family: 'DejaVu Sans'; text-anchor: middle; fill: #17212b" x="469.312765" y="933.632731" transform="rotate(-0 469.312765 933.632731)">0.04</text>
+   </g>
+   <g id="asio-runtime-ratio-text_269">
+    <text style="font-size: 8px; font-family: 'DejaVu Sans'; text-anchor: middle; fill: #17212b" x="558.873912" y="933.632731" transform="rotate(-0 558.873912 933.632731)">0.02</text>
+   </g>
+   <g id="asio-runtime-ratio-text_270">
+    <text style="font-size: 8px; font-family: 'DejaVu Sans'; text-anchor: middle; fill: #ffffff" x="648.435059" y="933.632731" transform="rotate(-0 648.435059 933.632731)">1.26</text>
+   </g>
+   <g id="asio-runtime-ratio-text_271">
+    <text style="font-size: 8px; font-family: 'DejaVu Sans'; text-anchor: middle; fill: #ffffff" x="737.996206" y="933.632731" transform="rotate(-0 737.996206 933.632731)">2.05</text>
+   </g>
+  </g>
+  <g id="asio-runtime-ratio-axes_2">
+   <g id="asio-runtime-ratio-patch_7">
+    <path d="M 795.906162 692.240201 
+L 812.317891 692.240201 
+L 812.317891 364.00563 
+L 795.906162 364.00563 
+z
+" style="fill: #ffffff"/>
+   </g>
+   <image xlink:href="data:image/png;base64,
+iVBORw0KGgoAAAANSUhEUgAAABcAAAHHCAYAAABUY8M7AAACy0lEQVR4nO2d0Y1sMQhDDaKV7b+srSLwCnjZT8/oRLiAIwQ2Sa40mji/PyOTqtUuttJGllRnqJW3Blt5++BnuG0ZaohErbyxlR+jz8uXT60V76rjm6fcIfKpjoLalhF2n4cNnjay0JX3+CovbluOkZ/YgaaNLLZbxsevxlrx7EC/cCkKH/xwrTjUyhvc87DB00aW2efVWCueteJT8S/yVgwbPG1koXt+sPFv7yM3sW1JGzxtZKFfFu18Kp5ty0W7z6/aM/S9D2hpg6eNLHTP23s/Dxs8bWSxBzrUEB3w6R9OeNrgaSMLfkCHDZ42sthuGWeIxB1o2OBpI2ut+IfWildtiN6Lfxjh2ra8NNAk388D2pbBVt4b/6fcUhuit7Zimq0oH7yxu2WwA21s5YP9tcI49/lgB9rYymet+FiI5FMa2QLHXxuii3a3fMWKYYOnjSy0W+R8WQx2oMIOdLbnF5Wwj1xhrShw5WGDJ/dLkXagHx9ogHsuJzxs8LSRBQ+RbEofWuzKwwcPcFvErDyx8HK6pXaf37QhumoX12NbscgnUdjgaSNr3fKHNkRXrRW/8MgN6lZMLLz2DH2r57UDfWugSX7kyqb0oUWuPLCVayu/aAd61Yboqr1aXFW+bxbarXjXLq7XjrnAVi5s5YGtXPul6C0rClt57CP3ogrsX8JprfhUz2uPube2YvrQWiveVcLu81grfr7nbYQLO9DAVq6N/0VrxavWiu/FXz54cNvS1EuRsD0P7/eWscHTRhY7RCNszwe7uOSDB7ct44OnD61dXK/1vJwv6PShRbaisPEPpxXFHWj74OlDi32Gjg2e3H2uteJTA02wFQfblvbB04fW7vPXvs4VOESzlT9mxbbB00YW24qNrXy28rfa0hv//7Uh+sJJNNyTqLHxH2zl7XNLcdsyu88v2vh//vJfA96KjY3/2OBpI7t7/g+6LoQvcxmScQAAAABJRU5ErkJggg==" id="asio-runtime-ratio-image7a22ca17a9" transform="scale(1 -1) translate(0 -327.6)" x="795.6" y="-364.32" width="16.56" height="327.6"/>
+   <g id="asio-runtime-ratio-matplotlib.axis_3"/>
+   <g id="asio-runtime-ratio-matplotlib.axis_4">
+    <g id="asio-runtime-ratio-ytick_34">
+     <g id="asio-runtime-ratio-line2d_41">
+      <defs>
+       <path id="asio-runtime-ratio-m5907383009" d="M 0 0 
+L 3.5 0 
+" style="stroke: #000000; stroke-width: 0.8"/>
+      </defs>
+      <g>
+       <use xlink:href="#asio-runtime-ratio-m5907383009" x="812.317891" y="590.925145" style="stroke: #000000; stroke-width: 0.8"/>
+      </g>
+     </g>
+     <g id="asio-runtime-ratio-text_272">
+      <!-- $\mathdefault{10^{-1}}$ -->
+      <g transform="translate(819.317891 595.110145)">
+       <text>
+        <tspan x="0" y="-0.68925" style="font-size: 9px; font-family: 'DejaVu Sans'">1</tspan>
+        <tspan x="5.726074" y="-0.68925" style="font-size: 9px; font-family: 'DejaVu Sans'">0</tspan>
+        <tspan x="11.538281" y="-4.40625" style="font-size: 6.3px; font-family: 'DejaVu Sans'">−</tspan>
+        <tspan x="16.816992" y="-4.40625" style="font-size: 6.3px; font-family: 'DejaVu Sans'">1</tspan>
+       </text>
+      </g>
+     </g>
+    </g>
+    <g id="asio-runtime-ratio-ytick_35">
+     <g id="asio-runtime-ratio-line2d_42">
+      <g>
+       <use xlink:href="#asio-runtime-ratio-m5907383009" x="812.317891" y="472.501242" style="stroke: #000000; stroke-width: 0.8"/>
+      </g>
+     </g>
+     <g id="asio-runtime-ratio-text_273">
+      <!-- $\mathdefault{10^{0}}$ -->
+      <g transform="translate(819.317891 476.731242)">
+       <text>
+        <tspan x="0" y="-0.60175" style="font-size: 9px; font-family: 'DejaVu Sans'">1</tspan>
+        <tspan x="5.726074" y="-0.60175" style="font-size: 9px; font-family: 'DejaVu Sans'">0</tspan>
+        <tspan x="11.538281" y="-4.31875" style="font-size: 6.3px; font-family: 'DejaVu Sans'">0</tspan>
+       </text>
+      </g>
+     </g>
+    </g>
+    <g id="asio-runtime-ratio-ytick_36">
+     <g id="asio-runtime-ratio-line2d_43">
+      <defs>
+       <path id="asio-runtime-ratio-m4afdebc270" d="M 0 0 
+L 2 0 
+" style="stroke: #000000; stroke-width: 0.6"/>
+      </defs>
+      <g>
+       <use xlink:href="#asio-runtime-ratio-m4afdebc270" x="812.317891" y="673.6999" style="stroke: #000000; stroke-width: 0.6"/>
+      </g>
+     </g>
+    </g>
+    <g id="asio-runtime-ratio-ytick_37">
+     <g id="asio-runtime-ratio-line2d_44">
+      <g>
+       <use xlink:href="#asio-runtime-ratio-m4afdebc270" x="812.317891" y="652.846486" style="stroke: #000000; stroke-width: 0.6"/>
+      </g>
+     </g>
+    </g>
+    <g id="asio-runtime-ratio-ytick_38">
+     <g id="asio-runtime-ratio-line2d_45">
+      <g>
+       <use xlink:href="#asio-runtime-ratio-m4afdebc270" x="812.317891" y="638.050754" style="stroke: #000000; stroke-width: 0.6"/>
+      </g>
+     </g>
+    </g>
+    <g id="asio-runtime-ratio-ytick_39">
+     <g id="asio-runtime-ratio-line2d_46">
+      <g>
+       <use xlink:href="#asio-runtime-ratio-m4afdebc270" x="812.317891" y="626.574292" style="stroke: #000000; stroke-width: 0.6"/>
+      </g>
+     </g>
+    </g>
+    <g id="asio-runtime-ratio-ytick_40">
+     <g id="asio-runtime-ratio-line2d_47">
+      <g>
+       <use xlink:href="#asio-runtime-ratio-m4afdebc270" x="812.317891" y="617.19734" style="stroke: #000000; stroke-width: 0.6"/>
+      </g>
+     </g>
+    </g>
+    <g id="asio-runtime-ratio-ytick_41">
+     <g id="asio-runtime-ratio-line2d_48">
+      <g>
+       <use xlink:href="#asio-runtime-ratio-m4afdebc270" x="812.317891" y="609.269239" style="stroke: #000000; stroke-width: 0.6"/>
+      </g>
+     </g>
+    </g>
+    <g id="asio-runtime-ratio-ytick_42">
+     <g id="asio-runtime-ratio-line2d_49">
+      <g>
+       <use xlink:href="#asio-runtime-ratio-m4afdebc270" x="812.317891" y="602.401607" style="stroke: #000000; stroke-width: 0.6"/>
+      </g>
+     </g>
+    </g>
+    <g id="asio-runtime-ratio-ytick_43">
+     <g id="asio-runtime-ratio-line2d_50">
+      <g>
+       <use xlink:href="#asio-runtime-ratio-m4afdebc270" x="812.317891" y="596.343925" style="stroke: #000000; stroke-width: 0.6"/>
+      </g>
+     </g>
+    </g>
+    <g id="asio-runtime-ratio-ytick_44">
+     <g id="asio-runtime-ratio-line2d_51">
+      <g>
+       <use xlink:href="#asio-runtime-ratio-m4afdebc270" x="812.317891" y="555.275998" style="stroke: #000000; stroke-width: 0.6"/>
+      </g>
+     </g>
+    </g>
+    <g id="asio-runtime-ratio-ytick_45">
+     <g id="asio-runtime-ratio-line2d_52">
+      <g>
+       <use xlink:href="#asio-runtime-ratio-m4afdebc270" x="812.317891" y="534.422584" style="stroke: #000000; stroke-width: 0.6"/>
+      </g>
+     </g>
+    </g>
+    <g id="asio-runtime-ratio-ytick_46">
+     <g id="asio-runtime-ratio-line2d_53">
+      <g>
+       <use xlink:href="#asio-runtime-ratio-m4afdebc270" x="812.317891" y="519.626851" style="stroke: #000000; stroke-width: 0.6"/>
+      </g>
+     </g>
+    </g>
+    <g id="asio-runtime-ratio-ytick_47">
+     <g id="asio-runtime-ratio-line2d_54">
+      <g>
+       <use xlink:href="#asio-runtime-ratio-m4afdebc270" x="812.317891" y="508.150389" style="stroke: #000000; stroke-width: 0.6"/>
+      </g>
+     </g>
+    </g>
+    <g id="asio-runtime-ratio-ytick_48">
+     <g id="asio-runtime-ratio-line2d_55">
+      <g>
+       <use xlink:href="#asio-runtime-ratio-m4afdebc270" x="812.317891" y="498.773437" style="stroke: #000000; stroke-width: 0.6"/>
+      </g>
+     </g>
+    </g>
+    <g id="asio-runtime-ratio-ytick_49">
+     <g id="asio-runtime-ratio-line2d_56">
+      <g>
+       <use xlink:href="#asio-runtime-ratio-m4afdebc270" x="812.317891" y="490.845337" style="stroke: #000000; stroke-width: 0.6"/>
+      </g>
+     </g>
+    </g>
+    <g id="asio-runtime-ratio-ytick_50">
+     <g id="asio-runtime-ratio-line2d_57">
+      <g>
+       <use xlink:href="#asio-runtime-ratio-m4afdebc270" x="812.317891" y="483.977704" style="stroke: #000000; stroke-width: 0.6"/>
+      </g>
+     </g>
+    </g>
+    <g id="asio-runtime-ratio-ytick_51">
+     <g id="asio-runtime-ratio-line2d_58">
+      <g>
+       <use xlink:href="#asio-runtime-ratio-m4afdebc270" x="812.317891" y="477.920023" style="stroke: #000000; stroke-width: 0.6"/>
+      </g>
+     </g>
+    </g>
+    <g id="asio-runtime-ratio-ytick_52">
+     <g id="asio-runtime-ratio-line2d_59">
+      <g>
+       <use xlink:href="#asio-runtime-ratio-m4afdebc270" x="812.317891" y="436.852095" style="stroke: #000000; stroke-width: 0.6"/>
+      </g>
+     </g>
+    </g>
+    <g id="asio-runtime-ratio-ytick_53">
+     <g id="asio-runtime-ratio-line2d_60">
+      <g>
+       <use xlink:href="#asio-runtime-ratio-m4afdebc270" x="812.317891" y="415.998681" style="stroke: #000000; stroke-width: 0.6"/>
+      </g>
+     </g>
+    </g>
+    <g id="asio-runtime-ratio-ytick_54">
+     <g id="asio-runtime-ratio-line2d_61">
+      <g>
+       <use xlink:href="#asio-runtime-ratio-m4afdebc270" x="812.317891" y="401.202949" style="stroke: #000000; stroke-width: 0.6"/>
+      </g>
+     </g>
+    </g>
+    <g id="asio-runtime-ratio-ytick_55">
+     <g id="asio-runtime-ratio-line2d_62">
+      <g>
+       <use xlink:href="#asio-runtime-ratio-m4afdebc270" x="812.317891" y="389.726487" style="stroke: #000000; stroke-width: 0.6"/>
+      </g>
+     </g>
+    </g>
+    <g id="asio-runtime-ratio-ytick_56">
+     <g id="asio-runtime-ratio-line2d_63">
+      <g>
+       <use xlink:href="#asio-runtime-ratio-m4afdebc270" x="812.317891" y="380.349535" style="stroke: #000000; stroke-width: 0.6"/>
+      </g>
+     </g>
+    </g>
+    <g id="asio-runtime-ratio-ytick_57">
+     <g id="asio-runtime-ratio-line2d_64">
+      <g>
+       <use xlink:href="#asio-runtime-ratio-m4afdebc270" x="812.317891" y="372.421434" style="stroke: #000000; stroke-width: 0.6"/>
+      </g>
+     </g>
+    </g>
+    <g id="asio-runtime-ratio-ytick_58">
+     <g id="asio-runtime-ratio-line2d_65">
+      <g>
+       <use xlink:href="#asio-runtime-ratio-m4afdebc270" x="812.317891" y="365.553802" style="stroke: #000000; stroke-width: 0.6"/>
+      </g>
+     </g>
+    </g>
+    <g id="asio-runtime-ratio-text_274">
+     <text style="font-size: 9px; font-family: 'DejaVu Sans'; text-anchor: middle" x="851.306484" y="528.122915" transform="rotate(-90 851.306484 528.122915)">Ratio to native</text>
+    </g>
+   </g>
+   <g id="asio-runtime-ratio-LineCollection_1"/>
+   <g id="asio-runtime-ratio-patch_8">
+    <path d="M 795.906162 692.240201 
+L 804.112026 692.240201 
+L 812.317891 692.240201 
+L 812.317891 364.00563 
+L 804.112026 364.00563 
+L 795.906162 364.00563 
+L 795.906162 692.240201 
+z
+" style="fill: none; stroke: #000000; stroke-width: 0.8; stroke-linejoin: miter; stroke-linecap: square"/>
+   </g>
+  </g>
+  <g id="asio-runtime-ratio-text_275">
+   <text style="font-size: 17px; font-family: 'DejaVu Sans'; text-anchor: start" x="25.92" y="25.877344" transform="rotate(-0 25.92 25.877344)">Asio execution relative to native</text>
+  </g>
+  <g id="asio-runtime-ratio-text_276">
+   <text style="font-size: 9px; font-family: 'DejaVu Sans'" transform="translate(25.92 46.619473)">Median of 30 fresh executions; O3, no LTO. 1.00 = native; lower is faster.</text>
+   <text style="font-size: 9px; font-family: 'DejaVu Sans'" transform="translate(25.92 57.421934)">All workloads initialize a timer/reactor. Native macOS kqueue polling affects these ratios; see diagnostic.</text>
+  </g>
+ </g>
+ <defs>
+  <clipPath id="asio-runtime-ratio-p0d1d6bc50c">
+   <rect x="155.84875" y="112.083984" width="626.928029" height="832.077862"/>
+  </clipPath>
+ </defs>
+</svg>

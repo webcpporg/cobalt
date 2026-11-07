@@ -7,11 +7,13 @@
 #include <webcpp/cobalt.hpp>
 #include <webcpp/test/exit_status.hpp>
 
-#include <boost/asio/deferred.hpp>
-#include <boost/asio/post.hpp>
-#include <boost/asio/steady_timer.hpp>
-#include <boost/cobalt/composition.hpp>
+#include "output.hpp"
+
 #include <boost/core/lightweight_test.hpp>
+#include <webcpp/asio/deferred.hpp>
+#include <webcpp/asio/post.hpp>
+#include <webcpp/asio/steady_timer.hpp>
+#include <webcpp/cobalt/composition.hpp>
 
 #include <chrono>
 #include <coroutine>
@@ -22,8 +24,8 @@
 #include <tuple>
 #include <utility>
 
-namespace cobalt = boost::cobalt;
-namespace asio = boost::asio;
+namespace cobalt = webcpp::cobalt;
+namespace asio = webcpp::asio;
 
 namespace {
 
@@ -46,7 +48,8 @@ private:
         cobalt::pmr::new_delete_resource()->deallocate(pointer, bytes, alignment);
     }
 
-    bool do_is_equal(const cobalt::pmr::memory_resource& other) const noexcept override {
+    [[nodiscard]] bool do_is_equal(
+        const cobalt::pmr::memory_resource& other) const noexcept override {
         return this == &other;
     }
 };
@@ -59,6 +62,8 @@ struct composed_wait final : cobalt::op<boost::system::error_code, int> {
     composed_wait(asio::steady_timer& value, int& start_count, int& completion_count)
         : timer(value), starts(start_count), completions(completion_count) {}
 
+    // The coroutine transformation invokes static promise hooks through its promise object.
+    // NOLINTNEXTLINE(readability-static-accessed-through-instance)
     void initiate([[maybe_unused]] cobalt::completion_handler<boost::system::error_code, int>
                       handler) override {
         ++starts;
@@ -109,9 +114,34 @@ struct suspended_frame {
     cobalt::unique_handle<promise_type> handle;
 };
 
+// The coroutine transformation invokes static promise hooks through its promise object.
+// NOLINTNEXTLINE(readability-static-accessed-through-instance)
 suspended_frame frame([[maybe_unused]] int& destructions, bool& ran) {
     ran = true;
     co_return;
+}
+
+void check_frame_lifetime() {
+    int destructions = 0;
+    bool ran = false;
+    {
+        auto first = frame(destructions, ran);
+        BOOST_TEST(!ran);
+        const auto* const address = first.handle.address();
+        auto owned = std::move(first.handle);
+        BOOST_TEST(!first.handle);
+        BOOST_TEST(owned.address() == address);
+        owned.resume();
+        BOOST_TEST(ran);
+        BOOST_TEST(owned.done());
+        const auto raw = owned.release();
+        BOOST_TEST(!owned);
+        auto restored = cobalt::unique_handle<void>::from_address(raw.address());
+        BOOST_TEST(restored.done());
+        restored.destroy();
+        BOOST_TEST(!restored);
+    }
+    BOOST_TEST_EQ(destructions, 1);
 }
 
 }  // namespace
@@ -122,7 +152,7 @@ cobalt::main co_main([[maybe_unused]] int argc, [[maybe_unused]] char** argv) {
     asio::steady_timer deadline(executor, std::chrono::seconds(5));
     deadline.async_wait([](boost::system::error_code error) {
         if (!error) {
-            std::fputs("composition contract timed out\n", stderr);
+            webcpp::test::write_stderr("composition contract timed out\n");
             std::_Exit(99);
         }
     });
@@ -156,26 +186,7 @@ cobalt::main co_main([[maybe_unused]] int argc, [[maybe_unused]] char** argv) {
         BOOST_TEST_EQ(resource.live_bytes, 0U);
         BOOST_TEST_EQ(completions, 1);
     }
-    int destructions = 0;
-    bool ran = false;
-    {
-        auto first = frame(destructions, ran);
-        BOOST_TEST(!ran);
-        const auto address = first.handle.address();
-        auto owned = std::move(first.handle);
-        BOOST_TEST(!first.handle);
-        BOOST_TEST(owned.address() == address);
-        owned.resume();
-        BOOST_TEST(ran);
-        BOOST_TEST(owned.done());
-        auto raw = owned.release();
-        BOOST_TEST(!owned);
-        auto restored = cobalt::unique_handle<void>::from_address(raw.address());
-        BOOST_TEST(restored.done());
-        restored.destroy();
-        BOOST_TEST(!restored);
-    }
-    BOOST_TEST_EQ(destructions, 1);
+    check_frame_lifetime();
     deadline.cancel();
     std::puts("cobalt: composed cancellation, allocator, executor and frame lifetime checked");
     co_return webcpp::test::exit_status(boost::report_errors());

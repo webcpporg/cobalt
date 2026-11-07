@@ -7,17 +7,18 @@
 #include <webcpp/cobalt.hpp>
 #include <webcpp/test/exit_status.hpp>
 
-#include <boost/asio/steady_timer.hpp>
 #include <boost/core/lightweight_test.hpp>
+#include <webcpp/asio/steady_timer.hpp>
 
 #include <chrono>
 #include <cstdio>
 
-boost::cobalt::main co_main([[maybe_unused]] int argc, [[maybe_unused]] char** argv) {
+webcpp::cobalt::main co_main([[maybe_unused]] int argc, [[maybe_unused]] char** argv) {
     // NOLINTNEXTLINE(readability-static-accessed-through-instance)
-    const auto executor = co_await boost::cobalt::this_coro::executor;
-    boost::asio::steady_timer timer(executor, std::chrono::milliseconds(1));
-    const auto [error] = co_await boost::cobalt::as_tuple(timer.async_wait(boost::cobalt::use_op));
+    const auto executor = co_await webcpp::cobalt::this_coro::executor;
+    webcpp::asio::steady_timer timer(executor, std::chrono::milliseconds(1));
+    const auto [error] =
+        co_await webcpp::cobalt::as_tuple(timer.async_wait(webcpp::cobalt::use_op));
     BOOST_TEST(!error);
     std::puts("cobalt: canonical and compatibility entry points agree");
     co_return webcpp::test::exit_status(boost::report_errors());

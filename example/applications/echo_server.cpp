@@ -1,11 +1,14 @@
 // Copyright (c) 2026 WebCpp.org
-// Distributed under the Boost Software License, Version 1.0.
+//
+// Distributed under the Boost Software License, Version 1.0. (See
+// accompanying file LICENSE_1_0.txt or copy at
+// https://www.boost.org/LICENSE_1_0.txt)
 
 #include <webcpp/cobalt.hpp>
 
-#include <boost/asio/steady_timer.hpp>
-#include <boost/cobalt/io/acceptor.hpp>
-#include <boost/cobalt/io/write.hpp>
+#include <webcpp/asio/steady_timer.hpp>
+#include <webcpp/cobalt/io/acceptor.hpp>
+#include <webcpp/cobalt/io/write.hpp>
 
 #include <array>
 #include <charconv>
@@ -14,9 +17,9 @@
 #include <list>
 #include <string_view>
 
-namespace asio = boost::asio;
-namespace cobalt = boost::cobalt;
-namespace io = boost::cobalt::io;
+namespace asio = webcpp::asio;
+namespace cobalt = webcpp::cobalt;
+namespace io = webcpp::cobalt::io;
 
 namespace {
 struct server_state {
@@ -101,7 +104,10 @@ cobalt::main co_main(int argc, char** argv) {
     if ((argc != 3 && argc != 4) || !parse(argv[1], port) || !parse(argv[2], limit) ||
         (argc == 4 && !parse(argv[3], cancel_ms)) || port < 1 || port > 65535 || limit < 1 ||
         limit > 32 || cancel_ms < 0 || cancel_ms > 60000) {
-        std::fputs("usage: echo_server <port 1..65535> <sessions 1..32> [cancel-ms]\n", stderr);
+        if (std::fputs("usage: echo_server <port 1..65535> <sessions 1..32> [cancel-ms]\n",
+                       stderr) == EOF) {
+            co_return 2;
+        }
         co_return 2;
     }
     server_state state;
@@ -125,7 +131,9 @@ cobalt::main co_main(int argc, char** argv) {
         });
     }
     std::printf("listening: port=%d limit=%d\n", port, limit);
-    std::fflush(stdout);
+    if (std::fflush(stdout) != 0) {
+        ++state.failures;
+    }
     co_await accepting;
     for (auto& current : sessions) {
         co_await current.running;
@@ -134,8 +142,9 @@ cobalt::main co_main(int argc, char** argv) {
     // Drain the timer handler before the state and named promises are destroyed.
     co_await asio::post(executor, cobalt::use_op);
     std::printf("done: accepted=%d completed=%d bytes=%zu cancelled=%d failures=%d\n",
-                state.accepted, state.completed, state.bytes, state.cancelled, state.failures);
-    co_return state.failures ? 1 : 0;
+                state.accepted, state.completed, state.bytes, static_cast<int>(state.cancelled),
+                state.failures);
+    co_return state.failures != 0 ? 1 : 0;
 }
 
 // end::echo-main[]

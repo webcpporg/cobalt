@@ -1,0 +1,47 @@
+// Copyright (c) 2026 WebCpp.org
+// Distributed under the Boost Software License, Version 1.0.
+
+// Diagnostic only: isolate the effect of initializing an otherwise idle reactor.
+#include <boost/asio.hpp>
+#include <chrono>
+#include <cstdio>
+#include <cstdlib>
+#include <memory>
+
+boost::asio::awaitable<void> posts(std::size_t count) {
+    const auto executor = co_await boost::asio::this_coro::executor;
+    std::size_t sum = 0;
+    for (std::size_t index = 1; index <= count; ++index) {
+        co_await boost::asio::post(executor, boost::asio::use_awaitable);
+        sum += index;
+    }
+    if (sum != count * (count + 1) / 2)
+        std::abort();
+}
+
+int main() {
+    constexpr std::size_t count = 10000;
+    for (int repetition = 0; repetition < 5; ++repetition) {
+        for (bool initialize_reactor : {false, true}) {
+            boost::asio::io_context context;
+            std::unique_ptr<boost::asio::steady_timer> idle_timer;
+            if (initialize_reactor)
+                idle_timer = std::make_unique<boost::asio::steady_timer>(context);
+            bool finished = false;
+            boost::asio::co_spawn(context, posts(count), [&](std::exception_ptr error) {
+                if (error)
+                    std::abort();
+                finished = true;
+            });
+            const auto start = std::chrono::steady_clock::now();
+            context.run();
+            const auto ns =
+                std::chrono::duration<double, std::nano>(std::chrono::steady_clock::now() - start)
+                    .count();
+            if (!finished)
+                std::abort();
+            std::printf("repetition=%d initialized_reactor=%d ns_per_post=%.3f\n", repetition,
+                        initialize_reactor, ns / count);
+        }
+    }
+}

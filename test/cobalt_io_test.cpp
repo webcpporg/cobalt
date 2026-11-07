@@ -7,11 +7,11 @@
 // The public target must link Cobalt's compiled I/O wrappers and core APIs.
 #include <webcpp/test/exit_status.hpp>
 
-#include <boost/asio/post.hpp>
-#include <boost/asio/steady_timer.hpp>
-#include <boost/cobalt.hpp>
-#include <boost/cobalt/io.hpp>
 #include <boost/core/lightweight_test.hpp>
+#include <webcpp/asio/post.hpp>
+#include <webcpp/asio/steady_timer.hpp>
+#include <webcpp/cobalt.hpp>
+#include <webcpp/cobalt/io.hpp>
 
 #include <algorithm>
 #include <array>
@@ -20,7 +20,7 @@
 #include <cstdlib>
 #include <string_view>
 
-namespace cobalt = boost::cobalt;
+namespace cobalt = webcpp::cobalt;
 namespace io = cobalt::io;
 
 namespace {
@@ -53,87 +53,18 @@ cobalt::task<void> refused_connection(const cobalt::executor& exec) {
     io::stream_socket client(exec);
     const auto [error] = co_await cobalt::as_tuple(client.connect(*endpoint));
     BOOST_TEST_EQ(error,
-                  boost::asio::error::make_error_code(boost::asio::error::connection_refused));
+                  webcpp::asio::error::make_error_code(webcpp::asio::error::connection_refused));
 }
 
-#if defined(__GNUC__) && !defined(__clang__) && __GNUC__ == 14
-#pragma GCC diagnostic pop
-#endif
-
-}  // namespace
-
-cobalt::main co_main([[maybe_unused]] int argc, [[maybe_unused]] char** argv) {
-    // NOLINTNEXTLINE(readability-static-accessed-through-instance)
-    const auto exec = co_await cobalt::this_coro::executor;
-    boost::asio::steady_timer watchdog(exec, std::chrono::seconds(10));
-    watchdog.async_wait([](boost::system::error_code error) {
-        if (!error) {
-            std::abort();
-        }
-    });
-    BOOST_TEST_EQ(co_await answer(), 42);
-
-    io::acceptor listener({io::tcp_v4, "127.0.0.1", 0}, exec);
-    io::stream_socket server(exec);
-    io::stream_socket client(exec);
-    auto accepting = accept_client(listener, server);
-    const auto [connect_error] =
-        co_await cobalt::as_tuple(client.connect(listener.local_endpoint()));
-    if (!BOOST_TEST(!connect_error)) {
-        co_return webcpp::test::exit_status(boost::report_errors());
-    }
-    co_await accepting;
-    constexpr std::string_view message = "Cobalt I/O on WASIp3";
-    std::array<char, message.size()> bytes{};
-    const auto [write_error, written] =
-        co_await cobalt::as_tuple(io::write(client, io::buffer(message)));
-    BOOST_TEST(!write_error);
-    BOOST_TEST_EQ(written, message.size());
-    const auto [read_error, received] =
-        co_await cobalt::as_tuple(io::read(server, io::buffer(bytes)));
-    BOOST_TEST(!read_error);
-    BOOST_TEST_EQ(received, message.size());
-    BOOST_TEST(std::string_view(bytes.data(), received) == message);
-
-    // A small receive buffer forces observable partial reads independently of
-    // the host's TCP segmentation. Send the same bytes using gathered buffers.
-    const std::array<boost::asio::const_buffer, 2> pieces{io::buffer(message.substr(0, 3)),
-                                                          io::buffer(message.substr(3))};
-    const auto [gather_error, gather_size] = co_await cobalt::as_tuple(io::write(client, pieces));
-    BOOST_TEST(!gather_error);
-    BOOST_TEST_EQ(gather_size, message.size());
-    std::size_t offset = 0;
-    int read_count = 0;
-    while (offset != bytes.size()) {
-        const auto [partial_error, count] = co_await cobalt::as_tuple(server.read_some(
-            io::buffer(bytes.data() + offset, std::min<std::size_t>(2, bytes.size() - offset))));
-        if (!BOOST_TEST(!partial_error && count > 0)) {
-            co_return webcpp::test::exit_status(boost::report_errors());
-        }
-        offset += count;
-        ++read_count;
-    }
-    BOOST_TEST(read_count > 1);
-    BOOST_TEST(std::string_view(bytes.data(), offset) == message);
-    boost::asio::post(exec, [&client] { BOOST_TEST(client.cancel().has_value()); });
-    const auto [cancel_error, cancelled] =
-        co_await cobalt::as_tuple(client.read_some(io::buffer(bytes)));
-    BOOST_TEST(cancel_error == boost::asio::error::operation_aborted);
-    BOOST_TEST_EQ(cancelled, 0U);
-    BOOST_TEST(server.shutdown(io::socket::shutdown_type::shutdown_send).has_value());
-    const auto [eof_error, eof_size] =
-        co_await cobalt::as_tuple(client.read_some(io::buffer(bytes)));
-    BOOST_TEST(eof_error == boost::asio::error::eof);
-    BOOST_TEST_EQ(eof_size, 0U);
-
-    co_await refused_connection(exec);
-
-    io::datagram_socket left({io::udp_v4, "127.0.0.1", 0}, exec);
-    io::datagram_socket right({io::udp_v4, "127.0.0.1", 0}, exec);
+template <std::size_t Size>
+cobalt::task<bool> check_datagrams(io::datagram_socket& left, io::datagram_socket& right,
+                                   const cobalt::executor& exec, std::string_view message,
+                                   std::array<char, Size>& bytes,
+                                   const std::array<webcpp::asio::const_buffer, 2>& pieces) {
     const auto left_endpoint = left.local_endpoint();
     const auto right_endpoint = right.local_endpoint();
     if (!BOOST_TEST(left_endpoint && right_endpoint)) {
-        co_return webcpp::test::exit_status(boost::report_errors());
+        co_return false;
     }
     const auto [left_error] = co_await cobalt::as_tuple(left.connect(*right_endpoint));
     const auto [right_error] = co_await cobalt::as_tuple(right.connect(*left_endpoint));
@@ -165,13 +96,16 @@ cobalt::main co_main([[maybe_unused]] int argc, [[maybe_unused]] char** argv) {
         co_await cobalt::as_tuple(right.receive(io::buffer(bytes)));
     BOOST_TEST(!empty_receive_error);
     BOOST_TEST_EQ(empty_received, 0U);
-    boost::asio::post(exec, [&right] { BOOST_TEST(right.cancel().has_value()); });
+    webcpp::asio::post(exec, [&right] { BOOST_TEST(right.cancel().has_value()); });
     const auto [udp_cancel_error, udp_cancelled] =
         co_await cobalt::as_tuple(right.receive(io::buffer(bytes)));
-    BOOST_TEST(udp_cancel_error == boost::asio::error::operation_aborted);
+    BOOST_TEST(udp_cancel_error == webcpp::asio::error::operation_aborted);
     BOOST_TEST_EQ(udp_cancelled, 0U);
 
-    io::resolver resolver(exec);
+    co_return true;
+}
+
+cobalt::task<void> check_resolver(io::resolver& resolver) {
     const auto [resolve_error, endpoints] = co_await cobalt::as_tuple(
         resolver.resolve("127.0.0.1", "443", io::resolver::flags::numeric_host));
     BOOST_TEST(!resolve_error);
@@ -180,6 +114,90 @@ cobalt::main co_main([[maybe_unused]] int argc, [[maybe_unused]] char** argv) {
         co_await cobalt::as_tuple(resolver.resolve("localhost", "443"));
     BOOST_TEST(!host_error);
     BOOST_TEST(!host_endpoints.empty());
+}
+
+#if defined(__GNUC__) && !defined(__clang__) && __GNUC__ == 14
+#pragma GCC diagnostic pop
+#endif
+
+}  // namespace
+
+cobalt::main co_main([[maybe_unused]] int argc, [[maybe_unused]] char** argv) {
+    // NOLINTNEXTLINE(readability-static-accessed-through-instance)
+    const auto exec = co_await cobalt::this_coro::executor;
+    webcpp::asio::steady_timer watchdog(exec, std::chrono::seconds(10));
+    watchdog.async_wait([](boost::system::error_code error) {
+        if (!error) {
+            std::abort();
+        }
+    });
+    BOOST_TEST_EQ(co_await answer(), 42);
+
+    io::acceptor listener({io::tcp_v4, "127.0.0.1", 0}, exec);
+    io::stream_socket server(exec);
+    io::stream_socket client(exec);
+    auto accepting = accept_client(listener, server);
+    const auto [connect_error] =
+        co_await cobalt::as_tuple(client.connect(listener.local_endpoint()));
+    if (!BOOST_TEST(!connect_error)) {
+        co_return webcpp::test::exit_status(boost::report_errors());
+    }
+    co_await accepting;
+    constexpr std::string_view message = "Cobalt I/O on WASIp3";
+    std::array<char, message.size()> bytes{};
+    const auto [write_error, written] =
+        co_await cobalt::as_tuple(io::write(client, io::buffer(message)));
+    BOOST_TEST(!write_error);
+    BOOST_TEST_EQ(written, message.size());
+    const auto [read_error, received] =
+        co_await cobalt::as_tuple(io::read(server, io::buffer(bytes)));
+    BOOST_TEST(!read_error);
+    BOOST_TEST_EQ(received, message.size());
+    BOOST_TEST(std::string_view(bytes.data(), received) == message);
+
+    // A small receive buffer forces observable partial reads independently of
+    // the host's TCP segmentation. Send the same bytes using gathered buffers.
+    const std::array<webcpp::asio::const_buffer, 2> pieces{
+        io::buffer(message.substr(0, 3)),
+        io::buffer(message.substr(3)),
+    };
+    const auto [gather_error, gather_size] = co_await cobalt::as_tuple(io::write(client, pieces));
+    BOOST_TEST(!gather_error);
+    BOOST_TEST_EQ(gather_size, message.size());
+    std::size_t offset = 0;
+    int read_count = 0;
+    while (offset != bytes.size()) {
+        const auto [partial_error, count] = co_await cobalt::as_tuple(server.read_some(
+            io::buffer(bytes.data() + offset, std::min<std::size_t>(2, bytes.size() - offset))));
+        if (!BOOST_TEST(!partial_error && count > 0)) {
+            co_return webcpp::test::exit_status(boost::report_errors());
+        }
+        offset += count;
+        ++read_count;
+    }
+    BOOST_TEST(read_count > 1);
+    BOOST_TEST(std::string_view(bytes.data(), offset) == message);
+    webcpp::asio::post(exec, [&client] { BOOST_TEST(client.cancel().has_value()); });
+    const auto [cancel_error, cancelled] =
+        co_await cobalt::as_tuple(client.read_some(io::buffer(bytes)));
+    BOOST_TEST(cancel_error == webcpp::asio::error::operation_aborted);
+    BOOST_TEST_EQ(cancelled, 0U);
+    BOOST_TEST(server.shutdown(io::socket::shutdown_type::shutdown_send).has_value());
+    const auto [eof_error, eof_size] =
+        co_await cobalt::as_tuple(client.read_some(io::buffer(bytes)));
+    BOOST_TEST(eof_error == webcpp::asio::error::eof);
+    BOOST_TEST_EQ(eof_size, 0U);
+
+    co_await refused_connection(exec);
+
+    io::datagram_socket left({io::udp_v4, "127.0.0.1", 0}, exec);
+    io::datagram_socket right({io::udp_v4, "127.0.0.1", 0}, exec);
+    if (!(co_await check_datagrams(left, right, exec, message, bytes, pieces))) {
+        co_return webcpp::test::exit_status(boost::report_errors());
+    }
+
+    io::resolver resolver(exec);
+    co_await check_resolver(resolver);
     watchdog.cancel();
     std::puts("cobalt: compiled I/O, task, TCP, UDP, cancellation, EOF and resolver checked");
     co_return webcpp::test::exit_status(boost::report_errors());

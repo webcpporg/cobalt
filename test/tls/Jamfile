@@ -5,7 +5,7 @@
 # https://www.boost.org/LICENSE_1_0.txt)
 
 import webcpp ;
-webcpp.targets native wasip3 ;
+webcpp.targets native wasip2 wasip3 ;
 webcpp.original python3 : .. ;
 
 webcpp.link cobalt_tls_client : cobalt_tls_client.cpp
@@ -37,7 +37,14 @@ for local test in cobalt_tls_client cobalt_ssl_client cobalt_ssl_state cobalt_ss
     webcpp.drive $(test)_runtime : $(test).cpp
       : <library>$(library) <include>../../../../tools/node-test/include
         <webcpp-drive-timeout>180 <dependency>../../../../tools/openssl/test/tls.py
-      : ../../../../tools/openssl/test/driver.py : $(args) : native wasip3 ;
+      : ../../../../tools/openssl/test/driver.py : $(args) : native wasip2 wasip3 ;
     .tls += $(test)_runtime ;
 }
-webcpp.lane tls : $(.tls) : native wasip3 ;
+webcpp.lane tls : $(.tls) : native wasip2 wasip3 ;
+
+# Native core identity survives the explicitly owned SSL type in either include
+# order.
+webcpp.compile native_ssl_identity : native_identity.cpp
+  : <library>/webcpp/cobalt//io_ssl : native ;
+webcpp.compile native_ssl_identity_boost_first : native_identity.cpp
+  : <library>/webcpp/cobalt//io_ssl <define>WEBCPP_TEST_BOOST_FIRST : native ;

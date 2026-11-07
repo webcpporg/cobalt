@@ -1,0 +1,1631 @@
+{
+  "schema": 1,
+  "scope": "Nine maintained Asio guide programs; not the complete upstream Boost.Asio example corpus.",
+  "counts": {
+    "passed": 92,
+    "not-applicable": 61,
+    "sdk-runtime-blocked": 27
+  },
+  "cells": [
+    {
+      "profile": "native-single-on",
+      "application": "asio_quick_start",
+      "status": "passed",
+      "reason": "Exact expected-output comparison",
+      "host": "native",
+      "evidence": "asio-native-single-on.json",
+      "source_manifest": "5bbede8068a56d90ce1d9110d185ad1c00ae6f17b8e1ea3e9df7dda7cba11760.sources.json"
+    },
+    {
+      "profile": "native-single-on",
+      "application": "asio_timers",
+      "status": "passed",
+      "reason": "Exact expected-output comparison",
+      "host": "native",
+      "evidence": "asio-native-single-on.json",
+      "source_manifest": "5bbede8068a56d90ce1d9110d185ad1c00ae6f17b8e1ea3e9df7dda7cba11760.sources.json"
+    },
+    {
+      "profile": "native-single-on",
+      "application": "asio_turn_limit",
+      "status": "not-applicable",
+      "reason": "Browser-specific interface",
+      "host": "native",
+      "evidence": "asio-native-single-on.json",
+      "source_manifest": "5bbede8068a56d90ce1d9110d185ad1c00ae6f17b8e1ea3e9df7dda7cba11760.sources.json"
+    },
+    {
+      "profile": "native-single-on",
+      "application": "asio_promise",
+      "status": "not-applicable",
+      "reason": "Browser-specific interface",
+      "host": "native",
+      "evidence": "asio-native-single-on.json",
+      "source_manifest": "5bbede8068a56d90ce1d9110d185ad1c00ae6f17b8e1ea3e9df7dda7cba11760.sources.json"
+    },
+    {
+      "profile": "native-single-on",
+      "application": "asio_event",
+      "status": "not-applicable",
+      "reason": "Browser-specific interface",
+      "host": "native",
+      "evidence": "asio-native-single-on.json",
+      "source_manifest": "5bbede8068a56d90ce1d9110d185ad1c00ae6f17b8e1ea3e9df7dda7cba11760.sources.json"
+    },
+    {
+      "profile": "native-single-on",
+      "application": "asio_sockets",
+      "status": "not-applicable",
+      "reason": "Browser-specific interface",
+      "host": "native",
+      "evidence": "asio-native-single-on.json",
+      "source_manifest": "5bbede8068a56d90ce1d9110d185ad1c00ae6f17b8e1ea3e9df7dda7cba11760.sources.json"
+    },
+    {
+      "profile": "native-single-on",
+      "application": "asio_resolver",
+      "status": "not-applicable",
+      "reason": "Browser-specific interface",
+      "host": "native",
+      "evidence": "asio-native-single-on.json",
+      "source_manifest": "5bbede8068a56d90ce1d9110d185ad1c00ae6f17b8e1ea3e9df7dda7cba11760.sources.json"
+    },
+    {
+      "profile": "native-single-on",
+      "application": "asio_tls_client",
+      "status": "passed",
+      "reason": "Exact expected-output comparison",
+      "host": "native",
+      "evidence": "asio-native-single-on.json",
+      "source_manifest": "5bbede8068a56d90ce1d9110d185ad1c00ae6f17b8e1ea3e9df7dda7cba11760.sources.json"
+    },
+    {
+      "profile": "native-single-on",
+      "application": "asio_capabilities",
+      "status": "passed",
+      "reason": "Exact expected-output comparison",
+      "host": "native",
+      "evidence": "asio-native-single-on.json",
+      "source_manifest": "5bbede8068a56d90ce1d9110d185ad1c00ae6f17b8e1ea3e9df7dda7cba11760.sources.json"
+    },
+    {
+      "profile": "native-single-off",
+      "application": "asio_quick_start",
+      "status": "passed",
+      "reason": "Exact expected-output comparison",
+      "host": "native",
+      "evidence": "asio-native-single-off.json",
+      "source_manifest": "5bbede8068a56d90ce1d9110d185ad1c00ae6f17b8e1ea3e9df7dda7cba11760.sources.json"
+    },
+    {
+      "profile": "native-single-off",
+      "application": "asio_timers",
+      "status": "passed",
+      "reason": "Exact expected-output comparison",
+      "host": "native",
+      "evidence": "asio-native-single-off.json",
+      "source_manifest": "5bbede8068a56d90ce1d9110d185ad1c00ae6f17b8e1ea3e9df7dda7cba11760.sources.json"
+    },
+    {
+      "profile": "native-single-off",
+      "application": "asio_turn_limit",
+      "status": "not-applicable",
+      "reason": "Browser-specific interface",
+      "host": "native",
+      "evidence": "asio-native-single-off.json",
+      "source_manifest": "5bbede8068a56d90ce1d9110d185ad1c00ae6f17b8e1ea3e9df7dda7cba11760.sources.json"
+    },
+    {
+      "profile": "native-single-off",
+      "application": "asio_promise",
+      "status": "not-applicable",
+      "reason": "Browser-specific interface",
+      "host": "native",
+      "evidence": "asio-native-single-off.json",
+      "source_manifest": "5bbede8068a56d90ce1d9110d185ad1c00ae6f17b8e1ea3e9df7dda7cba11760.sources.json"
+    },
+    {
+      "profile": "native-single-off",
+      "application": "asio_event",
+      "status": "not-applicable",
+      "reason": "Browser-specific interface",
+      "host": "native",
+      "evidence": "asio-native-single-off.json",
+      "source_manifest": "5bbede8068a56d90ce1d9110d185ad1c00ae6f17b8e1ea3e9df7dda7cba11760.sources.json"
+    },
+    {
+      "profile": "native-single-off",
+      "application": "asio_sockets",
+      "status": "not-applicable",
+      "reason": "Browser-specific interface",
+      "host": "native",
+      "evidence": "asio-native-single-off.json",
+      "source_manifest": "5bbede8068a56d90ce1d9110d185ad1c00ae6f17b8e1ea3e9df7dda7cba11760.sources.json"
+    },
+    {
+      "profile": "native-single-off",
+      "application": "asio_resolver",
+      "status": "not-applicable",
+      "reason": "Browser-specific interface",
+      "host": "native",
+      "evidence": "asio-native-single-off.json",
+      "source_manifest": "5bbede8068a56d90ce1d9110d185ad1c00ae6f17b8e1ea3e9df7dda7cba11760.sources.json"
+    },
+    {
+      "profile": "native-single-off",
+      "application": "asio_tls_client",
+      "status": "passed",
+      "reason": "Exact expected-output comparison",
+      "host": "native",
+      "evidence": "asio-native-single-off.json",
+      "source_manifest": "5bbede8068a56d90ce1d9110d185ad1c00ae6f17b8e1ea3e9df7dda7cba11760.sources.json"
+    },
+    {
+      "profile": "native-single-off",
+      "application": "asio_capabilities",
+      "status": "passed",
+      "reason": "Exact expected-output comparison",
+      "host": "native",
+      "evidence": "asio-native-single-off.json",
+      "source_manifest": "5bbede8068a56d90ce1d9110d185ad1c00ae6f17b8e1ea3e9df7dda7cba11760.sources.json"
+    },
+    {
+      "profile": "native-multi-on",
+      "application": "asio_quick_start",
+      "status": "passed",
+      "reason": "Exact expected-output comparison",
+      "host": "native",
+      "evidence": "asio-native-multi-on.json",
+      "source_manifest": "5bbede8068a56d90ce1d9110d185ad1c00ae6f17b8e1ea3e9df7dda7cba11760.sources.json"
+    },
+    {
+      "profile": "native-multi-on",
+      "application": "asio_timers",
+      "status": "passed",
+      "reason": "Exact expected-output comparison",
+      "host": "native",
+      "evidence": "asio-native-multi-on.json",
+      "source_manifest": "5bbede8068a56d90ce1d9110d185ad1c00ae6f17b8e1ea3e9df7dda7cba11760.sources.json"
+    },
+    {
+      "profile": "native-multi-on",
+      "application": "asio_turn_limit",
+      "status": "not-applicable",
+      "reason": "Browser-specific interface",
+      "host": "native",
+      "evidence": "asio-native-multi-on.json",
+      "source_manifest": "5bbede8068a56d90ce1d9110d185ad1c00ae6f17b8e1ea3e9df7dda7cba11760.sources.json"
+    },
+    {
+      "profile": "native-multi-on",
+      "application": "asio_promise",
+      "status": "not-applicable",
+      "reason": "Browser-specific interface",
+      "host": "native",
+      "evidence": "asio-native-multi-on.json",
+      "source_manifest": "5bbede8068a56d90ce1d9110d185ad1c00ae6f17b8e1ea3e9df7dda7cba11760.sources.json"
+    },
+    {
+      "profile": "native-multi-on",
+      "application": "asio_event",
+      "status": "not-applicable",
+      "reason": "Browser-specific interface",
+      "host": "native",
+      "evidence": "asio-native-multi-on.json",
+      "source_manifest": "5bbede8068a56d90ce1d9110d185ad1c00ae6f17b8e1ea3e9df7dda7cba11760.sources.json"
+    },
+    {
+      "profile": "native-multi-on",
+      "application": "asio_sockets",
+      "status": "not-applicable",
+      "reason": "Browser-specific interface",
+      "host": "native",
+      "evidence": "asio-native-multi-on.json",
+      "source_manifest": "5bbede8068a56d90ce1d9110d185ad1c00ae6f17b8e1ea3e9df7dda7cba11760.sources.json"
+    },
+    {
+      "profile": "native-multi-on",
+      "application": "asio_resolver",
+      "status": "not-applicable",
+      "reason": "Browser-specific interface",
+      "host": "native",
+      "evidence": "asio-native-multi-on.json",
+      "source_manifest": "5bbede8068a56d90ce1d9110d185ad1c00ae6f17b8e1ea3e9df7dda7cba11760.sources.json"
+    },
+    {
+      "profile": "native-multi-on",
+      "application": "asio_tls_client",
+      "status": "passed",
+      "reason": "Exact expected-output comparison",
+      "host": "native",
+      "evidence": "asio-native-multi-on.json",
+      "source_manifest": "5bbede8068a56d90ce1d9110d185ad1c00ae6f17b8e1ea3e9df7dda7cba11760.sources.json"
+    },
+    {
+      "profile": "native-multi-on",
+      "application": "asio_capabilities",
+      "status": "passed",
+      "reason": "Exact expected-output comparison",
+      "host": "native",
+      "evidence": "asio-native-multi-on.json",
+      "source_manifest": "5bbede8068a56d90ce1d9110d185ad1c00ae6f17b8e1ea3e9df7dda7cba11760.sources.json"
+    },
+    {
+      "profile": "native-multi-off",
+      "application": "asio_quick_start",
+      "status": "passed",
+      "reason": "Exact expected-output comparison",
+      "host": "native",
+      "evidence": "asio-native-multi-off.json",
+      "source_manifest": "5bbede8068a56d90ce1d9110d185ad1c00ae6f17b8e1ea3e9df7dda7cba11760.sources.json"
+    },
+    {
+      "profile": "native-multi-off",
+      "application": "asio_timers",
+      "status": "passed",
+      "reason": "Exact expected-output comparison",
+      "host": "native",
+      "evidence": "asio-native-multi-off.json",
+      "source_manifest": "5bbede8068a56d90ce1d9110d185ad1c00ae6f17b8e1ea3e9df7dda7cba11760.sources.json"
+    },
+    {
+      "profile": "native-multi-off",
+      "application": "asio_turn_limit",
+      "status": "not-applicable",
+      "reason": "Browser-specific interface",
+      "host": "native",
+      "evidence": "asio-native-multi-off.json",
+      "source_manifest": "5bbede8068a56d90ce1d9110d185ad1c00ae6f17b8e1ea3e9df7dda7cba11760.sources.json"
+    },
+    {
+      "profile": "native-multi-off",
+      "application": "asio_promise",
+      "status": "not-applicable",
+      "reason": "Browser-specific interface",
+      "host": "native",
+      "evidence": "asio-native-multi-off.json",
+      "source_manifest": "5bbede8068a56d90ce1d9110d185ad1c00ae6f17b8e1ea3e9df7dda7cba11760.sources.json"
+    },
+    {
+      "profile": "native-multi-off",
+      "application": "asio_event",
+      "status": "not-applicable",
+      "reason": "Browser-specific interface",
+      "host": "native",
+      "evidence": "asio-native-multi-off.json",
+      "source_manifest": "5bbede8068a56d90ce1d9110d185ad1c00ae6f17b8e1ea3e9df7dda7cba11760.sources.json"
+    },
+    {
+      "profile": "native-multi-off",
+      "application": "asio_sockets",
+      "status": "not-applicable",
+      "reason": "Browser-specific interface",
+      "host": "native",
+      "evidence": "asio-native-multi-off.json",
+      "source_manifest": "5bbede8068a56d90ce1d9110d185ad1c00ae6f17b8e1ea3e9df7dda7cba11760.sources.json"
+    },
+    {
+      "profile": "native-multi-off",
+      "application": "asio_resolver",
+      "status": "not-applicable",
+      "reason": "Browser-specific interface",
+      "host": "native",
+      "evidence": "asio-native-multi-off.json",
+      "source_manifest": "5bbede8068a56d90ce1d9110d185ad1c00ae6f17b8e1ea3e9df7dda7cba11760.sources.json"
+    },
+    {
+      "profile": "native-multi-off",
+      "application": "asio_tls_client",
+      "status": "passed",
+      "reason": "Exact expected-output comparison",
+      "host": "native",
+      "evidence": "asio-native-multi-off.json",
+      "source_manifest": "5bbede8068a56d90ce1d9110d185ad1c00ae6f17b8e1ea3e9df7dda7cba11760.sources.json"
+    },
+    {
+      "profile": "native-multi-off",
+      "application": "asio_capabilities",
+      "status": "passed",
+      "reason": "Exact expected-output comparison",
+      "host": "native",
+      "evidence": "asio-native-multi-off.json",
+      "source_manifest": "5bbede8068a56d90ce1d9110d185ad1c00ae6f17b8e1ea3e9df7dda7cba11760.sources.json"
+    },
+    {
+      "profile": "wasip2-single-on",
+      "application": "asio_quick_start",
+      "status": "passed",
+      "reason": "Exact expected-output comparison",
+      "host": "wasmtime",
+      "evidence": "asio-wasip2-single-on.json",
+      "source_manifest": "5bbede8068a56d90ce1d9110d185ad1c00ae6f17b8e1ea3e9df7dda7cba11760.sources.json"
+    },
+    {
+      "profile": "wasip2-single-on",
+      "application": "asio_timers",
+      "status": "passed",
+      "reason": "Exact expected-output comparison",
+      "host": "wasmtime",
+      "evidence": "asio-wasip2-single-on.json",
+      "source_manifest": "5bbede8068a56d90ce1d9110d185ad1c00ae6f17b8e1ea3e9df7dda7cba11760.sources.json"
+    },
+    {
+      "profile": "wasip2-single-on",
+      "application": "asio_turn_limit",
+      "status": "not-applicable",
+      "reason": "Browser-specific interface",
+      "host": "wasmtime",
+      "evidence": "asio-wasip2-single-on.json",
+      "source_manifest": "5bbede8068a56d90ce1d9110d185ad1c00ae6f17b8e1ea3e9df7dda7cba11760.sources.json"
+    },
+    {
+      "profile": "wasip2-single-on",
+      "application": "asio_promise",
+      "status": "not-applicable",
+      "reason": "Browser-specific interface",
+      "host": "wasmtime",
+      "evidence": "asio-wasip2-single-on.json",
+      "source_manifest": "5bbede8068a56d90ce1d9110d185ad1c00ae6f17b8e1ea3e9df7dda7cba11760.sources.json"
+    },
+    {
+      "profile": "wasip2-single-on",
+      "application": "asio_event",
+      "status": "not-applicable",
+      "reason": "Browser-specific interface",
+      "host": "wasmtime",
+      "evidence": "asio-wasip2-single-on.json",
+      "source_manifest": "5bbede8068a56d90ce1d9110d185ad1c00ae6f17b8e1ea3e9df7dda7cba11760.sources.json"
+    },
+    {
+      "profile": "wasip2-single-on",
+      "application": "asio_sockets",
+      "status": "not-applicable",
+      "reason": "Browser-specific interface",
+      "host": "wasmtime",
+      "evidence": "asio-wasip2-single-on.json",
+      "source_manifest": "5bbede8068a56d90ce1d9110d185ad1c00ae6f17b8e1ea3e9df7dda7cba11760.sources.json"
+    },
+    {
+      "profile": "wasip2-single-on",
+      "application": "asio_resolver",
+      "status": "not-applicable",
+      "reason": "Browser-specific interface",
+      "host": "wasmtime",
+      "evidence": "asio-wasip2-single-on.json",
+      "source_manifest": "5bbede8068a56d90ce1d9110d185ad1c00ae6f17b8e1ea3e9df7dda7cba11760.sources.json"
+    },
+    {
+      "profile": "wasip2-single-on",
+      "application": "asio_tls_client",
+      "status": "passed",
+      "reason": "Exact expected-output comparison",
+      "host": "wasmtime",
+      "evidence": "asio-wasip2-single-on.json",
+      "source_manifest": "5bbede8068a56d90ce1d9110d185ad1c00ae6f17b8e1ea3e9df7dda7cba11760.sources.json"
+    },
+    {
+      "profile": "wasip2-single-on",
+      "application": "asio_capabilities",
+      "status": "passed",
+      "reason": "Exact expected-output comparison",
+      "host": "wasmtime",
+      "evidence": "asio-wasip2-single-on.json",
+      "source_manifest": "5bbede8068a56d90ce1d9110d185ad1c00ae6f17b8e1ea3e9df7dda7cba11760.sources.json"
+    },
+    {
+      "profile": "wasip2-single-off",
+      "application": "asio_quick_start",
+      "status": "passed",
+      "reason": "Exact expected-output comparison",
+      "host": "wasmtime",
+      "evidence": "asio-wasip2-single-off.json",
+      "source_manifest": "5bbede8068a56d90ce1d9110d185ad1c00ae6f17b8e1ea3e9df7dda7cba11760.sources.json"
+    },
+    {
+      "profile": "wasip2-single-off",
+      "application": "asio_timers",
+      "status": "passed",
+      "reason": "Exact expected-output comparison",
+      "host": "wasmtime",
+      "evidence": "asio-wasip2-single-off.json",
+      "source_manifest": "5bbede8068a56d90ce1d9110d185ad1c00ae6f17b8e1ea3e9df7dda7cba11760.sources.json"
+    },
+    {
+      "profile": "wasip2-single-off",
+      "application": "asio_turn_limit",
+      "status": "not-applicable",
+      "reason": "Browser-specific interface",
+      "host": "wasmtime",
+      "evidence": "asio-wasip2-single-off.json",
+      "source_manifest": "5bbede8068a56d90ce1d9110d185ad1c00ae6f17b8e1ea3e9df7dda7cba11760.sources.json"
+    },
+    {
+      "profile": "wasip2-single-off",
+      "application": "asio_promise",
+      "status": "not-applicable",
+      "reason": "Browser-specific interface",
+      "host": "wasmtime",
+      "evidence": "asio-wasip2-single-off.json",
+      "source_manifest": "5bbede8068a56d90ce1d9110d185ad1c00ae6f17b8e1ea3e9df7dda7cba11760.sources.json"
+    },
+    {
+      "profile": "wasip2-single-off",
+      "application": "asio_event",
+      "status": "not-applicable",
+      "reason": "Browser-specific interface",
+      "host": "wasmtime",
+      "evidence": "asio-wasip2-single-off.json",
+      "source_manifest": "5bbede8068a56d90ce1d9110d185ad1c00ae6f17b8e1ea3e9df7dda7cba11760.sources.json"
+    },
+    {
+      "profile": "wasip2-single-off",
+      "application": "asio_sockets",
+      "status": "not-applicable",
+      "reason": "Browser-specific interface",
+      "host": "wasmtime",
+      "evidence": "asio-wasip2-single-off.json",
+      "source_manifest": "5bbede8068a56d90ce1d9110d185ad1c00ae6f17b8e1ea3e9df7dda7cba11760.sources.json"
+    },
+    {
+      "profile": "wasip2-single-off",
+      "application": "asio_resolver",
+      "status": "not-applicable",
+      "reason": "Browser-specific interface",
+      "host": "wasmtime",
+      "evidence": "asio-wasip2-single-off.json",
+      "source_manifest": "5bbede8068a56d90ce1d9110d185ad1c00ae6f17b8e1ea3e9df7dda7cba11760.sources.json"
+    },
+    {
+      "profile": "wasip2-single-off",
+      "application": "asio_tls_client",
+      "status": "passed",
+      "reason": "Exact expected-output comparison",
+      "host": "wasmtime",
+      "evidence": "asio-wasip2-single-off.json",
+      "source_manifest": "5bbede8068a56d90ce1d9110d185ad1c00ae6f17b8e1ea3e9df7dda7cba11760.sources.json"
+    },
+    {
+      "profile": "wasip2-single-off",
+      "application": "asio_capabilities",
+      "status": "passed",
+      "reason": "Exact expected-output comparison",
+      "host": "wasmtime",
+      "evidence": "asio-wasip2-single-off.json",
+      "source_manifest": "5bbede8068a56d90ce1d9110d185ad1c00ae6f17b8e1ea3e9df7dda7cba11760.sources.json"
+    },
+    {
+      "profile": "wasip2-multi-on",
+      "application": "asio_quick_start",
+      "status": "sdk-runtime-blocked",
+      "reason": "wasi-sdk 34 has no P2 pthread target",
+      "host": "wasmtime",
+      "evidence": null,
+      "source_manifest": null
+    },
+    {
+      "profile": "wasip2-multi-on",
+      "application": "asio_timers",
+      "status": "sdk-runtime-blocked",
+      "reason": "wasi-sdk 34 has no P2 pthread target",
+      "host": "wasmtime",
+      "evidence": null,
+      "source_manifest": null
+    },
+    {
+      "profile": "wasip2-multi-on",
+      "application": "asio_turn_limit",
+      "status": "sdk-runtime-blocked",
+      "reason": "wasi-sdk 34 has no P2 pthread target",
+      "host": "wasmtime",
+      "evidence": null,
+      "source_manifest": null
+    },
+    {
+      "profile": "wasip2-multi-on",
+      "application": "asio_promise",
+      "status": "sdk-runtime-blocked",
+      "reason": "wasi-sdk 34 has no P2 pthread target",
+      "host": "wasmtime",
+      "evidence": null,
+      "source_manifest": null
+    },
+    {
+      "profile": "wasip2-multi-on",
+      "application": "asio_event",
+      "status": "sdk-runtime-blocked",
+      "reason": "wasi-sdk 34 has no P2 pthread target",
+      "host": "wasmtime",
+      "evidence": null,
+      "source_manifest": null
+    },
+    {
+      "profile": "wasip2-multi-on",
+      "application": "asio_sockets",
+      "status": "sdk-runtime-blocked",
+      "reason": "wasi-sdk 34 has no P2 pthread target",
+      "host": "wasmtime",
+      "evidence": null,
+      "source_manifest": null
+    },
+    {
+      "profile": "wasip2-multi-on",
+      "application": "asio_resolver",
+      "status": "sdk-runtime-blocked",
+      "reason": "wasi-sdk 34 has no P2 pthread target",
+      "host": "wasmtime",
+      "evidence": null,
+      "source_manifest": null
+    },
+    {
+      "profile": "wasip2-multi-on",
+      "application": "asio_tls_client",
+      "status": "sdk-runtime-blocked",
+      "reason": "wasi-sdk 34 has no P2 pthread target",
+      "host": "wasmtime",
+      "evidence": null,
+      "source_manifest": null
+    },
+    {
+      "profile": "wasip2-multi-on",
+      "application": "asio_capabilities",
+      "status": "sdk-runtime-blocked",
+      "reason": "wasi-sdk 34 has no P2 pthread target",
+      "host": "wasmtime",
+      "evidence": null,
+      "source_manifest": null
+    },
+    {
+      "profile": "wasip2-multi-off",
+      "application": "asio_quick_start",
+      "status": "sdk-runtime-blocked",
+      "reason": "wasi-sdk 34 has no P2 pthread target",
+      "host": "wasmtime",
+      "evidence": null,
+      "source_manifest": null
+    },
+    {
+      "profile": "wasip2-multi-off",
+      "application": "asio_timers",
+      "status": "sdk-runtime-blocked",
+      "reason": "wasi-sdk 34 has no P2 pthread target",
+      "host": "wasmtime",
+      "evidence": null,
+      "source_manifest": null
+    },
+    {
+      "profile": "wasip2-multi-off",
+      "application": "asio_turn_limit",
+      "status": "sdk-runtime-blocked",
+      "reason": "wasi-sdk 34 has no P2 pthread target",
+      "host": "wasmtime",
+      "evidence": null,
+      "source_manifest": null
+    },
+    {
+      "profile": "wasip2-multi-off",
+      "application": "asio_promise",
+      "status": "sdk-runtime-blocked",
+      "reason": "wasi-sdk 34 has no P2 pthread target",
+      "host": "wasmtime",
+      "evidence": null,
+      "source_manifest": null
+    },
+    {
+      "profile": "wasip2-multi-off",
+      "application": "asio_event",
+      "status": "sdk-runtime-blocked",
+      "reason": "wasi-sdk 34 has no P2 pthread target",
+      "host": "wasmtime",
+      "evidence": null,
+      "source_manifest": null
+    },
+    {
+      "profile": "wasip2-multi-off",
+      "application": "asio_sockets",
+      "status": "sdk-runtime-blocked",
+      "reason": "wasi-sdk 34 has no P2 pthread target",
+      "host": "wasmtime",
+      "evidence": null,
+      "source_manifest": null
+    },
+    {
+      "profile": "wasip2-multi-off",
+      "application": "asio_resolver",
+      "status": "sdk-runtime-blocked",
+      "reason": "wasi-sdk 34 has no P2 pthread target",
+      "host": "wasmtime",
+      "evidence": null,
+      "source_manifest": null
+    },
+    {
+      "profile": "wasip2-multi-off",
+      "application": "asio_tls_client",
+      "status": "sdk-runtime-blocked",
+      "reason": "wasi-sdk 34 has no P2 pthread target",
+      "host": "wasmtime",
+      "evidence": null,
+      "source_manifest": null
+    },
+    {
+      "profile": "wasip2-multi-off",
+      "application": "asio_capabilities",
+      "status": "sdk-runtime-blocked",
+      "reason": "wasi-sdk 34 has no P2 pthread target",
+      "host": "wasmtime",
+      "evidence": null,
+      "source_manifest": null
+    },
+    {
+      "profile": "wasip3-single-on",
+      "application": "asio_quick_start",
+      "status": "passed",
+      "reason": "Exact expected-output comparison",
+      "host": "wasmtime",
+      "evidence": "asio-wasip3-single-on.json",
+      "source_manifest": "5bbede8068a56d90ce1d9110d185ad1c00ae6f17b8e1ea3e9df7dda7cba11760.sources.json"
+    },
+    {
+      "profile": "wasip3-single-on",
+      "application": "asio_timers",
+      "status": "passed",
+      "reason": "Exact expected-output comparison",
+      "host": "wasmtime",
+      "evidence": "asio-wasip3-single-on.json",
+      "source_manifest": "5bbede8068a56d90ce1d9110d185ad1c00ae6f17b8e1ea3e9df7dda7cba11760.sources.json"
+    },
+    {
+      "profile": "wasip3-single-on",
+      "application": "asio_turn_limit",
+      "status": "not-applicable",
+      "reason": "Browser-specific interface",
+      "host": "wasmtime",
+      "evidence": "asio-wasip3-single-on.json",
+      "source_manifest": "5bbede8068a56d90ce1d9110d185ad1c00ae6f17b8e1ea3e9df7dda7cba11760.sources.json"
+    },
+    {
+      "profile": "wasip3-single-on",
+      "application": "asio_promise",
+      "status": "not-applicable",
+      "reason": "Browser-specific interface",
+      "host": "wasmtime",
+      "evidence": "asio-wasip3-single-on.json",
+      "source_manifest": "5bbede8068a56d90ce1d9110d185ad1c00ae6f17b8e1ea3e9df7dda7cba11760.sources.json"
+    },
+    {
+      "profile": "wasip3-single-on",
+      "application": "asio_event",
+      "status": "not-applicable",
+      "reason": "Browser-specific interface",
+      "host": "wasmtime",
+      "evidence": "asio-wasip3-single-on.json",
+      "source_manifest": "5bbede8068a56d90ce1d9110d185ad1c00ae6f17b8e1ea3e9df7dda7cba11760.sources.json"
+    },
+    {
+      "profile": "wasip3-single-on",
+      "application": "asio_sockets",
+      "status": "not-applicable",
+      "reason": "Browser-specific interface",
+      "host": "wasmtime",
+      "evidence": "asio-wasip3-single-on.json",
+      "source_manifest": "5bbede8068a56d90ce1d9110d185ad1c00ae6f17b8e1ea3e9df7dda7cba11760.sources.json"
+    },
+    {
+      "profile": "wasip3-single-on",
+      "application": "asio_resolver",
+      "status": "not-applicable",
+      "reason": "Browser-specific interface",
+      "host": "wasmtime",
+      "evidence": "asio-wasip3-single-on.json",
+      "source_manifest": "5bbede8068a56d90ce1d9110d185ad1c00ae6f17b8e1ea3e9df7dda7cba11760.sources.json"
+    },
+    {
+      "profile": "wasip3-single-on",
+      "application": "asio_tls_client",
+      "status": "passed",
+      "reason": "Exact expected-output comparison",
+      "host": "wasmtime",
+      "evidence": "asio-wasip3-single-on.json",
+      "source_manifest": "5bbede8068a56d90ce1d9110d185ad1c00ae6f17b8e1ea3e9df7dda7cba11760.sources.json"
+    },
+    {
+      "profile": "wasip3-single-on",
+      "application": "asio_capabilities",
+      "status": "passed",
+      "reason": "Exact expected-output comparison",
+      "host": "wasmtime",
+      "evidence": "asio-wasip3-single-on.json",
+      "source_manifest": "5bbede8068a56d90ce1d9110d185ad1c00ae6f17b8e1ea3e9df7dda7cba11760.sources.json"
+    },
+    {
+      "profile": "wasip3-single-off",
+      "application": "asio_quick_start",
+      "status": "passed",
+      "reason": "Exact expected-output comparison",
+      "host": "wasmtime",
+      "evidence": "asio-wasip3-single-off.json",
+      "source_manifest": "ebb8f591d15acfbca148d55acf57fda23ce5e987439a5b3c9e88f735d7329af8.sources.json"
+    },
+    {
+      "profile": "wasip3-single-off",
+      "application": "asio_timers",
+      "status": "passed",
+      "reason": "Exact expected-output comparison",
+      "host": "wasmtime",
+      "evidence": "asio-wasip3-single-off.json",
+      "source_manifest": "ebb8f591d15acfbca148d55acf57fda23ce5e987439a5b3c9e88f735d7329af8.sources.json"
+    },
+    {
+      "profile": "wasip3-single-off",
+      "application": "asio_turn_limit",
+      "status": "not-applicable",
+      "reason": "Browser-specific interface",
+      "host": "wasmtime",
+      "evidence": "asio-wasip3-single-off.json",
+      "source_manifest": "ebb8f591d15acfbca148d55acf57fda23ce5e987439a5b3c9e88f735d7329af8.sources.json"
+    },
+    {
+      "profile": "wasip3-single-off",
+      "application": "asio_promise",
+      "status": "not-applicable",
+      "reason": "Browser-specific interface",
+      "host": "wasmtime",
+      "evidence": "asio-wasip3-single-off.json",
+      "source_manifest": "ebb8f591d15acfbca148d55acf57fda23ce5e987439a5b3c9e88f735d7329af8.sources.json"
+    },
+    {
+      "profile": "wasip3-single-off",
+      "application": "asio_event",
+      "status": "not-applicable",
+      "reason": "Browser-specific interface",
+      "host": "wasmtime",
+      "evidence": "asio-wasip3-single-off.json",
+      "source_manifest": "ebb8f591d15acfbca148d55acf57fda23ce5e987439a5b3c9e88f735d7329af8.sources.json"
+    },
+    {
+      "profile": "wasip3-single-off",
+      "application": "asio_sockets",
+      "status": "not-applicable",
+      "reason": "Browser-specific interface",
+      "host": "wasmtime",
+      "evidence": "asio-wasip3-single-off.json",
+      "source_manifest": "ebb8f591d15acfbca148d55acf57fda23ce5e987439a5b3c9e88f735d7329af8.sources.json"
+    },
+    {
+      "profile": "wasip3-single-off",
+      "application": "asio_resolver",
+      "status": "not-applicable",
+      "reason": "Browser-specific interface",
+      "host": "wasmtime",
+      "evidence": "asio-wasip3-single-off.json",
+      "source_manifest": "ebb8f591d15acfbca148d55acf57fda23ce5e987439a5b3c9e88f735d7329af8.sources.json"
+    },
+    {
+      "profile": "wasip3-single-off",
+      "application": "asio_tls_client",
+      "status": "passed",
+      "reason": "Exact expected-output comparison",
+      "host": "wasmtime",
+      "evidence": "asio-wasip3-single-off.json",
+      "source_manifest": "ebb8f591d15acfbca148d55acf57fda23ce5e987439a5b3c9e88f735d7329af8.sources.json"
+    },
+    {
+      "profile": "wasip3-single-off",
+      "application": "asio_capabilities",
+      "status": "passed",
+      "reason": "Exact expected-output comparison",
+      "host": "wasmtime",
+      "evidence": "asio-wasip3-single-off.json",
+      "source_manifest": "ebb8f591d15acfbca148d55acf57fda23ce5e987439a5b3c9e88f735d7329af8.sources.json"
+    },
+    {
+      "profile": "wasip3-multi-on",
+      "application": "asio_quick_start",
+      "status": "sdk-runtime-blocked",
+      "reason": "wasi-sdk 34 has no cooperative P3 C++ exception runtime",
+      "host": "wasmtime",
+      "evidence": null,
+      "source_manifest": null
+    },
+    {
+      "profile": "wasip3-multi-on",
+      "application": "asio_timers",
+      "status": "sdk-runtime-blocked",
+      "reason": "wasi-sdk 34 has no cooperative P3 C++ exception runtime",
+      "host": "wasmtime",
+      "evidence": null,
+      "source_manifest": null
+    },
+    {
+      "profile": "wasip3-multi-on",
+      "application": "asio_turn_limit",
+      "status": "sdk-runtime-blocked",
+      "reason": "wasi-sdk 34 has no cooperative P3 C++ exception runtime",
+      "host": "wasmtime",
+      "evidence": null,
+      "source_manifest": null
+    },
+    {
+      "profile": "wasip3-multi-on",
+      "application": "asio_promise",
+      "status": "sdk-runtime-blocked",
+      "reason": "wasi-sdk 34 has no cooperative P3 C++ exception runtime",
+      "host": "wasmtime",
+      "evidence": null,
+      "source_manifest": null
+    },
+    {
+      "profile": "wasip3-multi-on",
+      "application": "asio_event",
+      "status": "sdk-runtime-blocked",
+      "reason": "wasi-sdk 34 has no cooperative P3 C++ exception runtime",
+      "host": "wasmtime",
+      "evidence": null,
+      "source_manifest": null
+    },
+    {
+      "profile": "wasip3-multi-on",
+      "application": "asio_sockets",
+      "status": "sdk-runtime-blocked",
+      "reason": "wasi-sdk 34 has no cooperative P3 C++ exception runtime",
+      "host": "wasmtime",
+      "evidence": null,
+      "source_manifest": null
+    },
+    {
+      "profile": "wasip3-multi-on",
+      "application": "asio_resolver",
+      "status": "sdk-runtime-blocked",
+      "reason": "wasi-sdk 34 has no cooperative P3 C++ exception runtime",
+      "host": "wasmtime",
+      "evidence": null,
+      "source_manifest": null
+    },
+    {
+      "profile": "wasip3-multi-on",
+      "application": "asio_tls_client",
+      "status": "sdk-runtime-blocked",
+      "reason": "wasi-sdk 34 has no cooperative P3 C++ exception runtime",
+      "host": "wasmtime",
+      "evidence": null,
+      "source_manifest": null
+    },
+    {
+      "profile": "wasip3-multi-on",
+      "application": "asio_capabilities",
+      "status": "sdk-runtime-blocked",
+      "reason": "wasi-sdk 34 has no cooperative P3 C++ exception runtime",
+      "host": "wasmtime",
+      "evidence": null,
+      "source_manifest": null
+    },
+    {
+      "profile": "wasip3-multi-off",
+      "application": "asio_quick_start",
+      "status": "passed",
+      "reason": "Exact expected-output comparison",
+      "host": "wasmtime",
+      "evidence": "asio-wasip3-multi-off.json",
+      "source_manifest": "ebb8f591d15acfbca148d55acf57fda23ce5e987439a5b3c9e88f735d7329af8.sources.json"
+    },
+    {
+      "profile": "wasip3-multi-off",
+      "application": "asio_timers",
+      "status": "passed",
+      "reason": "Exact expected-output comparison",
+      "host": "wasmtime",
+      "evidence": "asio-wasip3-multi-off.json",
+      "source_manifest": "ebb8f591d15acfbca148d55acf57fda23ce5e987439a5b3c9e88f735d7329af8.sources.json"
+    },
+    {
+      "profile": "wasip3-multi-off",
+      "application": "asio_turn_limit",
+      "status": "not-applicable",
+      "reason": "Browser-specific interface",
+      "host": "wasmtime",
+      "evidence": "asio-wasip3-multi-off.json",
+      "source_manifest": "ebb8f591d15acfbca148d55acf57fda23ce5e987439a5b3c9e88f735d7329af8.sources.json"
+    },
+    {
+      "profile": "wasip3-multi-off",
+      "application": "asio_promise",
+      "status": "not-applicable",
+      "reason": "Browser-specific interface",
+      "host": "wasmtime",
+      "evidence": "asio-wasip3-multi-off.json",
+      "source_manifest": "ebb8f591d15acfbca148d55acf57fda23ce5e987439a5b3c9e88f735d7329af8.sources.json"
+    },
+    {
+      "profile": "wasip3-multi-off",
+      "application": "asio_event",
+      "status": "not-applicable",
+      "reason": "Browser-specific interface",
+      "host": "wasmtime",
+      "evidence": "asio-wasip3-multi-off.json",
+      "source_manifest": "ebb8f591d15acfbca148d55acf57fda23ce5e987439a5b3c9e88f735d7329af8.sources.json"
+    },
+    {
+      "profile": "wasip3-multi-off",
+      "application": "asio_sockets",
+      "status": "not-applicable",
+      "reason": "Browser-specific interface",
+      "host": "wasmtime",
+      "evidence": "asio-wasip3-multi-off.json",
+      "source_manifest": "ebb8f591d15acfbca148d55acf57fda23ce5e987439a5b3c9e88f735d7329af8.sources.json"
+    },
+    {
+      "profile": "wasip3-multi-off",
+      "application": "asio_resolver",
+      "status": "not-applicable",
+      "reason": "Browser-specific interface",
+      "host": "wasmtime",
+      "evidence": "asio-wasip3-multi-off.json",
+      "source_manifest": "ebb8f591d15acfbca148d55acf57fda23ce5e987439a5b3c9e88f735d7329af8.sources.json"
+    },
+    {
+      "profile": "wasip3-multi-off",
+      "application": "asio_tls_client",
+      "status": "passed",
+      "reason": "Exact expected-output comparison",
+      "host": "wasmtime",
+      "evidence": "asio-wasip3-multi-off.json",
+      "source_manifest": "ebb8f591d15acfbca148d55acf57fda23ce5e987439a5b3c9e88f735d7329af8.sources.json"
+    },
+    {
+      "profile": "wasip3-multi-off",
+      "application": "asio_capabilities",
+      "status": "passed",
+      "reason": "Exact expected-output comparison",
+      "host": "wasmtime",
+      "evidence": "asio-wasip3-multi-off.json",
+      "source_manifest": "ebb8f591d15acfbca148d55acf57fda23ce5e987439a5b3c9e88f735d7329af8.sources.json"
+    },
+    {
+      "profile": "jspi-single-on",
+      "application": "asio_quick_start",
+      "status": "passed",
+      "reason": "Exact expected-output comparison",
+      "host": "node",
+      "evidence": "asio-jspi-single-on.json",
+      "source_manifest": "ebb8f591d15acfbca148d55acf57fda23ce5e987439a5b3c9e88f735d7329af8.sources.json"
+    },
+    {
+      "profile": "jspi-single-on",
+      "application": "asio_timers",
+      "status": "passed",
+      "reason": "Exact expected-output comparison",
+      "host": "node",
+      "evidence": "asio-jspi-single-on.json",
+      "source_manifest": "ebb8f591d15acfbca148d55acf57fda23ce5e987439a5b3c9e88f735d7329af8.sources.json"
+    },
+    {
+      "profile": "jspi-single-on",
+      "application": "asio_turn_limit",
+      "status": "passed",
+      "reason": "Exact expected-output comparison",
+      "host": "node",
+      "evidence": "asio-jspi-single-on.json",
+      "source_manifest": "ebb8f591d15acfbca148d55acf57fda23ce5e987439a5b3c9e88f735d7329af8.sources.json"
+    },
+    {
+      "profile": "jspi-single-on",
+      "application": "asio_promise",
+      "status": "passed",
+      "reason": "Exact expected-output comparison",
+      "host": "node",
+      "evidence": "asio-jspi-single-on.json",
+      "source_manifest": "ebb8f591d15acfbca148d55acf57fda23ce5e987439a5b3c9e88f735d7329af8.sources.json"
+    },
+    {
+      "profile": "jspi-single-on",
+      "application": "asio_event",
+      "status": "passed",
+      "reason": "Exact expected-output comparison",
+      "host": "node",
+      "evidence": "asio-jspi-single-on.json",
+      "source_manifest": "ebb8f591d15acfbca148d55acf57fda23ce5e987439a5b3c9e88f735d7329af8.sources.json"
+    },
+    {
+      "profile": "jspi-single-on",
+      "application": "asio_sockets",
+      "status": "passed",
+      "reason": "Exact expected-output comparison",
+      "host": "node",
+      "evidence": "asio-jspi-single-on.json",
+      "source_manifest": "ebb8f591d15acfbca148d55acf57fda23ce5e987439a5b3c9e88f735d7329af8.sources.json"
+    },
+    {
+      "profile": "jspi-single-on",
+      "application": "asio_resolver",
+      "status": "passed",
+      "reason": "Exact expected-output comparison",
+      "host": "node",
+      "evidence": "asio-jspi-single-on.json",
+      "source_manifest": "ebb8f591d15acfbca148d55acf57fda23ce5e987439a5b3c9e88f735d7329af8.sources.json"
+    },
+    {
+      "profile": "jspi-single-on",
+      "application": "asio_tls_client",
+      "status": "not-applicable",
+      "reason": "Requires guest TLS or socket backend",
+      "host": "node",
+      "evidence": "asio-jspi-single-on.json",
+      "source_manifest": "ebb8f591d15acfbca148d55acf57fda23ce5e987439a5b3c9e88f735d7329af8.sources.json"
+    },
+    {
+      "profile": "jspi-single-on",
+      "application": "asio_capabilities",
+      "status": "not-applicable",
+      "reason": "Requires guest TLS or socket backend",
+      "host": "node",
+      "evidence": "asio-jspi-single-on.json",
+      "source_manifest": "ebb8f591d15acfbca148d55acf57fda23ce5e987439a5b3c9e88f735d7329af8.sources.json"
+    },
+    {
+      "profile": "jspi-single-off",
+      "application": "asio_quick_start",
+      "status": "passed",
+      "reason": "Exact expected-output comparison",
+      "host": "node",
+      "evidence": "asio-jspi-single-off.json",
+      "source_manifest": "ebb8f591d15acfbca148d55acf57fda23ce5e987439a5b3c9e88f735d7329af8.sources.json"
+    },
+    {
+      "profile": "jspi-single-off",
+      "application": "asio_timers",
+      "status": "passed",
+      "reason": "Exact expected-output comparison",
+      "host": "node",
+      "evidence": "asio-jspi-single-off.json",
+      "source_manifest": "ebb8f591d15acfbca148d55acf57fda23ce5e987439a5b3c9e88f735d7329af8.sources.json"
+    },
+    {
+      "profile": "jspi-single-off",
+      "application": "asio_turn_limit",
+      "status": "passed",
+      "reason": "Exact expected-output comparison",
+      "host": "node",
+      "evidence": "asio-jspi-single-off.json",
+      "source_manifest": "ebb8f591d15acfbca148d55acf57fda23ce5e987439a5b3c9e88f735d7329af8.sources.json"
+    },
+    {
+      "profile": "jspi-single-off",
+      "application": "asio_promise",
+      "status": "passed",
+      "reason": "Exact expected-output comparison",
+      "host": "node",
+      "evidence": "asio-jspi-single-off.json",
+      "source_manifest": "ebb8f591d15acfbca148d55acf57fda23ce5e987439a5b3c9e88f735d7329af8.sources.json"
+    },
+    {
+      "profile": "jspi-single-off",
+      "application": "asio_event",
+      "status": "passed",
+      "reason": "Exact expected-output comparison",
+      "host": "node",
+      "evidence": "asio-jspi-single-off.json",
+      "source_manifest": "ebb8f591d15acfbca148d55acf57fda23ce5e987439a5b3c9e88f735d7329af8.sources.json"
+    },
+    {
+      "profile": "jspi-single-off",
+      "application": "asio_sockets",
+      "status": "passed",
+      "reason": "Exact expected-output comparison",
+      "host": "node",
+      "evidence": "asio-jspi-single-off.json",
+      "source_manifest": "ebb8f591d15acfbca148d55acf57fda23ce5e987439a5b3c9e88f735d7329af8.sources.json"
+    },
+    {
+      "profile": "jspi-single-off",
+      "application": "asio_resolver",
+      "status": "passed",
+      "reason": "Exact expected-output comparison",
+      "host": "node",
+      "evidence": "asio-jspi-single-off.json",
+      "source_manifest": "ebb8f591d15acfbca148d55acf57fda23ce5e987439a5b3c9e88f735d7329af8.sources.json"
+    },
+    {
+      "profile": "jspi-single-off",
+      "application": "asio_tls_client",
+      "status": "not-applicable",
+      "reason": "Requires guest TLS or socket backend",
+      "host": "node",
+      "evidence": "asio-jspi-single-off.json",
+      "source_manifest": "ebb8f591d15acfbca148d55acf57fda23ce5e987439a5b3c9e88f735d7329af8.sources.json"
+    },
+    {
+      "profile": "jspi-single-off",
+      "application": "asio_capabilities",
+      "status": "not-applicable",
+      "reason": "Requires guest TLS or socket backend",
+      "host": "node",
+      "evidence": "asio-jspi-single-off.json",
+      "source_manifest": "ebb8f591d15acfbca148d55acf57fda23ce5e987439a5b3c9e88f735d7329af8.sources.json"
+    },
+    {
+      "profile": "jspi-multi-on",
+      "application": "asio_quick_start",
+      "status": "passed",
+      "reason": "Exact expected-output comparison",
+      "host": "node",
+      "evidence": "asio-jspi-multi-on.json",
+      "source_manifest": "ebb8f591d15acfbca148d55acf57fda23ce5e987439a5b3c9e88f735d7329af8.sources.json"
+    },
+    {
+      "profile": "jspi-multi-on",
+      "application": "asio_timers",
+      "status": "passed",
+      "reason": "Exact expected-output comparison",
+      "host": "node",
+      "evidence": "asio-jspi-multi-on.json",
+      "source_manifest": "ebb8f591d15acfbca148d55acf57fda23ce5e987439a5b3c9e88f735d7329af8.sources.json"
+    },
+    {
+      "profile": "jspi-multi-on",
+      "application": "asio_turn_limit",
+      "status": "passed",
+      "reason": "Exact expected-output comparison",
+      "host": "node",
+      "evidence": "asio-jspi-multi-on.json",
+      "source_manifest": "ebb8f591d15acfbca148d55acf57fda23ce5e987439a5b3c9e88f735d7329af8.sources.json"
+    },
+    {
+      "profile": "jspi-multi-on",
+      "application": "asio_promise",
+      "status": "passed",
+      "reason": "Exact expected-output comparison",
+      "host": "node",
+      "evidence": "asio-jspi-multi-on.json",
+      "source_manifest": "ebb8f591d15acfbca148d55acf57fda23ce5e987439a5b3c9e88f735d7329af8.sources.json"
+    },
+    {
+      "profile": "jspi-multi-on",
+      "application": "asio_event",
+      "status": "passed",
+      "reason": "Exact expected-output comparison",
+      "host": "node",
+      "evidence": "asio-jspi-multi-on.json",
+      "source_manifest": "ebb8f591d15acfbca148d55acf57fda23ce5e987439a5b3c9e88f735d7329af8.sources.json"
+    },
+    {
+      "profile": "jspi-multi-on",
+      "application": "asio_sockets",
+      "status": "passed",
+      "reason": "Exact expected-output comparison",
+      "host": "node",
+      "evidence": "asio-jspi-multi-on.json",
+      "source_manifest": "ebb8f591d15acfbca148d55acf57fda23ce5e987439a5b3c9e88f735d7329af8.sources.json"
+    },
+    {
+      "profile": "jspi-multi-on",
+      "application": "asio_resolver",
+      "status": "passed",
+      "reason": "Exact expected-output comparison",
+      "host": "node",
+      "evidence": "asio-jspi-multi-on.json",
+      "source_manifest": "ebb8f591d15acfbca148d55acf57fda23ce5e987439a5b3c9e88f735d7329af8.sources.json"
+    },
+    {
+      "profile": "jspi-multi-on",
+      "application": "asio_tls_client",
+      "status": "not-applicable",
+      "reason": "Requires guest TLS or socket backend",
+      "host": "node",
+      "evidence": "asio-jspi-multi-on.json",
+      "source_manifest": "ebb8f591d15acfbca148d55acf57fda23ce5e987439a5b3c9e88f735d7329af8.sources.json"
+    },
+    {
+      "profile": "jspi-multi-on",
+      "application": "asio_capabilities",
+      "status": "not-applicable",
+      "reason": "Requires guest TLS or socket backend",
+      "host": "node",
+      "evidence": "asio-jspi-multi-on.json",
+      "source_manifest": "ebb8f591d15acfbca148d55acf57fda23ce5e987439a5b3c9e88f735d7329af8.sources.json"
+    },
+    {
+      "profile": "jspi-multi-off",
+      "application": "asio_quick_start",
+      "status": "passed",
+      "reason": "Exact expected-output comparison",
+      "host": "node",
+      "evidence": "asio-jspi-multi-off.json",
+      "source_manifest": "ebb8f591d15acfbca148d55acf57fda23ce5e987439a5b3c9e88f735d7329af8.sources.json"
+    },
+    {
+      "profile": "jspi-multi-off",
+      "application": "asio_timers",
+      "status": "passed",
+      "reason": "Exact expected-output comparison",
+      "host": "node",
+      "evidence": "asio-jspi-multi-off.json",
+      "source_manifest": "ebb8f591d15acfbca148d55acf57fda23ce5e987439a5b3c9e88f735d7329af8.sources.json"
+    },
+    {
+      "profile": "jspi-multi-off",
+      "application": "asio_turn_limit",
+      "status": "passed",
+      "reason": "Exact expected-output comparison",
+      "host": "node",
+      "evidence": "asio-jspi-multi-off.json",
+      "source_manifest": "ebb8f591d15acfbca148d55acf57fda23ce5e987439a5b3c9e88f735d7329af8.sources.json"
+    },
+    {
+      "profile": "jspi-multi-off",
+      "application": "asio_promise",
+      "status": "passed",
+      "reason": "Exact expected-output comparison",
+      "host": "node",
+      "evidence": "asio-jspi-multi-off.json",
+      "source_manifest": "ebb8f591d15acfbca148d55acf57fda23ce5e987439a5b3c9e88f735d7329af8.sources.json"
+    },
+    {
+      "profile": "jspi-multi-off",
+      "application": "asio_event",
+      "status": "passed",
+      "reason": "Exact expected-output comparison",
+      "host": "node",
+      "evidence": "asio-jspi-multi-off.json",
+      "source_manifest": "ebb8f591d15acfbca148d55acf57fda23ce5e987439a5b3c9e88f735d7329af8.sources.json"
+    },
+    {
+      "profile": "jspi-multi-off",
+      "application": "asio_sockets",
+      "status": "passed",
+      "reason": "Exact expected-output comparison",
+      "host": "node",
+      "evidence": "asio-jspi-multi-off.json",
+      "source_manifest": "ebb8f591d15acfbca148d55acf57fda23ce5e987439a5b3c9e88f735d7329af8.sources.json"
+    },
+    {
+      "profile": "jspi-multi-off",
+      "application": "asio_resolver",
+      "status": "passed",
+      "reason": "Exact expected-output comparison",
+      "host": "node",
+      "evidence": "asio-jspi-multi-off.json",
+      "source_manifest": "ebb8f591d15acfbca148d55acf57fda23ce5e987439a5b3c9e88f735d7329af8.sources.json"
+    },
+    {
+      "profile": "jspi-multi-off",
+      "application": "asio_tls_client",
+      "status": "not-applicable",
+      "reason": "Requires guest TLS or socket backend",
+      "host": "node",
+      "evidence": "asio-jspi-multi-off.json",
+      "source_manifest": "ebb8f591d15acfbca148d55acf57fda23ce5e987439a5b3c9e88f735d7329af8.sources.json"
+    },
+    {
+      "profile": "jspi-multi-off",
+      "application": "asio_capabilities",
+      "status": "not-applicable",
+      "reason": "Requires guest TLS or socket backend",
+      "host": "node",
+      "evidence": "asio-jspi-multi-off.json",
+      "source_manifest": "ebb8f591d15acfbca148d55acf57fda23ce5e987439a5b3c9e88f735d7329af8.sources.json"
+    },
+    {
+      "profile": "asyncify-single-on",
+      "application": "asio_quick_start",
+      "status": "passed",
+      "reason": "Exact expected-output comparison",
+      "host": "node",
+      "evidence": "asio-asyncify-single-on.json",
+      "source_manifest": "ebb8f591d15acfbca148d55acf57fda23ce5e987439a5b3c9e88f735d7329af8.sources.json"
+    },
+    {
+      "profile": "asyncify-single-on",
+      "application": "asio_timers",
+      "status": "passed",
+      "reason": "Exact expected-output comparison",
+      "host": "node",
+      "evidence": "asio-asyncify-single-on.json",
+      "source_manifest": "ebb8f591d15acfbca148d55acf57fda23ce5e987439a5b3c9e88f735d7329af8.sources.json"
+    },
+    {
+      "profile": "asyncify-single-on",
+      "application": "asio_turn_limit",
+      "status": "passed",
+      "reason": "Exact expected-output comparison",
+      "host": "node",
+      "evidence": "asio-asyncify-single-on.json",
+      "source_manifest": "ebb8f591d15acfbca148d55acf57fda23ce5e987439a5b3c9e88f735d7329af8.sources.json"
+    },
+    {
+      "profile": "asyncify-single-on",
+      "application": "asio_promise",
+      "status": "passed",
+      "reason": "Exact expected-output comparison",
+      "host": "node",
+      "evidence": "asio-asyncify-single-on.json",
+      "source_manifest": "ebb8f591d15acfbca148d55acf57fda23ce5e987439a5b3c9e88f735d7329af8.sources.json"
+    },
+    {
+      "profile": "asyncify-single-on",
+      "application": "asio_event",
+      "status": "passed",
+      "reason": "Exact expected-output comparison",
+      "host": "node",
+      "evidence": "asio-asyncify-single-on.json",
+      "source_manifest": "ebb8f591d15acfbca148d55acf57fda23ce5e987439a5b3c9e88f735d7329af8.sources.json"
+    },
+    {
+      "profile": "asyncify-single-on",
+      "application": "asio_sockets",
+      "status": "passed",
+      "reason": "Exact expected-output comparison",
+      "host": "node",
+      "evidence": "asio-asyncify-single-on.json",
+      "source_manifest": "ebb8f591d15acfbca148d55acf57fda23ce5e987439a5b3c9e88f735d7329af8.sources.json"
+    },
+    {
+      "profile": "asyncify-single-on",
+      "application": "asio_resolver",
+      "status": "passed",
+      "reason": "Exact expected-output comparison",
+      "host": "node",
+      "evidence": "asio-asyncify-single-on.json",
+      "source_manifest": "ebb8f591d15acfbca148d55acf57fda23ce5e987439a5b3c9e88f735d7329af8.sources.json"
+    },
+    {
+      "profile": "asyncify-single-on",
+      "application": "asio_tls_client",
+      "status": "not-applicable",
+      "reason": "Requires guest TLS or socket backend",
+      "host": "node",
+      "evidence": "asio-asyncify-single-on.json",
+      "source_manifest": "ebb8f591d15acfbca148d55acf57fda23ce5e987439a5b3c9e88f735d7329af8.sources.json"
+    },
+    {
+      "profile": "asyncify-single-on",
+      "application": "asio_capabilities",
+      "status": "not-applicable",
+      "reason": "Requires guest TLS or socket backend",
+      "host": "node",
+      "evidence": "asio-asyncify-single-on.json",
+      "source_manifest": "ebb8f591d15acfbca148d55acf57fda23ce5e987439a5b3c9e88f735d7329af8.sources.json"
+    },
+    {
+      "profile": "asyncify-single-off",
+      "application": "asio_quick_start",
+      "status": "passed",
+      "reason": "Exact expected-output comparison",
+      "host": "node",
+      "evidence": "asio-asyncify-single-off.json",
+      "source_manifest": "ebb8f591d15acfbca148d55acf57fda23ce5e987439a5b3c9e88f735d7329af8.sources.json"
+    },
+    {
+      "profile": "asyncify-single-off",
+      "application": "asio_timers",
+      "status": "passed",
+      "reason": "Exact expected-output comparison",
+      "host": "node",
+      "evidence": "asio-asyncify-single-off.json",
+      "source_manifest": "ebb8f591d15acfbca148d55acf57fda23ce5e987439a5b3c9e88f735d7329af8.sources.json"
+    },
+    {
+      "profile": "asyncify-single-off",
+      "application": "asio_turn_limit",
+      "status": "passed",
+      "reason": "Exact expected-output comparison",
+      "host": "node",
+      "evidence": "asio-asyncify-single-off.json",
+      "source_manifest": "ebb8f591d15acfbca148d55acf57fda23ce5e987439a5b3c9e88f735d7329af8.sources.json"
+    },
+    {
+      "profile": "asyncify-single-off",
+      "application": "asio_promise",
+      "status": "passed",
+      "reason": "Exact expected-output comparison",
+      "host": "node",
+      "evidence": "asio-asyncify-single-off.json",
+      "source_manifest": "ebb8f591d15acfbca148d55acf57fda23ce5e987439a5b3c9e88f735d7329af8.sources.json"
+    },
+    {
+      "profile": "asyncify-single-off",
+      "application": "asio_event",
+      "status": "passed",
+      "reason": "Exact expected-output comparison",
+      "host": "node",
+      "evidence": "asio-asyncify-single-off.json",
+      "source_manifest": "ebb8f591d15acfbca148d55acf57fda23ce5e987439a5b3c9e88f735d7329af8.sources.json"
+    },
+    {
+      "profile": "asyncify-single-off",
+      "application": "asio_sockets",
+      "status": "passed",
+      "reason": "Exact expected-output comparison",
+      "host": "node",
+      "evidence": "asio-asyncify-single-off.json",
+      "source_manifest": "ebb8f591d15acfbca148d55acf57fda23ce5e987439a5b3c9e88f735d7329af8.sources.json"
+    },
+    {
+      "profile": "asyncify-single-off",
+      "application": "asio_resolver",
+      "status": "passed",
+      "reason": "Exact expected-output comparison",
+      "host": "node",
+      "evidence": "asio-asyncify-single-off.json",
+      "source_manifest": "ebb8f591d15acfbca148d55acf57fda23ce5e987439a5b3c9e88f735d7329af8.sources.json"
+    },
+    {
+      "profile": "asyncify-single-off",
+      "application": "asio_tls_client",
+      "status": "not-applicable",
+      "reason": "Requires guest TLS or socket backend",
+      "host": "node",
+      "evidence": "asio-asyncify-single-off.json",
+      "source_manifest": "ebb8f591d15acfbca148d55acf57fda23ce5e987439a5b3c9e88f735d7329af8.sources.json"
+    },
+    {
+      "profile": "asyncify-single-off",
+      "application": "asio_capabilities",
+      "status": "not-applicable",
+      "reason": "Requires guest TLS or socket backend",
+      "host": "node",
+      "evidence": "asio-asyncify-single-off.json",
+      "source_manifest": "ebb8f591d15acfbca148d55acf57fda23ce5e987439a5b3c9e88f735d7329af8.sources.json"
+    },
+    {
+      "profile": "asyncify-multi-on",
+      "application": "asio_quick_start",
+      "status": "passed",
+      "reason": "Exact expected-output comparison",
+      "host": "node",
+      "evidence": "asio-asyncify-multi-on.json",
+      "source_manifest": "ebb8f591d15acfbca148d55acf57fda23ce5e987439a5b3c9e88f735d7329af8.sources.json"
+    },
+    {
+      "profile": "asyncify-multi-on",
+      "application": "asio_timers",
+      "status": "passed",
+      "reason": "Exact expected-output comparison",
+      "host": "node",
+      "evidence": "asio-asyncify-multi-on.json",
+      "source_manifest": "ebb8f591d15acfbca148d55acf57fda23ce5e987439a5b3c9e88f735d7329af8.sources.json"
+    },
+    {
+      "profile": "asyncify-multi-on",
+      "application": "asio_turn_limit",
+      "status": "passed",
+      "reason": "Exact expected-output comparison",
+      "host": "node",
+      "evidence": "asio-asyncify-multi-on.json",
+      "source_manifest": "ebb8f591d15acfbca148d55acf57fda23ce5e987439a5b3c9e88f735d7329af8.sources.json"
+    },
+    {
+      "profile": "asyncify-multi-on",
+      "application": "asio_promise",
+      "status": "passed",
+      "reason": "Exact expected-output comparison",
+      "host": "node",
+      "evidence": "asio-asyncify-multi-on.json",
+      "source_manifest": "ebb8f591d15acfbca148d55acf57fda23ce5e987439a5b3c9e88f735d7329af8.sources.json"
+    },
+    {
+      "profile": "asyncify-multi-on",
+      "application": "asio_event",
+      "status": "passed",
+      "reason": "Exact expected-output comparison",
+      "host": "node",
+      "evidence": "asio-asyncify-multi-on.json",
+      "source_manifest": "ebb8f591d15acfbca148d55acf57fda23ce5e987439a5b3c9e88f735d7329af8.sources.json"
+    },
+    {
+      "profile": "asyncify-multi-on",
+      "application": "asio_sockets",
+      "status": "passed",
+      "reason": "Exact expected-output comparison",
+      "host": "node",
+      "evidence": "asio-asyncify-multi-on.json",
+      "source_manifest": "ebb8f591d15acfbca148d55acf57fda23ce5e987439a5b3c9e88f735d7329af8.sources.json"
+    },
+    {
+      "profile": "asyncify-multi-on",
+      "application": "asio_resolver",
+      "status": "passed",
+      "reason": "Exact expected-output comparison",
+      "host": "node",
+      "evidence": "asio-asyncify-multi-on.json",
+      "source_manifest": "ebb8f591d15acfbca148d55acf57fda23ce5e987439a5b3c9e88f735d7329af8.sources.json"
+    },
+    {
+      "profile": "asyncify-multi-on",
+      "application": "asio_tls_client",
+      "status": "not-applicable",
+      "reason": "Requires guest TLS or socket backend",
+      "host": "node",
+      "evidence": "asio-asyncify-multi-on.json",
+      "source_manifest": "ebb8f591d15acfbca148d55acf57fda23ce5e987439a5b3c9e88f735d7329af8.sources.json"
+    },
+    {
+      "profile": "asyncify-multi-on",
+      "application": "asio_capabilities",
+      "status": "not-applicable",
+      "reason": "Requires guest TLS or socket backend",
+      "host": "node",
+      "evidence": "asio-asyncify-multi-on.json",
+      "source_manifest": "ebb8f591d15acfbca148d55acf57fda23ce5e987439a5b3c9e88f735d7329af8.sources.json"
+    },
+    {
+      "profile": "asyncify-multi-off",
+      "application": "asio_quick_start",
+      "status": "passed",
+      "reason": "Exact expected-output comparison",
+      "host": "node",
+      "evidence": "asio-asyncify-multi-off.json",
+      "source_manifest": "ebb8f591d15acfbca148d55acf57fda23ce5e987439a5b3c9e88f735d7329af8.sources.json"
+    },
+    {
+      "profile": "asyncify-multi-off",
+      "application": "asio_timers",
+      "status": "passed",
+      "reason": "Exact expected-output comparison",
+      "host": "node",
+      "evidence": "asio-asyncify-multi-off.json",
+      "source_manifest": "ebb8f591d15acfbca148d55acf57fda23ce5e987439a5b3c9e88f735d7329af8.sources.json"
+    },
+    {
+      "profile": "asyncify-multi-off",
+      "application": "asio_turn_limit",
+      "status": "passed",
+      "reason": "Exact expected-output comparison",
+      "host": "node",
+      "evidence": "asio-asyncify-multi-off.json",
+      "source_manifest": "ebb8f591d15acfbca148d55acf57fda23ce5e987439a5b3c9e88f735d7329af8.sources.json"
+    },
+    {
+      "profile": "asyncify-multi-off",
+      "application": "asio_promise",
+      "status": "passed",
+      "reason": "Exact expected-output comparison",
+      "host": "node",
+      "evidence": "asio-asyncify-multi-off.json",
+      "source_manifest": "ebb8f591d15acfbca148d55acf57fda23ce5e987439a5b3c9e88f735d7329af8.sources.json"
+    },
+    {
+      "profile": "asyncify-multi-off",
+      "application": "asio_event",
+      "status": "passed",
+      "reason": "Exact expected-output comparison",
+      "host": "node",
+      "evidence": "asio-asyncify-multi-off.json",
+      "source_manifest": "ebb8f591d15acfbca148d55acf57fda23ce5e987439a5b3c9e88f735d7329af8.sources.json"
+    },
+    {
+      "profile": "asyncify-multi-off",
+      "application": "asio_sockets",
+      "status": "passed",
+      "reason": "Exact expected-output comparison",
+      "host": "node",
+      "evidence": "asio-asyncify-multi-off.json",
+      "source_manifest": "ebb8f591d15acfbca148d55acf57fda23ce5e987439a5b3c9e88f735d7329af8.sources.json"
+    },
+    {
+      "profile": "asyncify-multi-off",
+      "application": "asio_resolver",
+      "status": "passed",
+      "reason": "Exact expected-output comparison",
+      "host": "node",
+      "evidence": "asio-asyncify-multi-off.json",
+      "source_manifest": "ebb8f591d15acfbca148d55acf57fda23ce5e987439a5b3c9e88f735d7329af8.sources.json"
+    },
+    {
+      "profile": "asyncify-multi-off",
+      "application": "asio_tls_client",
+      "status": "not-applicable",
+      "reason": "Requires guest TLS or socket backend",
+      "host": "node",
+      "evidence": "asio-asyncify-multi-off.json",
+      "source_manifest": "ebb8f591d15acfbca148d55acf57fda23ce5e987439a5b3c9e88f735d7329af8.sources.json"
+    },
+    {
+      "profile": "asyncify-multi-off",
+      "application": "asio_capabilities",
+      "status": "not-applicable",
+      "reason": "Requires guest TLS or socket backend",
+      "host": "node",
+      "evidence": "asio-asyncify-multi-off.json",
+      "source_manifest": "ebb8f591d15acfbca148d55acf57fda23ce5e987439a5b3c9e88f735d7329af8.sources.json"
+    }
+  ]
+}

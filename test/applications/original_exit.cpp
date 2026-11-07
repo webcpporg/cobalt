@@ -10,6 +10,16 @@
 #include <cstdlib>
 
 namespace {
-[[maybe_unused]] const int registered =
-    std::atexit([] { std::fputs("webcpp: upstream application reached normal exit\n", stderr); });
+struct normal_exit_observer {
+    ~normal_exit_observer() {
+        if (std::fputs("webcpp: upstream application reached normal exit\n", stderr) < 0 ||
+            std::fflush(stderr) != 0) {
+            std::_Exit(98);
+        }
+    }
+};
+
+// Constant initialization cannot throw. The runtime invokes the destructor on
+// normal exit, leaving imported applications and their entry points unchanged.
+const normal_exit_observer registered{};
 }  // namespace

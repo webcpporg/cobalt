@@ -9,14 +9,14 @@
 
 #include <webcpp/test/exit_status.hpp>
 
-#include <boost/asio/post.hpp>
-#include <boost/asio/steady_timer.hpp>
-#include <boost/cobalt/io/steady_timer.hpp>
-#include <boost/cobalt/main.hpp>
-#include <boost/cobalt/op.hpp>
-#include <boost/cobalt/result.hpp>
-#include <boost/cobalt/this_coro.hpp>
 #include <boost/core/lightweight_test.hpp>
+#include <webcpp/asio/post.hpp>
+#include <webcpp/asio/steady_timer.hpp>
+#include <webcpp/cobalt/io/steady_timer.hpp>
+#include <webcpp/cobalt/main.hpp>
+#include <webcpp/cobalt/op.hpp>
+#include <webcpp/cobalt/result.hpp>
+#include <webcpp/cobalt/this_coro.hpp>
 
 #include <algorithm>
 #include <chrono>
@@ -29,7 +29,7 @@
 #endif
 
 using namespace std::chrono_literals;
-namespace cobalt = boost::cobalt;
+namespace cobalt = webcpp::cobalt;
 
 cobalt::main co_main([[maybe_unused]] int argc, [[maybe_unused]] char** argv) {
     // Cobalt's awaiter has static members called by the compiler's co_await expansion.
@@ -40,7 +40,7 @@ cobalt::main co_main([[maybe_unused]] int argc, [[maybe_unused]] char** argv) {
     std::size_t since = 0;
     std::size_t longest = 0;
     for (std::size_t i = 0; i < 5000; ++i) {
-        co_await boost::asio::post(exec, cobalt::use_op);
+        co_await webcpp::asio::post(exec, cobalt::use_op);
         const int now = yields.count();
         if (now != seen) {
             seen = now;
@@ -57,7 +57,7 @@ cobalt::main co_main([[maybe_unused]] int argc, [[maybe_unused]] char** argv) {
     const auto deadline = std::chrono::steady_clock::now() + 10s;
     const int before = yields.count();
     while (!timeout.ran() && std::chrono::steady_clock::now() < deadline) {
-        co_await boost::asio::post(exec, cobalt::use_op);
+        co_await webcpp::asio::post(exec, cobalt::use_op);
     }
     BOOST_TEST(timeout.ran());
     BOOST_TEST_GT(yields.count(), before);
@@ -68,7 +68,7 @@ cobalt::main co_main([[maybe_unused]] int argc, [[maybe_unused]] char** argv) {
     cobalt::io::steady_timer cobalt_timer(50ms, exec);
     auto [cobalt_error] = co_await cobalt::as_tuple(cobalt_timer.wait());
     BOOST_TEST(!cobalt_error);
-    boost::asio::steady_timer asio_timer(exec, 20ms);
+    webcpp::asio::steady_timer asio_timer(exec, 20ms);
     auto [asio_error] = co_await cobalt::as_tuple(asio_timer.async_wait(cobalt::use_op));
     BOOST_TEST(!asio_error);
     std::puts("cobalt: turns and timers passed");

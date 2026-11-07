@@ -1,0 +1,125 @@
+// Copyright (c) 2026 WebCpp.org
+//
+// Distributed under the Boost Software License, Version 1.0. (See
+// accompanying file LICENSE_1_0.txt or copy at
+// https://www.boost.org/LICENSE_1_0.txt)
+
+[#cobalt-configuration]
+== Configuration and deployment profiles
+
+This source distribution requires Boost 1.92.0 headers. The public configuration
+rejects other Boost versions before an application can combine them with the
+pinned compiled sources, including when compiling without B2. The native core
+inventory includes `src/native_version.cpp` for the same check when only the
+archive is built. Do not omit source-inventory entries.
+
+Define requirements before any Cobalt header, consistently in every translation
+unit. `WEBCPP_COBALT_HAS_*` macros are read-only observations: defining one does
+not supply the missing environment feature. `REQUIRE_*` controls default to
+unset; setting one to `1` requests a compile-time diagnostic when unavailable.
+
+[cols="2,3",options="header"]
+|===
+|Control or observation |Meaning
+|`WEBCPP_COBALT_NO_EXCEPTIONS` |Derived from the collection's exception policy, or explicitly selected for this integration. It does not change the compiler's exception ABI or repair upstream issue 287.
+|`WEBCPP_COBALT_LINK_SSL` |Unset by default; set to `1` when explicitly linking the matching corrected SSL implementation and provider; supplied by the SSL B2 targets.
+|`WEBCPP_COBALT_REQUIRE_SOCKET_BACKEND` |Require guest TCP/UDP, unavailable in a normal browser.
+|`WEBCPP_COBALT_REQUIRE_OPENSSL` |Require both a guest TLS target and explicit SSL linkage.
+|`WEBCPP_COBALT_REQUIRE_THREADS` |Require a thread-enabled Asio/compiler profile.
+|`WEBCPP_COBALT_REQUIRE_LOCAL_SOCKETS` |Require native local sockets.
+|`WEBCPP_COBALT_REQUIRE_SIGNALS` |Require native operating-system signals, not coroutine cancellation signals.
+|`WEBCPP_COBALT_REQUIRE_SERIAL_PORT` |Require native serial-port support.
+|`WEBCPP_COBALT_REQUIRE_REVERSE_DNS` |Require reverse name lookup, unavailable in the WASI/browser adapters.
+|`WEBCPP_COBALT_REQUIRE_PIPE_CREATION` |Require guest-created asynchronous pipes with transfer, cancellation and EOF support. WASIp2 has no guest pipe creation; the Emscripten lifecycle is not supported.
+|`WEBCPP_COBALT_REQUIRE_POSIX_STDIO` |Require native POSIX descriptors for asynchronous stdio. SDK 34's WASI stdio descriptors do not provide nonblocking mode.
+|`WEBCPP_COBALT_REQUIRE_POLLABLE_STDIO` |Require Asio's explicit WASIp2 pollable stdio adapter, usable with Cobalt's completion tokens.
+|`WEBCPP_ASIO_DEFAULT_MAX_HANDLERS_PER_TURN` |Asio's shared browser scheduling default, `100`; compile the runner with the same value. It is a handler-count budget, not a time limit.
+|===
+
+The corresponding `HAS_SOCKET_BACKEND`, `HAS_OPENSSL_BACKEND`, `HAS_THREADS`,
+`HAS_LOCAL_SOCKETS`, `HAS_SIGNALS`, `HAS_SERIAL_PORT` and `HAS_REVERSE_DNS`
+observations use the `WEBCPP_COBALT_` prefix. `HAS_BROWSER_BRIDGE`,
+`HAS_BROWSER_WORKERS` and `HAS_HOST_DNS` distinguish JavaScript integration,
+pthread hosting and forward lookup. Internal `BACKEND_*` macros are not public
+configuration controls.
+
+In a browser build, including `io.hpp`, `io/acceptor.hpp`, `io/socket.hpp`,
+`io/stream_socket.hpp` or `io/datagram_socket.hpp` requests a raw socket facility
+and produces a targeted diagnostic. Include only the coroutine headers needed
+by a browser HTTP/WebSocket client and use Beast's host transport adapter.
+The same socket headers select the guest transport on native and WASIp2/P3.
+
+Keep Boost's build-wide Cobalt controls when selecting executor and memory
+policies: `BOOST_COBALT_USE_IO_CONTEXT`, `BOOST_COBALT_CUSTOM_EXECUTOR`,
+`BOOST_COBALT_USE_STD_PMR`, `BOOST_COBALT_USE_BOOST_CONTAINER_PMR`,
+`BOOST_COBALT_USE_CUSTOM_PMR` and `BOOST_COBALT_NO_PMR`. Native sources read them
+directly; Wasm configuration forwards them to the shipped implementation.
+The defaults are the type-erased Asio executor and standard-library PMR.
+Choose one executor policy and one PMR policy. Rebuild the complete core, runner,
+optional SSL and application with matching definitions; changing only one
+translation unit violates the library's configuration contract.
+
+Custom executor and PMR declarations follow Boost's customization convention:
+supply `boost::cobalt::executor` or `boost::cobalt::pmr` in a configuration header
+included before Cobalt in every source. For Wasm, the executor must belong to the
+selected WebCPP Asio backend. A custom PMR implementation or Boost.Container PMR
+also brings its own explicit dependencies. Source-archive consumers cover the
+default policy, `io_context` plus no-PMR, and an application-declared context
+executor with counting PMR, using direct compilation and CMake. These witnesses
+do not certify arbitrary custom executor/resource implementations.
+
+Conflicting executor or PMR selections in one translation unit produce a
+configuration error. There is no general linker guard for arbitrary configuration
+differences between separately compiled translation units or prebuilt archives.
+The consumer recipe applies one common configuration target to the application,
+core, runner and SSL. Its dependency audit rejects a compiled source missing the
+requested policy. Rebuild all of them when changing policy; an existing archive
+cannot acquire a different ABI just by defining a macro in the application.
+
+`HAS_PIPE_CREATION`, `HAS_POSIX_STDIO` and `HAS_POLLABLE_STDIO` are separate
+observations. Receiving a host-provided stream does not imply that the guest can
+create a pipe. Use `WEBCPP_COBALT_FOR` from `async_for.hpp` for asynchronous range
+iteration; it forwards to the selected coroutine backend.
+
+[#cobalt-profiles]
+=== Feature matrix
+
+This table describes facilities, not a claim that every upstream example has
+passed in every combination. See <<cobalt-testing>> for the current evidence gates.
+
+[cols="2,1,1,1,1",options="header"]
+|===
+|Facility |Native |WASIp2 |WASIp3 |Emscripten
+|Core coroutines and Asio timers |Boost core |Shipped backend |Shipped backend |Shipped backend
+|TCP/UDP and forward DNS |Operating system |Pollables; host grants |Waitables; host grants |No raw guest transport
+|Corrected Cobalt SSL wrapper |OpenSSL |OpenSSL |OpenSSL |Browser-managed TLS instead
+|Promises and DOM events |Not applicable |Not applicable |Not applicable |Asio browser bridge
+|Single-thread profile |Available |Available |Available |JSPI or Asyncify
+|Thread profile |Native threads |Unavailable in SDK 34 |Experimental cooperative threads, EH off |Pthreads; isolation and worker hosting required
+|{cpp} exceptions |On/off |On/off, single-thread |On/off single-thread; off for cooperative profile |On/off; flags depend on JSPI/Asyncify
+|OS signals, local sockets, serial ports |Subject to native Boost/platform |Unavailable |Unavailable |Unavailable
+|Reverse DNS |Native resolver |Unavailable |Unavailable |Unavailable
+|Guest asynchronous pipe pair |Subject to native Boost/platform |Unavailable |Available |Unsupported lifecycle
+|Async stdio through POSIX descriptors |Native POSIX only |No nonblocking mode |No nonblocking mode |Use an explicit browser channel
+|Explicit pollable stdio adapter |Not applicable |Cancellation and reuse supported |Not implemented |Not applicable
+|===
+
+WASIp3 cooperative threads do not run simultaneously on CPU cores. Browser
+pthreads require the hosting policy and shared-memory facilities established by
+the worker examples. Neither a macro nor a compiled binary grants network access.
+The runtime can deny sockets or DNS even when the target provides them.
+
+[#cobalt-exceptions]
+=== Exceptions and errors
+
+Both exception modes remain selectable. The build warns about
+https://github.com/boostorg/cobalt/issues/287[Boost.Cobalt issue 287]: moving some
+pending coroutine objects with `libc++` and exceptions disabled can abort. This
+is an upstream limitation, not a claim that every use of `std::move` fails.
+The warning is informational; it does not enable exceptions or make the operation
+safe. Use the versioned reproducer when evaluating another compiler/runtime.
+The native runtime tests keep Apple Clang's known missing-promise-member
+diagnostic visible with `-Wno-error=coroutine-missing-unhandled-exception` for
+their no-exceptions consumers. This test-local setting is not exported by the
+library targets; external strict builds must account for the upstream diagnostic
+described in <<cobalt-differences>>.

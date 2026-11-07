@@ -1,0 +1,146 @@
+// Copyright (c) 2026 WebCpp.org
+//
+// Distributed under the Boost Software License, Version 1.0. (See
+// accompanying file LICENSE_1_0.txt or copy at
+// https://www.boost.org/LICENSE_1_0.txt)
+
+[#cobalt-building]
+== How-to: select the compiled integration
+
+Include `webcpp/cobalt/main.hpp` and the operation headers and use `webcpp::cobalt`. Select one entry-point model:
+
+[cols="1,3",options="header"]
+|===
+|B2 dependency |Application contract
+|`/webcpp/cobalt//core` |The application supplies `main` and drives its context.
+|`/webcpp/cobalt//cobalt` |The application supplies `co_main`; link exactly one runner.
+|`/webcpp/cobalt//io_ssl` |Add the corrected SSL wrapper to a custom-main application.
+|`/webcpp/cobalt//cobalt_ssl` |Combine the runner and corrected SSL wrapper.
+|===
+
+The SSL targets select the same source-built OpenSSL and embedded CA provider as
+Asio and Beast. The plain core does not pull in TLS. Browser HTTPS/WSS uses the
+browser's TLS implementation and trust policy, not these OpenSSL targets.
+
+[#cobalt-building-external]
+=== Build with another build system
+
+`sources.json` is the source inventory, split into `core`, `runner`, `ssl` and
+`multi_add` for each target. B2's generated `src/sources.jam` comes from the same
+inventory. Consumers compile these already shipped files; the maintainer-only
+`upstream/sync.py` is not a build step.
+
+Use matching Boost 1.92 headers. Compile sources and application with the same
+target, exception mode, threading ABI and Cobalt configuration. For native,
+define `BOOST_COBALT_NO_LIB=1` when linking the explicit archives. The native core
+and runner use the unchanged upstream sources. The native SSL inventory selects
+WebCPP's separate corrected wrapper and composed-transfer adapter.
+
+Add Asio's explicit runtime source for Wasm: `src/wasip2/pollable.cpp`,
+`src/wasip3/waitable.cpp` or `src/browser_src.cpp` from the Asio library. Verify
+the pinned WASI SDK ABI before compiling its bridge. Emscripten also requires
+embind, stack exports and the chosen suspension flags. Its browser bridge must
+reach the final link as an object, so JavaScript import metadata is retained.
+
+For guest TLS, provide matching OpenSSL headers and `libssl`/`libcrypto`, the
+generated embedded-CA header include directory, `WEBCPP_ASIO_HAS_OPENSSL=1` and
+`WEBCPP_COBALT_LINK_SSL=1`. A macro alone does not link or configure OpenSSL.
+The WASI OpenSSL provider also links wasi-libc's `wasi-emulated-getpid`,
+`wasi-emulated-signal`, `wasi-emulated-process-clocks` and `wasi-emulated-mman`
+support libraries, after its crypto archive, as the consumer recipe records.
+Replacing the CA bytes is an Asio TLS-context operation; it does not change the
+browser's certificate store.
+
+The superproject's `tools/test/fixtures/portable-network/CMakeLists.txt` is a
+consumer recipe. `tools/test/portable_network_distribution.py` creates a source
+archive with a SHA-256 inventory, deletes its staging inputs and extracts it into
+a path with spaces. The archive omits Git/B2/cache files. Consumers use a direct
+compiler or CMake. Compiler dependency files verify the actual source and header
+paths, the complete Cobalt source selection and the configuration of each source.
+Checkout headers and undeclared external dependencies fail that audit.
+
+The optional `--openssl-prefix` and `--ca-header` inputs copy explicitly supplied
+dependencies into the extracted tree before compiling the TLS tests. They must
+match the selected target and ABI. `--evidence-dir <directory>` preserves the
+tested source archive and `compiler-receipt.json`, including commands and resolved
+dependency paths. These are local consumer proofs, not a second release pipeline.
+
+For example, run the native CMake consumer from the superproject:
+
+[source,bash]
+----
+python3 tools/test/portable_network_distribution.py \
+  --compiler /path/to/clang++ --boost-include /path/to/boost/include \
+  --target native --build-system cmake \
+  --cobalt-executor custom --cobalt-pmr custom \
+  --evidence-dir /path/to/evidence
+----
+
+The custom configuration is the compiled fixture
+`test/distribution/consumer_config.hpp`. It declares an Asio context executor and
+a counting PMR resource before any Cobalt header. Every compiled source receives
+that same preincluded header. The test crosses translation-unit boundaries and
+checks allocations through the compiled core's allocator. It proves that concrete
+customization, not every user-defined executor or memory implementation.
+
+[#cobalt-promises]
+=== Await a browser Promise
+
+Use Asio's `browser::async_await` with the executor obtained from
+`this_coro::executor` and Cobalt's `use_op` completion token. The operation
+resumes the coroutine when JavaScript settles the Promise; rejection follows
+the bridge's error contract. DOM-event waits use the corresponding Asio bridge.
+Neither operation exists on a native or WASI target without JavaScript hosting.
+The Promise tests cover both exception modes and both Emscripten suspension modes.
+
+[#cobalt-building-ssl]
+=== Preserve the corrected native SSL composition
+
+Include `webcpp/cobalt/io/ssl.hpp`, keep the concrete `io::ssl::stream` type and
+call `webcpp::cobalt::io::read` or `write` for complete-buffer transfers.
+These overloads preserve cancellation through Asio's composed operations.
+`read_some` and `write_some` remain primitive operations on the corrected stream.
+
+Do not erase the stream to Boost's generic I/O interface and expect this
+composition correction to follow it. That selects Boost's original generic
+`read`/`write` implementation, whose cancellation association failed the native
+regression. The wrapper's handshake state protections still apply, but this
+does not repair an upstream composition chosen through a different static type.
+
+Stream and buffer storage must outlive the pending operation. A transferred-byte
+count can be nonzero on cancellation. Terminal cancellation does not make a
+connection reusable; end that connection according to the underlying Asio contract.
+
+[#cobalt-ssl-state]
+=== SSL handshake and stream state
+
+The corrected wrapper supports STARTTLS. Before its first handshake, reads and
+writes use plain TCP. Complete a successful, verified handshake before sending
+confidential application data. `secure()` reports TLS establishment, not whether
+the application configured trust and hostname verification.
+
+[cols="2,4",options="header"]
+|===
+|State or operation |Behavior
+|Before the first handshake |`secure()` is false; plain TCP I/O is allowed.
+|Successful handshake |`secure()` becomes true before the coroutine resumes; application I/O uses TLS.
+|Failed or cancelled handshake |`secure()` stays false; further application I/O returns `not_connected` with zero bytes.
+|Handshake after an attempt has started |Returns `already_started`; use a new stream for another attempt.
+|Shutdown before TLS establishment |Returns `no_protocol_option`.
+|Completed shutdown, including failure or cancellation |Clears `secure()` and blocks application I/O; another shutdown returns `no_protocol_option`.
+|===
+
+Both handshake overloads update the same state. The buffered overload reports
+consumption of already-read handshake bytes. Serialize state-changing operations;
+the wrapper does not synchronize overlapping handshakes, shutdown or direct SSL
+object manipulation.
+
+`native_ssl_handle()` returns a borrowed `SSL*`, owned by the stream. Do not free
+it or retain it after stream destruction. Use it to configure SNI before the
+handshake and check the result. `native_handle()` still denotes the TCP socket.
+Peer trust, hostname verification and SNI remain distinct application duties.
+
+Cancelling an application transfer cannot retract bytes already sent and does
+not undo the handshake, so `secure()` may remain true after transfer cancellation.
+It is not a connection-health or retry-safety indicator. End the connection after
+terminal cancellation; do not infer safe reuse from that flag.

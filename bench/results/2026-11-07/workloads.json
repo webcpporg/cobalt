@@ -1,0 +1,18 @@
+{
+  "seed": 20261106,
+  "counts": {
+    "post": 1024,
+    "immediate": 512,
+    "channel": 1024,
+    "parallel": 1024,
+    "allocation": 256,
+    "timer": 1024,
+    "http": 8192
+  },
+  "frozen_at": 1794024534.358581,
+  "rule": "One common count per workload: power of two targeting 20 ms at the slowest calibration, bounded 256..65536. Calibration is excluded from reported samples.",
+  "evidence": {
+    "calibration-process.jsonl": "2cd065d9135987d32c14038c3580d4b986bd346399ed0ab6c14f3b9bbd714390",
+    "calibration-browser.jsonl": "e0e7cf5b053e00ceb83a107cd6b01ff6bfc9bff62f4446a75c7f42c343834a5d"
+  }
+}

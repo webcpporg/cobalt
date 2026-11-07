@@ -1,0 +1,9 @@
+{
+  "boost_version": 109200,
+  "files": {
+    "boost/cobalt/io/endpoint.hpp": {
+      "before": "5b915d39de36a0291eb1e8fc82f21342f9a6cb3cd64150f0a82f63cc334c219e",
+      "after": "d1e48d3be7b52fc7888f7a174487edf64aad0dfcfce1ac43d1e6082cd29d349e"
+    }
+  }
+}

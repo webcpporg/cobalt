@@ -1,6 +1,9 @@
 #!/usr/bin/env python3
 # Copyright (c) 2026 WebCpp.org
-# Distributed under the Boost Software License, Version 1.0.
+#
+# Distributed under the Boost Software License, Version 1.0. (See
+# accompanying file LICENSE_1_0.txt or copy at
+# https://www.boost.org/LICENSE_1_0.txt)
 
 """Record original defects and corrected native binding results, without downloading."""
 import argparse
@@ -13,56 +16,80 @@ import sys
 import zipfile
 
 parser = argparse.ArgumentParser(description=__doc__)
-parser.add_argument('--original', type=Path, required=True)
-parser.add_argument('--adapted', type=Path, required=True)
-parser.add_argument('--capture', action='store_true')
+parser.add_argument("--original", type=Path, required=True)
+parser.add_argument("--adapted", type=Path, required=True)
+parser.add_argument("--capture", action="store_true")
 args = parser.parse_args()
 here = Path(__file__).resolve().parent
 original, adapted = args.original.resolve(), args.adapted.resolve()
 
 
 def run(directory, script, *arguments):
-    result = subprocess.run([sys.executable, str(script), *map(str, arguments)],
-                            cwd=directory, env=dict(os.environ, PYTHONPATH=str(directory)),
-                            capture_output=True, text=True, timeout=35)
+    result = subprocess.run(
+        [sys.executable, str(script), *map(str, arguments)],
+        cwd=directory,
+        env=dict(os.environ, PYTHONPATH=str(directory)),
+        capture_output=True,
+        text=True,
+        timeout=35,
+    )
     return result
 
 
-bad = run(original, here.parent / 'upstream/example/python.py')
-assert bad.returncode == 1 and "NameError: name 'boost_async_example_python' is not defined" in bad.stderr
-(original / 'original-script.log').write_text(bad.stdout + bad.stderr)
-print('PASS original module-name defect reproduced with the real C++ extension')
-red = run(original, here / 'driver.py', original)
+bad = run(original, here.parent / "upstream/example/python.py")
+assert (
+    bad.returncode == 1
+    and "NameError: name 'boost_async_example_python' is not defined" in bad.stderr
+)
+(original / "original-script.log").write_text(bad.stdout + bad.stderr)
+print("PASS original module-name defect reproduced with the real C++ extension")
+red = run(original, here / "driver.py", original)
 assert red.returncode == 1, red.stdout + red.stderr
-for mode in ('values', 'cancel-outer', 'cancel-inner', 'repeat'):
-    assert f'FAIL {mode}:' in red.stdout, red.stdout
-assert 'PASS error:' in red.stdout and 'PASS close-generator:' in red.stdout, red.stdout
-(original / 'runtime.log').write_text(red.stdout + red.stderr)
-print('PASS original generator/cancellation defects observed separately from successful error propagation')
-green = run(adapted, here / 'driver.py', adapted)
-assert green.returncode == 0 and green.stdout.count('PASS ') == 6, green.stdout + green.stderr
-(adapted / 'runtime.log').write_text(green.stdout + green.stderr)
-print(green.stdout, end='')
-corrected = run(adapted, here / 'corrected.py')
+for mode in ("values", "cancel-outer", "cancel-inner", "repeat"):
+    assert f"FAIL {mode}:" in red.stdout, red.stdout
+assert "PASS error:" in red.stdout and "PASS close-generator:" in red.stdout, red.stdout
+(original / "runtime.log").write_text(red.stdout + red.stderr)
+print(
+    "PASS original generator/cancellation defects observed separately from successful error"
+    " propagation"
+)
+green = run(adapted, here / "driver.py", adapted)
+assert green.returncode == 0 and green.stdout.count("PASS ") == 6, green.stdout + green.stderr
+(adapted / "runtime.log").write_text(green.stdout + green.stderr)
+print(green.stdout, end="")
+corrected = run(adapted, here / "corrected.py")
 assert corrected.returncode == 0, corrected.stdout + corrected.stderr
-assert corrected.stdout.splitlines() == [f'Cpp generator {value}' for value in range(1, 11)] + [
-    'Cpp promise gave us 42', 'Python coroutine gave foobar'], corrected.stdout
-(adapted / 'corrected-script.log').write_text(corrected.stdout + corrected.stderr)
+assert corrected.stdout.splitlines() == [f"Cpp generator {value}" for value in range(1, 11)] + [
+    "Cpp promise gave us 42",
+    "Python coroutine gave foobar",
+], corrected.stdout
+(adapted / "corrected-script.log").write_text(corrected.stdout + corrected.stderr)
 if args.capture:
     records = []
-    with zipfile.ZipFile(here / 'evidence.zip', 'w', zipfile.ZIP_DEFLATED) as archive:
-        for label, directory in (('original', original), ('adapted', adapted)):
+    with zipfile.ZipFile(here / "evidence.zip", "w", zipfile.ZIP_DEFLATED) as archive:
+        for label, directory in (("original", original), ("adapted", adapted)):
             for path in sorted(directory.iterdir()):
-                if path.suffix not in ('.json', '.log'):
+                if path.suffix not in (".json", ".log"):
                     continue
-                name = f'{label}/{path.name}'
+                name = f"{label}/{path.name}"
                 data = path.read_bytes()
                 archive.writestr(name, data)
-                records.append({'path': name, 'bytes': len(data),
-                                'sha256': hashlib.sha256(data).hexdigest()})
-    (here / 'evidence.json').write_text(json.dumps({
-        'notice': 'Generated by observe.py --capture. Exact native fixture observations, not Wasm evidence.',
-        'command': sys.argv, 'artifacts': records,
-        'bindings': json.loads((here / 'binding-adaptation.json').read_text()),
-        'dependencies': json.loads((here / 'dependencies.json').read_text())
-    }, indent=2) + '\n')
+                records.append(
+                    {"path": name, "bytes": len(data), "sha256": hashlib.sha256(data).hexdigest()}
+                )
+    (here / "evidence.json").write_text(
+        json.dumps(
+            {
+                "notice": (
+                    "Generated by observe.py --capture. Exact native fixture observations, not Wasm"
+                    " evidence."
+                ),
+                "command": sys.argv,
+                "artifacts": records,
+                "bindings": json.loads((here / "binding-adaptation.json").read_text()),
+                "dependencies": json.loads((here / "dependencies.json").read_text()),
+            },
+            indent=2,
+        )
+        + "\n"
+    )

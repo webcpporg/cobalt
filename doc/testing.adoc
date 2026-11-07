@@ -1,0 +1,85 @@
+// Copyright (c) 2026 WebCpp.org
+//
+// Distributed under the Boost Software License, Version 1.0. (See
+// accompanying file LICENSE_1_0.txt or copy at
+// https://www.boost.org/LICENSE_1_0.txt)
+
+[#cobalt-testing]
+== Testing
+
+The migration remains under local validation. The current
+<<cobalt-application-matrix>> records each original application and its available
+counterparts against the shipped implementation. Historical Asio/Cobalt results
+do not certify the new source layout. The independent whole-candidate review
+and its correction reviews accompany the local lint gate. Remote CI has separate
+evidence; a local review is not a remote CI verdict.
+
+Native identity preserves Boost 1.92 defects outside the corrected SSL wrapper.
+The `upstream-limitations` lane records precise failures for composed accept and
+composition cancellation. Its output says `UPSTREAM-LIMITATION`; a passing
+negative probe means the limitation was reproduced, not that cancellation works.
+An unexpected exit, diagnostic or newly fixed upstream behavior fails the probe
+and requires the compatibility record to be revisited.
+
+The tests distinguish immutable upstream programs, namespace-only migrations and
+behavioral counterparts. `test/applications/upstream` retains original hashes;
+`test/applications/prepare.py` produces the separately identified namespace
+migrations. A missing host facility is documented or diagnosed, never replaced
+by an empty successful program.
+
+Native SSL has compile-time type-identity tests for both header orders, plus
+runtime client, handshake-state, transfer-cancellation and shutdown tests against
+real local peers. The same TLS 1.2/1.3 state tests run on WASIp2/P3. A native CMake
+consumer also compiles the complete source inventory and runs those tests from
+a copied source snapshot without B2, Git or replacement Boost headers.
+
+The SSL client also checks move construction, socket identity and cancellation
+after destroying the source, both before and after handshake completion.
+
+Browser examples keep cancellation state in the owning module instance, with a
+scoped {cpp} registration. Duplicate registration cannot replace an active run;
+normal completion and exception unwinding remove it. Browser tests also call the
+exported cancellation function after completion and require a zero result.
+
+The state cases cover STARTTLS, a buffered ClientHello, state observed at await
+time, trust rejection, malformed CA data, hostname verification and SNI. Transfer
+cancellation covers primitive reads/writes and complete-buffer operations with
+partial progress. The peer applies backpressure; only an actual
+`operation_aborted` satisfies a cancellation case. A completion that wins the
+race requires a fresh connection and a bounded retry, rather than being counted
+as cancellation. An outer watchdog catches lost completion.
+
+Shutdown tests first wait until the peer observes `close_notify`. The peer then
+either closes without its own TLS shutdown, producing `stream_truncated`, or
+holds the connection while the coroutine requests cancellation, producing
+`operation_aborted`. Both cases must clear `secure()`, block application I/O and
+reject a second shutdown. Elapsed time alone is not proof of a pending operation.
+
+[source,bash]
+----
+b2 -a variant=release libs/cobalt/test/tls//tls
+b2 -a variant=release libs/cobalt/test/tls//native_ssl_identity libs/cobalt/test/tls//native_ssl_identity_boost_first
+b2 -a toolset=clang-wasip2 variant=release libs/cobalt/test/applications//migrated-portable
+b2 -a toolset=clang-wasip3 variant=release libs/cobalt/test/applications//migrated-portable-p3
+----
+
+The TLS drivers grant networking explicitly and create short-lived local
+certificates. Run them with a Python/OpenSSL installation supporting TLS 1.3.
+The browser lanes use real Chrome and check page output and worker completion;
+Node-only examples are labeled separately. The shared published test report is
+https://webcpporg.github.io/report/[the WebCPP report]; it is evidence for the
+commit it names, not for an unsubmitted local candidate.
+
+Performance, memory and binary-size comparisons must use optimized builds and
+record source hashes, compiler/linker flags, EH, threads, suspension mode and
+runtime. Raw Wasm and JavaScript sizes are separate artifacts. An unavailable
+measurement is not zero. The <<cobalt-release-measurements>> records fresh
+observations of the shipped implementation, with source and artifact identities.
+Prior Asio benchmark results retain their original dates and environments.
+
+`bench/results/2026-11-07/` retains the quantitative report and raw archive.
+`test/applications/results/2026-11-07/` separately retains the three libraries'
+application matrices, commands, logs and source snapshots. Each archive has a
+SHA-256 file. These local results do not stand in for CI of the coordinated commits.
+The independent review and local closure evidence are recorded separately in the
+superproject's execution ledger.

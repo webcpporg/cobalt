@@ -1,0 +1,288 @@
+--- a/http.cpp
++++ b/http.cpp
+@@ -36,15 +36,16 @@
+ namespace beast = boost::beast;
+ 
+ using executor_type = cobalt::use_op_t::executor_with_default<cobalt::executor>;
+-using socket_type = typename boost::asio::ip::tcp::socket::rebind_executor<executor_type>::other;
++using socket_type = boost::asio::ip::tcp::socket::rebind_executor<executor_type>::other;
+ using ssl_socket_type = boost::asio::ssl::stream<socket_type>;
+-using acceptor_type =
+-    typename boost::asio::ip::tcp::acceptor::rebind_executor<executor_type>::other;
++using acceptor_type = boost::asio::ip::tcp::acceptor::rebind_executor<executor_type>::other;
+ using websocket_type = beast::websocket::stream<ssl_socket_type>;
++
++namespace {
+ 
+ cobalt::promise<ssl_socket_type> connect(std::string_view host, boost::asio::ssl::context& ctx) {
+     boost::asio::ip::tcp::resolver resolve{cobalt::this_thread::get_executor()};
+-    auto endpoints =
++    auto const endpoints =
+         co_await resolve.async_resolve("127.0.0.1", webcpp_fixture::remote_port(), cobalt::use_op);
+ 
+     // Timer for timeouts
+@@ -67,6 +68,8 @@
+     co_return sock;
+ }
+ 
++}  // namespace
++
+ cobalt::main co_main(int argc, char** argv) {
+     boost::asio::ssl::context ctx{boost::asio::ssl::context::tls_client};
+     ctx.load_verify_file(webcpp_fixture::ca_file());
+--- a/ticker.cpp
++++ b/ticker.cpp
+@@ -41,18 +41,20 @@
+ 
+ // tag::decls[]
+ using executor_type = cobalt::use_op_t::executor_with_default<cobalt::executor>;
+-using socket_type = typename asio::ip::tcp::socket::rebind_executor<executor_type>::other;
+-using acceptor_type = typename asio::ip::tcp::acceptor::rebind_executor<executor_type>::other;
++using socket_type = asio::ip::tcp::socket::rebind_executor<executor_type>::other;
++using acceptor_type = asio::ip::tcp::acceptor::rebind_executor<executor_type>::other;
+ using websocket_type = beast::websocket::stream<asio::ssl::stream<socket_type>>;
+ namespace http = beast::http;
+ // end::decls[]
+ 
+ // tag::connect[]
++namespace {
++
+ cobalt::promise<asio::ssl::stream<socket_type>> connect(std::string host,
+                                                         boost::asio::ssl::context& ctx) {
+     asio::ip::tcp::resolver res{cobalt::this_thread::get_executor()};
+-    auto ep = co_await res.async_resolve("127.0.0.1", webcpp_fixture::remote_port(),
+-                                         cobalt::use_op);  // <1>
++    auto const ep = co_await res.async_resolve("127.0.0.1", webcpp_fixture::remote_port(),
++                                               cobalt::use_op);  // <1>
+ 
+     asio::ssl::stream<socket_type> sock{cobalt::this_thread::get_executor(), ctx};
+     sock.set_verify_mode(boost::asio::ssl::verify_peer);
+@@ -87,15 +89,15 @@
+     beast::flat_buffer buf;
+     while (ws.is_open())  // <1>
+     {
+-        auto sz = co_await ws.async_read(buf);  // <2>
+-        json::string_view data{static_cast<const char*>(buf.cdata().data()), sz};
++        auto const sz = co_await ws.async_read(buf);  // <2>
++        json::string_view const data{static_cast<const char*>(buf.cdata().data()), sz};
+         auto obj = json::parse(data);
+         co_yield obj.as_object();  // <3>
+         buf.consume(sz);
+     }
+     co_return {};
+ } catch (std::exception& e) {
+-    std::cerr << "Error reading: " << e.what() << std::endl;
++    std::cerr << "Error reading: " << e.what() << '\n' << std::flush;
+     throw;
+ }
+ // end::json_reader[]
+@@ -108,16 +110,18 @@
+ 
+ cobalt::promise<void> handle_rejections(std::list<std::string>& unconfirmed, subscription_map& subs,
+                                         const json::object& ms) {
+-    if (unconfirmed.empty())
++    if (unconfirmed.empty()) {
+         co_return;
+-    auto rej = unconfirmed.front();
++    }
++    auto const rej = unconfirmed.front();
+     unconfirmed.pop_front();
+     auto r = subs.equal_range(rej);
+-    for (const auto& [k, chn] : boost::make_iterator_range(r))
+-        if (auto ptr = chn.lock()) {
++    for (const auto& [k, chn] : boost::make_iterator_range(r)) {
++        if (auto const ptr = chn.lock()) {
+             co_await ptr->write(ms);
+             ptr->close();
+         }
++    }
+ 
+     subs.erase(r.first, r.second);
+ }
+@@ -126,19 +130,23 @@
+                                     const json::object& ms, websocket_type& ws) {
+     const auto& sym = json::value_to<std::string>(ms.at("symbol"));
+ 
+-    if (!unconfirmed.empty() && sym == unconfirmed.front())
++    if (!unconfirmed.empty() && sym == unconfirmed.front()) {
+         unconfirmed.pop_front();
++    }
+ 
+     bool has_expired = false;
+-    auto r = boost::make_iterator_range(subs.equal_range(sym));
+-    for (const auto& [k, chn] : r)
+-        if (auto ptr = chn.lock())
++    auto const r = boost::make_iterator_range(subs.equal_range(sym));
++    for (const auto& [k, chn] : r) {
++        if (auto const ptr = chn.lock()) {
+             co_await ptr->write(ms);
+-        else
++        } else {
+             has_expired = true;
+-
+-    if (has_expired)
++        }
++    }
++
++    if (has_expired) {
+         erase_if(subs, [](const auto& p) { return p.second.expired(); });
++    }
+ 
+     if (r.empty() && ms.at("event") != "unsubscribed")  //
+     {
+@@ -179,23 +187,26 @@
+         {
+             case 0:  // <5>
+                 if (auto ms = get<0>(msg);
+-                    ms.at("event") == "rejected")  // invalid sub, cancel however subbed
++                    ms.at("event") == "rejected") {  // invalid sub, cancel however subbed
+                     co_await handle_rejections(unconfirmed, subs, ms);
+-                else
++                } else {
+                     co_await handle_update(unconfirmed, subs, ms, ws);
++                }
+                 break;
+             case 1:  // //<6>
+                 co_await handle_new_subscription(unconfirmed, subs, std::move(get<1>(msg)), ws);
+                 break;
++            default: break;
+         }
+     }
+ 
+     for (auto& [k, c] : subs) {
+-        if (auto ptr = c.lock())
++        if (auto const ptr = c.lock()) {
+             ptr->close();
++        }
+     }
+ } catch (std::exception& e) {
+-    std::cerr << "Exception: " << e.what() << std::endl;
++    std::cerr << "Exception: " << e.what() << '\n' << std::flush;
+     throw;
+ }
+ // end::run_blockchain_info[]
+@@ -204,10 +215,12 @@
+ cobalt::promise<void> read_and_close(beast::websocket::stream<socket_type>& st,
+                                      beast::flat_buffer buf) {
+     system::error_code ec;
+-    co_await st.async_read(buf, asio::as_tuple(cobalt::use_op));
+-    co_await st.async_close(beast::websocket::close_code::going_away,
+-                            asio::as_tuple(cobalt::use_op));
+-    st.next_layer().close(ec);
++    // Peer shutdown errors are intentionally ignored, as in the original example.
++    static_cast<void>(co_await st.async_read(buf, asio::as_tuple(cobalt::use_op)));
++    static_cast<void>(co_await st.async_close(beast::websocket::close_code::going_away,
++                                              asio::as_tuple(cobalt::use_op)));
++    // NOLINTNEXTLINE(bugprone-unused-return-value): best-effort cleanup, including ec.
++    static_cast<void>(st.next_layer().close(ec));
+ }
+ 
+ // end::read_and_close[]
+@@ -236,8 +248,8 @@
+     // close when data gets sent
+     auto p = read_and_close(st, std::move(buf));  // <4>
+ 
+-    auto ptr = std::make_shared<cobalt::channel<json::object>>(1u);  // <5>
+-    co_await subc.write(subscription{sym, ptr});                     // <6>
++    auto const ptr = std::make_shared<cobalt::channel<json::object>>(1u);  // <5>
++    co_await subc.write(subscription{sym, ptr});                           // <6>
+ 
+     while (ptr->is_open() && st.is_open())  // <7>
+     {
+@@ -245,22 +257,25 @@
+         co_await st.async_write(asio::buffer(bb));
+     }
+ 
+-    co_await st.async_close(beast::websocket::close_code::going_away,
+-                            asio::as_tuple(cobalt::use_op));  // <8>
++    static_cast<void>(co_await st.async_close(beast::websocket::close_code::going_away,
++                                              asio::as_tuple(cobalt::use_op)));  // <8>
+     st.next_layer().close();
+     co_await p;  // <9>
+ 
+ } catch (std::exception& e) {
+-    std::cerr << "Session ended with exception: " << e.what() << std::endl;
++    std::cerr << "Session ended with exception: " << e.what() << '\n' << std::flush;
+ }
+ // end::run_session[]
+ 
+ // tag::main[]
+-cobalt::main co_main(int argc, char* argv[]) {
++}  // namespace
++
++cobalt::main co_main(int argc, char** argv) {
+     acceptor_type acc{
++        // NOLINTNEXTLINE(readability-static-accessed-through-instance)
+         co_await cobalt::this_coro::executor,
+         asio::ip::tcp::endpoint(asio::ip::tcp::v4(), webcpp_fixture::listener_port())};
+-    std::cout << "Listening on localhost:8080" << std::endl;
++    std::cout << "Listening on localhost:8080" << '\n' << std::flush;
+ 
+     constexpr int limit = 10;                   // allow 10 ongoing sessions
+     cobalt::channel<subscription> sub_manager;  // <1>
+@@ -272,8 +287,9 @@
+             [&](cobalt::wait_group& sessions) -> cobalt::promise<void> {
+                 while (!co_await cobalt::this_coro::cancelled)  // <4>
+                 {
+-                    if (sessions.size() >= limit)  // <5>
++                    if (sessions.size() >= limit) {  // <5>
+                         co_await sessions.wait_one();
++                    }
+ 
+                     auto conn = co_await acc.async_accept();  // <6>
+                     sessions.push_back(                       // <7>
+--- a/echo_server.cpp
++++ b/echo_server.cpp
+@@ -18,24 +18,26 @@
+ #include <boost/cobalt/io/stream_socket.hpp>
+ #include <boost/cobalt/main.hpp>
+ 
++#include <array>
+ #include <boost/cobalt/io/acceptor.hpp>
+ #include <boost/cobalt/io/write.hpp>
+ #include <list>
+ 
+ // tag::decls[]
+ namespace cobalt = boost::cobalt;
+-namespace this_coro = boost::cobalt::this_coro;
+ // end::decls[]
+ 
+ // tag::echo[]
++namespace {
++
+ cobalt::promise<void> echo(cobalt::io::stream_socket socket) {
+     try  // <1>
+     {
+-        char data[4096];
++        std::array<char, 4096> data{};
+         while (socket.is_open())  // <2>
+         {
+-            std::size_t n = co_await socket.read_some(boost::asio::buffer(data));  // <3>
+-            co_await cobalt::io::write(socket, boost::asio::buffer(data, n));      // <4>
++            std::size_t const n = co_await socket.read_some(boost::asio::buffer(data));  // <3>
++            co_await cobalt::io::write(socket, boost::asio::buffer(data, n));            // <4>
+         }
+     } catch (std::exception& e) {
+         std::printf("echo: exception: %s\n", e.what());
+@@ -62,16 +64,19 @@
+ cobalt::promise<void> run_server(cobalt::wait_group& workers) {
+     auto l = listen();  // <1>
+     while (true) {
+-        if (workers.size() == 10u)
++        if (workers.size() == 10u) {
+             co_await workers.wait_one();  // <2>
+-        else
++        } else {
+             workers.push_back(echo(co_await l));  // <3>
++        }
+     }
+ }
+ 
+ // end::run_server[]
+ 
+ // tag::main[]
++}  // namespace
++
+ cobalt::main co_main(int argc, char** argv) {
+     co_await cobalt::with(cobalt::wait_group(), &run_server);  // <1>
+     co_return 0u;

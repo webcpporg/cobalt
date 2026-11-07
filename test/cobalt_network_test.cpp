@@ -9,15 +9,15 @@
 #include <webcpp/asio/ip/udp.hpp>
 #include <webcpp/test/exit_status.hpp>
 
-#include <boost/asio/post.hpp>
-#include <boost/asio/read.hpp>
-#include <boost/asio/steady_timer.hpp>
-#include <boost/asio/write.hpp>
-#include <boost/cobalt/main.hpp>
-#include <boost/cobalt/op.hpp>
-#include <boost/cobalt/result.hpp>
-#include <boost/cobalt/this_coro.hpp>
 #include <boost/core/lightweight_test.hpp>
+#include <webcpp/asio/post.hpp>
+#include <webcpp/asio/read.hpp>
+#include <webcpp/asio/steady_timer.hpp>
+#include <webcpp/asio/write.hpp>
+#include <webcpp/cobalt/main.hpp>
+#include <webcpp/cobalt/op.hpp>
+#include <webcpp/cobalt/result.hpp>
+#include <webcpp/cobalt/this_coro.hpp>
 
 #include <array>
 #include <chrono>
@@ -25,8 +25,8 @@
 #include <cstdlib>
 #include <string_view>
 
-namespace asio = boost::asio;
-namespace cobalt = boost::cobalt;
+namespace asio = webcpp::asio;
+namespace cobalt = webcpp::cobalt;
 using tcp = webcpp::asio::ip::tcp;
 using udp = webcpp::asio::ip::udp;
 

@@ -1,0 +1,11 @@
+--- a/boost/cobalt/io/write.hpp
++++ b/boost/cobalt/io/write.hpp
+@@ -49,7 +49,7 @@
+ template<typename Stream>
+ requires requires (Stream & str, std::uint64_t offset, const_buffer_sequence buffer)
+ {
+-  {str.write_some_at(offset, buffer)} -> std::same_as<write_op>;
++  {str.write_some_at(offset, buffer)} -> std::same_as<write_at_op>;
+ }
+ [[nodiscard]] BOOST_COBALT_MSVC_NOINLINE
+ write_all_at write_at(Stream & str, std::uint64_t offset, const_buffer_sequence buffer)

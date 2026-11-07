@@ -8,11 +8,16 @@ import webcpp ;
 webcpp.targets native wasip2 wasip3 emscripten ;
 webcpp.original python3 : .. ;
 
+# Dedicated-worker hosts must identify the actual program when Emscripten
+# creates nested pthread workers from an importScripts-based bootstrap.
+local browser-hosting =
+  <toolset>emscripten:<linkflags>-sINCOMING_MODULE_JS_API=arguments,locateFile,print,printErr,onExit,onAbort,mainScriptUrlOrBlob ;
+
 # Only the immutable upstream translation units suppress their unused argv
 # parameters. No WebCPP source or library-wide warning policy is weakened.
 for local app in channel delay delay_op outcome signals
 {
-    local requirements = <library>/webcpp/cobalt//cobalt
+    local requirements = <library>/webcpp/cobalt//cobalt $(browser-hosting)
       <toolset>clang:<cxxflags>-Wno-unused-parameter
       <toolset>gcc:<cxxflags>-Wno-unused-parameter
       <toolset>emscripten:<cxxflags>-Wno-unused-parameter
@@ -29,14 +34,18 @@ for local app in channel delay delay_op outcome signals
           <toolset>emscripten:<cxxflags>-Wno-unused-variable ;
     }
     webcpp.drive original_$(app) : upstream/example/$(app).cpp original_exit.cpp
-      : $(requirements) : original_driver.py : $(app) : native wasip2 emscripten ;
-    webcpp.drive original_$(app)_p3 : upstream/example/$(app).cpp original_exit.cpp
-      : $(requirements) : original_driver.py : $(app) --wasip3 : wasip3 ;
+      : $(requirements) : original_driver.py : $(app) : native ;
+    webcpp.drive migrated_$(app) : migrated/example/$(app).cpp original_exit.cpp
+      : $(requirements) : original_driver.py : $(app) --migrated : wasip2 emscripten ;
+    webcpp.drive migrated_$(app)_p3 : migrated/example/$(app).cpp original_exit.cpp
+      : $(requirements) : original_driver.py : $(app) --wasip3 --migrated : wasip3 ;
     .portable += original_$(app) ;
-    .portable-p3 += original_$(app)_p3 ;
+    .portable-p3 += migrated_$(app)_p3 ;
+    .migrated += migrated_$(app) ;
 }
-webcpp.lane upstream-portable : $(.portable) : native wasip2 emscripten ;
-webcpp.lane upstream-portable-p3 : $(.portable-p3) : wasip3 ;
+webcpp.lane upstream-portable : $(.portable) : native ;
+webcpp.lane migrated-portable : $(.migrated) : wasip2 emscripten ;
+webcpp.lane migrated-portable-p3 : $(.portable-p3) : wasip3 ;
 
 # The original worker examples are checked in native B2 single and multi:
 # neither native B2 label defines BOOST_ASIO_DISABLE_THREADS.
@@ -48,11 +57,21 @@ for local app in thread thread_pool spsc
       <toolset>clang:<cxxflags>-Wno-unused-parameter
       <toolset>gcc:<cxxflags>-Wno-unused-parameter ;
     if $(app) != spsc { requirements += <exception-handling>on ; }
-    webcpp.drive original_$(app) : upstream/example/$(app).cpp original_exit.cpp
-      : $(requirements) : original_driver.py : $(app) : native ;
+    if $(app) = spsc
+    {
+        # Its deterministic lost-wakeup witness is in the spsc own lane.
+        # Compile the unchanged source without scheduling a flaky infinite run.
+        webcpp.compile original_$(app) : upstream/example/$(app).cpp
+          : $(requirements) : native ;
+    }
+    else
+    {
+        webcpp.drive original_$(app) : upstream/example/$(app).cpp original_exit.cpp
+          : $(requirements) : original_driver.py : $(app) : native ;
+    }
     explicit original_$(app) ;
     # The immutable SPSC source has a reproduced lost-wakeup defect. Keep its
-    # bounded observation available explicitly, outside the conformance lane.
+    # bounded reproduction in spsc//spsc-wakeup, outside the conformance lane.
     if $(app) != spsc { .workers += original_$(app) ; }
 }
 webcpp.lane upstream-workers : $(.workers) : native ;
@@ -67,14 +86,14 @@ for local app in thread thread_pool
         # The unchanged main joins a blocking pool; host main on a fifth worker.
         hosting = <linkflags>-sPTHREAD_POOL_SIZE=5 <linkflags>-sPROXY_TO_PTHREAD=1 ;
     }
-    webcpp.drive original_$(app)_browser : upstream/example/$(app).cpp original_exit.cpp
+    webcpp.drive migrated_$(app)_browser : migrated/example/$(app).cpp original_exit.cpp
       : <library>$(library) <threading>multi <exception-handling>on
         <webcpp-drive-timeout>60 <cxxflags>-Wno-unused-parameter
-        <linkflags>-sEXIT_RUNTIME=1 $(hosting)
-      : original_driver.py : $(app) : emscripten ;
-    .browser-workers += original_$(app)_browser ;
+        <linkflags>-sEXIT_RUNTIME=1 $(hosting) $(browser-hosting)
+      : original_driver.py : $(app) --migrated : emscripten ;
+    .browser-workers += migrated_$(app)_browser ;
 }
-webcpp.lane upstream-worker-modules : $(.browser-workers) : emscripten ;
+webcpp.lane migrated-worker-modules : $(.browser-workers) : emscripten ;
 build-project spsc ;
 build-project portable ;
 build-project network ;

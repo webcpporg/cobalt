@@ -8,17 +8,17 @@
 #include <webcpp/cobalt.hpp>
 #include <webcpp/test/exit_status.hpp>
 
-#include <boost/asio/post.hpp>
 #include <boost/core/lightweight_test.hpp>
+#include <webcpp/asio/post.hpp>
 
 #include <cstdio>
 
 namespace {
 
-boost::cobalt::promise<int> work() {
+webcpp::cobalt::promise<int> work() {
     // NOLINTNEXTLINE(readability-static-accessed-through-instance)
-    const auto executor = co_await boost::cobalt::this_coro::executor;
-    co_await boost::asio::post(executor, boost::cobalt::use_op);
+    const auto executor = co_await webcpp::cobalt::this_coro::executor;
+    co_await webcpp::asio::post(executor, webcpp::cobalt::use_op);
     co_return 42;
 }
 
@@ -26,7 +26,7 @@ boost::cobalt::promise<int> work() {
 
 int main() {
     webcpp::asio::io_context context;
-    boost::cobalt::this_thread::set_executor(context.get_executor());
+    webcpp::cobalt::this_thread::set_executor(context.get_executor());
     auto operation = work();
     context.run();  // lint-run: this application's custom main drives its context
     if (!BOOST_TEST(operation.ready())) {

@@ -10,6 +10,7 @@
 #include <webcpp/cobalt.hpp>
 #include <webcpp/test/exit_status.hpp>
 
+#include "active_run.hpp"
 #include "events.hpp"
 #include "spsc_queue.hpp"
 
@@ -22,9 +23,7 @@
 #include <string_view>
 
 namespace {
-std::atomic<bool>* active_stop = nullptr;
-
-cobalt::thread produce(awaitable_spsc_queue<int>& queue, int count, std::atomic<bool>& stop) {
+cobalt::thread produce(awaitable_spsc_queue<int>& queue, int count, const std::atomic<bool>& stop) {
     for (int value = 0; value < count && !stop.load(); ++value) {
         co_await queue.write(value);
     }
@@ -44,7 +43,8 @@ extern "C"
     EMSCRIPTEN_KEEPALIVE
 #endif
     int cobalt_cancel_spsc() {
-    if (!active_stop) {
+    auto* active_stop = static_cast<std::atomic<bool>*>(active_run::find("spsc"));
+    if (active_stop == nullptr) {
         return 0;
     }
     active_stop->store(true);
@@ -58,14 +58,19 @@ cobalt::main co_main(int argc, char** argv) {
     if (argc > 3 || (argc > 1 && !parse(argv[1], count)) ||
         (argc > 2 && !parse(argv[2], cancel_after)) || count < 1 || count > 10000000 ||
         cancel_after < 0 || cancel_after >= count) {
-        std::fputs("usage: spsc <count 1..10000000> [cancel-after <count]\n", stderr);
+        if (std::fputs("usage: spsc <count 1..10000000> [cancel-after <count]\n", stderr) < 0) {
+            co_return webcpp::test::exit_status(1);
+        }
         co_return webcpp::test::exit_status(2);
     }
     // NOLINTNEXTLINE(readability-static-accessed-through-instance)
     const auto executor = co_await cobalt::this_coro::executor;
     awaitable_spsc_queue<int> queue(128);
     std::atomic<bool> stop{false};
-    active_stop = &stop;
+    active_run registration("spsc", &stop);
+    if (!registration.registered()) {
+        co_return webcpp::test::exit_status(2);
+    }
     cobalt_event("started", 0, 0, 0);
     auto worker = produce(queue, count, stop);
     int received = 0;
@@ -79,16 +84,16 @@ cobalt::main co_main(int argc, char** argv) {
         checksum += value;
         ++received;
         if (received % 256 == 0) {
-            cobalt_event("progress", received, value, stop.load());
+            cobalt_event("progress", received, value, static_cast<int>(stop.load()));
         }
         if (cancel_after != 0 && received == cancel_after) {
             stop.store(true);
         }
         // Keep the UI cancellation callback reachable even while data is ready.
-        co_await boost::asio::post(executor, cobalt::use_op);
+        co_await webcpp::asio::post(executor, cobalt::use_op);
     }
     co_await worker;
-    active_stop = nullptr;
+    registration.reset();
     BOOST_TEST_EQ(checksum, static_cast<std::int64_t>(received) * (received - 1) / 2);
     if (!stop.load()) {
         BOOST_TEST_EQ(received, count);
@@ -100,7 +105,7 @@ cobalt::main co_main(int argc, char** argv) {
     std::printf("spsc: count=%d checksum=%lld cancelled=%d\n", received,
                 static_cast<long long>(checksum), stop.load() ? 1 : 0);
     const int errors = boost::report_errors();
-    cobalt_event(errors ? "error" : "done", received, errors, stop.load());
+    cobalt_event(errors != 0 ? "error" : "done", received, errors, static_cast<int>(stop.load()));
     co_return webcpp::test::exit_status(errors);
 }
 

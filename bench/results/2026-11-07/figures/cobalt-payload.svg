@@ -1,0 +1,1032 @@
+<?xml version="1.0" encoding="utf-8" standalone="no"?>
+<!DOCTYPE svg PUBLIC "-//W3C//DTD SVG 1.1//EN"
+  "http://www.w3.org/Graphics/SVG/1.1/DTD/svg11.dtd">
+<svg xmlns:xlink="http://www.w3.org/1999/xlink" width="864pt" height="596.16pt" viewBox="0 0 864 596.16" xmlns="http://www.w3.org/2000/svg" version="1.1">
+ <metadata>
+  <rdf:RDF xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:cc="http://creativecommons.org/ns#" xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#">
+   <cc:Work>
+    <dc:type rdf:resource="http://purl.org/dc/dcmitype/StillImage"/>
+    <dc:date>2026-11-07T01:30:56.577211</dc:date>
+    <dc:format>image/svg+xml</dc:format>
+    <dc:creator>
+     <cc:Agent>
+      <dc:title>Matplotlib v3.11.2, https://matplotlib.org/</dc:title>
+     </cc:Agent>
+    </dc:creator>
+   </cc:Work>
+  </rdf:RDF>
+ </metadata>
+ <defs>
+  <style type="text/css">*{stroke-linejoin: round; stroke-linecap: butt}</style>
+ </defs>
+ <g id="cobalt-payload-figure_1">
+  <g id="cobalt-payload-patch_1">
+   <path d="M 0 596.16 
+L 864 596.16 
+L 864 0 
+L 0 0 
+z
+" style="fill: #ffffff"/>
+  </g>
+  <g id="cobalt-payload-axes_1">
+   <g id="cobalt-payload-patch_2">
+    <path d="M 103.69375 556.138237 
+L 785.930604 556.138237 
+L 785.930604 112.083984 
+L 103.69375 112.083984 
+z
+" style="fill: #ffffff"/>
+   </g>
+   <g clip-path="url(#cobalt-payload-p869daf301a)">
+    <image xlink:href="data:image/png;base64,
+iVBORw0KGgoAAAANSUhEUgAAA7QAAAJoCAYAAABWTK1OAAAQaUlEQVR4nO3ZUY4kxRVA0cnO7B56ANkaDEhsgAV4C94D+/9DQsL+8NgNVFWwhvkIBTd0zgJaTxF6nXUzj3+dP413bOf8+PfVIzDJ/df/ONsN2dl92dk9nd98XD0Ck9x/+cXZbuj8xzerR2CSp1l/GAAAAGYStAAAACQJWgAAAJIELQAAAEmCFgAAgCRBCwAAQJKgBQAAIEnQAgAAkCRoAQAASBK0AAAAJAlaAAAAkgQtAAAASYIWAACAJEELAABAkqAFAAAgSdACAACQJGgBAABIErQAAAAkCVoAAACSBC0AAABJghYAAIAkQQsAAECSoAUAACBJ0AIAAJAkaAEAAEgStAAAACQJWgAAAJIELQAAAEmCFgAAgCRBCwAAQJKgBQAAIEnQAgAAkCRoAQAASBK0AAAAJAlaAAAAkq7j+Vo9AzOcp3Pd1NPL8+oRmMHObstzdk/H6ZvAtp78htqS5+y2/DcGAAAgSdACAACQJGgBAABIErQAAAAkCVoAAACSBC0AAABJghYAAIAkQQsAAECSoAUAACBJ0AIAAJAkaAEAAEgStAAAACQJWgAAAJIELQAAAEmCFgAAgCRBCwAAQJKgBQAAIEnQAgAAkCRoAQAASBK0AAAAJAlaAAAAkgQtAAAASYIWAACAJEELAABAkqAFAAAgSdACAACQJGgBAABIErQAAAAkCVoAAACSBC0AAABJghYAAIAkQQsAAECSoAUAACBJ0AIAAJAkaAEAAEi63j3G6hmAzzDuD+e1oWP1AMzjObulMfx+2tbwnIUSX2gBAABIErQAAAAkCVoAAACSBC0AAABJghYAAIAkQQsAAECSoAUAACBJ0AIAAJAkaAEAAEgStAAAACQJWgAAAJIELQAAAEmCFgAAgCRBCwAAQJKgBQAAIEnQAgAAkCRoAQAASBK0AAAAJAlaAAAAkgQtAAAASYIWAACAJEELAABAkqAFAAAgSdACAACQJGgBAABIErQAAAAkCVoAAACSBC0AAABJghYAAIAkQQsAAECSoAUAACBJ0AIAAJAkaAEAAEgStAAAACQJWgAAAJKu1QMwx3EcjhZC7Cy02FmAvwZfaAEAAEgStAAAACQJWgAAAJIELQAAAEmCFgAAgCRBCwAAQJKgBQAAIEnQAgAAkCRoAQAASBK0AAAAJAlaAAAAkgQtAAAASYIWAACAJEELAABAkqAFAAAgSdACAACQJGgBAABIErQAAAAkCVoAAACSBC0AAABJghYAAIAkQQsAAECSoAUAACBJ0AIAAJAkaAEAAEgStAAAACQJWgAAAJIELQAAAEmCFgAAgCRBCwAAQJKgBQAAIEnQAgAAkCRoAQAASBK0AAAAJAlaAAAAkgQtAAAASdfxfK2egRnO07luys5uys5uy85uys5u67ieV4/ABMeleXblCy0AAABJghYAAIAkQQsAAECSoAUAACBJ0AIAAJAkaAEAAEgStAAAACQJWgAAAJIELQAAAEmCFgAAgCRBCwAAQJKgBQAAIEnQAgAAkCRoAQAASBK0AAAAJAlaAAAAkgQtAAAASYIWAACAJEELAABAkqAFAAAgSdACAACQJGgBAABIErQAAAAkCVoAAACSBC0AAABJghYAAIAkQQsAAECSoAUAACBJ0AIAAJAkaAEAAEgStAAAACQJWgAAAJIELQAAAEmCFgAAgCRBCwAAQNJ1++ePq2dggtuH07lu6vr03eoRmOD25eVcN3W9fb96BCb4w85u6+Xf364egQnePr441035QgsAAECSoAUAACBJ0AIAAJAkaAEAAEgStAAAACQJWgAAAJIELQAAAEmCFgAAgCRBCwAAQJKgBQAAIEnQAgAAkCRoAQAASBK0AAAAJAlaAAAAkgQtAAAASYIWAACAJEELAABAkqAFAAAgSdACAACQJGgBAABIErQAAAAkCVoAAACSBC0AAABJghYAAIAkQQsAAECSoAUAACBJ0AIAAJAkaAEAAEgStAAAACQJWgAAAJIELQAAAEmCFgAAgCRBCwAAQJKgBQAAIEnQAgAAkHTdX8/VMzDB7YN73dUxVk/ADPcvvF+Ekturnd3V8yd3u6P7e/e6KzcLAABAkqAFAAAgSdACAACQJGgBAABIErQAAAAkCVoAAACSBC0AAABJghYAAIAkQQsAAECSoAUAACBJ0AIAAJAkaAEAAEgStAAAACQJWgAAAJIELQAAAEmCFgAAgCRBCwAAQJKgBQAAIEnQAgAAkCRoAQAASBK0AAAAJAlaAAAAkgQtAAAASYIWAACAJEELAABAkqAFAAAgSdACAACQJGgBAABIErQAAAAkCVoAAACSBC0AAABJghYAAIAkQQsAAECSoAUAACB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" id="cobalt-payload-imagef692030caf" transform="scale(1 -1) translate(0 -443.52)" x="103.68" y="-112.32" width="682.56" height="443.52"/>
+   </g>
+   <g id="cobalt-payload-matplotlib.axis_1">
+    <g id="cobalt-payload-xtick_1">
+     <g id="cobalt-payload-line2d_1">
+      <defs>
+       <path id="cobalt-payload-m87936718da" d="M 0 0 
+L 0 3.5 
+" style="stroke: #000000; stroke-width: 0.8"/>
+      </defs>
+      <g>
+       <use xlink:href="#cobalt-payload-m87936718da" x="146.333553" y="556.138237" style="stroke: #000000; stroke-width: 0.8"/>
+      </g>
+     </g>
+     <g id="cobalt-payload-text_1">
+      <text style="font-size: 9px; font-family: 'DejaVu Sans'" transform="translate(133.555725 573.945351) rotate(-20)">O2</text>
+     </g>
+    </g>
+    <g id="cobalt-payload-xtick_2">
+     <g id="cobalt-payload-line2d_2">
+      <g>
+       <use xlink:href="#cobalt-payload-m87936718da" x="231.61316" y="556.138237" style="stroke: #000000; stroke-width: 0.8"/>
+      </g>
+     </g>
+     <g id="cobalt-payload-text_2">
+      <text style="font-size: 9px; font-family: 'DejaVu Sans'" transform="translate(191.001783 584.075934) rotate(-20)">O2 + LTO</text>
+     </g>
+    </g>
+    <g id="cobalt-payload-xtick_3">
+     <g id="cobalt-payload-line2d_3">
+      <g>
+       <use xlink:href="#cobalt-payload-m87936718da" x="316.892767" y="556.138237" style="stroke: #000000; stroke-width: 0.8"/>
+      </g>
+     </g>
+     <g id="cobalt-payload-text_3">
+      <text style="font-size: 9px; font-family: 'DejaVu Sans'" transform="translate(304.114939 573.945351) rotate(-20)">O3</text>
+     </g>
+    </g>
+    <g id="cobalt-payload-xtick_4">
+     <g id="cobalt-payload-line2d_4">
+      <g>
+       <use xlink:href="#cobalt-payload-m87936718da" x="402.172374" y="556.138237" style="stroke: #000000; stroke-width: 0.8"/>
+      </g>
+     </g>
+     <g id="cobalt-payload-text_4">
+      <text style="font-size: 9px; font-family: 'DejaVu Sans'" transform="translate(361.560997 584.075934) rotate(-20)">O3 + LTO</text>
+     </g>
+    </g>
+    <g id="cobalt-payload-xtick_5">
+     <g id="cobalt-payload-line2d_5">
+      <g>
+       <use xlink:href="#cobalt-payload-m87936718da" x="487.451981" y="556.138237" style="stroke: #000000; stroke-width: 0.8"/>
+      </g>
+     </g>
+     <g id="cobalt-payload-text_5">
+      <text style="font-size: 9px; font-family: 'DejaVu Sans'" transform="translate(475.649377 573.590398) rotate(-20)">Os</text>
+     </g>
+    </g>
+    <g id="cobalt-payload-xtick_6">
+     <g id="cobalt-payload-line2d_6">
+      <g>
+       <use xlink:href="#cobalt-payload-m87936718da" x="572.731587" y="556.138237" style="stroke: #000000; stroke-width: 0.8"/>
+      </g>
+     </g>
+     <g id="cobalt-payload-text_6">
+      <text style="font-size: 9px; font-family: 'DejaVu Sans'" transform="translate(533.095435 583.720982) rotate(-20)">Os + LTO</text>
+     </g>
+    </g>
+    <g id="cobalt-payload-xtick_7">
+     <g id="cobalt-payload-line2d_7">
+      <g>
+       <use xlink:href="#cobalt-payload-m87936718da" x="658.011194" y="556.138237" style="stroke: #000000; stroke-width: 0.8"/>
+      </g>
+     </g>
+     <g id="cobalt-payload-text_7">
+      <text style="font-size: 9px; font-family: 'DejaVu Sans'" transform="translate(646.175554 573.602423) rotate(-20)">Oz</text>
+     </g>
+    </g>
+    <g id="cobalt-payload-xtick_8">
+     <g id="cobalt-payload-line2d_8">
+      <g>
+       <use xlink:href="#cobalt-payload-m87936718da" x="743.290801" y="556.138237" style="stroke: #000000; stroke-width: 0.8"/>
+      </g>
+     </g>
+     <g id="cobalt-payload-text_8">
+      <text style="font-size: 9px; font-family: 'DejaVu Sans'" transform="translate(703.621613 583.733006) rotate(-20)">Oz + LTO</text>
+     </g>
+    </g>
+   </g>
+   <g id="cobalt-payload-matplotlib.axis_2">
+    <g id="cobalt-payload-ytick_1">
+     <g id="cobalt-payload-line2d_9">
+      <defs>
+       <path id="cobalt-payload-m362d7d7103" d="M 0 0 
+L -3.5 0 
+" style="stroke: #000000; stroke-width: 0.8"/>
+      </defs>
+      <g>
+       <use xlink:href="#cobalt-payload-m362d7d7103" x="103.69375" y="125.144404" style="stroke: #000000; stroke-width: 0.8"/>
+      </g>
+     </g>
+     <g id="cobalt-payload-text_9">
+      <text style="font-size: 9px; font-family: 'DejaVu Sans'; text-anchor: end" x="96.69375" y="128.5637" transform="rotate(-0 96.69375 128.5637)">asyncify-multi-off</text>
+     </g>
+    </g>
+    <g id="cobalt-payload-ytick_2">
+     <g id="cobalt-payload-line2d_10">
+      <g>
+       <use xlink:href="#cobalt-payload-m362d7d7103" x="103.69375" y="151.265242" style="stroke: #000000; stroke-width: 0.8"/>
+      </g>
+     </g>
+     <g id="cobalt-payload-text_10">
+      <text style="font-size: 9px; font-family: 'DejaVu Sans'; text-anchor: end" x="96.69375" y="154.684539" transform="rotate(-0 96.69375 154.684539)">asyncify-multi-on</text>
+     </g>
+    </g>
+    <g id="cobalt-payload-ytick_3">
+     <g id="cobalt-payload-line2d_11">
+      <g>
+       <use xlink:href="#cobalt-payload-m362d7d7103" x="103.69375" y="177.38608" style="stroke: #000000; stroke-width: 0.8"/>
+      </g>
+     </g>
+     <g id="cobalt-payload-text_11">
+      <text style="font-size: 9px; font-family: 'DejaVu Sans'; text-anchor: end" x="96.69375" y="180.805377" transform="rotate(-0 96.69375 180.805377)">asyncify-single-off</text>
+     </g>
+    </g>
+    <g id="cobalt-payload-ytick_4">
+     <g id="cobalt-payload-line2d_12">
+      <g>
+       <use xlink:href="#cobalt-payload-m362d7d7103" x="103.69375" y="203.506919" style="stroke: #000000; stroke-width: 0.8"/>
+      </g>
+     </g>
+     <g id="cobalt-payload-text_12">
+      <text style="font-size: 9px; font-family: 'DejaVu Sans'; text-anchor: end" x="96.69375" y="206.926216" transform="rotate(-0 96.69375 206.926216)">asyncify-single-on</text>
+     </g>
+    </g>
+    <g id="cobalt-payload-ytick_5">
+     <g id="cobalt-payload-line2d_13">
+      <g>
+       <use xlink:href="#cobalt-payload-m362d7d7103" x="103.69375" y="229.627757" style="stroke: #000000; stroke-width: 0.8"/>
+      </g>
+     </g>
+     <g id="cobalt-payload-text_13">
+      <text style="font-size: 9px; font-family: 'DejaVu Sans'; text-anchor: end" x="96.69375" y="233.047054" transform="rotate(-0 96.69375 233.047054)">jspi-multi-off</text>
+     </g>
+    </g>
+    <g id="cobalt-payload-ytick_6">
+     <g id="cobalt-payload-line2d_14">
+      <g>
+       <use xlink:href="#cobalt-payload-m362d7d7103" x="103.69375" y="255.748596" style="stroke: #000000; stroke-width: 0.8"/>
+      </g>
+     </g>
+     <g id="cobalt-payload-text_14">
+      <text style="font-size: 9px; font-family: 'DejaVu Sans'; text-anchor: end" x="96.69375" y="259.167892" transform="rotate(-0 96.69375 259.167892)">jspi-multi-on</text>
+     </g>
+    </g>
+    <g id="cobalt-payload-ytick_7">
+     <g id="cobalt-payload-line2d_15">
+      <g>
+       <use xlink:href="#cobalt-payload-m362d7d7103" x="103.69375" y="281.869434" style="stroke: #000000; stroke-width: 0.8"/>
+      </g>
+     </g>
+     <g id="cobalt-payload-text_15">
+      <text style="font-size: 9px; font-family: 'DejaVu Sans'; text-anchor: end" x="96.69375" y="285.288731" transform="rotate(-0 96.69375 285.288731)">jspi-single-off</text>
+     </g>
+    </g>
+    <g id="cobalt-payload-ytick_8">
+     <g id="cobalt-payload-line2d_16">
+      <g>
+       <use xlink:href="#cobalt-payload-m362d7d7103" x="103.69375" y="307.990272" style="stroke: #000000; stroke-width: 0.8"/>
+      </g>
+     </g>
+     <g id="cobalt-payload-text_16">
+      <text style="font-size: 9px; font-family: 'DejaVu Sans'; text-anchor: end" x="96.69375" y="311.409569" transform="rotate(-0 96.69375 311.409569)">jspi-single-on</text>
+     </g>
+    </g>
+    <g id="cobalt-payload-ytick_9">
+     <g id="cobalt-payload-line2d_17">
+      <g>
+       <use xlink:href="#cobalt-payload-m362d7d7103" x="103.69375" y="334.111111" style="stroke: #000000; stroke-width: 0.8"/>
+      </g>
+     </g>
+     <g id="cobalt-payload-text_17">
+      <text style="font-size: 9px; font-family: 'DejaVu Sans'; text-anchor: end" x="96.69375" y="337.530408" transform="rotate(-0 96.69375 337.530408)">native-multi-off</text>
+     </g>
+    </g>
+    <g id="cobalt-payload-ytick_10">
+     <g id="cobalt-payload-line2d_18">
+      <g>
+       <use xlink:href="#cobalt-payload-m362d7d7103" x="103.69375" y="360.231949" style="stroke: #000000; stroke-width: 0.8"/>
+      </g>
+     </g>
+     <g id="cobalt-payload-text_18">
+      <text style="font-size: 9px; font-family: 'DejaVu Sans'; text-anchor: end" x="96.69375" y="363.651246" transform="rotate(-0 96.69375 363.651246)">native-multi-on</text>
+     </g>
+    </g>
+    <g id="cobalt-payload-ytick_11">
+     <g id="cobalt-payload-line2d_19">
+      <g>
+       <use xlink:href="#cobalt-payload-m362d7d7103" x="103.69375" y="386.352788" style="stroke: #000000; stroke-width: 0.8"/>
+      </g>
+     </g>
+     <g id="cobalt-payload-text_19">
+      <text style="font-size: 9px; font-family: 'DejaVu Sans'; text-anchor: end" x="96.69375" y="389.772084" transform="rotate(-0 96.69375 389.772084)">native-single-off</text>
+     </g>
+    </g>
+    <g id="cobalt-payload-ytick_12">
+     <g id="cobalt-payload-line2d_20">
+      <g>
+       <use xlink:href="#cobalt-payload-m362d7d7103" x="103.69375" y="412.473626" style="stroke: #000000; stroke-width: 0.8"/>
+      </g>
+     </g>
+     <g id="cobalt-payload-text_20">
+      <text style="font-size: 9px; font-family: 'DejaVu Sans'; text-anchor: end" x="96.69375" y="415.892923" transform="rotate(-0 96.69375 415.892923)">native-single-on</text>
+     </g>
+    </g>
+    <g id="cobalt-payload-ytick_13">
+     <g id="cobalt-payload-line2d_21">
+      <g>
+       <use xlink:href="#cobalt-payload-m362d7d7103" x="103.69375" y="438.594464" style="stroke: #000000; stroke-width: 0.8"/>
+      </g>
+     </g>
+     <g id="cobalt-payload-text_21">
+      <text style="font-size: 9px; font-family: 'DejaVu Sans'; text-anchor: end" x="96.69375" y="442.013761" transform="rotate(-0 96.69375 442.013761)">wasip2-single-off</text>
+     </g>
+    </g>
+    <g id="cobalt-payload-ytick_14">
+     <g id="cobalt-payload-line2d_22">
+      <g>
+       <use xlink:href="#cobalt-payload-m362d7d7103" x="103.69375" y="464.715303" style="stroke: #000000; stroke-width: 0.8"/>
+      </g>
+     </g>
+     <g id="cobalt-payload-text_22">
+      <text style="font-size: 9px; font-family: 'DejaVu Sans'; text-anchor: end" x="96.69375" y="468.1346" transform="rotate(-0 96.69375 468.1346)">wasip2-single-on</text>
+     </g>
+    </g>
+    <g id="cobalt-payload-ytick_15">
+     <g id="cobalt-payload-line2d_23">
+      <g>
+       <use xlink:href="#cobalt-payload-m362d7d7103" x="103.69375" y="490.836141" style="stroke: #000000; stroke-width: 0.8"/>
+      </g>
+     </g>
+     <g id="cobalt-payload-text_23">
+      <text style="font-size: 9px; font-family: 'DejaVu Sans'; text-anchor: end" x="96.69375" y="494.255438" transform="rotate(-0 96.69375 494.255438)">wasip3-multi-off</text>
+     </g>
+    </g>
+    <g id="cobalt-payload-ytick_16">
+     <g id="cobalt-payload-line2d_24">
+      <g>
+       <use xlink:href="#cobalt-payload-m362d7d7103" x="103.69375" y="516.95698" style="stroke: #000000; stroke-width: 0.8"/>
+      </g>
+     </g>
+     <g id="cobalt-payload-text_24">
+      <text style="font-size: 9px; font-family: 'DejaVu Sans'; text-anchor: end" x="96.69375" y="520.376276" transform="rotate(-0 96.69375 520.376276)">wasip3-single-off</text>
+     </g>
+    </g>
+    <g id="cobalt-payload-ytick_17">
+     <g id="cobalt-payload-line2d_25">
+      <g>
+       <use xlink:href="#cobalt-payload-m362d7d7103" x="103.69375" y="543.077818" style="stroke: #000000; stroke-width: 0.8"/>
+      </g>
+     </g>
+     <g id="cobalt-payload-text_25">
+      <text style="font-size: 9px; font-family: 'DejaVu Sans'; text-anchor: end" x="96.69375" y="546.497115" transform="rotate(-0 96.69375 546.497115)">wasip3-single-on</text>
+     </g>
+    </g>
+   </g>
+   <g id="cobalt-payload-patch_3">
+    <path d="M 103.69375 556.138237 
+L 103.69375 112.083984 
+" style="fill: none; stroke: #000000; stroke-width: 0.8; stroke-linejoin: miter; stroke-linecap: square"/>
+   </g>
+   <g id="cobalt-payload-patch_4">
+    <path d="M 785.930604 556.138237 
+L 785.930604 112.083984 
+" style="fill: none; stroke: #000000; stroke-width: 0.8; stroke-linejoin: miter; stroke-linecap: square"/>
+   </g>
+   <g id="cobalt-payload-patch_5">
+    <path d="M 103.69375 556.138237 
+L 785.930604 556.138237 
+" style="fill: none; stroke: #000000; stroke-width: 0.8; stroke-linejoin: miter; stroke-linecap: square"/>
+   </g>
+   <g id="cobalt-payload-patch_6">
+    <path d="M 103.69375 112.083984 
+L 785.930604 112.083984 
+" style="fill: none; stroke: #000000; stroke-width: 0.8; stroke-linejoin: miter; stroke-linecap: square"/>
+   </g>
+   <g id="cobalt-payload-text_26">
+    <text style="font-size: 8px; font-family: 'DejaVu Sans'; text-anchor: middle; fill: #ffffff" x="146.333553" y="127.222529" transform="rotate(-0 146.333553 127.222529)">477.63</text>
+   </g>
+   <g id="cobalt-payload-text_27">
+    <text style="font-size: 8px; font-family: 'DejaVu Sans'; text-anchor: middle; fill: #ffffff" x="231.61316" y="127.222529" transform="rotate(-0 231.61316 127.222529)">469.22</text>
+   </g>
+   <g id="cobalt-payload-text_28">
+    <text style="font-size: 8px; font-family: 'DejaVu Sans'; text-anchor: middle; fill: #ffffff" x="316.892767" y="127.222529" transform="rotate(-0 316.892767 127.222529)">468.34</text>
+   </g>
+   <g id="cobalt-payload-text_29">
+    <text style="font-size: 8px; font-family: 'DejaVu Sans'; text-anchor: middle; fill: #ffffff" x="402.172374" y="127.222529" transform="rotate(-0 402.172374 127.222529)">459.56</text>
+   </g>
+   <g id="cobalt-payload-text_30">
+    <text style="font-size: 8px; font-family: 'DejaVu Sans'; text-anchor: middle; fill: #ffffff" x="487.451981" y="127.222529" transform="rotate(-0 487.451981 127.222529)">422.30</text>
+   </g>
+   <g id="cobalt-payload-text_31">
+    <text style="font-size: 8px; font-family: 'DejaVu Sans'; text-anchor: middle; fill: #ffffff" x="572.731587" y="127.222529" transform="rotate(-0 572.731587 127.222529)">411.60</text>
+   </g>
+   <g id="cobalt-payload-text_32">
+    <text style="font-size: 8px; font-family: 'DejaVu Sans'; text-anchor: middle; fill: #ffffff" x="658.011194" y="127.222529" transform="rotate(-0 658.011194 127.222529)">411.00</text>
+   </g>
+   <g id="cobalt-payload-text_33">
+    <text style="font-size: 8px; font-family: 'DejaVu Sans'; text-anchor: middle; fill: #ffffff" x="743.290801" y="127.222529" transform="rotate(-0 743.290801 127.222529)">392.31</text>
+   </g>
+   <g id="cobalt-payload-text_34">
+    <text style="font-size: 8px; font-family: 'DejaVu Sans'; text-anchor: middle; fill: #ffffff" x="146.333553" y="153.343367" transform="rotate(-0 146.333553 153.343367)">657.06</text>
+   </g>
+   <g id="cobalt-payload-text_35">
+    <text style="font-size: 8px; font-family: 'DejaVu Sans'; text-anchor: middle; fill: #ffffff" x="231.61316" y="153.343367" transform="rotate(-0 231.61316 153.343367)">611.93</text>
+   </g>
+   <g id="cobalt-payload-text_36">
+    <text style="font-size: 8px; font-family: 'DejaVu Sans'; text-anchor: middle; fill: #ffffff" x="316.892767" y="153.343367" transform="rotate(-0 316.892767 153.343367)">633.34</text>
+   </g>
+   <g id="cobalt-payload-text_37">
+    <text style="font-size: 8px; font-family: 'DejaVu Sans'; text-anchor: middle; fill: #ffffff" x="402.172374" y="153.343367" transform="rotate(-0 402.172374 153.343367)">594.83</text>
+   </g>
+   <g id="cobalt-payload-text_38">
+    <text style="font-size: 8px; font-family: 'DejaVu Sans'; text-anchor: middle; fill: #ffffff" x="487.451981" y="153.343367" transform="rotate(-0 487.451981 153.343367)">579.05</text>
+   </g>
+   <g id="cobalt-payload-text_39">
+    <text style="font-size: 8px; font-family: 'DejaVu Sans'; text-anchor: middle; fill: #ffffff" x="572.731587" y="153.343367" transform="rotate(-0 572.731587 153.343367)">522.40</text>
+   </g>
+   <g id="cobalt-payload-text_40">
+    <text style="font-size: 8px; font-family: 'DejaVu Sans'; text-anchor: middle; fill: #ffffff" x="658.011194" y="153.343367" transform="rotate(-0 658.011194 153.343367)">545.80</text>
+   </g>
+   <g id="cobalt-payload-text_41">
+    <text style="font-size: 8px; font-family: 'DejaVu Sans'; text-anchor: middle; fill: #ffffff" x="743.290801" y="153.343367" transform="rotate(-0 743.290801 153.343367)">478.29</text>
+   </g>
+   <g id="cobalt-payload-text_42">
+    <text style="font-size: 8px; font-family: 'DejaVu Sans'; text-anchor: middle; fill: #ffffff" x="146.333553" y="179.464205" transform="rotate(-0 146.333553 179.464205)">411.16</text>
+   </g>
+   <g id="cobalt-payload-text_43">
+    <text style="font-size: 8px; font-family: 'DejaVu Sans'; text-anchor: middle; fill: #ffffff" x="231.61316" y="179.464205" transform="rotate(-0 231.61316 179.464205)">391.64</text>
+   </g>
+   <g id="cobalt-payload-text_44">
+    <text style="font-size: 8px; font-family: 'DejaVu Sans'; text-anchor: middle; fill: #ffffff" x="316.892767" y="179.464205" transform="rotate(-0 316.892767 179.464205)">404.72</text>
+   </g>
+   <g id="cobalt-payload-text_45">
+    <text style="font-size: 8px; font-family: 'DejaVu Sans'; text-anchor: middle; fill: #ffffff" x="402.172374" y="179.464205" transform="rotate(-0 402.172374 179.464205)">385.66</text>
+   </g>
+   <g id="cobalt-payload-text_46">
+    <text style="font-size: 8px; font-family: 'DejaVu Sans'; text-anchor: middle; fill: #ffffff" x="487.451981" y="179.464205" transform="rotate(-0 487.451981 179.464205)">358.95</text>
+   </g>
+   <g id="cobalt-payload-text_47">
+    <text style="font-size: 8px; font-family: 'DejaVu Sans'; text-anchor: middle; fill: #ffffff" x="572.731587" y="179.464205" transform="rotate(-0 572.731587 179.464205)">343.04</text>
+   </g>
+   <g id="cobalt-payload-text_48">
+    <text style="font-size: 8px; font-family: 'DejaVu Sans'; text-anchor: middle; fill: #ffffff" x="658.011194" y="179.464205" transform="rotate(-0 658.011194 179.464205)">350.96</text>
+   </g>
+   <g id="cobalt-payload-text_49">
+    <text style="font-size: 8px; font-family: 'DejaVu Sans'; text-anchor: middle; fill: #ffffff" x="743.290801" y="179.464205" transform="rotate(-0 743.290801 179.464205)">327.90</text>
+   </g>
+   <g id="cobalt-payload-text_50">
+    <text style="font-size: 8px; font-family: 'DejaVu Sans'; text-anchor: middle; fill: #ffffff" x="146.333553" y="205.585044" transform="rotate(-0 146.333553 205.585044)">574.26</text>
+   </g>
+   <g id="cobalt-payload-text_51">
+    <text style="font-size: 8px; font-family: 'DejaVu Sans'; text-anchor: middle; fill: #ffffff" x="231.61316" y="205.585044" transform="rotate(-0 231.61316 205.585044)">531.36</text>
+   </g>
+   <g id="cobalt-payload-text_52">
+    <text style="font-size: 8px; font-family: 'DejaVu Sans'; text-anchor: middle; fill: #ffffff" x="316.892767" y="205.585044" transform="rotate(-0 316.892767 205.585044)">556.13</text>
+   </g>
+   <g id="cobalt-payload-text_53">
+    <text style="font-size: 8px; font-family: 'DejaVu Sans'; text-anchor: middle; fill: #ffffff" x="402.172374" y="205.585044" transform="rotate(-0 402.172374 205.585044)">518.95</text>
+   </g>
+   <g id="cobalt-payload-text_54">
+    <text style="font-size: 8px; font-family: 'DejaVu Sans'; text-anchor: middle; fill: #ffffff" x="487.451981" y="205.585044" transform="rotate(-0 487.451981 205.585044)">497.62</text>
+   </g>
+   <g id="cobalt-payload-text_55">
+    <text style="font-size: 8px; font-family: 'DejaVu Sans'; text-anchor: middle; fill: #ffffff" x="572.731587" y="205.585044" transform="rotate(-0 572.731587 205.585044)">440.36</text>
+   </g>
+   <g id="cobalt-payload-text_56">
+    <text style="font-size: 8px; font-family: 'DejaVu Sans'; text-anchor: middle; fill: #ffffff" x="658.011194" y="205.585044" transform="rotate(-0 658.011194 205.585044)">470.64</text>
+   </g>
+   <g id="cobalt-payload-text_57">
+    <text style="font-size: 8px; font-family: 'DejaVu Sans'; text-anchor: middle; fill: #ffffff" x="743.290801" y="205.585044" transform="rotate(-0 743.290801 205.585044)">403.60</text>
+   </g>
+   <g id="cobalt-payload-text_58">
+    <text style="font-size: 8px; font-family: 'DejaVu Sans'; text-anchor: middle; fill: #ffffff" x="146.333553" y="231.705882" transform="rotate(-0 146.333553 231.705882)">309.11</text>
+   </g>
+   <g id="cobalt-payload-text_59">
+    <text style="font-size: 8px; font-family: 'DejaVu Sans'; text-anchor: middle; fill: #ffffff" x="231.61316" y="231.705882" transform="rotate(-0 231.61316 231.705882)">309.07</text>
+   </g>
+   <g id="cobalt-payload-text_60">
+    <text style="font-size: 8px; font-family: 'DejaVu Sans'; text-anchor: middle; fill: #ffffff" x="316.892767" y="231.705882" transform="rotate(-0 316.892767 231.705882)">308.35</text>
+   </g>
+   <g id="cobalt-payload-text_61">
+    <text style="font-size: 8px; font-family: 'DejaVu Sans'; text-anchor: middle; fill: #ffffff" x="402.172374" y="231.705882" transform="rotate(-0 402.172374 231.705882)">308.22</text>
+   </g>
+   <g id="cobalt-payload-text_62">
+    <text style="font-size: 8px; font-family: 'DejaVu Sans'; text-anchor: middle; fill: #ffffff" x="487.451981" y="231.705882" transform="rotate(-0 487.451981 231.705882)">269.99</text>
+   </g>
+   <g id="cobalt-payload-text_63">
+    <text style="font-size: 8px; font-family: 'DejaVu Sans'; text-anchor: middle; fill: #ffffff" x="572.731587" y="231.705882" transform="rotate(-0 572.731587 231.705882)">266.99</text>
+   </g>
+   <g id="cobalt-payload-text_64">
+    <text style="font-size: 8px; font-family: 'DejaVu Sans'; text-anchor: middle; fill: #ffffff" x="658.011194" y="231.705882" transform="rotate(-0 658.011194 231.705882)">251.31</text>
+   </g>
+   <g id="cobalt-payload-text_65">
+    <text style="font-size: 8px; font-family: 'DejaVu Sans'; text-anchor: middle; fill: #ffffff" x="743.290801" y="231.705882" transform="rotate(-0 743.290801 231.705882)">242.57</text>
+   </g>
+   <g id="cobalt-payload-text_66">
+    <text style="font-size: 8px; font-family: 'DejaVu Sans'; text-anchor: middle; fill: #ffffff" x="146.333553" y="257.826721" transform="rotate(-0 146.333553 257.826721)">340.49</text>
+   </g>
+   <g id="cobalt-payload-text_67">
+    <text style="font-size: 8px; font-family: 'DejaVu Sans'; text-anchor: middle; fill: #ffffff" x="231.61316" y="257.826721" transform="rotate(-0 231.61316 257.826721)">352.54</text>
+   </g>
+   <g id="cobalt-payload-text_68">
+    <text style="font-size: 8px; font-family: 'DejaVu Sans'; text-anchor: middle; fill: #ffffff" x="316.892767" y="257.826721" transform="rotate(-0 316.892767 257.826721)">342.48</text>
+   </g>
+   <g id="cobalt-payload-text_69">
+    <text style="font-size: 8px; font-family: 'DejaVu Sans'; text-anchor: middle; fill: #ffffff" x="402.172374" y="257.826721" transform="rotate(-0 402.172374 257.826721)">351.21</text>
+   </g>
+   <g id="cobalt-payload-text_70">
+    <text style="font-size: 8px; font-family: 'DejaVu Sans'; text-anchor: middle; fill: #ffffff" x="487.451981" y="257.826721" transform="rotate(-0 487.451981 257.826721)">300.05</text>
+   </g>
+   <g id="cobalt-payload-text_71">
+    <text style="font-size: 8px; font-family: 'DejaVu Sans'; text-anchor: middle; fill: #ffffff" x="572.731587" y="257.826721" transform="rotate(-0 572.731587 257.826721)">295.55</text>
+   </g>
+   <g id="cobalt-payload-text_72">
+    <text style="font-size: 8px; font-family: 'DejaVu Sans'; text-anchor: middle; fill: #ffffff" x="658.011194" y="257.826721" transform="rotate(-0 658.011194 257.826721)">274.44</text>
+   </g>
+   <g id="cobalt-payload-text_73">
+    <text style="font-size: 8px; font-family: 'DejaVu Sans'; text-anchor: middle; fill: #ffffff" x="743.290801" y="257.826721" transform="rotate(-0 743.290801 257.826721)">262.52</text>
+   </g>
+   <g id="cobalt-payload-text_74">
+    <text style="font-size: 8px; font-family: 'DejaVu Sans'; text-anchor: middle; fill: #ffffff" x="146.333553" y="283.947559" transform="rotate(-0 146.333553 283.947559)">277.83</text>
+   </g>
+   <g id="cobalt-payload-text_75">
+    <text style="font-size: 8px; font-family: 'DejaVu Sans'; text-anchor: middle; fill: #ffffff" x="231.61316" y="283.947559" transform="rotate(-0 231.61316 283.947559)">274.97</text>
+   </g>
+   <g id="cobalt-payload-text_76">
+    <text style="font-size: 8px; font-family: 'DejaVu Sans'; text-anchor: middle; fill: #ffffff" x="316.892767" y="283.947559" transform="rotate(-0 316.892767 283.947559)">277.89</text>
+   </g>
+   <g id="cobalt-payload-text_77">
+    <text style="font-size: 8px; font-family: 'DejaVu Sans'; text-anchor: middle; fill: #ffffff" x="402.172374" y="283.947559" transform="rotate(-0 402.172374 283.947559)">275.19</text>
+   </g>
+   <g id="cobalt-payload-text_78">
+    <text style="font-size: 8px; font-family: 'DejaVu Sans'; text-anchor: middle; fill: #ffffff" x="487.451981" y="283.947559" transform="rotate(-0 487.451981 283.947559)">236.27</text>
+   </g>
+   <g id="cobalt-payload-text_79">
+    <text style="font-size: 8px; font-family: 'DejaVu Sans'; text-anchor: middle; fill: #ffffff" x="572.731587" y="283.947559" transform="rotate(-0 572.731587 283.947559)">234.23</text>
+   </g>
+   <g id="cobalt-payload-text_80">
+    <text style="font-size: 8px; font-family: 'DejaVu Sans'; text-anchor: middle; fill: #ffffff" x="658.011194" y="283.947559" transform="rotate(-0 658.011194 283.947559)">219.62</text>
+   </g>
+   <g id="cobalt-payload-text_81">
+    <text style="font-size: 8px; font-family: 'DejaVu Sans'; text-anchor: middle; fill: #ffffff" x="743.290801" y="283.947559" transform="rotate(-0 743.290801 283.947559)">212.46</text>
+   </g>
+   <g id="cobalt-payload-text_82">
+    <text style="font-size: 8px; font-family: 'DejaVu Sans'; text-anchor: middle; fill: #ffffff" x="146.333553" y="310.068397" transform="rotate(-0 146.333553 310.068397)">307.08</text>
+   </g>
+   <g id="cobalt-payload-text_83">
+    <text style="font-size: 8px; font-family: 'DejaVu Sans'; text-anchor: middle; fill: #ffffff" x="231.61316" y="310.068397" transform="rotate(-0 231.61316 310.068397)">323.72</text>
+   </g>
+   <g id="cobalt-payload-text_84">
+    <text style="font-size: 8px; font-family: 'DejaVu Sans'; text-anchor: middle; fill: #ffffff" x="316.892767" y="310.068397" transform="rotate(-0 316.892767 310.068397)">310.46</text>
+   </g>
+   <g id="cobalt-payload-text_85">
+    <text style="font-size: 8px; font-family: 'DejaVu Sans'; text-anchor: middle; fill: #ffffff" x="402.172374" y="310.068397" transform="rotate(-0 402.172374 310.068397)">326.24</text>
+   </g>
+   <g id="cobalt-payload-text_86">
+    <text style="font-size: 8px; font-family: 'DejaVu Sans'; text-anchor: middle; fill: #ffffff" x="487.451981" y="310.068397" transform="rotate(-0 487.451981 310.068397)">265.20</text>
+   </g>
+   <g id="cobalt-payload-text_87">
+    <text style="font-size: 8px; font-family: 'DejaVu Sans'; text-anchor: middle; fill: #ffffff" x="572.731587" y="310.068397" transform="rotate(-0 572.731587 310.068397)">263.28</text>
+   </g>
+   <g id="cobalt-payload-text_88">
+    <text style="font-size: 8px; font-family: 'DejaVu Sans'; text-anchor: middle; fill: #ffffff" x="658.011194" y="310.068397" transform="rotate(-0 658.011194 310.068397)">241.38</text>
+   </g>
+   <g id="cobalt-payload-text_89">
+    <text style="font-size: 8px; font-family: 'DejaVu Sans'; text-anchor: middle; fill: #ffffff" x="743.290801" y="310.068397" transform="rotate(-0 743.290801 310.068397)">231.31</text>
+   </g>
+   <g id="cobalt-payload-text_90">
+    <text style="font-size: 8px; font-family: 'DejaVu Sans'; text-anchor: middle; fill: #ffffff" x="146.333553" y="336.189236" transform="rotate(-0 146.333553 336.189236)">421.77</text>
+   </g>
+   <g id="cobalt-payload-text_91">
+    <text style="font-size: 8px; font-family: 'DejaVu Sans'; text-anchor: middle; fill: #ffffff" x="231.61316" y="336.189236" transform="rotate(-0 231.61316 336.189236)">309.08</text>
+   </g>
+   <g id="cobalt-payload-text_92">
+    <text style="font-size: 8px; font-family: 'DejaVu Sans'; text-anchor: middle; fill: #ffffff" x="316.892767" y="336.189236" transform="rotate(-0 316.892767 336.189236)">419.16</text>
+   </g>
+   <g id="cobalt-payload-text_93">
+    <text style="font-size: 8px; font-family: 'DejaVu Sans'; text-anchor: middle; fill: #ffffff" x="402.172374" y="336.189236" transform="rotate(-0 402.172374 336.189236)">323.41</text>
+   </g>
+   <g id="cobalt-payload-text_94">
+    <text style="font-size: 8px; font-family: 'DejaVu Sans'; text-anchor: middle; fill: #ffffff" x="487.451981" y="336.189236" transform="rotate(-0 487.451981 336.189236)">408.14</text>
+   </g>
+   <g id="cobalt-payload-text_95">
+    <text style="font-size: 8px; font-family: 'DejaVu Sans'; text-anchor: middle; fill: #ffffff" x="572.731587" y="336.189236" transform="rotate(-0 572.731587 336.189236)">287.92</text>
+   </g>
+   <g id="cobalt-payload-text_96">
+    <text style="font-size: 8px; font-family: 'DejaVu Sans'; text-anchor: middle; fill: #ffffff" x="658.011194" y="336.189236" transform="rotate(-0 658.011194 336.189236)">490.67</text>
+   </g>
+   <g id="cobalt-payload-text_97">
+    <text style="font-size: 8px; font-family: 'DejaVu Sans'; text-anchor: middle; fill: #ffffff" x="743.290801" y="336.189236" transform="rotate(-0 743.290801 336.189236)">303.34</text>
+   </g>
+   <g id="cobalt-payload-text_98">
+    <text style="font-size: 8px; font-family: 'DejaVu Sans'; text-anchor: middle; fill: #ffffff" x="146.333553" y="362.310074" transform="rotate(-0 146.333553 362.310074)">517.12</text>
+   </g>
+   <g id="cobalt-payload-text_99">
+    <text style="font-size: 8px; font-family: 'DejaVu Sans'; text-anchor: middle; fill: #ffffff" x="231.61316" y="362.310074" transform="rotate(-0 231.61316 362.310074)">407.08</text>
+   </g>
+   <g id="cobalt-payload-text_100">
+    <text style="font-size: 8px; font-family: 'DejaVu Sans'; text-anchor: middle; fill: #ffffff" x="316.892767" y="362.310074" transform="rotate(-0 316.892767 362.310074)">532.09</text>
+   </g>
+   <g id="cobalt-payload-text_101">
+    <text style="font-size: 8px; font-family: 'DejaVu Sans'; text-anchor: middle; fill: #ffffff" x="402.172374" y="362.310074" transform="rotate(-0 402.172374 362.310074)">407.12</text>
+   </g>
+   <g id="cobalt-payload-text_102">
+    <text style="font-size: 8px; font-family: 'DejaVu Sans'; text-anchor: middle; fill: #ffffff" x="487.451981" y="362.310074" transform="rotate(-0 487.451981 362.310074)">501.44</text>
+   </g>
+   <g id="cobalt-payload-text_103">
+    <text style="font-size: 8px; font-family: 'DejaVu Sans'; text-anchor: middle; fill: #ffffff" x="572.731587" y="362.310074" transform="rotate(-0 572.731587 362.310074)">365.59</text>
+   </g>
+   <g id="cobalt-payload-text_104">
+    <text style="font-size: 8px; font-family: 'DejaVu Sans'; text-anchor: middle; fill: #ffffff" x="658.011194" y="362.310074" transform="rotate(-0 658.011194 362.310074)">573.75</text>
+   </g>
+   <g id="cobalt-payload-text_105">
+    <text style="font-size: 8px; font-family: 'DejaVu Sans'; text-anchor: middle; fill: #ffffff" x="743.290801" y="362.310074" transform="rotate(-0 743.290801 362.310074)">358.09</text>
+   </g>
+   <g id="cobalt-payload-text_106">
+    <text style="font-size: 8px; font-family: 'DejaVu Sans'; text-anchor: middle; fill: #ffffff" x="146.333553" y="388.430913" transform="rotate(-0 146.333553 388.430913)">421.77</text>
+   </g>
+   <g id="cobalt-payload-text_107">
+    <text style="font-size: 8px; font-family: 'DejaVu Sans'; text-anchor: middle; fill: #ffffff" x="231.61316" y="388.430913" transform="rotate(-0 231.61316 388.430913)">309.08</text>
+   </g>
+   <g id="cobalt-payload-text_108">
+    <text style="font-size: 8px; font-family: 'DejaVu Sans'; text-anchor: middle; fill: #ffffff" x="316.892767" y="388.430913" transform="rotate(-0 316.892767 388.430913)">419.16</text>
+   </g>
+   <g id="cobalt-payload-text_109">
+    <text style="font-size: 8px; font-family: 'DejaVu Sans'; text-anchor: middle; fill: #ffffff" x="402.172374" y="388.430913" transform="rotate(-0 402.172374 388.430913)">323.41</text>
+   </g>
+   <g id="cobalt-payload-text_110">
+    <text style="font-size: 8px; font-family: 'DejaVu Sans'; text-anchor: middle; fill: #ffffff" x="487.451981" y="388.430913" transform="rotate(-0 487.451981 388.430913)">408.14</text>
+   </g>
+   <g id="cobalt-payload-text_111">
+    <text style="font-size: 8px; font-family: 'DejaVu Sans'; text-anchor: middle; fill: #ffffff" x="572.731587" y="388.430913" transform="rotate(-0 572.731587 388.430913)">287.92</text>
+   </g>
+   <g id="cobalt-payload-text_112">
+    <text style="font-size: 8px; font-family: 'DejaVu Sans'; text-anchor: middle; fill: #ffffff" x="658.011194" y="388.430913" transform="rotate(-0 658.011194 388.430913)">490.67</text>
+   </g>
+   <g id="cobalt-payload-text_113">
+    <text style="font-size: 8px; font-family: 'DejaVu Sans'; text-anchor: middle; fill: #ffffff" x="743.290801" y="388.430913" transform="rotate(-0 743.290801 388.430913)">303.34</text>
+   </g>
+   <g id="cobalt-payload-text_114">
+    <text style="font-size: 8px; font-family: 'DejaVu Sans'; text-anchor: middle; fill: #ffffff" x="146.333553" y="414.551751" transform="rotate(-0 146.333553 414.551751)">517.12</text>
+   </g>
+   <g id="cobalt-payload-text_115">
+    <text style="font-size: 8px; font-family: 'DejaVu Sans'; text-anchor: middle; fill: #ffffff" x="231.61316" y="414.551751" transform="rotate(-0 231.61316 414.551751)">407.08</text>
+   </g>
+   <g id="cobalt-payload-text_116">
+    <text style="font-size: 8px; font-family: 'DejaVu Sans'; text-anchor: middle; fill: #ffffff" x="316.892767" y="414.551751" transform="rotate(-0 316.892767 414.551751)">532.09</text>
+   </g>
+   <g id="cobalt-payload-text_117">
+    <text style="font-size: 8px; font-family: 'DejaVu Sans'; text-anchor: middle; fill: #ffffff" x="402.172374" y="414.551751" transform="rotate(-0 402.172374 414.551751)">407.12</text>
+   </g>
+   <g id="cobalt-payload-text_118">
+    <text style="font-size: 8px; font-family: 'DejaVu Sans'; text-anchor: middle; fill: #ffffff" x="487.451981" y="414.551751" transform="rotate(-0 487.451981 414.551751)">501.44</text>
+   </g>
+   <g id="cobalt-payload-text_119">
+    <text style="font-size: 8px; font-family: 'DejaVu Sans'; text-anchor: middle; fill: #ffffff" x="572.731587" y="414.551751" transform="rotate(-0 572.731587 414.551751)">365.59</text>
+   </g>
+   <g id="cobalt-payload-text_120">
+    <text style="font-size: 8px; font-family: 'DejaVu Sans'; text-anchor: middle; fill: #ffffff" x="658.011194" y="414.551751" transform="rotate(-0 658.011194 414.551751)">573.75</text>
+   </g>
+   <g id="cobalt-payload-text_121">
+    <text style="font-size: 8px; font-family: 'DejaVu Sans'; text-anchor: middle; fill: #ffffff" x="743.290801" y="414.551751" transform="rotate(-0 743.290801 414.551751)">358.09</text>
+   </g>
+   <g id="cobalt-payload-text_122">
+    <text style="font-size: 8px; font-family: 'DejaVu Sans'; text-anchor: middle; fill: #ffffff" x="146.333553" y="440.672589" transform="rotate(-0 146.333553 440.672589)">1681.74</text>
+   </g>
+   <g id="cobalt-payload-text_123">
+    <text style="font-size: 8px; font-family: 'DejaVu Sans'; text-anchor: middle; fill: #ffffff" x="231.61316" y="440.672589" transform="rotate(-0 231.61316 440.672589)">1181.23</text>
+   </g>
+   <g id="cobalt-payload-text_124">
+    <text style="font-size: 8px; font-family: 'DejaVu Sans'; text-anchor: middle; fill: #ffffff" x="316.892767" y="440.672589" transform="rotate(-0 316.892767 440.672589)">1675.41</text>
+   </g>
+   <g id="cobalt-payload-text_125">
+    <text style="font-size: 8px; font-family: 'DejaVu Sans'; text-anchor: middle; fill: #ffffff" x="402.172374" y="440.672589" transform="rotate(-0 402.172374 440.672589)">1179.46</text>
+   </g>
+   <g id="cobalt-payload-text_126">
+    <text style="font-size: 8px; font-family: 'DejaVu Sans'; text-anchor: middle; fill: #ffffff" x="487.451981" y="440.672589" transform="rotate(-0 487.451981 440.672589)">1714.51</text>
+   </g>
+   <g id="cobalt-payload-text_127">
+    <text style="font-size: 8px; font-family: 'DejaVu Sans'; text-anchor: middle; fill: #ffffff" x="572.731587" y="440.672589" transform="rotate(-0 572.731587 440.672589)">1173.84</text>
+   </g>
+   <g id="cobalt-payload-text_128">
+    <text style="font-size: 8px; font-family: 'DejaVu Sans'; text-anchor: middle; fill: #ffffff" x="658.011194" y="440.672589" transform="rotate(-0 658.011194 440.672589)">1848.80</text>
+   </g>
+   <g id="cobalt-payload-text_129">
+    <text style="font-size: 8px; font-family: 'DejaVu Sans'; text-anchor: middle; fill: #ffffff" x="743.290801" y="440.672589" transform="rotate(-0 743.290801 440.672589)">1180.41</text>
+   </g>
+   <g id="cobalt-payload-text_130">
+    <text style="font-size: 8px; font-family: 'DejaVu Sans'; text-anchor: middle; fill: #ffffff" x="146.333553" y="466.793428" transform="rotate(-0 146.333553 466.793428)">1851.02</text>
+   </g>
+   <g id="cobalt-payload-text_131">
+    <text style="font-size: 8px; font-family: 'DejaVu Sans'; text-anchor: middle; fill: #ffffff" x="231.61316" y="466.793428" transform="rotate(-0 231.61316 466.793428)">1255.85</text>
+   </g>
+   <g id="cobalt-payload-text_132">
+    <text style="font-size: 8px; font-family: 'DejaVu Sans'; text-anchor: middle; fill: #ffffff" x="316.892767" y="466.793428" transform="rotate(-0 316.892767 466.793428)">1850.45</text>
+   </g>
+   <g id="cobalt-payload-text_133">
+    <text style="font-size: 8px; font-family: 'DejaVu Sans'; text-anchor: middle; fill: #ffffff" x="402.172374" y="466.793428" transform="rotate(-0 402.172374 466.793428)">1256.73</text>
+   </g>
+   <g id="cobalt-payload-text_134">
+    <text style="font-size: 8px; font-family: 'DejaVu Sans'; text-anchor: middle; fill: #ffffff" x="487.451981" y="466.793428" transform="rotate(-0 487.451981 466.793428)">1877.98</text>
+   </g>
+   <g id="cobalt-payload-text_135">
+    <text style="font-size: 8px; font-family: 'DejaVu Sans'; text-anchor: middle; fill: #ffffff" x="572.731587" y="466.793428" transform="rotate(-0 572.731587 466.793428)">1251.53</text>
+   </g>
+   <g id="cobalt-payload-text_136">
+    <text style="font-size: 8px; font-family: 'DejaVu Sans'; text-anchor: middle; fill: #ffffff" x="658.011194" y="466.793428" transform="rotate(-0 658.011194 466.793428)">2025.85</text>
+   </g>
+   <g id="cobalt-payload-text_137">
+    <text style="font-size: 8px; font-family: 'DejaVu Sans'; text-anchor: middle; fill: #ffffff" x="743.290801" y="466.793428" transform="rotate(-0 743.290801 466.793428)">1281.17</text>
+   </g>
+   <g id="cobalt-payload-text_138">
+    <text style="font-size: 8px; font-family: 'DejaVu Sans'; text-anchor: middle; fill: #ffffff" x="146.333553" y="492.914266" transform="rotate(-0 146.333553 492.914266)">1866.37</text>
+   </g>
+   <g id="cobalt-payload-text_139">
+    <text style="font-size: 8px; font-family: 'DejaVu Sans'; text-anchor: middle; fill: #ffffff" x="231.61316" y="492.914266" transform="rotate(-0 231.61316 492.914266)">1308.85</text>
+   </g>
+   <g id="cobalt-payload-text_140">
+    <text style="font-size: 8px; font-family: 'DejaVu Sans'; text-anchor: middle; fill: #ffffff" x="316.892767" y="492.914266" transform="rotate(-0 316.892767 492.914266)">1859.36</text>
+   </g>
+   <g id="cobalt-payload-text_141">
+    <text style="font-size: 8px; font-family: 'DejaVu Sans'; text-anchor: middle; fill: #ffffff" x="402.172374" y="492.914266" transform="rotate(-0 402.172374 492.914266)">1307.16</text>
+   </g>
+   <g id="cobalt-payload-text_142">
+    <text style="font-size: 8px; font-family: 'DejaVu Sans'; text-anchor: middle; fill: #ffffff" x="487.451981" y="492.914266" transform="rotate(-0 487.451981 492.914266)">1878.36</text>
+   </g>
+   <g id="cobalt-payload-text_143">
+    <text style="font-size: 8px; font-family: 'DejaVu Sans'; text-anchor: middle; fill: #ffffff" x="572.731587" y="492.914266" transform="rotate(-0 572.731587 492.914266)">1295.06</text>
+   </g>
+   <g id="cobalt-payload-text_144">
+    <text style="font-size: 8px; font-family: 'DejaVu Sans'; text-anchor: middle; fill: #ffffff" x="658.011194" y="492.914266" transform="rotate(-0 658.011194 492.914266)">2036.01</text>
+   </g>
+   <g id="cobalt-payload-text_145">
+    <text style="font-size: 8px; font-family: 'DejaVu Sans'; text-anchor: middle; fill: #ffffff" x="743.290801" y="492.914266" transform="rotate(-0 743.290801 492.914266)">1307.41</text>
+   </g>
+   <g id="cobalt-payload-text_146">
+    <text style="font-size: 8px; font-family: 'DejaVu Sans'; text-anchor: middle; fill: #ffffff" x="146.333553" y="519.035105" transform="rotate(-0 146.333553 519.035105)">1779.17</text>
+   </g>
+   <g id="cobalt-payload-text_147">
+    <text style="font-size: 8px; font-family: 'DejaVu Sans'; text-anchor: middle; fill: #ffffff" x="231.61316" y="519.035105" transform="rotate(-0 231.61316 519.035105)">1291.43</text>
+   </g>
+   <g id="cobalt-payload-text_148">
+    <text style="font-size: 8px; font-family: 'DejaVu Sans'; text-anchor: middle; fill: #ffffff" x="316.892767" y="519.035105" transform="rotate(-0 316.892767 519.035105)">1772.58</text>
+   </g>
+   <g id="cobalt-payload-text_149">
+    <text style="font-size: 8px; font-family: 'DejaVu Sans'; text-anchor: middle; fill: #ffffff" x="402.172374" y="519.035105" transform="rotate(-0 402.172374 519.035105)">1290.44</text>
+   </g>
+   <g id="cobalt-payload-text_150">
+    <text style="font-size: 8px; font-family: 'DejaVu Sans'; text-anchor: middle; fill: #ffffff" x="487.451981" y="519.035105" transform="rotate(-0 487.451981 519.035105)">1803.66</text>
+   </g>
+   <g id="cobalt-payload-text_151">
+    <text style="font-size: 8px; font-family: 'DejaVu Sans'; text-anchor: middle; fill: #ffffff" x="572.731587" y="519.035105" transform="rotate(-0 572.731587 519.035105)">1276.24</text>
+   </g>
+   <g id="cobalt-payload-text_152">
+    <text style="font-size: 8px; font-family: 'DejaVu Sans'; text-anchor: middle; fill: #ffffff" x="658.011194" y="519.035105" transform="rotate(-0 658.011194 519.035105)">1946.11</text>
+   </g>
+   <g id="cobalt-payload-text_153">
+    <text style="font-size: 8px; font-family: 'DejaVu Sans'; text-anchor: middle; fill: #ffffff" x="743.290801" y="519.035105" transform="rotate(-0 743.290801 519.035105)">1290.18</text>
+   </g>
+   <g id="cobalt-payload-text_154">
+    <text style="font-size: 8px; font-family: 'DejaVu Sans'; text-anchor: middle; fill: #ffffff" x="146.333553" y="545.155943" transform="rotate(-0 146.333553 545.155943)">1951.96</text>
+   </g>
+   <g id="cobalt-payload-text_155">
+    <text style="font-size: 8px; font-family: 'DejaVu Sans'; text-anchor: middle; fill: #ffffff" x="231.61316" y="545.155943" transform="rotate(-0 231.61316 545.155943)">1358.60</text>
+   </g>
+   <g id="cobalt-payload-text_156">
+    <text style="font-size: 8px; font-family: 'DejaVu Sans'; text-anchor: middle; fill: #ffffff" x="316.892767" y="545.155943" transform="rotate(-0 316.892767 545.155943)">1951.46</text>
+   </g>
+   <g id="cobalt-payload-text_157">
+    <text style="font-size: 8px; font-family: 'DejaVu Sans'; text-anchor: middle; fill: #ffffff" x="402.172374" y="545.155943" transform="rotate(-0 402.172374 545.155943)">1359.74</text>
+   </g>
+   <g id="cobalt-payload-text_158">
+    <text style="font-size: 8px; font-family: 'DejaVu Sans'; text-anchor: middle; fill: #ffffff" x="487.451981" y="545.155943" transform="rotate(-0 487.451981 545.155943)">1969.76</text>
+   </g>
+   <g id="cobalt-payload-text_159">
+    <text style="font-size: 8px; font-family: 'DejaVu Sans'; text-anchor: middle; fill: #ffffff" x="572.731587" y="545.155943" transform="rotate(-0 572.731587 545.155943)">1346.83</text>
+   </g>
+   <g id="cobalt-payload-text_160">
+    <text style="font-size: 8px; font-family: 'DejaVu Sans'; text-anchor: middle; fill: #ffffff" x="658.011194" y="545.155943" transform="rotate(-0 658.011194 545.155943)">2125.34</text>
+   </g>
+   <g id="cobalt-payload-text_161">
+    <text style="font-size: 8px; font-family: 'DejaVu Sans'; text-anchor: middle; fill: #ffffff" x="743.290801" y="545.155943" transform="rotate(-0 743.290801 545.155943)">1383.80</text>
+   </g>
+  </g>
+  <g id="cobalt-payload-axes_2">
+   <g id="cobalt-payload-patch_7">
+    <path d="M 800.218287 512.707146 
+L 818.077891 512.707146 
+L 818.077891 155.515076 
+L 800.218287 155.515076 
+z
+" style="fill: #ffffff"/>
+   </g>
+   <image xlink:href="data:image/png;base64,
+iVBORw0KGgoAAAANSUhEUgAAABkAAAHwCAYAAABT1cSdAAAC00lEQVR4nO2b0a0rQQhDDZpWXv9lvSoGbgvhw6OVsRs4cmxgN1Hi/v/XICvxQKdQ0HByW8VJgV4uuF0jnds6mTQfcoUq3DILsmUygUomUMnk8o3A7RrpXAREMmmdiQ86JOkESDmpVnFyZTK5DzhJJ8DtGurclgkeKk6uzlpplUxKJxOoZHKF2pUymQQdknQCpOakZObkymRyZeakhDJJOiRlnlaOzsd1ZSpcMmvlCmWSdEjSCZB6MS1nMpAz2XoZS2bir04mLZMJnMnG17kj9PbbOk6SDkk6AWKPqUGHJJ0AqXaVTLuu2zWQJ37rnJTnZCBnMpLnZO8wBh2SdAK0nEDGSdvJ73ImW9vVMk7Ku2sgt2skT/xIvicjnQd/loXOFj5CR6tVnLRMhVsok6BDkk6A52Qot2vrnPQDSD5gQCgT+DIO5KeVvXMSfEjLDCNknLRQhUFX8hFwJp9sFzwnv8sT/73zm3QCfOPXPtzlEychc+Mh5CReQEBX8hGwk60VTjoBXpBfzCRlIEfp/AYdknQCfE+G8pyM5OeukdyukfzqsPf8gq7kI+BMZnK7lk58ykCOd9dEzmQkt2skt2vpPTkvtvDxqt8ZfPIRUHISMk4g4yRknMBOvtcu8JUPGBBqV8g4gZ0M5HZ98NUhXOGBXOGRvCBHcru2tise/OUs6QSIZQK6ko+AM5nJmYzkOVm6uw5kjlZ41X8vk+JDko+Az+83M2k6JOkEeHcN5UxG8pyM5Huy9rmrVO4J/KvDQF6QSyucfASkvhcuPiT5CEhl0nxI8hHwFp7Jmez9KqrpkKQTILW7QiiTfgApOgMOfu9aaTok6QR4ToZyu9bOScs4KT4k+Qj4kWgmf8O9duLbTpb+SFN0SNIJ0KpwyThpO/ldzmSkg/Lu+l1u19Yt3Do3vlQygc5lLJl2tUom/SCTo/NxQWitlEyFmw5JOgHOZChngon+AMYzhIG+5JsWAAAAAElFTkSuQmCC" id="cobalt-payload-image8e20b2227a" transform="scale(1 -1) translate(0 -357.12)" x="799.92" y="-155.52" width="18" height="357.12"/>
+   <g id="cobalt-payload-matplotlib.axis_3"/>
+   <g id="cobalt-payload-matplotlib.axis_4">
+    <g id="cobalt-payload-ytick_18">
+     <g id="cobalt-payload-line2d_26">
+      <defs>
+       <path id="cobalt-payload-m13ce6971ca" d="M 0 0 
+L 3.5 0 
+" style="stroke: #000000; stroke-width: 0.8"/>
+      </defs>
+      <g>
+       <use xlink:href="#cobalt-payload-m13ce6971ca" x="818.077891" y="512.707146" style="stroke: #000000; stroke-width: 0.8"/>
+      </g>
+     </g>
+     <g id="cobalt-payload-text_162">
+      <!-- $\mathdefault{10^{0}}$ -->
+      <g transform="translate(825.077891 516.937146)">
+       <text>
+        <tspan x="0" y="-0.60175" style="font-size: 9px; font-family: 'DejaVu Sans'">1</tspan>
+        <tspan x="5.726074" y="-0.60175" style="font-size: 9px; font-family: 'DejaVu Sans'">0</tspan>
+        <tspan x="11.538281" y="-4.31875" style="font-size: 6.3px; font-family: 'DejaVu Sans'">0</tspan>
+       </text>
+      </g>
+     </g>
+    </g>
+    <g id="cobalt-payload-ytick_19">
+     <g id="cobalt-payload-line2d_27">
+      <g>
+       <use xlink:href="#cobalt-payload-m13ce6971ca" x="818.077891" y="405.359341" style="stroke: #000000; stroke-width: 0.8"/>
+      </g>
+     </g>
+     <g id="cobalt-payload-text_163">
+      <!-- $\mathdefault{10^{1}}$ -->
+      <g transform="translate(825.077891 409.544341)">
+       <text>
+        <tspan x="0" y="-0.68925" style="font-size: 9px; font-family: 'DejaVu Sans'">1</tspan>
+        <tspan x="5.726074" y="-0.68925" style="font-size: 9px; font-family: 'DejaVu Sans'">0</tspan>
+        <tspan x="11.538281" y="-4.40625" style="font-size: 6.3px; font-family: 'DejaVu Sans'">1</tspan>
+       </text>
+      </g>
+     </g>
+    </g>
+    <g id="cobalt-payload-ytick_20">
+     <g id="cobalt-payload-line2d_28">
+      <g>
+       <use xlink:href="#cobalt-payload-m13ce6971ca" x="818.077891" y="298.011535" style="stroke: #000000; stroke-width: 0.8"/>
+      </g>
+     </g>
+     <g id="cobalt-payload-text_164">
+      <!-- $\mathdefault{10^{2}}$ -->
+      <g transform="translate(825.077891 302.241535)">
+       <text>
+        <tspan x="0" y="-0.60175" style="font-size: 9px; font-family: 'DejaVu Sans'">1</tspan>
+        <tspan x="5.726074" y="-0.60175" style="font-size: 9px; font-family: 'DejaVu Sans'">0</tspan>
+        <tspan x="11.538281" y="-4.31875" style="font-size: 6.3px; font-family: 'DejaVu Sans'">2</tspan>
+       </text>
+      </g>
+     </g>
+    </g>
+    <g id="cobalt-payload-ytick_21">
+     <g id="cobalt-payload-line2d_29">
+      <g>
+       <use xlink:href="#cobalt-payload-m13ce6971ca" x="818.077891" y="190.66373" style="stroke: #000000; stroke-width: 0.8"/>
+      </g>
+     </g>
+     <g id="cobalt-payload-text_165">
+      <!-- $\mathdefault{10^{3}}$ -->
+      <g transform="translate(825.077891 194.89373)">
+       <text>
+        <tspan x="0" y="-0.60175" style="font-size: 9px; font-family: 'DejaVu Sans'">1</tspan>
+        <tspan x="5.726074" y="-0.60175" style="font-size: 9px; font-family: 'DejaVu Sans'">0</tspan>
+        <tspan x="11.538281" y="-4.31875" style="font-size: 6.3px; font-family: 'DejaVu Sans'">3</tspan>
+       </text>
+      </g>
+     </g>
+    </g>
+    <g id="cobalt-payload-ytick_22">
+     <g id="cobalt-payload-line2d_30">
+      <defs>
+       <path id="cobalt-payload-m3a7ad26a09" d="M 0 0 
+L 2 0 
+" style="stroke: #000000; stroke-width: 0.6"/>
+      </defs>
+      <g>
+       <use xlink:href="#cobalt-payload-m3a7ad26a09" x="818.077891" y="480.392237" style="stroke: #000000; stroke-width: 0.6"/>
+      </g>
+     </g>
+    </g>
+    <g id="cobalt-payload-ytick_23">
+     <g id="cobalt-payload-line2d_31">
+      <g>
+       <use xlink:href="#cobalt-payload-m3a7ad26a09" x="818.077891" y="461.489226" style="stroke: #000000; stroke-width: 0.6"/>
+      </g>
+     </g>
+    </g>
+    <g id="cobalt-payload-ytick_24">
+     <g id="cobalt-payload-line2d_32">
+      <g>
+       <use xlink:href="#cobalt-payload-m3a7ad26a09" x="818.077891" y="448.077327" style="stroke: #000000; stroke-width: 0.6"/>
+      </g>
+     </g>
+    </g>
+    <g id="cobalt-payload-ytick_25">
+     <g id="cobalt-payload-line2d_33">
+      <g>
+       <use xlink:href="#cobalt-payload-m3a7ad26a09" x="818.077891" y="437.67425" style="stroke: #000000; stroke-width: 0.6"/>
+      </g>
+     </g>
+    </g>
+    <g id="cobalt-payload-ytick_26">
+     <g id="cobalt-payload-line2d_34">
+      <g>
+       <use xlink:href="#cobalt-payload-m3a7ad26a09" x="818.077891" y="429.174317" style="stroke: #000000; stroke-width: 0.6"/>
+      </g>
+     </g>
+    </g>
+    <g id="cobalt-payload-ytick_27">
+     <g id="cobalt-payload-line2d_35">
+      <g>
+       <use xlink:href="#cobalt-payload-m3a7ad26a09" x="818.077891" y="421.987726" style="stroke: #000000; stroke-width: 0.6"/>
+      </g>
+     </g>
+    </g>
+    <g id="cobalt-payload-ytick_28">
+     <g id="cobalt-payload-line2d_36">
+      <g>
+       <use xlink:href="#cobalt-payload-m3a7ad26a09" x="818.077891" y="415.762418" style="stroke: #000000; stroke-width: 0.6"/>
+      </g>
+     </g>
+    </g>
+    <g id="cobalt-payload-ytick_29">
+     <g id="cobalt-payload-line2d_37">
+      <g>
+       <use xlink:href="#cobalt-payload-m3a7ad26a09" x="818.077891" y="410.271307" style="stroke: #000000; stroke-width: 0.6"/>
+      </g>
+     </g>
+    </g>
+    <g id="cobalt-payload-ytick_30">
+     <g id="cobalt-payload-line2d_38">
+      <g>
+       <use xlink:href="#cobalt-payload-m3a7ad26a09" x="818.077891" y="373.044431" style="stroke: #000000; stroke-width: 0.6"/>
+      </g>
+     </g>
+    </g>
+    <g id="cobalt-payload-ytick_31">
+     <g id="cobalt-payload-line2d_39">
+      <g>
+       <use xlink:href="#cobalt-payload-m3a7ad26a09" x="818.077891" y="354.141421" style="stroke: #000000; stroke-width: 0.6"/>
+      </g>
+     </g>
+    </g>
+    <g id="cobalt-payload-ytick_32">
+     <g id="cobalt-payload-line2d_40">
+      <g>
+       <use xlink:href="#cobalt-payload-m3a7ad26a09" x="818.077891" y="340.729522" style="stroke: #000000; stroke-width: 0.6"/>
+      </g>
+     </g>
+    </g>
+    <g id="cobalt-payload-ytick_33">
+     <g id="cobalt-payload-line2d_41">
+      <g>
+       <use xlink:href="#cobalt-payload-m3a7ad26a09" x="818.077891" y="330.326445" style="stroke: #000000; stroke-width: 0.6"/>
+      </g>
+     </g>
+    </g>
+    <g id="cobalt-payload-ytick_34">
+     <g id="cobalt-payload-line2d_42">
+      <g>
+       <use xlink:href="#cobalt-payload-m3a7ad26a09" x="818.077891" y="321.826512" style="stroke: #000000; stroke-width: 0.6"/>
+      </g>
+     </g>
+    </g>
+    <g id="cobalt-payload-ytick_35">
+     <g id="cobalt-payload-line2d_43">
+      <g>
+       <use xlink:href="#cobalt-payload-m3a7ad26a09" x="818.077891" y="314.639921" style="stroke: #000000; stroke-width: 0.6"/>
+      </g>
+     </g>
+    </g>
+    <g id="cobalt-payload-ytick_36">
+     <g id="cobalt-payload-line2d_44">
+      <g>
+       <use xlink:href="#cobalt-payload-m3a7ad26a09" x="818.077891" y="308.414612" style="stroke: #000000; stroke-width: 0.6"/>
+      </g>
+     </g>
+    </g>
+    <g id="cobalt-payload-ytick_37">
+     <g id="cobalt-payload-line2d_45">
+      <g>
+       <use xlink:href="#cobalt-payload-m3a7ad26a09" x="818.077891" y="302.923501" style="stroke: #000000; stroke-width: 0.6"/>
+      </g>
+     </g>
+    </g>
+    <g id="cobalt-payload-ytick_38">
+     <g id="cobalt-payload-line2d_46">
+      <g>
+       <use xlink:href="#cobalt-payload-m3a7ad26a09" x="818.077891" y="265.696626" style="stroke: #000000; stroke-width: 0.6"/>
+      </g>
+     </g>
+    </g>
+    <g id="cobalt-payload-ytick_39">
+     <g id="cobalt-payload-line2d_47">
+      <g>
+       <use xlink:href="#cobalt-payload-m3a7ad26a09" x="818.077891" y="246.793616" style="stroke: #000000; stroke-width: 0.6"/>
+      </g>
+     </g>
+    </g>
+    <g id="cobalt-payload-ytick_40">
+     <g id="cobalt-payload-line2d_48">
+      <g>
+       <use xlink:href="#cobalt-payload-m3a7ad26a09" x="818.077891" y="233.381716" style="stroke: #000000; stroke-width: 0.6"/>
+      </g>
+     </g>
+    </g>
+    <g id="cobalt-payload-ytick_41">
+     <g id="cobalt-payload-line2d_49">
+      <g>
+       <use xlink:href="#cobalt-payload-m3a7ad26a09" x="818.077891" y="222.978639" style="stroke: #000000; stroke-width: 0.6"/>
+      </g>
+     </g>
+    </g>
+    <g id="cobalt-payload-ytick_42">
+     <g id="cobalt-payload-line2d_50">
+      <g>
+       <use xlink:href="#cobalt-payload-m3a7ad26a09" x="818.077891" y="214.478706" style="stroke: #000000; stroke-width: 0.6"/>
+      </g>
+     </g>
+    </g>
+    <g id="cobalt-payload-ytick_43">
+     <g id="cobalt-payload-line2d_51">
+      <g>
+       <use xlink:href="#cobalt-payload-m3a7ad26a09" x="818.077891" y="207.292115" style="stroke: #000000; stroke-width: 0.6"/>
+      </g>
+     </g>
+    </g>
+    <g id="cobalt-payload-ytick_44">
+     <g id="cobalt-payload-line2d_52">
+      <g>
+       <use xlink:href="#cobalt-payload-m3a7ad26a09" x="818.077891" y="201.066807" style="stroke: #000000; stroke-width: 0.6"/>
+      </g>
+     </g>
+    </g>
+    <g id="cobalt-payload-ytick_45">
+     <g id="cobalt-payload-line2d_53">
+      <g>
+       <use xlink:href="#cobalt-payload-m3a7ad26a09" x="818.077891" y="195.575696" style="stroke: #000000; stroke-width: 0.6"/>
+      </g>
+     </g>
+    </g>
+    <g id="cobalt-payload-ytick_46">
+     <g id="cobalt-payload-line2d_54">
+      <g>
+       <use xlink:href="#cobalt-payload-m3a7ad26a09" x="818.077891" y="158.34882" style="stroke: #000000; stroke-width: 0.6"/>
+      </g>
+     </g>
+    </g>
+    <g id="cobalt-payload-text_166">
+     <text style="font-size: 9px; font-family: 'DejaVu Sans'; text-anchor: middle" x="851.756484" y="334.111111" transform="rotate(-90 851.756484 334.111111)">KiB</text>
+    </g>
+   </g>
+   <g id="cobalt-payload-LineCollection_1"/>
+   <g id="cobalt-payload-patch_8">
+    <path d="M 800.218287 512.707146 
+L 809.148089 512.707146 
+L 818.077891 512.707146 
+L 818.077891 155.515076 
+L 809.148089 155.515076 
+L 800.218287 155.515076 
+L 800.218287 512.707146 
+z
+" style="fill: none; stroke: #000000; stroke-width: 0.8; stroke-linejoin: miter; stroke-linecap: square"/>
+   </g>
+  </g>
+  <g id="cobalt-payload-text_167">
+   <text style="font-size: 17px; font-family: 'DejaVu Sans'; text-anchor: start" x="25.92" y="25.877344" transform="rotate(-0 25.92 25.877344)">Cobalt workload payload</text>
+  </g>
+  <g id="cobalt-payload-text_168">
+   <text style="font-size: 9px; font-family: 'DejaVu Sans'; text-anchor: start" x="25.92" y="45.718594" transform="rotate(-0 25.92 45.718594)">Release, uninstrumented. Native executable; WASI component; Emscripten JavaScript + Wasm. Raw KiB.</text>
+  </g>
+ </g>
+ <defs>
+  <clipPath id="cobalt-payload-p869daf301a">
+   <rect x="103.69375" y="112.083984" width="682.236854" height="444.054253"/>
+  </clipPath>
+ </defs>
+</svg>
