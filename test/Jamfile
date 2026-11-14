@@ -37,10 +37,6 @@ project : requirements <conditional>@native-upstream-diagnostic ;
 webcpp.targets native wasip2 wasip3 emscripten ;
 
 webcpp.run canonical_entry : entry_test.cpp : <library>/webcpp/cobalt//cobalt ;
-webcpp.run legacy_entry : entry_test.cpp : <library>/webcpp/asio//cobalt
-  <include>../include ;
-webcpp.run mixed_entry : entry_test.cpp : <library>/webcpp/asio//cobalt
-  <library>/webcpp/cobalt//cobalt ;
 webcpp.run custom_main : custom_main_test.cpp : <library>/webcpp/cobalt//core ;
 
 webcpp.original node : . ;

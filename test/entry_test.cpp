@@ -20,6 +20,6 @@ webcpp::cobalt::main co_main([[maybe_unused]] int argc, [[maybe_unused]] char** 
     const auto [error] =
         co_await webcpp::cobalt::as_tuple(timer.async_wait(webcpp::cobalt::use_op));
     BOOST_TEST(!error);
-    std::puts("cobalt: canonical and compatibility entry points agree");
+    std::puts("cobalt: the runner enters co_main");
     co_return webcpp::test::exit_status(boost::report_errors());
 }

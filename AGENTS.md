@@ -12,8 +12,9 @@ commit `8b1cecba91d0e868ee0947b40fb04e3594680297`.
   Native identity, full compiled-core/runner selection and unpacked-source
   direct/CMake consumers have separate regression witnesses. Keep all of them:
   a header-only identity witness does not establish source-distribution support.
-- Cobalt depends on Asio. Asio's core must never depend on Cobalt. The old Asio
-  and root Cobalt target names are compatibility aliases to this library.
+- Cobalt depends on Asio. Asio's core must never depend on Cobalt. Cobalt's
+  targets have one name each, under `/webcpp/cobalt`: neither Asio nor the
+  superproject's root declares an alias to them.
 - Preserve correction provenance and regression witnesses while moving existing
   Wasm corrections into shipped sources. The former overlays are historical
   migration evidence, not a consumer build path. Native builds must not silently
