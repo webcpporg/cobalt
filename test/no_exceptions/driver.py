@@ -37,12 +37,19 @@ for case in cases:
     if expected_abort:
         assert result.returncode != 0, result.stdout + result.stderr
         assert 'after move\n' not in result.stderr, result.stderr
-        # Emscripten's release libc++ omits the native verbose-abort text.
-        # The direct exception-ptr control identifies the same runtime path.
-        diagnostic = ('RuntimeError: Aborted(native code called abort())' if
-                      program.endswith('.js') else
-                      'make_exception_ptr was called in -fno-exceptions mode')
-        assert diagnostic in result.stderr, result.stderr
+        if program.endswith('.js'):
+            # Emscripten's abort prints the line Aborted(<reason>) before it
+            # throws. A link with ASSERTIONS (debug, at -O0) gives native
+            # code's abort() its reason; a link without them (release, at
+            # -O3) gives it none, and omits libc++'s verbose-abort text. No
+            # other abort of Emscripten's runtime has an empty reason, and a
+            # trap, or an abort for another reason, prints another line.
+            native_abort = {'Aborted(native code called abort())', 'Aborted()'}
+            assert native_abort & set(result.stderr.splitlines()), result.stderr
+        else:
+            # The direct exception-ptr control identifies the same runtime path.
+            assert ('make_exception_ptr was called in -fno-exceptions mode'
+                    in result.stderr), result.stderr
         verdict = 'known-libc++-abort'
     else:
         assert result.returncode == 0, result.stdout + result.stderr
