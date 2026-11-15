@@ -49,7 +49,7 @@ struct BOOST_SYMBOL_VISIBLE datagram_socket final : socket
 
 
 #if defined(WEBCPP_ASIO_BACKEND_HAS_LOCAL_SOCKETS)
-inline ::boost::system::result<std::pair<datagram_socket, datagram_socket>> make_pair(decltype(local_datagram) protocol)
+[[nodiscard]] inline ::boost::system::result<std::pair<datagram_socket, datagram_socket>> make_pair(decltype(local_datagram) protocol)
 {
   std::pair<datagram_socket, datagram_socket> res;
   auto c = connect_pair(protocol, res.first, res.second);

@@ -23,4 +23,5 @@ Changes prepared for WebCPP's independent Cobalt integration.
 * Fixed SSL transfer cancellation and socket ownership after moving streams.
 * Fixed the shipped Wasm IPv6 UDP protocol constant; native Boost behavior remains documented.
 * Added target configuration, application matrices and Release performance and memory documentation.
+* Changed the shipped Wasm and native SSL functions returning `boost::system::result` to `+[[nodiscard]]+`.
 // end::unreleased[]

@@ -180,7 +180,7 @@ struct thread_awaitable
       std::rethrow_exception(ee);
   }
 
-  ::boost::system::result<void, std::exception_ptr> await_resume(const as_result_tag &)
+  [[nodiscard]] ::boost::system::result<void, std::exception_ptr> await_resume(const as_result_tag &)
   {
     if (cl.is_connected())
       cl.clear();

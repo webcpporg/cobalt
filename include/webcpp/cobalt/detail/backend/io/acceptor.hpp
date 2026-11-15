@@ -27,8 +27,8 @@ struct BOOST_SYMBOL_VISIBLE acceptor
 
   WEBCPP_COBALT_BACKEND_IO_DECL acceptor(const ::webcpp::cobalt::executor & executor = this_thread::get_executor());
   WEBCPP_COBALT_BACKEND_IO_DECL acceptor(endpoint ep, const ::webcpp::cobalt::executor & executor = this_thread::get_executor());
-  WEBCPP_COBALT_BACKEND_IO_DECL ::boost::system::result<void> bind(endpoint ep);
-  WEBCPP_COBALT_BACKEND_IO_DECL ::boost::system::result<void> listen(int backlog = max_listen_connections); // int backlog = net::max_backlog()
+  [[nodiscard]] WEBCPP_COBALT_BACKEND_IO_DECL ::boost::system::result<void> bind(endpoint ep);
+  [[nodiscard]] WEBCPP_COBALT_BACKEND_IO_DECL ::boost::system::result<void> listen(int backlog = max_listen_connections); // int backlog = net::max_backlog()
   WEBCPP_COBALT_BACKEND_IO_DECL endpoint local_endpoint();
  private:
   struct WEBCPP_COBALT_BACKEND_IO_DECL accept_op final : op<::boost::system::error_code>

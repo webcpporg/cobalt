@@ -102,24 +102,24 @@ struct BOOST_SYMBOL_VISIBLE file
 #else
   using native_handle_type = ::webcpp::asio_backend::basic_file<executor>::native_handle_type;
 #endif
-  WEBCPP_COBALT_BACKEND_IO_DECL ::boost::system::result<void> assign(const native_handle_type & native_file);
-  WEBCPP_COBALT_BACKEND_IO_DECL ::boost::system::result<void> cancel();
+  [[nodiscard]] WEBCPP_COBALT_BACKEND_IO_DECL ::boost::system::result<void> assign(const native_handle_type & native_file);
+  [[nodiscard]] WEBCPP_COBALT_BACKEND_IO_DECL ::boost::system::result<void> cancel();
 
   WEBCPP_COBALT_BACKEND_IO_DECL executor get_executor();
   WEBCPP_COBALT_BACKEND_IO_DECL bool is_open() const;
 
-  WEBCPP_COBALT_BACKEND_IO_DECL ::boost::system::result<void> close();
+  [[nodiscard]] WEBCPP_COBALT_BACKEND_IO_DECL ::boost::system::result<void> close();
   WEBCPP_COBALT_BACKEND_IO_DECL native_handle_type native_handle();
 
-  WEBCPP_COBALT_BACKEND_IO_DECL ::boost::system::result<void> open(const char * path,        flags open_flags);
-  WEBCPP_COBALT_BACKEND_IO_DECL ::boost::system::result<void> open(const std::string & path, flags open_flags);
+  [[nodiscard]] WEBCPP_COBALT_BACKEND_IO_DECL ::boost::system::result<void> open(const char * path,        flags open_flags);
+  [[nodiscard]] WEBCPP_COBALT_BACKEND_IO_DECL ::boost::system::result<void> open(const std::string & path, flags open_flags);
 
-  WEBCPP_COBALT_BACKEND_IO_DECL ::boost::system::result<native_handle_type> release();
-  WEBCPP_COBALT_BACKEND_IO_DECL ::boost::system::result<void> resize(std::uint64_t n);
+  [[nodiscard]] WEBCPP_COBALT_BACKEND_IO_DECL ::boost::system::result<native_handle_type> release();
+  [[nodiscard]] WEBCPP_COBALT_BACKEND_IO_DECL ::boost::system::result<void> resize(std::uint64_t n);
 
-  WEBCPP_COBALT_BACKEND_IO_DECL ::boost::system::result<std::uint64_t> size() const;
-  WEBCPP_COBALT_BACKEND_IO_DECL ::boost::system::result<void> sync_all();
-  WEBCPP_COBALT_BACKEND_IO_DECL ::boost::system::result<void> sync_data();
+  [[nodiscard]] WEBCPP_COBALT_BACKEND_IO_DECL ::boost::system::result<std::uint64_t> size() const;
+  [[nodiscard]] WEBCPP_COBALT_BACKEND_IO_DECL ::boost::system::result<void> sync_all();
+  [[nodiscard]] WEBCPP_COBALT_BACKEND_IO_DECL ::boost::system::result<void> sync_data();
 
 #if defined(WEBCPP_ASIO_BACKEND_HAS_FILE)
   file(::webcpp::asio_backend::basic_file<executor> & file) : file_(file) {}

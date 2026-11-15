@@ -52,7 +52,7 @@ struct BOOST_SYMBOL_VISIBLE stream_socket final : socket, stream
 
 
 #if defined(WEBCPP_ASIO_BACKEND_HAS_LOCAL_SOCKETS)
-inline ::boost::system::result<std::pair<stream_socket, stream_socket>> make_pair(decltype(local_stream) protocol)
+[[nodiscard]] inline ::boost::system::result<std::pair<stream_socket, stream_socket>> make_pair(decltype(local_stream) protocol)
 {
   std::pair<stream_socket, stream_socket> res;
   auto c = connect_pair(protocol, res.first, res.second);

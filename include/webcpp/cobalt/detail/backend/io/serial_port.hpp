@@ -29,8 +29,8 @@ namespace webcpp::cobalt::io
 
 struct BOOST_SYMBOL_VISIBLE serial_port final : stream
 {
-  WEBCPP_COBALT_BACKEND_IO_DECL ::boost::system::result<void> close();
-  WEBCPP_COBALT_BACKEND_IO_DECL ::boost::system::result<void> cancel();
+  [[nodiscard]] WEBCPP_COBALT_BACKEND_IO_DECL ::boost::system::result<void> close();
+  [[nodiscard]] WEBCPP_COBALT_BACKEND_IO_DECL ::boost::system::result<void> cancel();
   WEBCPP_COBALT_BACKEND_IO_DECL bool is_open() const;
 
   [[nodiscard]] WEBCPP_COBALT_BACKEND_IO_DECL ::boost::system::result<void> send_break();

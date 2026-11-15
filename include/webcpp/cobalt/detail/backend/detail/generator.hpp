@@ -266,7 +266,7 @@ struct generator_receiver : generator_receiver_base<Yield, Push>
           return {nullptr, res.value()};
     }
 
-    ::boost::system::result<Yield, std::exception_ptr> await_resume(const as_result_tag& )
+    [[nodiscard]] ::boost::system::result<Yield, std::exception_ptr> await_resume(const as_result_tag& )
     {
       if (cl.is_connected())
         cl.clear();

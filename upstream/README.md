@@ -48,4 +48,8 @@ python3 upstream/sync.py --boost-include /path/to/boost/include --boost-source /
 Do not edit generated files. Original copyright and Boost Software License
 notices remain in every derived implementation. The generator also annotates
 two unused protocol tag parameters and scopes the Clang Wasm entry-point
-diagnostic; these changes do not alter their API or runtime behavior.
+diagnostic; these changes do not alter their API or runtime behavior. It
+declares `[[nodiscard]]` every function of the shipped headers that returns
+`boost::system::result`, which has no `[[nodiscard]]` of its own, so that a
+dropped result is diagnosed rather than passing as a success; a friend
+declaration cannot carry the attribute and keeps the first declaration's.

@@ -26,7 +26,7 @@ namespace webcpp::cobalt::io
 {
 
 
-WEBCPP_COBALT_BACKEND_IO_DECL
+[[nodiscard]] WEBCPP_COBALT_BACKEND_IO_DECL
 ::boost::system::result<std::pair<struct readable_pipe, struct writable_pipe>> pipe(
     const executor & executor = this_thread::get_executor()
     );
@@ -40,16 +40,16 @@ struct BOOST_SYMBOL_VISIBLE readable_pipe final : read_stream
   WEBCPP_COBALT_BACKEND_IO_DECL readable_pipe(native_handle_type native_file, const ::webcpp::cobalt::executor & executor = this_thread::get_executor());
   WEBCPP_COBALT_BACKEND_IO_DECL readable_pipe(readable_pipe && sf) noexcept;
 
-  WEBCPP_COBALT_BACKEND_IO_DECL ::boost::system::result<void> assign(native_handle_type native_file);
-  WEBCPP_COBALT_BACKEND_IO_DECL ::boost::system::result<void> cancel();
+  [[nodiscard]] WEBCPP_COBALT_BACKEND_IO_DECL ::boost::system::result<void> assign(native_handle_type native_file);
+  [[nodiscard]] WEBCPP_COBALT_BACKEND_IO_DECL ::boost::system::result<void> cancel();
 
   WEBCPP_COBALT_BACKEND_IO_DECL executor get_executor();
   WEBCPP_COBALT_BACKEND_IO_DECL bool is_open() const;
 
-  WEBCPP_COBALT_BACKEND_IO_DECL ::boost::system::result<void> close();
+  [[nodiscard]] WEBCPP_COBALT_BACKEND_IO_DECL ::boost::system::result<void> close();
 
   WEBCPP_COBALT_BACKEND_IO_DECL native_handle_type native_handle();
-  WEBCPP_COBALT_BACKEND_IO_DECL ::boost::system::result<native_handle_type> release();
+  [[nodiscard]] WEBCPP_COBALT_BACKEND_IO_DECL ::boost::system::result<native_handle_type> release();
 
   [[nodiscard]] WEBCPP_COBALT_BACKEND_MSVC_NOINLINE read_op read_some(mutable_buffer_sequence buffer)
   {
@@ -75,8 +75,8 @@ struct BOOST_SYMBOL_VISIBLE writable_pipe final : write_stream
   WEBCPP_COBALT_BACKEND_IO_DECL writable_pipe(native_handle_type native_file, const ::webcpp::cobalt::executor & executor = this_thread::get_executor());
   WEBCPP_COBALT_BACKEND_IO_DECL writable_pipe(writable_pipe && sf) noexcept;
 
-  WEBCPP_COBALT_BACKEND_IO_DECL ::boost::system::result<void> assign(native_handle_type native_file);
-  WEBCPP_COBALT_BACKEND_IO_DECL ::boost::system::result<void> cancel();
+  [[nodiscard]] WEBCPP_COBALT_BACKEND_IO_DECL ::boost::system::result<void> assign(native_handle_type native_file);
+  [[nodiscard]] WEBCPP_COBALT_BACKEND_IO_DECL ::boost::system::result<void> cancel();
 
   WEBCPP_COBALT_BACKEND_IO_DECL executor get_executor();
   WEBCPP_COBALT_BACKEND_IO_DECL bool is_open() const;
@@ -86,11 +86,11 @@ struct BOOST_SYMBOL_VISIBLE writable_pipe final : write_stream
     return {buffer, this, initiate_write_some_};
   }
 
-  WEBCPP_COBALT_BACKEND_IO_DECL ::boost::system::result<void> close();
+  [[nodiscard]] WEBCPP_COBALT_BACKEND_IO_DECL ::boost::system::result<void> close();
 
   WEBCPP_COBALT_BACKEND_IO_DECL native_handle_type native_handle();
 
-  WEBCPP_COBALT_BACKEND_IO_DECL ::boost::system::result<native_handle_type> release();
+  [[nodiscard]] WEBCPP_COBALT_BACKEND_IO_DECL ::boost::system::result<native_handle_type> release();
 
  private:
   WEBCPP_COBALT_BACKEND_IO_DECL static void initiate_write_some_(void *, const_buffer_sequence, webcpp::cobalt::completion_handler<::boost::system::error_code, std::size_t>);

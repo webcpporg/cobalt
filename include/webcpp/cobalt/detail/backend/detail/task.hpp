@@ -46,7 +46,7 @@ struct task_value_holder
   std::optional<T> result;
   bool result_taken = false;
 
-  ::boost::system::result<T, std::exception_ptr> get_result_value()
+  [[nodiscard]] ::boost::system::result<T, std::exception_ptr> get_result_value()
   {
     result_taken = true;
     BOOST_ASSERT(result);
@@ -72,7 +72,7 @@ template<>
 struct task_value_holder<void>
 {
   bool result_taken = false;
-  ::boost::system::result<void, std::exception_ptr> get_result_value()
+  [[nodiscard]] ::boost::system::result<void, std::exception_ptr> get_result_value()
   {
     result_taken = true;
     return {::boost::system::in_place_value};
@@ -92,7 +92,7 @@ template<typename T>
 struct task_receiver : task_value_holder<T>
 {
   std::exception_ptr exception;
-  ::boost::system::result<T, std::exception_ptr> get_result()
+  [[nodiscard]] ::boost::system::result<T, std::exception_ptr> get_result()
   {
     if (exception && !done) // detached error
       return {::boost::system::in_place_error, std::exchange(exception, nullptr)};
@@ -204,7 +204,7 @@ struct task_receiver : task_value_holder<T>
       return self->get_result().value(loc);
     }
 
-    ::boost::system::result<T, std::exception_ptr> await_resume(const as_result_tag &)
+    [[nodiscard]] ::boost::system::result<T, std::exception_ptr> await_resume(const as_result_tag &)
     {
       if (cl.is_connected())
         cl.clear();

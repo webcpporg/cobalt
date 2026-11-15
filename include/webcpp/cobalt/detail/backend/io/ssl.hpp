@@ -81,7 +81,7 @@ struct BOOST_SYMBOL_VISIBLE stream final : private detail::stream_impl, socket, 
 
   template<typename VerifyCallback>
     requires requires (VerifyCallback & cb, ::webcpp::asio_backend::ssl::verify_context & ctx) {{cb(true, ctx)} -> std::same_as<bool>;}
-  ::boost::system::result<void> set_verify_callback(VerifyCallback vc)
+  [[nodiscard]] ::boost::system::result<void> set_verify_callback(VerifyCallback vc)
   {
     ::boost::system::error_code ec;
     stream_socket_.set_verify_callback(std::move(vc), ec);
@@ -89,11 +89,11 @@ struct BOOST_SYMBOL_VISIBLE stream final : private detail::stream_impl, socket, 
   }
 
   WEBCPP_COBALT_BACKEND_SSL_DECL
-  ::boost::system::result<void> set_verify_depth(int depth);
+  [[nodiscard]] ::boost::system::result<void> set_verify_depth(int depth);
 
 
   WEBCPP_COBALT_BACKEND_SSL_DECL
-  ::boost::system::result<void> set_verify_mode(verify depth);
+  [[nodiscard]] ::boost::system::result<void> set_verify_mode(verify depth);
 
  private:
 

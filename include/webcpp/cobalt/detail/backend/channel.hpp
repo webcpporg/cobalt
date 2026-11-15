@@ -105,7 +105,7 @@ struct channel
     std::coroutine_handle<void> await_suspend(std::coroutine_handle<Promise> h);
     T await_resume();
     std::tuple<::boost::system::error_code, T> await_resume(const struct as_tuple_tag & );
-    ::boost::system::result<T> await_resume(const struct as_result_tag &);
+    [[nodiscard]] ::boost::system::result<T> await_resume(const struct as_result_tag &);
     explicit operator bool() const {return chn && chn->is_open();}
   };
 
@@ -149,7 +149,7 @@ struct channel
     std::coroutine_handle<void> await_suspend(std::coroutine_handle<Promise> h);
     void await_resume();
     std::tuple<::boost::system::error_code> await_resume(const struct as_tuple_tag & );
-    ::boost::system::result<void> await_resume(const struct as_result_tag &);
+    [[nodiscard]] ::boost::system::result<void> await_resume(const struct as_result_tag &);
     explicit operator bool() const {return chn && chn->is_open();}
   };
 
@@ -271,7 +271,7 @@ struct channel<void>
     std::coroutine_handle<void> await_suspend(std::coroutine_handle<Promise> h);
     WEBCPP_COBALT_BACKEND_DECL void await_resume();
     WEBCPP_COBALT_BACKEND_DECL std::tuple<::boost::system::error_code> await_resume(const struct as_tuple_tag & );
-    WEBCPP_COBALT_BACKEND_DECL ::boost::system::result<void> await_resume(const struct as_result_tag &);
+    [[nodiscard]] WEBCPP_COBALT_BACKEND_DECL ::boost::system::result<void> await_resume(const struct as_result_tag &);
     explicit operator bool() const {return chn && chn->is_open();}
   };
 
@@ -313,7 +313,7 @@ struct channel<void>
 
     WEBCPP_COBALT_BACKEND_DECL void await_resume();
     WEBCPP_COBALT_BACKEND_DECL std::tuple<::boost::system::error_code> await_resume(const struct as_tuple_tag & );
-    WEBCPP_COBALT_BACKEND_DECL ::boost::system::result<void> await_resume(const struct as_result_tag &);
+    [[nodiscard]] WEBCPP_COBALT_BACKEND_DECL ::boost::system::result<void> await_resume(const struct as_result_tag &);
     explicit operator bool() const {return chn && chn->is_open();}
   };
 

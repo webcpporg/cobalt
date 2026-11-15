@@ -84,7 +84,7 @@ struct BOOST_SYMBOL_VISIBLE seq_packet_socket final : socket
 };
 
 
-inline ::boost::system::result<std::pair<seq_packet_socket, seq_packet_socket>> make_pair(decltype(local_seqpacket) protocol)
+[[nodiscard]] inline ::boost::system::result<std::pair<seq_packet_socket, seq_packet_socket>> make_pair(decltype(local_seqpacket) protocol)
 {
   std::pair<seq_packet_socket, seq_packet_socket> res;
   auto c = connect_pair(protocol, res.first, res.second);

@@ -45,6 +45,38 @@ def relocate(text: str) -> str:
     return text.replace("BOOST_COBALT_", "WEBCPP_COBALT_BACKEND_")
 
 
+# A declaration's leading return type, after the export macros and inline it may start with.
+RESULT_DECLARATION = re.compile(
+    r"^\s*(?:WEBCPP_COBALT_BACKEND(?:_IO)?_DECL\s+|inline\s+)*::boost::system::result<"
+)
+EXPORT_MACRO = re.compile(r"\s*WEBCPP_COBALT_BACKEND(?:_IO)?_DECL\s*")
+
+
+def mark_nodiscard(text: str) -> str:
+    """Declare [[nodiscard]] each function of a shipped header that returns
+    boost::system::result, which carries no [[nodiscard]] of its own: a dropped result would
+    pass as a success. A friend declaration is not a definition and cannot carry the attribute;
+    it redeclares a function marked at its first declaration."""
+    lines = text.split("\n")
+    for index, line in enumerate(lines):
+        match = RESULT_DECLARATION.match(line)
+        if not match:
+            continue
+        depth, end = 0, match.end() - 1
+        while end < len(line):
+            depth += {"<": 1, ">": -1}.get(line[end], 0)
+            if depth == 0:
+                break
+            end += 1
+        if not re.match(r">\s*(?!operator\b)\w+\s*\(", line[end:]):
+            continue
+        target = index - 1 if index and EXPORT_MACRO.fullmatch(lines[index - 1]) else index
+        declaration = lines[target].lstrip()
+        indent = lines[target][: len(lines[target]) - len(declaration)]
+        lines[target] = indent + "[[nodiscard]] " + declaration
+    return "\n".join(lines)
+
+
 def outputs(headers: Path, sources: Path) -> dict[str, bytes]:
     pin = json.loads((BUNDLE / "pin.json").read_text())
     original: dict[str, bytes] = {}
@@ -120,6 +152,8 @@ def outputs(headers: Path, sources: Path) -> dict[str, bytes]:
                 "  // Plain TCP is allowed only",
                 1,
             )
+        if destination.endswith(".hpp"):
+            ssl = mark_nodiscard(ssl)
         result[destination] = (banner + ssl).encode()
     for name, data in adapted.items():
         text = relocate(data.decode())
@@ -228,6 +262,8 @@ def outputs(headers: Path, sources: Path) -> dict[str, bytes]:
                         b"<webcpp/cobalt/detail/native_ssl.hpp>\n"
                         b"#include <webcpp/cobalt/detail/native_ssl_transfer.hpp>",
                     )
+        if path.startswith("include/"):
+            text = mark_nodiscard(text)
         result[path] = (banner + text).encode()
     source_names = sorted(
         name.removeprefix("libs/cobalt/src/")

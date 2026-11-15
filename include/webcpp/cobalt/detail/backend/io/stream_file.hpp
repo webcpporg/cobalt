@@ -45,7 +45,7 @@ struct BOOST_SYMBOL_VISIBLE stream_file : file, stream
   {
     return {buffer, this, initiate_read_some_};
   }
-  WEBCPP_COBALT_BACKEND_IO_DECL ::boost::system::result<std::uint64_t> seek(
+  [[nodiscard]] WEBCPP_COBALT_BACKEND_IO_DECL ::boost::system::result<std::uint64_t> seek(
       std::int64_t offset,
       seek_basis whence);
 

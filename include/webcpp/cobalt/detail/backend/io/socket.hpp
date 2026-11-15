@@ -48,8 +48,8 @@ struct BOOST_SYMBOL_VISIBLE socket
   [[nodiscard]] WEBCPP_COBALT_BACKEND_IO_DECL ::boost::system::result<endpoint> remote_endpoint() const;
 
 
-  WEBCPP_COBALT_BACKEND_IO_DECL ::boost::system::result<void> assign(protocol_type protocol, native_handle_type native_handle);
-  WEBCPP_COBALT_BACKEND_IO_DECL ::boost::system::result<native_handle_type> release();
+  [[nodiscard]] WEBCPP_COBALT_BACKEND_IO_DECL ::boost::system::result<void> assign(protocol_type protocol, native_handle_type native_handle);
+  [[nodiscard]] WEBCPP_COBALT_BACKEND_IO_DECL ::boost::system::result<native_handle_type> release();
 
   /// copied from what asio does
   [[nodiscard]] WEBCPP_COBALT_BACKEND_IO_DECL ::boost::system::result<std::size_t> bytes_readable();
@@ -151,7 +151,7 @@ struct BOOST_SYMBOL_VISIBLE socket
   ::webcpp::asio_backend::basic_socket<protocol_type, executor> & socket_;
 };
 
-WEBCPP_COBALT_BACKEND_IO_DECL ::boost::system::result<void> connect_pair(protocol_type protocol, socket & socket1, socket & socket2);
+[[nodiscard]] WEBCPP_COBALT_BACKEND_IO_DECL ::boost::system::result<void> connect_pair(protocol_type protocol, socket & socket1, socket & socket2);
 
 
 }

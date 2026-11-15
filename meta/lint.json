@@ -1,0 +1,3 @@
+{
+    "nodiscard-results": "a dropped result, an I/O call's or an awaited operation's, would pass as a success"
+}
