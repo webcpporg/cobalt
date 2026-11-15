@@ -111,10 +111,12 @@ for local handling in on off
 webcpp.lane cobalt : $(.cobalt) : native emscripten ;
 webcpp.lane cobalt_asyncify : $(.cobalt-emscripten) : emscripten ;
 
+# Cobalt's suspensions leave half of Asyncify's stack in each build a
+# program can get, whatever variant the lane builds: debug, compiled and
+# linked at -O0, the deepest, and release, at -O3.
 .asyncify-stack-debug = <variant>debug ;
 .asyncify-stack-release = <variant>release ;
-.asyncify-stack-optimized_link = <variant>release <linkflags>-O3 ;
-for local build in debug release optimized_link
+for local build in debug release
 {
     for local handling in on off
     {
